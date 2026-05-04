@@ -20,3 +20,6 @@ class Airplane(models.Model):
         on_delete=models.CASCADE,
         related_name="airplanes"
     )
+
+    class Meta:
+        ordering = ("name",)
