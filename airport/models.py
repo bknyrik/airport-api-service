@@ -42,3 +42,6 @@ class Airport(models.Model):
                 name="unique_country_city"
             ),
         )
+
+    def __str__(self) -> str:
+        return "%s %s/%s" % (self.name, self.country, self.city)
