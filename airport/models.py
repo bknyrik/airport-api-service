@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models import constraints
+from django.conf import settings
 
 
 class AirplaneType(models.Model):
@@ -106,3 +107,12 @@ class Flight(models.Model):
             self.departure_time,
             self.arrival_time
         )
+
+
+class Order(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="orders"
+    )
