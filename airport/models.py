@@ -76,3 +76,7 @@ class Crew(models.Model):
     first_name = models.CharField(max_length=64)
     last_name = models.CharField(max_length=64)
     position = models.CharField(choices=POSITION_CHOICES)
+
+    @property
+    def full_name(self) -> str:
+        return "%s %s" % (self.first_name, self.last_name)
