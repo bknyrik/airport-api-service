@@ -26,3 +26,9 @@ class Airplane(models.Model):
 
     def __str__(self) -> str:
         return self.name
+
+
+class Airport(models.Model):
+    name = models.CharField(max_length=64)
+    country = models.CharField(max_length=64)
+    city = models.CharField(max_length=64)
