@@ -116,3 +116,6 @@ class Order(models.Model):
         on_delete=models.CASCADE,
         related_name="orders"
     )
+
+    class Meta:
+        ordering = ("created_at",)
