@@ -99,3 +99,10 @@ class Flight(models.Model):
     departure_time = models.DateTimeField()
     arrival_time = models.DateTimeField()
     crewmembers = models.ManyToManyField(Crew, related_name="flights")
+
+    def __str__(self) -> str:
+        return f"%s %s-%s" % (
+            self.route,
+            self.departure_time,
+            self.arrival_time
+        )
