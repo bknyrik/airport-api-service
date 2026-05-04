@@ -137,3 +137,6 @@ class Ticket(models.Model):
         on_delete=models.CASCADE,
         related_name="tickets"
     )
+
+    def __str__(self) -> str:
+        return "Row: %d Seat: %d" % (self.row, self.seat)
