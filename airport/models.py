@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import constraints
 
 
 class AirplaneType(models.Model):
@@ -32,3 +33,12 @@ class Airport(models.Model):
     name = models.CharField(max_length=64)
     country = models.CharField(max_length=64)
     city = models.CharField(max_length=64)
+
+    class Meta:
+        ordering = ("name", )
+        constraints = (
+            constraints.UniqueConstraint(
+                fields=("country", "city"),
+                name="unique_country_city"
+            ),
+        )
