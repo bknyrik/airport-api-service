@@ -62,3 +62,17 @@ class Route(models.Model):
 
     def __str__(self) -> str:
         return f"{self.source}-{self.destination} {self.distance}"
+
+
+class Crew(models.Model):
+    POSITION_CHOICES = (
+        ("PL", "Pilot"),
+        ("FA", "Flight attendant"),
+        ("FE", "Flight engineer"),
+        ("NG", "Navigator"),
+        ("RO", "Radio operator")
+    )
+
+    first_name = models.CharField(max_length=64)
+    last_name = models.CharField(max_length=64)
+    position = models.CharField(choices=POSITION_CHOICES)
