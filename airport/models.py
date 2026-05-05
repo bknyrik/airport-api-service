@@ -105,6 +105,14 @@ class Flight(models.Model):
     arrival_time = models.DateTimeField()
     crewmembers = models.ManyToManyField(Crew, related_name="flights")
 
+    class Meta:
+        constraints = (
+            constraints.CheckConstraint(
+                condition=Q(departure_time__lte=F("arrival_time")),
+                name="departure_time_lte_arrival_time"
+            ),
+        )
+
     def __str__(self) -> str:
         return f"%s %s-%s" % (
             self.route,
