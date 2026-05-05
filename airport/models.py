@@ -78,16 +78,14 @@ class Route(models.Model):
 
 
 class Crew(models.Model):
-    class Position(models.TextChoices):
-        PILOT = "PL", _("Pilot")
+    class Role(models.TextChoices):
+        COMMANDER = "CN", _("Commander")
+        COPILOT = "CP", _("Copilot")
         FLIGHT_ATTENDANT = "FA", _("Flight attendant")
-        FLIGHT_ENGINEER = "FE", _("Flight engineer")
-        NAVIGATOR = "NG", _("Navigator")
-        RADIO_OPERATOR = "RO", _("Radio operator")
 
     first_name = models.CharField(max_length=64)
     last_name = models.CharField(max_length=64)
-    position = models.CharField(choices=Position)
+    role = models.CharField(choices=Role)
 
     class Meta:
         verbose_name_plural = "crewmembers"
