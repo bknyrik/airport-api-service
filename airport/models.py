@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models import constraints
 from django.conf import settings
+from django.utils.translation import gettext as _
 
 
 class AirplaneType(models.Model):
@@ -66,17 +67,16 @@ class Route(models.Model):
 
 
 class Crew(models.Model):
-    POSITION_CHOICES = (
-        ("PL", "Pilot"),
-        ("FA", "Flight attendant"),
-        ("FE", "Flight engineer"),
-        ("NG", "Navigator"),
-        ("RO", "Radio operator")
-    )
+    class Position(models.TextChoices):
+        PILOT = "PL", _("Pilot")
+        FLIGHT_ATTENDANT = "FA", _("Flight attendant")
+        FLIGHT_ENGINEER = "FE", _("Flight engineer")
+        NAVIGATOR = "NG", _("Navigator")
+        RADIO_OPERATOR = "RO", _("Radio operator")
 
     first_name = models.CharField(max_length=64)
     last_name = models.CharField(max_length=64)
-    position = models.CharField(choices=POSITION_CHOICES)
+    position = models.CharField(choices=Position)
 
     @property
     def full_name(self) -> str:
