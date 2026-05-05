@@ -35,6 +35,11 @@ class Airplane(models.Model):
         on_delete=models.CASCADE,
         related_name="airplanes"
     )
+    facilities = models.ManyToManyField(
+        Facility,
+        related_name="airplanes",
+        null=True
+    )
 
     class Meta:
         ordering = ("name",)
