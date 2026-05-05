@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models import constraints
+from django.db.models import Q, F
 from django.conf import settings
 from django.utils.translation import gettext as _
 
@@ -140,6 +141,18 @@ class Ticket(models.Model):
         on_delete=models.CASCADE,
         related_name="tickets"
     )
+
+    class Meta:
+        constraints = (
+            constraints.CheckConstraint(
+                condition=Q(row__range=(1, F("flight__airplane__row"))),
+                name="row_in_airplane_row"
+            ),
+            constraints.CheckConstraint(
+                condition=Q(seat__range=(1, F("flight__airplane__seats_in_row"))),
+                name="seat_in_airplane_seats_in_row"
+            )
+        )
 
     def __str__(self) -> str:
         return "Row: %d Seat: %d" % (self.row, self.seat)
