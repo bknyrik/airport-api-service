@@ -8,6 +8,10 @@ from django.utils.translation import gettext as _
 class Facility(models.Model):
     name = models.CharField(max_length=32, unique=True)
 
+    class Meta:
+        verbose_name_plural = "facilities"
+        ordering = ("name",)
+
 
 class AirplaneType(models.Model):
     name = models.CharField(max_length=64, unique=True)
