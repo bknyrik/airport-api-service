@@ -78,6 +78,9 @@ class Crew(models.Model):
     last_name = models.CharField(max_length=64)
     position = models.CharField(choices=Position)
 
+    class Meta:
+        verbose_name_plural = "crewmembers"
+
     @property
     def full_name(self) -> str:
         return "%s %s" % (self.first_name, self.last_name)
