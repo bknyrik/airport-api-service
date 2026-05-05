@@ -12,6 +12,9 @@ class Facility(models.Model):
         verbose_name_plural = "facilities"
         ordering = ("name",)
 
+    def __str__(self) -> str:
+        return self.name
+
 
 class AirplaneType(models.Model):
     name = models.CharField(max_length=64, unique=True)
