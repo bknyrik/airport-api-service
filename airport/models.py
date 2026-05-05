@@ -5,6 +5,10 @@ from django.conf import settings
 from django.utils.translation import gettext as _
 
 
+class Facility(models.Model):
+    name = models.CharField(max_length=32, unique=True)
+
+
 class AirplaneType(models.Model):
     name = models.CharField(max_length=64, unique=True)
 
