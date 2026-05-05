@@ -35,16 +35,10 @@ class Airplane(models.Model):
 class Airport(models.Model):
     name = models.CharField(max_length=64)
     country = models.CharField(max_length=64)
-    city = models.CharField(max_length=64)
+    city = models.CharField(max_length=64, unique=True)
 
     class Meta:
         ordering = ("name", )
-        constraints = (
-            constraints.UniqueConstraint(
-                fields=("country", "city"),
-                name="unique_country_city"
-            ),
-        )
 
     def __str__(self) -> str:
         return "%s %s/%s" % (self.name, self.country, self.city)
