@@ -198,4 +198,4 @@ class Ticket(models.Model):
         )
 
     def __str__(self) -> str:
-        return "Row: %d Seat: %d" % (self.row, self.seat)
+        return f"Row: {self.row} Seat: {self.seat}"
