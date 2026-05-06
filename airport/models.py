@@ -53,7 +53,7 @@ class Airport(models.Model):
     city = models.CharField(max_length=64, unique=True)
 
     class Meta:
-        ordering = ("name", )
+        ordering = ("country", "city")
 
     def __str__(self) -> str:
         return "%s %s/%s" % (self.name, self.country, self.city)
