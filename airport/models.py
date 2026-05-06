@@ -55,6 +55,7 @@ class Airplane(models.Model):
         Facility,
         related_name="airplanes"
     )
+    image = models.ImageField(null=True, upload_to=create_custom_image_path)
 
     class Meta:
         ordering = ("name",)
@@ -67,6 +68,7 @@ class Airport(models.Model):
     name = models.CharField(max_length=64)
     country = models.CharField(max_length=64)
     city = models.CharField(max_length=64)
+    image = models.ImageField(null=True, upload_to=create_custom_image_path)
 
     class Meta:
         ordering = ("country", "city")
