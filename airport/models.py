@@ -119,10 +119,10 @@ class Crew(models.Model):
 
     @property
     def full_name(self) -> str:
-        return "%s %s" % (self.first_name, self.last_name)
+        return f"{self.first_name} {self.last_name}"
 
     def __str__(self) -> str:
-        return f"%s - %s" % (self.full_name, self.get_role_display())
+        return f"{self.full_name} - {self.get_role_display()}"
 
 
 class Flight(models.Model):
