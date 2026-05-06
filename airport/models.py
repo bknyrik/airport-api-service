@@ -153,11 +153,7 @@ class Flight(models.Model):
         )
 
     def __str__(self) -> str:
-        return f"%s %s-%s" % (
-            self.route,
-            self.departure_time,
-            self.arrival_time
-        )
+        return f"{self.route} {self.departure_time}-{self.arrival_time}"
 
 
 class Order(models.Model):
