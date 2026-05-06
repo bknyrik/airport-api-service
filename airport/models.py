@@ -8,6 +8,7 @@ from django.db.models import Q, F
 from django.conf import settings
 from django.utils.translation import gettext as _
 from django.utils.text import slugify
+from django.core.exceptions import ValidationError
 
 
 def create_custom_image_path(
@@ -183,6 +184,18 @@ class Ticket(models.Model):
 
     class Meta:
         ordering = ("row", "seat")
+
+    def clean(self) -> None:
+        rows = self.flight.airplane.rows
+        seats_in_row = self.flight.airplane.seats_in_row
+
+        if self.row not in range(1, rows + 1):
+            raise ValidationError(f"Row must be in range from 1 to {rows}")
+
+        if self.seat not in range(1, seats_in_row + 1):
+            raise ValidationError(
+                f"Seat must be in range from 1 to {seats_in_row}"
+            )
 
     def __str__(self) -> str:
         return f"Row: {self.row} Seat: {self.seat}"
