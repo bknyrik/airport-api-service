@@ -50,7 +50,7 @@ class Airplane(models.Model):
 class Airport(models.Model):
     name = models.CharField(max_length=64)
     country = models.CharField(max_length=64)
-    city = models.CharField(max_length=64, unique=True)
+    city = models.CharField(max_length=64)
 
     class Meta:
         ordering = ("country", "city")
