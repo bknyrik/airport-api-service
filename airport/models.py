@@ -97,6 +97,7 @@ class Crew(models.Model):
 
     class Meta:
         verbose_name_plural = "crewmembers"
+        ordering = ("role", )
 
     @property
     def full_name(self) -> str:
