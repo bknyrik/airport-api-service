@@ -74,7 +74,7 @@ class Airport(models.Model):
         ordering = ("country", "city")
 
     def __str__(self) -> str:
-        return "%s %s/%s" % (self.name, self.country, self.city)
+        return f"{self.name} {self.country}/{self.city}"
 
 
 class Route(models.Model):
