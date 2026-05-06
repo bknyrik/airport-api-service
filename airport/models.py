@@ -95,7 +95,7 @@ class Crew(models.Model):
         return "%s %s" % (self.first_name, self.last_name)
 
     def __str__(self) -> str:
-        return f"%s - %s" % (self.full_name, self.get_position_display())
+        return f"%s - %s" % (self.full_name, self.get_role_display())
 
 
 class Flight(models.Model):
