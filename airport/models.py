@@ -175,11 +175,11 @@ class Ticket(models.Model):
         constraints = (
             constraints.CheckConstraint(
                 condition=Q(row__range=(1, F("flight__airplane__row"))),
-                name="row_in_airplane_row"
+                name="row_range_flight_airplane_row"
             ),
             constraints.CheckConstraint(
                 condition=Q(seat__range=(1, F("flight__airplane__seats_in_row"))),
-                name="seat_in_airplane_seats_in_row"
+                name="seat_range_flight_airplane_seats_in_row"
             )
         )
 
