@@ -37,8 +37,7 @@ class Airplane(models.Model):
     )
     facilities = models.ManyToManyField(
         Facility,
-        related_name="airplanes",
-        null=True
+        related_name="airplanes"
     )
 
     class Meta:
