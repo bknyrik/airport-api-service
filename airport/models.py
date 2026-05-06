@@ -182,16 +182,7 @@ class Ticket(models.Model):
     )
 
     class Meta:
-        constraints = (
-            constraints.CheckConstraint(
-                condition=Q(row__range=(1, F("flight__airplane__row"))),
-                name="row_range_flight_airplane_row"
-            ),
-            constraints.CheckConstraint(
-                condition=Q(seat__range=(1, F("flight__airplane__seats_in_row"))),
-                name="seat_range_flight_airplane_seats_in_row"
-            )
-        )
+        ordering = ("row", "seat")
 
     def __str__(self) -> str:
         return f"Row: {self.row} Seat: {self.seat}"
