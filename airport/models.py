@@ -74,6 +74,12 @@ class Route(models.Model):
 
     class Meta:
         ordering = ("-distance",)
+        constraints = (
+            constraints.UniqueConstraint(
+                fields=("source", "destination"),
+                name="source_destination_unique"
+            ),
+        )
 
     def __str__(self) -> str:
         return f"{self.source}-{self.destination} {self.distance}"
