@@ -1,8 +1,24 @@
+from __future__ import annotations
+import os
+import uuid
+
 from django.db import models
 from django.db.models import constraints
 from django.db.models import Q, F
 from django.conf import settings
 from django.utils.translation import gettext as _
+from django.utils.text import slugify
+
+
+def create_custom_image_path(
+    instance: Airport | Airplane,
+    file_name: str
+) -> str:
+    _, ext = os.path.splitext(file_name)
+    return os.path.join(
+        "upload/images/",
+        f"{slugify(instance.name)}-{uuid.uuid4()}{ext}"
+    )
 
 
 class Facility(models.Model):
