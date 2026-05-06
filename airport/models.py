@@ -142,10 +142,6 @@ class Flight(models.Model):
 
     class Meta:
         constraints = (
-            constraints.UniqueConstraint(
-                fields=("route", "airplane"),
-                name="route_airplane_unique"
-            ),
             constraints.CheckConstraint(
                 condition=Q(departure_time__lte=F("arrival_time")),
                 name="departure_time_lte_arrival_time"
