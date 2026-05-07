@@ -6,7 +6,8 @@ from airport.models import (
     Airplane,
     Airport,
     Route,
-    Crew
+    Crew,
+    Flight,
 )
 
 
@@ -16,4 +17,4 @@ admin.site.register(Airplane)
 admin.site.register(Airport)
 admin.site.register(Route)
 admin.site.register(Crew, list_filter=("role", ))
-
+admin.site.register(Flight)
