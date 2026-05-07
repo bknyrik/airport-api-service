@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.admin.options import TabularInline
 
 from airport.models import (
     Facility,
@@ -8,7 +9,14 @@ from airport.models import (
     Route,
     Crew,
     Flight,
+    Ticket,
+    Order
 )
+
+
+class TicketInline(TabularInline):
+    model = Ticket
+    extra = 1
 
 
 admin.site.register(Facility)
@@ -18,3 +26,5 @@ admin.site.register(Airport)
 admin.site.register(Route)
 admin.site.register(Crew, list_filter=("role", ))
 admin.site.register(Flight)
+admin.site.register(Order, inlines=(TicketInline, ))
+admin.site.register(Ticket)
