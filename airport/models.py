@@ -184,6 +184,12 @@ class Ticket(models.Model):
 
     class Meta:
         ordering = ("row", "seat")
+        constraints = (
+            constraints.UniqueConstraint(
+              fields=("row", "seat", "flight"),
+                name="row_seat_flight_unique"
+            ),
+        )
 
     def clean(self) -> None:
         rows = self.flight.airplane.rows
