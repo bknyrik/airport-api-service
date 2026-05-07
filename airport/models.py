@@ -62,7 +62,7 @@ class Airplane(models.Model):
         ordering = ("name",)
 
     def __str__(self) -> str:
-        return self.name
+        return f"{self.name} {self.rows}x{self.seats_in_row}"
 
 
 class Airport(models.Model):
