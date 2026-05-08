@@ -28,3 +28,8 @@ class AirplaneSerializer(serializers.ModelSerializer[Airplane]):
 class AirplaneListSerializer(AirplaneSerializer):
     facilities = serializers.StringRelatedField(many=True)
     airplane_type = serializers.StringRelatedField()
+
+
+class AirplaneRetrieveSerializer(AirplaneSerializer):
+    facilities = FacilitySerializer(many=True)
+    airplane_type = AirplaneTypeSerializer()
