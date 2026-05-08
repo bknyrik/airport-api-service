@@ -7,7 +7,7 @@ router = DefaultRouter()
 router.register("facilities", FacilityViewSet)
 
 
-urlpatterns = []
+urlpatterns = router.urls
 
 
 app_name = "airport"
