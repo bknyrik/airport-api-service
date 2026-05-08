@@ -23,3 +23,8 @@ class AirplaneSerializer(serializers.ModelSerializer[Airplane]):
     class Meta:
         model = Airplane
         fields = "__all__"
+
+
+class AirplaneListSerializer(AirplaneSerializer):
+    facilities = serializers.StringRelatedField(many=True)
+    airplane_type = serializers.StringRelatedField()
