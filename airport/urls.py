@@ -1,4 +1,10 @@
-from django.urls import path
+from rest_framework.routers import DefaultRouter
+
+from airport.views import FacilityViewSet
+
+
+router = DefaultRouter()
+router.register("facilities", FacilityViewSet)
 
 
 urlpatterns = []
