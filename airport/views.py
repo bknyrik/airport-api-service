@@ -23,5 +23,5 @@ class AirplaneTypeViewSet(ModelViewSet):
 
 
 class AirplaneViewSet(ModelViewSet):
-    queryset = Airplane.objects.all()
+    queryset = Airplane.objects.prefetch_related("facilities")
     serializer_class = AirplaneSerializer
