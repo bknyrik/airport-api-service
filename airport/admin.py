@@ -19,11 +19,16 @@ class TicketInline(TabularInline):
     extra = 1
 
 
+class FlightInline(TabularInline):
+    model = Flight
+    extra = 1
+
+
 admin.site.register(Facility)
 admin.site.register(AirplaneType)
 admin.site.register(Airplane)
 admin.site.register(Airport)
-admin.site.register(Route)
+admin.site.register(Route, inlines=(FlightInline, ))
 admin.site.register(Crew, list_filter=("role", ))
 admin.site.register(Flight)
 admin.site.register(Order, inlines=(TicketInline, ))
