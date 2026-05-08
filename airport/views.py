@@ -2,11 +2,13 @@ from rest_framework.viewsets import ModelViewSet
 
 from airport.models import (
     Facility,
-    AirplaneType
+    AirplaneType,
+    Airplane
 )
 from airport.serializers import (
     FacilitySerializer,
-    AirplaneTypeSerializer
+    AirplaneTypeSerializer,
+    AirplaneSerializer
 )
 
 
@@ -18,3 +20,8 @@ class FacilityViewSet(ModelViewSet):
 class AirplaneTypeViewSet(ModelViewSet):
     queryset = AirplaneType.objects.all()
     serializer_class = AirplaneTypeSerializer
+
+
+class AirplaneViewSet(ModelViewSet):
+    queryset = Airplane.objects.all()
+    serializer_class = AirplaneSerializer
