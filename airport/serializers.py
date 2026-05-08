@@ -15,4 +15,4 @@ class FacilitySerializer(serializers.ModelSerializer[Facility]):
 class AirplaneTypeSerializer(serializers.ModelSerializer[AirplaneType]):
     class Meta:
         model = AirplaneType
-        field = "__all__"
+        fields = "__all__"
