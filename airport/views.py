@@ -27,7 +27,7 @@ class AirplaneTypeViewSet(ModelViewSet):
 class AirplaneViewSet(ModelViewSet):
     queryset = Airplane.objects.prefetch_related("facilities")
 
-    def get_serializer_class(self):
+    def get_serializer_class(self) -> type[AirplaneSerializer]:
         if self.action == "list":
             return AirplaneListSerializer
 
