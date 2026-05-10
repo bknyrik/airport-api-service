@@ -72,4 +72,11 @@ class AirportImageSerializer(AirportSerializer):
 class CrewSerializer(serializers.ModelSerializer[Crew]):
     class Meta:
         model = Crew
-        fields = "__all__"
+        fields = ("id", "first_name", "last_name", "role")
+
+
+class CrewListSerializer(CrewSerializer):
+    role = serializers.ChoiceField(
+        choices=Crew.Role,
+        source="get_role_display"
+    )
