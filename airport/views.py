@@ -1,3 +1,4 @@
+from django.db.models import QuerySet
 from rest_framework.request import Request
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
@@ -31,6 +32,14 @@ class AirplaneTypeViewSet(ModelViewSet):
 
 class AirplaneViewSet(ModelViewSet):
     queryset = Airplane.objects.prefetch_related("facilities")
+
+    def get_queryset(self) -> QuerySet[Airplane]:
+        queryset = self.queryset
+
+        if self.action == "list":
+            queryset = queryset.select_related("airplane_type")
+
+        return queryset
 
     def get_serializer_class(self) -> type[AirplaneSerializer]:
         if self.action == "list":
