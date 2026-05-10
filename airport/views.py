@@ -16,6 +16,7 @@ from airport.serializers import (
     FacilitySerializer,
     FacilityListSerializer,
     AirplaneTypeSerializer,
+    AirplaneTypeListSerializer,
     AirplaneSerializer,
     AirplaneListSerializer,
     AirplaneRetrieveSerializer,
@@ -40,7 +41,12 @@ class FacilityViewSet(ModelViewSet):
 
 class AirplaneTypeViewSet(ModelViewSet):
     queryset = AirplaneType.objects.all()
-    serializer_class = AirplaneTypeSerializer
+
+    def get_serializer_class(self) -> type[AirplaneTypeSerializer]:
+        if self.action == "list":
+            return AirplaneTypeListSerializer
+
+        return AirplaneTypeSerializer
 
 
 class AirplaneViewSet(ModelViewSet):
