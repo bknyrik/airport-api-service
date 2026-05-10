@@ -1,6 +1,7 @@
 from __future__ import annotations
 import os
 import uuid
+from typing import Iterable
 
 from django.db import models
 from django.db.models import constraints
@@ -30,6 +31,23 @@ class Facility(models.Model):
     class Meta:
         verbose_name_plural = "facilities"
         ordering = ("name",)
+
+    def save(
+        self,
+        *,
+        force_insert: bool | tuple[models.base.ModelBase, ...] = False,
+        force_update: bool = False,
+        using: str = None,
+        update_fields: Iterable[str] | None = None,
+    ) -> None:
+        self.slug = slugify(self.name)
+
+        return super().save(
+            force_insert=force_insert,
+            force_update=force_update,
+            using=using,
+            update_fields=update_fields
+        )
 
     def __str__(self) -> str:
         return self.name
