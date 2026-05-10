@@ -95,9 +95,27 @@ class Airplane(models.Model):
         related_name="airplanes"
     )
     image = models.ImageField(null=True, upload_to=create_custom_image_path)
+    slug = models.SlugField()
 
     class Meta:
         ordering = ("name",)
+
+    def save(
+        self,
+        *,
+        force_insert: bool | tuple[models.base.ModelBase, ...] = False,
+        force_update: bool = False,
+        using: str = None,
+        update_fields: Iterable[str] | None = None,
+    ) -> None:
+        self.slug = slugify(self.name)
+
+        return super().save(
+            force_insert=force_insert,
+            force_update=force_update,
+            using=using,
+            update_fields=update_fields
+        )
 
     def __str__(self) -> str:
         return f"{self.name} {self.rows}x{self.seats_in_row}"
