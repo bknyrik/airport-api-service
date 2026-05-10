@@ -18,7 +18,8 @@ from airport.serializers import (
     AirplaneListSerializer,
     AirplaneRetrieveSerializer,
     AirplaneImageSerializer,
-    AirportSerializer
+    AirportSerializer,
+    AirportImageSerializer
 )
 
 
@@ -72,4 +73,19 @@ class AirportViewSet(ModelViewSet):
     queryset = Airport.objects.all()
 
     def get_serializer_class(self) -> type[AirportSerializer]:
+        if self.action == "upload_image":
+            return AirportImageSerializer
+
         return AirportSerializer
+
+    @action(
+        methods=("POST",),
+        detail=True,
+        url_path="upload_image"
+    )
+    def upload_image(self, request: Request, pk: int = None) -> Response:
+        airport = self.get_object()
+        serializer = self.get_serializer(airport, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)
