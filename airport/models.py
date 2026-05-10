@@ -126,7 +126,7 @@ class Airport(models.Model):
     country = models.CharField(max_length=64)
     city = models.CharField(max_length=64)
     image = models.ImageField(null=True, upload_to=create_custom_image_path)
-    slug = models.SlugField()
+    slug = models.SlugField(null=False, default="")
 
     class Meta:
         ordering = ("country", "city")
@@ -164,7 +164,7 @@ class Route(models.Model):
         related_name="destination_routes"
     )
     distance = models.IntegerField()
-    slug = models.SlugField()
+    slug = models.SlugField(null=False, default="")
 
     class Meta:
         ordering = ("-distance",)
@@ -207,7 +207,7 @@ class Crew(models.Model):
     first_name = models.CharField(max_length=64)
     last_name = models.CharField(max_length=64)
     role = models.CharField(choices=Role)
-    slug = models.SlugField()
+    slug = models.SlugField(null=False, default="")
 
     class Meta:
         verbose_name_plural = "crewmembers"
