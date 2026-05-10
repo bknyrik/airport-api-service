@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework.validators import ValidationError
 
 from airport.models import (
     Facility,
@@ -20,6 +21,8 @@ class AirplaneTypeSerializer(serializers.ModelSerializer[AirplaneType]):
 
 
 class AirplaneSerializer(serializers.ModelSerializer[Airplane]):
+    image = serializers.ImageField(read_only=True)
+
     class Meta:
         model = Airplane
         fields = (
@@ -29,8 +32,15 @@ class AirplaneSerializer(serializers.ModelSerializer[Airplane]):
             "rows",
             "seats_in_row",
             "facilities",
-            "image",
+            "image"
         )
+
+
+class AirplaneImageSerializer(AirplaneSerializer):
+    image = serializers.ImageField(required=True)
+
+    class Meta(AirplaneSerializer.Meta):
+        fields = ("id", "image")
 
 
 class AirplaneListSerializer(AirplaneSerializer):
