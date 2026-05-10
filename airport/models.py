@@ -164,6 +164,7 @@ class Route(models.Model):
         related_name="destination_routes"
     )
     distance = models.IntegerField()
+    slug = models.SlugField()
 
     class Meta:
         ordering = ("-distance",)
@@ -172,6 +173,25 @@ class Route(models.Model):
                 fields=("source", "destination"),
                 name="source_destination_unique"
             ),
+        )
+
+    def save(
+        self,
+        *,
+        force_insert: bool | tuple[models.base.ModelBase, ...] = False,
+        force_update: bool = False,
+        using: str = None,
+        update_fields: Iterable[str] | None = None,
+    ) -> None:
+        self.slug = slugify(
+            f"{self.source.slug}-{self.destination.slug}-{self.distance}"
+        )
+
+        return super().save(
+            force_insert=force_insert,
+            force_update=force_update,
+            using=using,
+            update_fields=update_fields
         )
 
     def __str__(self) -> str:
