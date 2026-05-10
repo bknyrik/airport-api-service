@@ -33,7 +33,7 @@ class AirplaneTypeSerializer(serializers.ModelSerializer[AirplaneType]):
 
 class AirplaneTypeListSerializer(AirplaneTypeSerializer):
     url = serializers.HyperlinkedIdentityField(
-        view_name="airport:airplane-type",
+        view_name="airport:airplanetype-detail",
         lookup_field="slug"
     )
 
