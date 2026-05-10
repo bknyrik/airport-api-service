@@ -9,10 +9,20 @@ from airport.models import (
 )
 
 
-class FacilitySerializer(serializers.ModelSerializer[Facility]):
+class FacilitySerializer(serializers.HyperlinkedModelSerializer[Facility]):
     class Meta:
         model = Facility
-        fields = "__all__"
+        fields = ("id", "name", "description")
+
+
+class FacilityListSerializer(FacilitySerializer):
+    url = serializers.HyperlinkedIdentityField(
+        view_name="airport:facility-detail",
+        lookup_field="slug"
+    )
+
+    class Meta(FacilitySerializer.Meta):
+        fields = ("url", ) + FacilitySerializer.Meta.fields
 
 
 class AirplaneTypeSerializer(serializers.ModelSerializer[AirplaneType]):
