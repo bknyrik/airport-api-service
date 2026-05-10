@@ -9,7 +9,8 @@ from airport.models import (
     Facility,
     AirplaneType,
     Airplane,
-    Airport
+    Airport,
+    Crew
 )
 from airport.serializers import (
     FacilitySerializer,
@@ -19,7 +20,9 @@ from airport.serializers import (
     AirplaneRetrieveSerializer,
     AirplaneImageSerializer,
     AirportSerializer,
-    AirportImageSerializer
+    AirportImageSerializer,
+    CrewSerializer,
+    CrewListSerializer
 )
 
 
@@ -89,3 +92,13 @@ class AirportViewSet(ModelViewSet):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class CrewViewSet(ModelViewSet):
+    queryset = Crew.objects.all()
+
+    def get_serializer_class(self) -> type[CrewSerializer]:
+        if self.action == "list":
+            return CrewListSerializer
+
+        return CrewSerializer
