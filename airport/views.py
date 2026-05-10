@@ -28,6 +28,7 @@ from airport.serializers import (
 
 
 class FacilityViewSet(ModelViewSet):
+    lookup_field = "slug"
     queryset = Facility.objects.all()
 
     def get_serializer_class(self) -> type[FacilitySerializer]:
