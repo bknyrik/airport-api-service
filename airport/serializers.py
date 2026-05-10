@@ -9,7 +9,7 @@ from airport.models import (
 )
 
 
-class FacilitySerializer(serializers.HyperlinkedModelSerializer[Facility]):
+class FacilitySerializer(serializers.ModelSerializer[Facility]):
     class Meta:
         model = Facility
         fields = ("id", "name", "description")
