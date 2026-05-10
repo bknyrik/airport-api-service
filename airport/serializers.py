@@ -28,7 +28,17 @@ class FacilityListSerializer(FacilitySerializer):
 class AirplaneTypeSerializer(serializers.ModelSerializer[AirplaneType]):
     class Meta:
         model = AirplaneType
-        fields = "__all__"
+        fields = ("id", "name")
+
+
+class AirplaneTypeListSerializer(AirplaneTypeSerializer):
+    url = serializers.HyperlinkedIdentityField(
+        view_name="airport:airplane-type",
+        lookup_field="slug"
+    )
+
+    class Meta(AirplaneTypeSerializer.Meta):
+        fields = ("url", ) + AirplaneTypeSerializer.Meta.fields
 
 
 class AirplaneSerializer(serializers.ModelSerializer[Airplane]):
