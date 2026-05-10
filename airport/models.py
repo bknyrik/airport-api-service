@@ -98,7 +98,7 @@ class Airplane(models.Model):
     slug = models.SlugField()
 
     class Meta:
-        ordering = ("name",)
+        ordering = ("-rows", "-seats_in_row")
 
     def save(
         self,
