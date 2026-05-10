@@ -126,9 +126,27 @@ class Airport(models.Model):
     country = models.CharField(max_length=64)
     city = models.CharField(max_length=64)
     image = models.ImageField(null=True, upload_to=create_custom_image_path)
+    slug = models.SlugField()
 
     class Meta:
         ordering = ("country", "city")
+
+    def save(
+        self,
+        *,
+        force_insert: bool | tuple[models.base.ModelBase, ...] = False,
+        force_update: bool = False,
+        using: str = None,
+        update_fields: Iterable[str] | None = None,
+    ) -> None:
+        self.slug = slugify(f"{self.country}-{self.city}-{self.name}")
+
+        return super().save(
+            force_insert=force_insert,
+            force_update=force_update,
+            using=using,
+            update_fields=update_fields
+        )
 
     def __str__(self) -> str:
         return f"{self.name} {self.country}/{self.city}"
