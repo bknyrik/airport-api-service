@@ -143,3 +143,8 @@ class RouteListSerializer(RouteSerializer):
 
     class Meta(RouteSerializer.Meta):
         fields = ("url", ) + RouteSerializer.Meta.fields
+
+
+class RouteRetrieveSerializer(RouteSerializer):
+    source = AirportListSerializer()
+    destination = AirportListSerializer()
