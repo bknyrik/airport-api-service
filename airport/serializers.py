@@ -59,3 +59,10 @@ class AirportSerializer(serializers.ModelSerializer[Airport]):
     class Meta:
         model = Airport
         fields = ("id", "name", "country", "city", "image")
+
+
+class AirportImageSerializer(AirportSerializer):
+    image = serializers.ImageField()
+
+    class Meta(AirportSerializer.Meta):
+        fields = ("id", "image")
