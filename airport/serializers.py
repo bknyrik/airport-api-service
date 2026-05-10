@@ -131,3 +131,15 @@ class RouteSerializer(serializers.ModelSerializer[Route]):
     class Meta:
         model = Route
         fields = ("id", "source", "destination", "distance")
+
+
+class RouteListSerializer(RouteSerializer):
+    url = serializers.HyperlinkedIdentityField(
+        view_name="airport:route-detail",
+        lookup_field="slug"
+    )
+    source = serializers.StringRelatedField()
+    destination = serializers.StringRelatedField()
+
+    class Meta(RouteSerializer.Meta):
+        fields = ("url", ) + RouteSerializer.Meta.fields
