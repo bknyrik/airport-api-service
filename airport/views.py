@@ -8,7 +8,8 @@ from rest_framework import status
 from airport.models import (
     Facility,
     AirplaneType,
-    Airplane
+    Airplane,
+    Airport
 )
 from airport.serializers import (
     FacilitySerializer,
@@ -16,7 +17,8 @@ from airport.serializers import (
     AirplaneSerializer,
     AirplaneListSerializer,
     AirplaneRetrieveSerializer,
-    AirplaneImageSerializer
+    AirplaneImageSerializer,
+    AirportSerializer
 )
 
 
@@ -64,3 +66,10 @@ class AirplaneViewSet(ModelViewSet):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class AirportViewSet(ModelViewSet):
+    queryset = Airport.objects.all()
+
+    def get_serializer_class(self) -> type[AirportSerializer]:
+        return AirportSerializer
