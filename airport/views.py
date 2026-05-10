@@ -10,7 +10,8 @@ from airport.models import (
     AirplaneType,
     Airplane,
     Airport,
-    Crew
+    Crew,
+    Route
 )
 from airport.serializers import (
     FacilitySerializer,
@@ -25,7 +26,9 @@ from airport.serializers import (
     AirportListSerializer,
     AirportImageSerializer,
     CrewSerializer,
-    CrewListSerializer
+    CrewListSerializer,
+    RouteSerializer,
+    RouteListSerializer
 )
 
 
@@ -123,3 +126,14 @@ class CrewViewSet(ModelViewSet):
             return CrewListSerializer
 
         return CrewSerializer
+
+
+class RouteViewSet(ModelViewSet):
+    lookup_field = "slug"
+    queryset = Route.objects.select_related("source", "destination")
+
+    def get_serializer_class(self) -> type[RouteSerializer]:
+        if self.action == "list":
+            return RouteListSerializer
+
+        return RouteSerializer
