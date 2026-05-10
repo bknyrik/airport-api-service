@@ -26,7 +26,7 @@ def create_custom_image_path(
 class Facility(models.Model):
     name = models.CharField(max_length=32, unique=True)
     description = models.TextField(null=True, blank=True)
-    slug = models.SlugField()
+    slug = models.SlugField(null=False, default="")
 
     class Meta:
         verbose_name_plural = "facilities"
@@ -55,7 +55,7 @@ class Facility(models.Model):
 
 class AirplaneType(models.Model):
     name = models.CharField(max_length=64, unique=True)
-    slug = models.SlugField()
+    slug = models.SlugField(null=False, default="")
 
     class Meta:
         ordering = ("name",)
@@ -95,7 +95,7 @@ class Airplane(models.Model):
         related_name="airplanes"
     )
     image = models.ImageField(null=True, upload_to=create_custom_image_path)
-    slug = models.SlugField()
+    slug = models.SlugField(null=False, default="")
 
     class Meta:
         ordering = ("-rows", "-seats_in_row")
