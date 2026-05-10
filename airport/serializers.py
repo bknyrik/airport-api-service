@@ -4,7 +4,8 @@ from airport.models import (
     Facility,
     AirplaneType,
     Airplane,
-    Airport
+    Airport,
+    Crew
 )
 
 
@@ -66,3 +67,9 @@ class AirportImageSerializer(AirportSerializer):
 
     class Meta(AirportSerializer.Meta):
         fields = ("id", "image")
+
+
+class CrewSerializer(serializers.ModelSerializer[Crew]):
+    class Meta:
+        model = Crew
+        fields = "__all__"
