@@ -65,8 +65,15 @@ class AirplaneImageSerializer(AirplaneSerializer):
 
 
 class AirplaneListSerializer(AirplaneSerializer):
+    url = serializers.HyperlinkedIdentityField(
+        view_name="airport:airplane",
+        lookup_field="slug"
+    )
     facilities = serializers.StringRelatedField(many=True)
     airplane_type = serializers.StringRelatedField()
+
+    class Meta(AirplaneSerializer.Meta):
+        fields = ("url", ) + AirplaneSerializer.Meta.fields
 
 
 class AirplaneRetrieveSerializer(AirplaneSerializer):
