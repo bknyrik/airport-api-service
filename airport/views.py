@@ -14,6 +14,7 @@ from airport.models import (
 )
 from airport.serializers import (
     FacilitySerializer,
+    FacilityListSerializer,
     AirplaneTypeSerializer,
     AirplaneSerializer,
     AirplaneListSerializer,
@@ -28,7 +29,12 @@ from airport.serializers import (
 
 class FacilityViewSet(ModelViewSet):
     queryset = Facility.objects.all()
-    serializer_class = FacilitySerializer
+
+    def get_serializer_class(self) -> type[FacilitySerializer]:
+        if self.action == "list":
+            return FacilityListSerializer
+
+        return FacilitySerializer
 
 
 class AirplaneTypeViewSet(ModelViewSet):
