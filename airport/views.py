@@ -22,6 +22,7 @@ from airport.serializers import (
     AirplaneRetrieveSerializer,
     AirplaneImageSerializer,
     AirportSerializer,
+    AirportListSerializer,
     AirportImageSerializer,
     CrewSerializer,
     CrewListSerializer
@@ -88,9 +89,13 @@ class AirplaneViewSet(ModelViewSet):
 
 
 class AirportViewSet(ModelViewSet):
+    lookup_field = "slug"
     queryset = Airport.objects.all()
 
     def get_serializer_class(self) -> type[AirportSerializer]:
+        if self.action == "list":
+            return AirportListSerializer
+
         if self.action == "upload_image":
             return AirportImageSerializer
 
