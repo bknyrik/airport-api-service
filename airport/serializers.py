@@ -7,6 +7,7 @@ from airport.models import (
     Airport,
     Crew,
     Route,
+    Flight
 )
 
 
@@ -125,6 +126,12 @@ class CrewListSerializer(CrewSerializer):
 
     class Meta(CrewSerializer.Meta):
         fields = ("url", ) + CrewSerializer.Meta.fields
+
+
+class FlightSerializer(serializers.ModelSerializer[Flight]):
+    class Meta:
+        model = Flight
+        fields = ("id", "airplane", "departure_time", "arrival_time")
 
 
 class RouteSerializer(serializers.ModelSerializer[Route]):
