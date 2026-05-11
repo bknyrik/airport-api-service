@@ -136,7 +136,6 @@ class RouteSerializer(serializers.ModelSerializer[Route]):
 class RouteListSerializer(RouteSerializer):
     url = serializers.HyperlinkedIdentityField(
         view_name="airport:route-detail",
-        lookup_field="slug"
     )
     source = serializers.StringRelatedField()
     destination = serializers.StringRelatedField()
