@@ -28,7 +28,8 @@ from airport.serializers import (
     CrewSerializer,
     CrewListSerializer,
     RouteSerializer,
-    RouteListSerializer
+    RouteListSerializer,
+    RouteRetrieveSerializer
 )
 
 
@@ -135,5 +136,8 @@ class RouteViewSet(ModelViewSet):
     def get_serializer_class(self) -> type[RouteSerializer]:
         if self.action == "list":
             return RouteListSerializer
+
+        if self.action == "retrieve":
+            return RouteRetrieveSerializer
 
         return RouteSerializer
