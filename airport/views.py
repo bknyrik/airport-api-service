@@ -130,7 +130,6 @@ class CrewViewSet(ModelViewSet):
 
 
 class RouteViewSet(ModelViewSet):
-    lookup_field = "slug"
     queryset = Route.objects.select_related("source", "destination")
 
     def get_serializer_class(self) -> type[RouteSerializer]:
