@@ -58,7 +58,7 @@ class AirplaneType(models.Model):
     slug = models.SlugField(null=False, default="")
 
     class Meta:
-        db_table = "airplane_type"
+        db_table = "airport_airplane_type"
         ordering = ("name",)
 
     def save(
