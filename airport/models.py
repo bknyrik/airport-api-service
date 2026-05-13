@@ -191,7 +191,7 @@ class Route(models.Model):
         )
 
     def __str__(self) -> str:
-        return f"{self.source}-{self.destination} {self.distance}"
+        return f"{self.source} -> {self.destination} {self.distance} km."
 
 
 class Crew(models.Model):
