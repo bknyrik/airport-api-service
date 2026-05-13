@@ -14,49 +14,31 @@ from airport.models import (
     Route,
     Flight
 )
-from airport.serializers import (
-    FacilitySerializer,
-    FacilityListSerializer,
-    AirplaneTypeSerializer,
-    AirplaneTypeListSerializer,
-    AirplaneSerializer,
-    AirplaneListSerializer,
-    AirplaneRetrieveSerializer,
-    AirplaneImageSerializer,
-    AirportSerializer,
-    AirportListSerializer,
-    AirportImageSerializer,
-    CrewSerializer,
-    CrewListSerializer,
-    RouteSerializer,
-    RouteListSerializer,
-    RouteRetrieveSerializer,
-    FlightSerializer,
-    FlightListSerializer,
-    FlightRetrieveSerializer
-)
+from airport import serializers
 
 
 class FacilityViewSet(ModelViewSet):
     lookup_field = "slug"
     queryset = Facility.objects.all()
 
-    def get_serializer_class(self) -> type[FacilitySerializer]:
+    def get_serializer_class(self) -> type[serializers.FacilitySerializer]:
         if self.action == "list":
-            return FacilityListSerializer
+            return serializers.FacilityListSerializer
 
-        return FacilitySerializer
+        return serializers.FacilitySerializer
 
 
 class AirplaneTypeViewSet(ModelViewSet):
     lookup_field = "slug"
     queryset = AirplaneType.objects.all()
 
-    def get_serializer_class(self) -> type[AirplaneTypeSerializer]:
+    def get_serializer_class(
+        self
+    ) -> type[serializers.AirplaneTypeSerializer]:
         if self.action == "list":
-            return AirplaneTypeListSerializer
+            return serializers.AirplaneTypeListSerializer
 
-        return AirplaneTypeSerializer
+        return serializers.AirplaneTypeSerializer
 
 
 class AirplaneViewSet(ModelViewSet):
@@ -71,17 +53,17 @@ class AirplaneViewSet(ModelViewSet):
 
         return queryset
 
-    def get_serializer_class(self) -> type[AirplaneSerializer]:
+    def get_serializer_class(self) -> type[serializers.AirplaneSerializer]:
         if self.action == "list":
-            return AirplaneListSerializer
+            return serializers.AirplaneListSerializer
 
         if self.action == "retrieve":
-            return AirplaneRetrieveSerializer
+            return serializers.AirplaneRetrieveSerializer
 
         if self.action == "upload_image":
-            return AirplaneImageSerializer
+            return serializers.AirplaneImageSerializer
 
-        return AirplaneSerializer
+        return serializers.AirplaneSerializer
 
     @action(
         methods=("POST",),
@@ -100,14 +82,14 @@ class AirportViewSet(ModelViewSet):
     lookup_field = "slug"
     queryset = Airport.objects.all()
 
-    def get_serializer_class(self) -> type[AirportSerializer]:
+    def get_serializer_class(self) -> type[serializers.AirportSerializer]:
         if self.action == "list":
-            return AirportListSerializer
+            return serializers.AirportListSerializer
 
         if self.action == "upload_image":
-            return AirportImageSerializer
+            return serializers.AirportImageSerializer
 
-        return AirportSerializer
+        return serializers.AirportSerializer
 
     @action(
         methods=("POST",),
@@ -126,24 +108,24 @@ class CrewViewSet(ModelViewSet):
     lookup_field = "slug"
     queryset = Crew.objects.all()
 
-    def get_serializer_class(self) -> type[CrewSerializer]:
+    def get_serializer_class(self) -> type[serializers.CrewSerializer]:
         if self.action == "list":
-            return CrewListSerializer
+            return serializers.CrewListSerializer
 
-        return CrewSerializer
+        return serializers.CrewSerializer
 
 
 class RouteViewSet(ModelViewSet):
     queryset = Route.objects.select_related("source", "destination")
 
-    def get_serializer_class(self) -> type[RouteSerializer]:
+    def get_serializer_class(self) -> type[serializers.RouteSerializer]:
         if self.action == "list":
-            return RouteListSerializer
+            return serializers.RouteListSerializer
 
         if self.action == "retrieve":
-            return RouteRetrieveSerializer
+            return serializers.RouteRetrieveSerializer
 
-        return RouteSerializer
+        return serializers.RouteSerializer
 
 
 class FlightViewSet(ModelViewSet):
@@ -161,11 +143,11 @@ class FlightViewSet(ModelViewSet):
 
         return queryset
 
-    def get_serializer_class(self) -> type[FlightSerializer]:
+    def get_serializer_class(self) -> type[serializers.FlightSerializer]:
         if self.action == "list":
-            return FlightListSerializer
+            return serializers.FlightListSerializer
 
         elif self.action == "retrieve":
-            return FlightRetrieveSerializer
+            return serializers.FlightRetrieveSerializer
 
-        return FlightSerializer
+        return serializers.FlightSerializer
