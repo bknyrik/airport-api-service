@@ -131,7 +131,14 @@ class CrewListSerializer(CrewSerializer):
 class FlightSerializer(serializers.ModelSerializer[Flight]):
     class Meta:
         model = Flight
-        fields = ("id", "airplane", "departure_time", "arrival_time")
+        fields = (
+            "id",
+            "route",
+            "airplane",
+            "departure_time",
+            "arrival_time",
+            "crewmembers"
+        )
 
 
 class RouteSerializer(serializers.ModelSerializer[Route]):
