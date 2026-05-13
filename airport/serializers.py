@@ -173,3 +173,21 @@ class RouteListSerializer(RouteSerializer):
 class RouteRetrieveSerializer(RouteSerializer):
     source = AirportListSerializer()
     destination = AirportListSerializer()
+
+
+class FlightRetrieveSerializer(FlightSerializer):
+    route = serializers.HyperlinkedRelatedField(
+        read_only=True,
+        view_name="airport:route-detail",
+    )
+    airplane = serializers.HyperlinkedRelatedField(
+        read_only=True,
+        view_name="airport:airplane-detail",
+        lookup_field="slug"
+    )
+    crewmembers = serializers.HyperlinkedRelatedField(
+        many=True,
+        read_only=True,
+        view_name="airport:crew-detail",
+        lookup_field="slug"
+    )
