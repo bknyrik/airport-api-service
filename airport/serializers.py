@@ -141,6 +141,11 @@ class FlightSerializer(serializers.ModelSerializer[Flight]):
         )
 
 
+class FlightListSerializer(FlightSerializer):
+    airplane = serializers.StringRelatedField()
+    crewmembers = serializers.StringRelatedField(many=True)
+
+
 class RouteSerializer(serializers.ModelSerializer[Route]):
     class Meta:
         model = Route
