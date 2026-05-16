@@ -84,6 +84,7 @@ class AirplaneType(models.Model):
 
 class Airplane(models.Model):
     name = models.CharField(max_length=64, unique=True)
+    description = models.TextField(null=True, blank=True)
     rows = models.IntegerField()
     seats_in_row = models.IntegerField()
     airplane_type = models.ForeignKey(
