@@ -177,6 +177,12 @@ class Route(models.Model):
             ),
         )
 
+    def clean(self) -> None:
+        if self.source == self.destination:
+            raise ValidationError(
+                "Source and destination must be other"
+            )
+
     def save(
         self,
         *,
@@ -185,6 +191,7 @@ class Route(models.Model):
         using: str = None,
         update_fields: Iterable[str] | None = None,
     ) -> None:
+        self.full_clean()
         return super().save(
             force_insert=force_insert,
             force_update=force_update,
