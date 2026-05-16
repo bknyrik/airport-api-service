@@ -128,7 +128,7 @@ class Airport(models.Model):
     country = models.CharField(max_length=64)
     city = models.CharField(max_length=64)
     image = models.ImageField(null=True, upload_to=create_custom_image_path)
-    slug = models.SlugField(null=False, default="")
+    slug = models.SlugField(null=False, default="", max_length=255)
 
     class Meta:
         ordering = ("country", "city")
