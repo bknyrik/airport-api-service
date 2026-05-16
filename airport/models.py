@@ -55,7 +55,7 @@ class Facility(models.Model):
 
 class AirplaneType(models.Model):
     name = models.CharField(max_length=64, unique=True)
-    slug = models.SlugField(null=False, default="")
+    slug = models.SlugField(null=False, default="", max_length=64)
 
     class Meta:
         db_table = "airport_airplane_type"
@@ -96,7 +96,7 @@ class Airplane(models.Model):
         related_name="airplanes"
     )
     image = models.ImageField(null=True, upload_to=create_custom_image_path)
-    slug = models.SlugField(null=False, default="")
+    slug = models.SlugField(null=False, default="", max_length=64)
 
     class Meta:
         ordering = ("-rows", "-seats_in_row")
