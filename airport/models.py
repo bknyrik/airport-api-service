@@ -26,7 +26,7 @@ def create_custom_image_path(
 class Facility(models.Model):
     name = models.CharField(max_length=32, unique=True)
     description = models.TextField(null=True, blank=True)
-    slug = models.SlugField(null=False, default="")
+    slug = models.SlugField(null=False, default="", max_length=64)
 
     class Meta:
         verbose_name_plural = "facilities"
