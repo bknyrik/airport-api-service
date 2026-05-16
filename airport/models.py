@@ -205,7 +205,7 @@ class Crew(models.Model):
     first_name = models.CharField(max_length=64)
     last_name = models.CharField(max_length=64)
     role = models.CharField(choices=Role)
-    slug = models.SlugField(null=False, default="")
+    slug = models.SlugField(null=False, default="", max_length=255)
 
     class Meta:
         verbose_name_plural = "crewmembers"
