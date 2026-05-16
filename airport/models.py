@@ -127,6 +127,7 @@ class Airport(models.Model):
     name = models.CharField(max_length=64)
     country = models.CharField(max_length=64)
     city = models.CharField(max_length=64)
+    description = models.TextField(null=True, blank=True)
     image = models.ImageField(null=True, upload_to=create_custom_image_path)
     slug = models.SlugField(null=False, default="", max_length=255)
 
