@@ -7,7 +7,8 @@ from airport.models import (
     Airport,
     Crew,
     Route,
-    Flight
+    Flight,
+    Ticket
 )
 
 
@@ -192,3 +193,9 @@ class FlightRetrieveSerializer(FlightSerializer):
         view_name="airport:crew-detail",
         lookup_field="slug"
     )
+
+
+class TicketSerializer(serializers.ModelSerializer[Ticket]):
+    class Meta:
+        model = Ticket
+        fields = ("id", "row", "seat")
