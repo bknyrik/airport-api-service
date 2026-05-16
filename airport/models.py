@@ -252,8 +252,9 @@ class Flight(models.Model):
     )
     airplane = models.ForeignKey(
         Airplane,
-        on_delete=models.CASCADE,
-        related_name="flights"
+        on_delete=models.SET_NULL,
+        related_name="flights",
+        null=True
     )
     departure_time = models.DateTimeField()
     arrival_time = models.DateTimeField()
