@@ -89,8 +89,9 @@ class Airplane(models.Model):
     seats_in_row = models.IntegerField()
     airplane_type = models.ForeignKey(
         AirplaneType,
-        on_delete=models.CASCADE,
-        related_name="airplanes"
+        on_delete=models.SET_NULL,
+        related_name="airplanes",
+        null=True
     )
     facilities = models.ManyToManyField(
         Facility,
