@@ -208,3 +208,7 @@ class OrderSerializer(serializers.ModelSerializer[Order]):
     class Meta:
         model = Order
         fields = ("id", "tickets")
+
+
+class OrderListSerializer(OrderSerializer):
+    tickets = serializers.StringRelatedField(many=True)
