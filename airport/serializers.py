@@ -51,6 +51,7 @@ class AirplaneSerializer(serializers.ModelSerializer[Airplane]):
         fields = (
             "id",
             "name",
+            "description",
             "airplane_type",
             "rows",
             "seats_in_row",
