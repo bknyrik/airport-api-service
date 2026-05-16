@@ -8,7 +8,8 @@ from airport.models import (
     Crew,
     Route,
     Flight,
-    Ticket
+    Ticket,
+    Order
 )
 
 
@@ -199,3 +200,11 @@ class TicketSerializer(serializers.ModelSerializer[Ticket]):
     class Meta:
         model = Ticket
         fields = ("id", "row", "seat")
+
+
+class OrderSerializer(serializers.ModelSerializer[Order]):
+    tickets = TicketSerializer(many=True)
+
+    class Meta:
+        model = Order
+        fields = ("id", "tickets")
