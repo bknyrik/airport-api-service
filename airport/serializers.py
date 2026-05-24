@@ -199,7 +199,7 @@ class FlightRetrieveSerializer(FlightSerializer):
 class TicketSerializer(serializers.ModelSerializer[Ticket]):
     class Meta:
         model = Ticket
-        fields = ("id", "row", "seat")
+        fields = ("id", "flight", "row", "seat")
 
 
 class OrderSerializer(serializers.ModelSerializer[Order]):
