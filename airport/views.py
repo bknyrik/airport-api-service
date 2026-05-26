@@ -32,6 +32,7 @@ class FacilityViewSet(ModelViewSet):
 class AirplaneTypeViewSet(ModelViewSet):
     lookup_field = "slug"
     queryset = AirplaneType.objects.all()
+    serializer_class = serializers.AirplaneTypeSerializer
 
 
 class AirplaneViewSet(ModelViewSet):
