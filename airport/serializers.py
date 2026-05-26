@@ -54,11 +54,6 @@ class AirplaneListSerializer(AirplaneSerializer):
     airplane_type = serializers.StringRelatedField()
 
 
-class AirplaneRetrieveSerializer(AirplaneSerializer):
-    facilities = FacilitySerializer(many=True)
-    airplane_type = AirplaneTypeSerializer()
-
-
 class AirportSerializer(serializers.ModelSerializer[Airport]):
     image = serializers.ImageField(read_only=True)
 
