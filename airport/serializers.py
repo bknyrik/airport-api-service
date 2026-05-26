@@ -66,7 +66,7 @@ class AirplaneListSerializer(AirplaneSerializer):
 
 class AirplaneRetrieveSerializer(AirplaneSerializer):
     facilities = FacilityListSerializer(many=True)
-    airplane_type = AirplaneTypeListSerializer()
+    airplane_type = AirplaneTypeSerializer()
 
 
 class AirportSerializer(serializers.ModelSerializer[Airport]):
