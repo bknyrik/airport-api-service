@@ -47,6 +47,9 @@ class AirplaneType(models.Model):
 
 
 class Airplane(models.Model):
+    ROWS_MIN_VALUE = 1
+    SEATS_IN_ROW_MIN_VALUE = 1
+
     name = models.CharField(max_length=64, unique=True)
     description = models.TextField(null=True, blank=True)
     rows = models.IntegerField()
