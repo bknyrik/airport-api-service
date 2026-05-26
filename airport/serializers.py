@@ -134,24 +134,6 @@ class RouteRetrieveSerializer(RouteSerializer):
     destination = AirportSerializer()
 
 
-class FlightRetrieveSerializer(FlightSerializer):
-    route = serializers.HyperlinkedRelatedField(
-        read_only=True,
-        view_name="airport:route-detail",
-    )
-    airplane = serializers.HyperlinkedRelatedField(
-        read_only=True,
-        view_name="airport:airplane-detail",
-        lookup_field="slug"
-    )
-    crewmembers = serializers.HyperlinkedRelatedField(
-        many=True,
-        read_only=True,
-        view_name="airport:crew-detail",
-        lookup_field="slug"
-    )
-
-
 class TicketSerializer(serializers.ModelSerializer[Ticket]):
     class Meta:
         model = Ticket
