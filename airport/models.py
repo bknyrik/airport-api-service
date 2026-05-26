@@ -256,16 +256,16 @@ class Ticket(models.Model):
             )
 
     def clean(self) -> None:
-        rows = self.flight.airplane.rows
-        seats_in_row = self.flight.airplane.seats_in_row
+        max_rows = self.flight.airplane.rows
+        max_seats = self.flight.airplane.seats_in_row
 
-        if self.row not in range(1, rows + 1):
-            raise ValidationError(f"Row must be in range from 1 to {rows}")
-
-        if self.seat not in range(1, seats_in_row + 1):
-            raise ValidationError(
-                f"Seat must be in range from 1 to {seats_in_row}"
-            )
+        Ticket.validate_row_and_seat(
+            self.row,
+            self.seat,
+            max_rows,
+            max_seats,
+            ValidationError
+        )
 
     def __str__(self) -> str:
         return f"Row: {self.row} Seat: {self.seat}"
