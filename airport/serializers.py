@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework.validators import ValidationError
 
 from airport.models import (
     Facility,
@@ -116,6 +117,19 @@ class TicketSerializer(serializers.ModelSerializer[Ticket]):
     class Meta:
         model = Ticket
         fields = ("id", "flight", "row", "seat")
+
+    def validate(self, attrs: dict) -> dict:
+        max_rows = attrs["flight"].airplane.rows
+        max_seats = attrs["flight"].airplane.seats_in_row
+
+        Ticket.validate_row_and_seat(
+            attrs["row"],
+            attrs["seat"],
+            max_rows,
+            max_seats,
+            ValidationError
+        )
+        return attrs
 
 
 class OrderSerializer(serializers.ModelSerializer[Order]):
