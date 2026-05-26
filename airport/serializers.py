@@ -1,3 +1,4 @@
+from django.db import transaction
 from rest_framework import serializers
 from rest_framework.validators import ValidationError
 
@@ -133,7 +134,7 @@ class TicketSerializer(serializers.ModelSerializer[Ticket]):
 
 
 class OrderSerializer(serializers.ModelSerializer[Order]):
-    tickets = TicketSerializer(many=True)
+    tickets = TicketSerializer(many=True, allow_empty=False)
 
     class Meta:
         model = Order
