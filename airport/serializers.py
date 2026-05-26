@@ -123,11 +123,6 @@ class RouteListSerializer(RouteSerializer):
     destination = serializers.StringRelatedField()
 
 
-class RouteRetrieveSerializer(RouteSerializer):
-    source = AirportSerializer()
-    destination = AirportSerializer()
-
-
 class TicketSerializer(serializers.ModelSerializer[Ticket]):
     class Meta:
         model = Ticket
