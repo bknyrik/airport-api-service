@@ -78,7 +78,7 @@ class AirportViewSet(ModelViewSet):
         detail=True,
         url_path="upload_image"
     )
-    def upload_image(self, request: Request, slug: str = None) -> Response:
+    def upload_image(self, request: Request, pk: int = None) -> Response:
         airport = self.get_object()
         serializer = self.get_serializer(airport, data=request.data)
         serializer.is_valid(raise_exception=True)
