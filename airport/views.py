@@ -69,9 +69,6 @@ class AirportViewSet(ModelViewSet):
     queryset = Airport.objects.all()
 
     def get_serializer_class(self) -> type[serializers.AirportSerializer]:
-        if self.action == "list":
-            return serializers.AirportListSerializer
-
         if self.action == "upload_image":
             return serializers.AirportImageSerializer
 
