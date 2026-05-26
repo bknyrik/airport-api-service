@@ -120,6 +120,9 @@ class FlightViewSet(ModelViewSet):
 class OrderViewSet(ModelViewSet):
     queryset = Order.objects.all()
 
+    def get_queryset(self) -> QuerySet[Order]:
+        return self.queryset.filter(user=self.request.user)
+
     def get_serializer_class(self) -> type[serializers.OrderSerializer]:
         if self.action == "list":
             return serializers.OrderListSerializer
