@@ -9,6 +9,7 @@ from django.db.models import Q, F
 from django.conf import settings
 from django.utils.translation import gettext as _
 from django.utils.text import slugify
+from django.core.validators import MinValueValidator
 from django.core.exceptions import ValidationError
 
 
@@ -52,8 +53,12 @@ class Airplane(models.Model):
 
     name = models.CharField(max_length=64, unique=True)
     description = models.TextField(null=True, blank=True)
-    rows = models.IntegerField()
-    seats_in_row = models.IntegerField()
+    rows = models.IntegerField(
+        validators=(MinValueValidator(ROWS_MIN_VALUE),)
+    )
+    seats_in_row = models.IntegerField(
+        validators=(MinValueValidator(SEATS_IN_ROW_MIN_VALUE),)
+    )
     airplane_type = models.ForeignKey(
         AirplaneType,
         on_delete=models.CASCADE,
