@@ -22,12 +22,6 @@ class FacilityViewSet(ModelViewSet):
     lookup_field = "slug"
     queryset = Facility.objects.all()
 
-    def get_serializer_class(self) -> type[serializers.FacilitySerializer]:
-        if self.action == "list":
-            return serializers.FacilityListSerializer
-
-        return serializers.FacilitySerializer
-
 
 class AirplaneTypeViewSet(ModelViewSet):
     queryset = AirplaneType.objects.all()
