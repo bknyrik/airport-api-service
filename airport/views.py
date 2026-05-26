@@ -19,7 +19,6 @@ from airport import serializers
 
 
 class FacilityViewSet(ModelViewSet):
-    lookup_field = "slug"
     queryset = Facility.objects.all()
     serializer_class = serializers.FacilitySerializer
 
