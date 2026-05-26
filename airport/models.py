@@ -252,7 +252,7 @@ class Ticket(models.Model):
 
         if seat not in range(1, max_seats + 1):
             raise exception_type(
-                {"seat": f"Row must be in range from 1 to {max_seats}"}
+                {"seat": f"Seat must be in range from 1 to {max_seats}"}
             )
 
     def clean(self) -> None:
