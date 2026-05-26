@@ -90,7 +90,7 @@ class CrewViewSet(ModelViewSet):
     queryset = Crew.objects.all()
 
     def get_serializer_class(self) -> type[serializers.CrewSerializer]:
-        if self.action == "list":
+        if self.action in ("list", "retrieve"):
             return serializers.CrewListSerializer
 
         return serializers.CrewSerializer
