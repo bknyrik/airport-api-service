@@ -211,8 +211,12 @@ class Ticket(models.Model):
     ROW_MIN_VALUE = 1
     SEAT_MIN_VALUE = 1
 
-    row = models.IntegerField()
-    seat = models.IntegerField()
+    row = models.IntegerField(
+        validators=(MinValueValidator(ROW_MIN_VALUE),)
+    )
+    seat = models.IntegerField(
+        validators=(MinValueValidator(SEAT_MIN_VALUE),)
+    )
     flight = models.ForeignKey(
         Flight,
         on_delete=models.CASCADE,
