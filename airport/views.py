@@ -125,11 +125,8 @@ class FlightViewSet(ModelViewSet):
         return queryset
 
     def get_serializer_class(self) -> type[serializers.FlightSerializer]:
-        if self.action == "list":
+        if self.action in ("list", "retrieve"):
             return serializers.FlightListSerializer
-
-        elif self.action == "retrieve":
-            return serializers.FlightRetrieveSerializer
 
         return serializers.FlightSerializer
 
