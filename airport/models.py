@@ -26,28 +26,10 @@ def create_custom_image_path(
 class Facility(models.Model):
     name = models.CharField(max_length=64, unique=True)
     description = models.TextField(null=True, blank=True)
-    slug = models.SlugField(null=False, default="", max_length=64)
 
     class Meta:
         verbose_name_plural = "facilities"
         ordering = ("name",)
-
-    def save(
-        self,
-        *,
-        force_insert: bool | tuple[models.base.ModelBase, ...] = False,
-        force_update: bool = False,
-        using: str = None,
-        update_fields: Iterable[str] | None = None,
-    ) -> None:
-        self.slug = slugify(self.name)
-
-        return super().save(
-            force_insert=force_insert,
-            force_update=force_update,
-            using=using,
-            update_fields=update_fields
-        )
 
     def __str__(self) -> str:
         return self.name
@@ -55,28 +37,10 @@ class Facility(models.Model):
 
 class AirplaneType(models.Model):
     name = models.CharField(max_length=64, unique=True)
-    slug = models.SlugField(null=False, default="", max_length=64)
 
     class Meta:
         db_table = "airport_airplane_type"
         ordering = ("name",)
-
-    def save(
-        self,
-        *,
-        force_insert: bool | tuple[models.base.ModelBase, ...] = False,
-        force_update: bool = False,
-        using: str = None,
-        update_fields: Iterable[str] | None = None,
-    ) -> None:
-        self.slug = slugify(self.name)
-
-        return super().save(
-            force_insert=force_insert,
-            force_update=force_update,
-            using=using,
-            update_fields=update_fields
-        )
 
     def __str__(self) -> str:
         return self.name
