@@ -33,14 +33,6 @@ class AirplaneTypeViewSet(ModelViewSet):
     lookup_field = "slug"
     queryset = AirplaneType.objects.all()
 
-    def get_serializer_class(
-        self
-    ) -> type[serializers.AirplaneTypeSerializer]:
-        if self.action == "list":
-            return serializers.AirplaneTypeListSerializer
-
-        return serializers.AirplaneTypeSerializer
-
 
 class AirplaneViewSet(ModelViewSet):
     queryset = Airplane.objects.prefetch_related("facilities")
