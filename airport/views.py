@@ -70,7 +70,7 @@ class AirplaneViewSet(ModelViewSet):
         detail=True,
         url_path="upload_image",
     )
-    def upload_image(self, request: Request, slug: str = None) -> Response:
+    def upload_image(self, request: Request, pk: int = None) -> Response:
         airplane = self.get_object()
         serializer = self.get_serializer(airplane, data=request.data)
         serializer.is_valid(raise_exception=True)
