@@ -74,16 +74,6 @@ class AirportImageSerializer(AirportSerializer):
         fields = ("id", "image")
 
 
-class AirportListSerializer(AirportSerializer):
-    url = serializers.HyperlinkedIdentityField(
-        view_name="airport:airport-detail",
-        lookup_field="slug"
-    )
-
-    class Meta(AirportSerializer.Meta):
-        fields = ("url", ) + AirportSerializer.Meta.fields
-
-
 class CrewSerializer(serializers.ModelSerializer[Crew]):
     class Meta:
         model = Crew
