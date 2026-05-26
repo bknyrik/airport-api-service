@@ -43,7 +43,6 @@ class AirplaneTypeViewSet(ModelViewSet):
 
 
 class AirplaneViewSet(ModelViewSet):
-    lookup_field = "slug"
     queryset = Airplane.objects.prefetch_related("facilities")
 
     def get_queryset(self) -> QuerySet[Airplane]:
