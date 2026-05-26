@@ -100,11 +100,8 @@ class RouteViewSet(ModelViewSet):
     queryset = Route.objects.select_related("source", "destination")
 
     def get_serializer_class(self) -> type[serializers.RouteSerializer]:
-        if self.action == "list":
+        if self.action in ("list", "retrieve"):
             return serializers.RouteListSerializer
-
-        if self.action == "retrieve":
-            return serializers.RouteRetrieveSerializer
 
         return serializers.RouteSerializer
 
