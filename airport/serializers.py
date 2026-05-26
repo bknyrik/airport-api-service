@@ -130,8 +130,8 @@ class RouteListSerializer(RouteSerializer):
 
 
 class RouteRetrieveSerializer(RouteSerializer):
-    source = AirportListSerializer()
-    destination = AirportListSerializer()
+    source = AirportSerializer()
+    destination = AirportSerializer()
 
 
 class FlightRetrieveSerializer(FlightSerializer):
