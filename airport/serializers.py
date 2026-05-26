@@ -91,17 +91,10 @@ class CrewSerializer(serializers.ModelSerializer[Crew]):
 
 
 class CrewListSerializer(CrewSerializer):
-    url = serializers.HyperlinkedIdentityField(
-        view_name="airport:crew-detail",
-        lookup_field="slug"
-    )
     role = serializers.ChoiceField(
         choices=Crew.Role,
         source="get_role_display"
     )
-
-    class Meta(CrewSerializer.Meta):
-        fields = ("url", ) + CrewSerializer.Meta.fields
 
 
 class FlightSerializer(serializers.ModelSerializer[Flight]):
