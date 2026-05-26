@@ -128,3 +128,6 @@ class OrderViewSet(ModelViewSet):
             return serializers.OrderListSerializer
 
         return serializers.OrderSerializer
+
+    def perform_create(self, serializer: serializers.OrderSerializer) -> None:
+        serializer.save(user=self.request.user)
