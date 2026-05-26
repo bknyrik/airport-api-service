@@ -40,11 +40,8 @@ class AirplaneViewSet(ModelViewSet):
         return queryset
 
     def get_serializer_class(self) -> type[serializers.AirplaneSerializer]:
-        if self.action == "list":
+        if self.action in ("list", "retrieve"):
             return serializers.AirplaneListSerializer
-
-        if self.action == "retrieve":
-            return serializers.AirplaneRetrieveSerializer
 
         if self.action == "upload_image":
             return serializers.AirplaneImageSerializer
