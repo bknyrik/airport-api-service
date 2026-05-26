@@ -101,15 +101,9 @@ class FlightSerializer(serializers.ModelSerializer[Flight]):
 
 
 class FlightListSerializer(FlightSerializer):
-    url = serializers.HyperlinkedIdentityField(
-        view_name="airport:flight-detail"
-    )
     route = serializers.StringRelatedField()
     airplane = serializers.StringRelatedField()
     crewmembers = serializers.StringRelatedField(many=True)
-
-    class Meta(FlightSerializer.Meta):
-        fields = ("url", ) + FlightSerializer.Meta.fields
 
 
 class RouteSerializer(serializers.ModelSerializer[Route]):
