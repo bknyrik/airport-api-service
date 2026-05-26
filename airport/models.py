@@ -141,7 +141,6 @@ class Crew(models.Model):
     first_name = models.CharField(max_length=64)
     last_name = models.CharField(max_length=64)
     role = models.CharField(choices=Role)
-    slug = models.SlugField(null=False, default="", max_length=255)
 
     class Meta:
         verbose_name_plural = "crewmembers"
@@ -150,23 +149,6 @@ class Crew(models.Model):
     @property
     def full_name(self) -> str:
         return f"{self.first_name} {self.last_name}"
-
-    def save(
-        self,
-        *,
-        force_insert: bool | tuple[models.base.ModelBase, ...] = False,
-        force_update: bool = False,
-        using: str = None,
-        update_fields: Iterable[str] | None = None,
-    ) -> None:
-        self.slug = slugify(f"{self.full_name}-{self.role}")
-
-        return super().save(
-            force_insert=force_insert,
-            force_update=force_update,
-            using=using,
-            update_fields=update_fields
-        )
 
     def __str__(self) -> str:
         return f"{self.full_name} - {self.get_role_display()}"
