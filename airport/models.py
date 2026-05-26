@@ -208,6 +208,9 @@ class Order(models.Model):
 
 
 class Ticket(models.Model):
+    ROW_MIN_VALUE = 1
+    SEAT_MIN_VALUE = 1
+
     row = models.IntegerField()
     seat = models.IntegerField()
     flight = models.ForeignKey(
