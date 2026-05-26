@@ -62,27 +62,9 @@ class Airplane(models.Model):
         related_name="airplanes"
     )
     image = models.ImageField(null=True, upload_to=create_custom_image_path)
-    slug = models.SlugField(null=False, default="", max_length=64)
 
     class Meta:
         ordering = ("-rows", "-seats_in_row")
-
-    def save(
-        self,
-        *,
-        force_insert: bool | tuple[models.base.ModelBase, ...] = False,
-        force_update: bool = False,
-        using: str = None,
-        update_fields: Iterable[str] | None = None,
-    ) -> None:
-        self.slug = slugify(self.name)
-
-        return super().save(
-            force_insert=force_insert,
-            force_update=force_update,
-            using=using,
-            update_fields=update_fields
-        )
 
     def __str__(self) -> str:
         return f"{self.name} {self.rows}x{self.seats_in_row}"
@@ -94,27 +76,9 @@ class Airport(models.Model):
     city = models.CharField(max_length=64)
     description = models.TextField(null=True, blank=True)
     image = models.ImageField(null=True, upload_to=create_custom_image_path)
-    slug = models.SlugField(null=False, default="", max_length=255)
 
     class Meta:
         ordering = ("country", "city")
-
-    def save(
-        self,
-        *,
-        force_insert: bool | tuple[models.base.ModelBase, ...] = False,
-        force_update: bool = False,
-        using: str = None,
-        update_fields: Iterable[str] | None = None,
-    ) -> None:
-        self.slug = slugify(f"{self.country}-{self.city}-{self.name}")
-
-        return super().save(
-            force_insert=force_insert,
-            force_update=force_update,
-            using=using,
-            update_fields=update_fields
-        )
 
     def __str__(self) -> str:
         return f"{self.name} {self.country}/{self.city}"
