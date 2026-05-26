@@ -55,7 +55,7 @@ class AirplaneListSerializer(AirplaneSerializer):
 
 
 class AirplaneRetrieveSerializer(AirplaneSerializer):
-    facilities = FacilityListSerializer(many=True)
+    facilities = FacilitySerializer(many=True)
     airplane_type = AirplaneTypeSerializer()
 
 
