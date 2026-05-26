@@ -65,7 +65,6 @@ class AirplaneViewSet(ModelViewSet):
 
 
 class AirportViewSet(ModelViewSet):
-    lookup_field = "slug"
     queryset = Airport.objects.all()
 
     def get_serializer_class(self) -> type[serializers.AirportSerializer]:
