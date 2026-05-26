@@ -140,6 +140,16 @@ class OrderSerializer(serializers.ModelSerializer[Order]):
         model = Order
         fields = ("id", "tickets")
 
+    def create(self, validated_data: dict) -> Order:
+        with transaction.atomic():
+            tickets_data = validated_data.pop("tickets")
+            order = Order.objects.create(**validated_data)
+
+            for ticket_data in tickets_data:
+                Ticket.objects.create(**ticket_data, order_id=order.id)
+
+        return order
+
 
 class OrderListSerializer(OrderSerializer):
     tickets = serializers.StringRelatedField(many=True)
