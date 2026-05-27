@@ -115,6 +115,19 @@ class AirportViewSet(ModelViewSet):
 class CrewViewSet(ModelViewSet):
     queryset = Crew.objects.all()
 
+    def get_queryset(self) -> QuerySet[Crew]:
+        queryset = self.queryset
+
+        if self.action == "list":
+            role = self.request.query_params.get("role")
+
+            if role:
+                queryset = queryset.filter(
+                    role__iexact=role
+                )
+
+        return queryset
+
     def get_serializer_class(self) -> type[serializers.CrewSerializer]:
         if self.action in ("list", "retrieve"):
             return serializers.CrewListRetrieveSerializer
