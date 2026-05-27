@@ -150,6 +150,26 @@ class OrderSerializer(serializers.ModelSerializer[Order]):
 
         return order
 
+    def update(self, instance: Order, validated_data: dict) -> Order:
+        with transaction.atomic():
+            tickets_data = self.initial_data.pop("tickets")
+
+            for ticket_data in tickets_data:
+                if ticket_data.get("id") is None:
+                    Ticket.objects.create(
+                        flight_id=ticket_data["flight"],
+                        row=ticket_data["row"],
+                        seat=ticket_data["seat"],
+                        order_id=instance.id
+                    )
+                else:
+                    ticket_id = ticket_data.pop("id")
+                    instance.tickets.filter(id=ticket_id).update(
+                        **ticket_data
+                    )
+
+        return instance
+
 
 class OrderListSerializer(OrderSerializer):
     tickets = serializers.StringRelatedField(many=True)
