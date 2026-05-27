@@ -2,6 +2,7 @@ from __future__ import annotations
 import os
 import uuid
 from typing import Iterable
+from datetime import datetime
 
 from django.db import models
 from django.db.models import constraints
@@ -183,6 +184,29 @@ class Flight(models.Model):
                 condition=Q(departure_time__lte=F("arrival_time")),
                 name="departure_time_lte_arrival_time"
             ),
+        )
+
+    @staticmethod
+    def validate_departure_time(
+        departure_time: datetime,
+        arrival_time: datetime,
+        exception_type: type[Exception]
+    ) -> None:
+        if departure_time > arrival_time:
+            raise exception_type(
+                {
+                    "departure_time": (
+                        "departure_time must be less "
+                        "than or equal arrival_time"
+                    )
+                }
+            )
+
+    def clean(self) -> None:
+        Flight.validate_departure_time(
+            self.departure_time,
+            self.arrival_time,
+            ValidationError
         )
 
     def __str__(self) -> str:
