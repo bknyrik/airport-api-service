@@ -131,15 +131,10 @@ class FlightViewSet(ModelViewSet):
 
 
 class OrderViewSet(ModelViewSet):
-    queryset = Order.objects.all()
+    queryset = Order.objects.prefetch_related("tickets")
 
     def get_queryset(self) -> QuerySet[Order]:
-        queryset = self.queryset
-
-        if self.action == "list":
-            queryset = queryset.prefetch_related("tickets")
-
-        return queryset.filter(user=self.request.user)
+        return self.queryset.filter(user=self.request.user)
 
     def get_serializer_class(self) -> type[serializers.OrderSerializer]:
         if self.action in ("list", "retrieve"):
