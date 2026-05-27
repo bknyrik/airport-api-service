@@ -78,6 +78,21 @@ class AirplaneViewSet(ModelViewSet):
 class AirportViewSet(ModelViewSet):
     queryset = Airport.objects.all()
 
+    def get_queryset(self) -> QuerySet[Airport]:
+        queryset = self.queryset
+
+        if self.action == "list":
+            country = self.request.query_params.get("country")
+            city = self.request.query_params.get("city")
+
+            if country:
+                queryset = queryset.filter(country__iexact=country)
+
+            if city:
+                queryset = queryset.filter(city__iexact=city)
+
+        return queryset
+
     def get_serializer_class(self) -> type[serializers.AirportSerializer]:
         if self.action == "upload_image":
             return serializers.AirportImageSerializer
