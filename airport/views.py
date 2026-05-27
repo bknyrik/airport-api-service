@@ -130,7 +130,7 @@ class OrderViewSet(ModelViewSet):
 
     def get_serializer_class(self) -> type[serializers.OrderSerializer]:
         if self.action in ("list", "retrieve"):
-            return serializers.OrderListSerializer
+            return serializers.OrderListRetrieveSerializer
 
         return serializers.OrderSerializer
 

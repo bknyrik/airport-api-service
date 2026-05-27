@@ -171,5 +171,5 @@ class OrderSerializer(serializers.ModelSerializer[Order]):
         return instance
 
 
-class OrderListSerializer(OrderSerializer):
+class OrderListRetrieveSerializer(OrderSerializer):
     tickets = serializers.StringRelatedField(many=True)
