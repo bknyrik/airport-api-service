@@ -97,7 +97,7 @@ class FlightSerializer(serializers.ModelSerializer[Flight]):
         )
 
 
-class FlightListSerializer(FlightSerializer):
+class FlightListRetrieveSerializer(FlightSerializer):
     route = serializers.StringRelatedField()
     airplane = serializers.StringRelatedField()
     crewmembers = serializers.StringRelatedField(many=True)
@@ -109,7 +109,7 @@ class RouteSerializer(serializers.ModelSerializer[Route]):
         fields = ("id", "source", "destination", "distance")
 
 
-class RouteListSerializer(RouteSerializer):
+class RouteListRetrieveSerializer(RouteSerializer):
     source = serializers.StringRelatedField()
     destination = serializers.StringRelatedField()
 

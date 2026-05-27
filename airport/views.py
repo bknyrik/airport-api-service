@@ -98,7 +98,7 @@ class RouteViewSet(ModelViewSet):
 
     def get_serializer_class(self) -> type[serializers.RouteSerializer]:
         if self.action in ("list", "retrieve"):
-            return serializers.RouteListSerializer
+            return serializers.RouteListRetrieveSerializer
 
         return serializers.RouteSerializer
 
@@ -112,7 +112,7 @@ class FlightViewSet(ModelViewSet):
 
     def get_serializer_class(self) -> type[serializers.FlightSerializer]:
         if self.action in ("list", "retrieve"):
-            return serializers.FlightListSerializer
+            return serializers.FlightListRetrieveSerializer
 
         return serializers.FlightSerializer
 
