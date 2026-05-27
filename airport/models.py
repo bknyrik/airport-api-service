@@ -229,7 +229,7 @@ class Ticket(models.Model):
     )
 
     class Meta:
-        ordering = ("row", "seat")
+        ordering = ("flight_id", "row", "seat")
         constraints = (
             constraints.UniqueConstraint(
               fields=("row", "seat", "flight"),
