@@ -104,7 +104,10 @@ class RouteViewSet(ModelViewSet):
 
 
 class FlightViewSet(ModelViewSet):
-    queryset = Flight.objects.prefetch_related("crewmembers").select_related(
+    queryset = Flight.objects.prefetch_related(
+        "crewmembers",
+        "tickets"
+    ).select_related(
         "airplane",
         "route__source",
         "route__destination"
