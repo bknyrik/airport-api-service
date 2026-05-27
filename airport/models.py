@@ -177,6 +177,7 @@ class Flight(models.Model):
     crewmembers = models.ManyToManyField(Crew, related_name="flights")
 
     class Meta:
+        ordering = ("-departure_time", "-arrival_time")
         constraints = (
             constraints.CheckConstraint(
                 condition=Q(departure_time__lte=F("arrival_time")),
