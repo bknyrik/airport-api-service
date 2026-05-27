@@ -37,6 +37,20 @@ class AirplaneViewSet(ModelViewSet):
         if self.action == "list":
             queryset = queryset.select_related("airplane_type")
 
+            facilities = self.request.query_params.get("facilities")
+            airplane_type = self.request.query_params.get("airplane_type")
+
+            if facilities:
+                facilities = tuple(map(int, facilities.split(",")))
+                queryset = queryset.filter(
+                    facilities__in=facilities
+                ).distinct()
+
+            if airplane_type:
+                queryset = queryset.filter(
+                    airplane_type__name__iexact=airplane_type
+                )
+
         return queryset
 
     def get_serializer_class(self) -> type[serializers.AirplaneSerializer]:
