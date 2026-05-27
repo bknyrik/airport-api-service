@@ -77,7 +77,7 @@ class CrewSerializer(serializers.ModelSerializer[Crew]):
         fields = ("id", "first_name", "last_name", "role")
 
 
-class CrewListSerializer(CrewSerializer):
+class CrewListRetrieveSerializer(CrewSerializer):
     role = serializers.ChoiceField(
         choices=Crew.Role,
         source="get_role_display"

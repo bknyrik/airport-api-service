@@ -88,7 +88,7 @@ class CrewViewSet(ModelViewSet):
 
     def get_serializer_class(self) -> type[serializers.CrewSerializer]:
         if self.action in ("list", "retrieve"):
-            return serializers.CrewListSerializer
+            return serializers.CrewListRetrieveSerializer
 
         return serializers.CrewSerializer
 
