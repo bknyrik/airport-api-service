@@ -121,7 +121,12 @@ class OrderViewSet(ModelViewSet):
     queryset = Order.objects.all()
 
     def get_queryset(self) -> QuerySet[Order]:
-        return self.queryset.filter(user=self.request.user)
+        queryset = self.queryset
+
+        if self.action == "list":
+            queryset = queryset.prefetch_related("tickets")
+
+        return queryset.filter(user=self.request.user)
 
     def get_serializer_class(self) -> type[serializers.OrderSerializer]:
         if self.action in ("list", "retrieve"):
