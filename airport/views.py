@@ -138,6 +138,21 @@ class CrewViewSet(ModelViewSet):
 class RouteViewSet(ModelViewSet):
     queryset = Route.objects.select_related("source", "destination")
 
+    def get_queryset(self) -> QuerySet[Route]:
+        queryset = self.queryset
+
+        if self.action == "list":
+            source_id = self.request.query_params.get("source_id")
+            destination_id = self.request.query_params.get("destination_id")
+
+            if source_id:
+                queryset = queryset.filter(source_id=source_id)
+
+            if destination_id:
+                queryset = queryset.filter(destination_id=destination_id)
+
+        return queryset
+
     def get_serializer_class(self) -> type[serializers.RouteSerializer]:
         if self.action in ("list", "retrieve"):
             return serializers.RouteListRetrieveSerializer
