@@ -110,6 +110,14 @@ class FlightListRetrieveSerializer(FlightSerializer):
     route = serializers.StringRelatedField()
     airplane = serializers.StringRelatedField()
     crewmembers = serializers.StringRelatedField(many=True)
+    tickets_available = serializers.IntegerField(read_only=True)
+    seats_taken = serializers.IntegerField(read_only=True, source="tickets.count")
+
+    class Meta(FlightSerializer.Meta):
+        fields = FlightSerializer.Meta.fields + (
+            "tickets_available",
+            "seats_taken"
+        )
 
 
 class RouteSerializer(serializers.ModelSerializer[Route]):
