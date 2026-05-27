@@ -124,7 +124,7 @@ class OrderViewSet(ModelViewSet):
         return self.queryset.filter(user=self.request.user)
 
     def get_serializer_class(self) -> type[serializers.OrderSerializer]:
-        if self.action == "list":
+        if self.action in ("list", "retrieve"):
             return serializers.OrderListSerializer
 
         return serializers.OrderSerializer
