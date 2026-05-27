@@ -51,7 +51,7 @@ class AirplaneImageSerializer(AirplaneSerializer):
         fields = ("id", "image")
 
 
-class AirplaneListSerializer(AirplaneSerializer):
+class AirplaneListRetrieveSerializer(AirplaneSerializer):
     facilities = serializers.StringRelatedField(many=True)
     airplane_type = serializers.StringRelatedField()
 
