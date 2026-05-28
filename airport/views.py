@@ -116,10 +116,9 @@ class AirportViewSet(ModelViewSet):
 
 
 class CrewViewSet(ModelViewSet):
-    queryset = Crew.objects.all()
 
     def get_queryset(self) -> QuerySet[Crew]:
-        queryset = self.queryset
+        queryset = Crew.objects.all()
 
         if self.action == "list":
             first_name = self.request.query_params.get("first_name")
