@@ -79,6 +79,8 @@ class Airplane(models.Model):
 
 
 class Airport(models.Model):
+    IATA_CODE_MIN_LENGTH = 3
+
     name = models.CharField(max_length=64)
     country = models.CharField(max_length=64)
     city = models.CharField(max_length=64)
