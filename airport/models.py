@@ -118,11 +118,23 @@ class Route(models.Model):
             ),
         )
 
-    def clean(self) -> None:
-        if self.source == self.destination:
-            raise ValidationError(
-                "Source and destination must be other"
+    @staticmethod
+    def validate_source(
+        source_id: int,
+        destination_id: int,
+        exception_type: type[Exception]
+    ) -> None:
+        if source_id == destination_id:
+            raise exception_type(
+                {"source": "Source and destination must be other",}
             )
+
+    def clean(self) -> None:
+        Route.validate_source(
+            self.source_id,
+            self.destination_id,
+            ValidationError
+        )
 
     def save(
         self,
