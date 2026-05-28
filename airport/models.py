@@ -93,6 +93,8 @@ class Airport(models.Model):
 
 
 class Route(models.Model):
+    DISTANCE_MIN_VALUE = 1
+
     source = models.ForeignKey(
         Airport,
         on_delete=models.CASCADE,
