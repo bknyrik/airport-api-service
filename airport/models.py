@@ -87,7 +87,7 @@ class Airport(models.Model):
     iata_code = models.CharField(max_length=3, unique=True)
 
     class Meta:
-        ordering = ("country", "city")
+        ordering = ("country", "city", "iata_code")
 
     def __str__(self) -> str:
         return f"{self.name} {self.country}/{self.city}"
