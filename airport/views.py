@@ -147,10 +147,9 @@ class CrewViewSet(ModelViewSet):
 
 
 class RouteViewSet(ModelViewSet):
-    queryset = Route.objects.select_related("source", "destination")
 
     def get_queryset(self) -> QuerySet[Route]:
-        queryset = self.queryset
+        queryset = Route.objects.select_related("source", "destination")
 
         if self.action == "list":
             source_id = self.request.query_params.get("source_id")
