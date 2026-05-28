@@ -37,13 +37,12 @@ class AirplaneViewSet(ModelViewSet):
         if self.action == "list":
             queryset = queryset.select_related("airplane_type")
 
-            facilities = self.request.query_params.get("facilities")
+            facilities_ids = self.request.query_params.get("facilities_ids")
             airplane_type = self.request.query_params.get("airplane_type")
 
-            if facilities:
-                facilities = tuple(map(int, facilities.split(",")))
+            if facilities_ids:
                 queryset = queryset.filter(
-                    facilities__in=facilities
+                    facilities__in=tuple(map(int, facilities_ids.split(",")))
                 ).distinct()
 
             if airplane_type:
