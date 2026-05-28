@@ -10,7 +10,7 @@ from django.db.models import Q, F
 from django.conf import settings
 from django.utils.translation import gettext as _
 from django.utils.text import slugify
-from django.core.validators import MinValueValidator
+from django.core.validators import MinValueValidator, MinLengthValidator
 from django.core.exceptions import ValidationError
 
 
@@ -86,7 +86,11 @@ class Airport(models.Model):
     city = models.CharField(max_length=64)
     description = models.TextField(null=True, blank=True)
     image = models.ImageField(null=True, upload_to=create_custom_image_path)
-    iata_code = models.CharField(max_length=3, unique=True)
+    iata_code = models.CharField(
+        max_length=3,
+        unique=True,
+        validators=(MinLengthValidator(IATA_CODE_MIN_LENGTH),)
+    )
 
     class Meta:
         ordering = ("country", "city", "iata_code")
