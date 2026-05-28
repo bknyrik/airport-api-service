@@ -192,12 +192,20 @@ class FlightViewSet(ModelViewSet):
         if self.action == "list":
             airplane_id = self.request.query_params.get("airplane_id")
             route_id = self.request.query_params.get("route_id")
+            crewmembers_ids = self.request.query_params.get("crewmembers_ids")
 
             if airplane_id:
                 queryset = queryset.filter(airplane_id=airplane_id)
 
             if route_id:
                 queryset = queryset.filter(route_id=route_id)
+
+            if crewmembers_ids:
+                queryset = queryset.filter(
+                    crewmembers__in=tuple(
+                         map(int, crewmembers_ids.split(","))
+                    )
+                ).distinct()
 
         return queryset.annotate(
             tickets_available=(
