@@ -75,10 +75,9 @@ class AirplaneViewSet(ModelViewSet):
 
 
 class AirportViewSet(ModelViewSet):
-    queryset = Airport.objects.all()
 
     def get_queryset(self) -> QuerySet[Airport]:
-        queryset = self.queryset
+        queryset = Airport.objects.all()
 
         if self.action == "list":
             country = self.request.query_params.get("country")
