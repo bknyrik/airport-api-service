@@ -88,6 +88,12 @@ class Airport(models.Model):
 
     class Meta:
         ordering = ("country", "city", "iata_code")
+        constraints = (
+            constraints.UniqueConstraint(
+                fields=("name", "country", "city"),
+                name="name_country_city_unique"
+            ),
+        )
 
     def __str__(self) -> str:
         return f"{self.name} {self.country}/{self.city}"
