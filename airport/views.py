@@ -144,12 +144,20 @@ class RouteViewSet(ModelViewSet):
         if self.action == "list":
             source_id = self.request.query_params.get("source_id")
             destination_id = self.request.query_params.get("destination_id")
+            min_distance = self.request.query_params.get("min_distance")
+            max_distance = self.request.query_params.get("max_distance")
 
             if source_id:
                 queryset = queryset.filter(source_id=source_id)
 
             if destination_id:
                 queryset = queryset.filter(destination_id=destination_id)
+
+            if min_distance:
+                queryset = queryset.filter(distance__gte=min_distance)
+
+            if max_distance:
+                queryset = queryset.filter(distance__lte=max_distance)
 
         return queryset
 
