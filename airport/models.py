@@ -105,7 +105,9 @@ class Route(models.Model):
         on_delete=models.CASCADE,
         related_name="destination_routes"
     )
-    distance = models.IntegerField()
+    distance = models.IntegerField(
+        validators=(MinValueValidator(DISTANCE_MIN_VALUE),)
+    )
 
     class Meta:
         ordering = ("-distance",)
