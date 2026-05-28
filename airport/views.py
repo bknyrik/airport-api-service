@@ -189,6 +189,16 @@ class FlightViewSet(ModelViewSet):
     def get_queryset(self) -> QuerySet[Flight]:
         queryset = self.queryset
 
+        if self.action == "list":
+            airplane_id = self.request.query_params.get("airplane_id")
+            route_id = self.request.query_params.get("route_id")
+
+            if airplane_id:
+                queryset = queryset.filter(airplane_id=airplane_id)
+
+            if route_id:
+                queryset = queryset.filter(route_id=route_id)
+
         return queryset.annotate(
             tickets_available=(
                 F("airplane__rows") * F("airplane__seats_in_row")
