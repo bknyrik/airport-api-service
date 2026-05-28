@@ -119,7 +119,15 @@ class CrewViewSet(ModelViewSet):
         queryset = self.queryset
 
         if self.action == "list":
+            first_name = self.request.query_params.get("first_name")
+            last_name= self.request.query_params.get("last_name")
             role = self.request.query_params.get("role")
+
+            if first_name:
+                queryset = queryset.filter(first_name__icontains=first_name)
+
+            if last_name:
+                queryset = queryset.filter(last_name__icontains=last_name)
 
             if role:
                 queryset = queryset.filter(
