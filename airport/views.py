@@ -83,12 +83,16 @@ class AirportViewSet(ModelViewSet):
         if self.action == "list":
             country = self.request.query_params.get("country")
             city = self.request.query_params.get("city")
+            iata_code = self.request.query_params.get("iata_code")
 
             if country:
                 queryset = queryset.filter(country__iexact=country)
 
             if city:
                 queryset = queryset.filter(city__iexact=city)
+
+            if iata_code:
+                queryset = queryset.filter(iata_code__icontains=iata_code)
 
         return queryset
 
