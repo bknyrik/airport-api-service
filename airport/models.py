@@ -84,6 +84,7 @@ class Airport(models.Model):
     city = models.CharField(max_length=64)
     description = models.TextField(null=True, blank=True)
     image = models.ImageField(null=True, upload_to=create_custom_image_path)
+    iata_code = models.CharField(max_length=3, unique=True)
 
     class Meta:
         ordering = ("country", "city")
