@@ -231,7 +231,10 @@ class Flight(models.Model):
         constraints = (
             constraints.CheckConstraint(
                 condition=Q(departure_time__lte=F("arrival_time")),
-                name="departure_time_lte_arrival_time"
+                name="departure_time_lte_arrival_time",
+                violation_error_message=(
+                    "Departure time must be less than or equal arrival time"
+                )
             ),
         )
 
