@@ -10,7 +10,11 @@ from django.db.models import Q, F
 from django.conf import settings
 from django.utils.translation import gettext as _
 from django.utils.text import slugify
-from django.core.validators import MinValueValidator, MinLengthValidator
+from django.core.validators import (
+    MinValueValidator,
+    MinLengthValidator,
+    RegexValidator,
+)
 from django.core.exceptions import ValidationError
 
 
@@ -79,7 +83,7 @@ class Airplane(models.Model):
 
 
 class Airport(models.Model):
-    IATA_CODE_MIN_LENGTH = 3
+    IATA_CODE_REGEX = r"[A-Z]{3,3}"
 
     name = models.CharField(max_length=64)
     country = models.CharField(max_length=64)
@@ -89,7 +93,7 @@ class Airport(models.Model):
     iata_code = models.CharField(
         max_length=3,
         unique=True,
-        validators=(MinLengthValidator(IATA_CODE_MIN_LENGTH),)
+        validators=(MinLengthValidator(IATA_CODE_REGEX),)
     )
 
     class Meta:
