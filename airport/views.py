@@ -19,7 +19,8 @@ from airport import serializers
 from airport.pagination import (
     AirplanePagination,
     AirportSetPagination,
-    CrewSetPagination
+    CrewSetPagination,
+    RouteSetPagination
 )
 
 
@@ -153,6 +154,7 @@ class CrewViewSet(ModelViewSet):
 
 
 class RouteViewSet(ModelViewSet):
+    pagination_class = RouteSetPagination
 
     def get_queryset(self) -> QuerySet[Route]:
         queryset = Route.objects.select_related("source", "destination")
