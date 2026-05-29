@@ -239,7 +239,7 @@ class Flight(models.Model):
         )
 
     @staticmethod
-    def validate_departure_time(
+    def validate_departure_time_lte_arrival_time(
         departure_time: datetime,
         arrival_time: datetime,
         exception_type: type[Exception]
@@ -248,14 +248,14 @@ class Flight(models.Model):
             raise exception_type(
                 {
                     "departure_time": (
-                        "departure_time must be less "
-                        "than or equal arrival_time"
-                    )
+                        "Departure time must be less "
+                        "than or equal arrival time"
+                    ),
                 }
             )
 
     def clean(self) -> None:
-        Flight.validate_departure_time(
+        Flight.validate_departure_time_lte_arrival_time(
             self.departure_time,
             self.arrival_time,
             ValidationError

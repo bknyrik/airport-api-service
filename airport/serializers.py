@@ -105,7 +105,7 @@ class FlightSerializer(serializers.ModelSerializer[Flight]):
         )
 
     def validate(self, attrs: dict) -> dict:
-        Flight.validate_departure_time(
+        Flight.validate_departure_time_lte_arrival_time(
             attrs["departure_time"],
             attrs["arrival_time"],
             ValidationError
