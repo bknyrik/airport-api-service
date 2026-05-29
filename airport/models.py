@@ -310,7 +310,10 @@ class Ticket(models.Model):
         constraints = (
             constraints.UniqueConstraint(
               fields=("row", "seat", "flight"),
-                name="row_seat_flight_unique"
+              name="row_seat_flight_unique",
+              violation_error_message=(
+                  "Ticket with this row, seat and flight exists."
+              )
             ),
         )
 
