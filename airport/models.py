@@ -156,7 +156,10 @@ class Route(models.Model):
     ) -> None:
         if source_id == destination_id:
             raise exception_type(
-                {"source": "Source and destination must be other",}
+                {
+                    "source": "Source and destination must be other",
+                    "destination": "Destination and source must be other"
+                }
             )
 
     def clean(self) -> None:
