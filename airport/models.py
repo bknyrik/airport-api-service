@@ -315,7 +315,7 @@ class Ticket(models.Model):
         )
 
     @staticmethod
-    def validate_row_and_seat(
+    def validate_row_and_seat_in_range(
         row: int,
         seat: int,
         max_rows: int,
@@ -336,7 +336,7 @@ class Ticket(models.Model):
         max_rows = self.flight.airplane.rows
         max_seats = self.flight.airplane.seats_in_row
 
-        Ticket.validate_row_and_seat(
+        Ticket.validate_row_and_seat_in_range(
             self.row,
             self.seat,
             max_rows,

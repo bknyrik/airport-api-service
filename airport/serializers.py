@@ -157,7 +157,7 @@ class TicketSerializer(serializers.ModelSerializer[Ticket]):
         max_rows = attrs["flight"].airplane.rows
         max_seats = attrs["flight"].airplane.seats_in_row
 
-        Ticket.validate_row_and_seat(
+        Ticket.validate_row_and_seat_in_range(
             attrs["row"],
             attrs["seat"],
             max_rows,
