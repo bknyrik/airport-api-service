@@ -21,7 +21,8 @@ from airport.pagination import (
     AirportSetPagination,
     CrewSetPagination,
     RouteSetPagination,
-    FlightSetPagination
+    FlightSetPagination,
+    OrderSetPagination
 )
 
 
@@ -235,6 +236,7 @@ class FlightViewSet(ModelViewSet):
 
 class OrderViewSet(ModelViewSet):
     queryset = Order.objects.prefetch_related("tickets")
+    pagination_class = OrderSetPagination
 
     def get_queryset(self) -> QuerySet[Order]:
         return self.queryset.filter(user=self.request.user)
