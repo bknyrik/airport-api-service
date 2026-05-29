@@ -141,7 +141,10 @@ class Route(models.Model):
         constraints = (
             constraints.UniqueConstraint(
                 fields=("source", "destination"),
-                name="source_destination_unique"
+                name="source_destination_unique",
+                violation_error_message=(
+                    "Route with this source and destination exists."
+                )
             ),
         )
 
