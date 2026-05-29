@@ -108,7 +108,10 @@ class Airport(models.Model):
         constraints = (
             constraints.UniqueConstraint(
                 fields=("name", "country", "city"),
-                name="name_country_city_unique"
+                name="name_country_city_unique",
+                violation_error_message=(
+                    "Airport with this name, country and city exists."
+                )
             ),
         )
 
