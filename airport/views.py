@@ -16,14 +16,7 @@ from airport.models import (
     Order
 )
 from airport import serializers
-from airport.pagination import (
-    AirplaneSetPagination,
-    AirportSetPagination,
-    CrewSetPagination,
-    RouteSetPagination,
-    FlightSetPagination,
-    OrderSetPagination
-)
+from airport import pagination
 
 
 class FacilityViewSet(ModelViewSet):
@@ -38,7 +31,7 @@ class AirplaneTypeViewSet(ModelViewSet):
 
 class AirplaneViewSet(ModelViewSet):
     queryset = Airplane.objects.prefetch_related("facilities")
-    pagination_class = AirplaneSetPagination
+    pagination_class = pagination.AirplaneSetPagination
 
     def get_queryset(self) -> QuerySet[Airplane]:
         queryset = self.queryset
@@ -84,7 +77,7 @@ class AirplaneViewSet(ModelViewSet):
 
 
 class AirportViewSet(ModelViewSet):
-    pagination_class = AirportSetPagination
+    pagination_class = pagination.AirportSetPagination
 
     def get_queryset(self) -> QuerySet[Airport]:
         queryset = Airport.objects.all()
@@ -125,7 +118,7 @@ class AirportViewSet(ModelViewSet):
 
 
 class CrewViewSet(ModelViewSet):
-    pagination_class = CrewSetPagination
+    pagination_class = pagination.CrewSetPagination
 
     def get_queryset(self) -> QuerySet[Crew]:
         queryset = Crew.objects.all()
@@ -156,7 +149,7 @@ class CrewViewSet(ModelViewSet):
 
 
 class RouteViewSet(ModelViewSet):
-    pagination_class = RouteSetPagination
+    pagination_class = pagination.RouteSetPagination
 
     def get_queryset(self) -> QuerySet[Route]:
         queryset = Route.objects.select_related("source", "destination")
@@ -197,7 +190,7 @@ class FlightViewSet(ModelViewSet):
         "route__source",
         "route__destination"
     )
-    pagination_class = FlightSetPagination
+    pagination_class = pagination.FlightSetPagination
 
     def get_queryset(self) -> QuerySet[Flight]:
         queryset = self.queryset
@@ -236,7 +229,7 @@ class FlightViewSet(ModelViewSet):
 
 class OrderViewSet(ModelViewSet):
     queryset = Order.objects.prefetch_related("tickets")
-    pagination_class = OrderSetPagination
+    pagination_class = pagination.OrderSetPagination
 
     def get_queryset(self) -> QuerySet[Order]:
         return self.queryset.filter(user=self.request.user)
