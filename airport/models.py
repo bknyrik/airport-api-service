@@ -12,7 +12,6 @@ from django.utils.translation import gettext as _
 from django.utils.text import slugify
 from django.core.validators import (
     MinValueValidator,
-    MinLengthValidator,
     RegexValidator,
 )
 from django.core.exceptions import ValidationError
@@ -91,9 +90,16 @@ class Airport(models.Model):
     description = models.TextField(null=True, blank=True)
     image = models.ImageField(null=True, upload_to=create_custom_image_path)
     iata_code = models.CharField(
-        max_length=3,
         unique=True,
-        validators=(MinLengthValidator(IATA_CODE_REGEX),)
+        validators=(
+            RegexValidator(
+                regex=IATA_CODE_REGEX,
+                message=(
+                    "IATA code must be a three-letter"
+                    " identifier in upper case"
+                )
+            ),
+        )
     )
 
     class Meta:
