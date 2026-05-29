@@ -16,6 +16,7 @@ from airport.models import (
     Order
 )
 from airport import serializers
+from airport.pagination import AirplanePagination
 
 
 class FacilityViewSet(ModelViewSet):
@@ -30,6 +31,7 @@ class AirplaneTypeViewSet(ModelViewSet):
 
 class AirplaneViewSet(ModelViewSet):
     queryset = Airplane.objects.prefetch_related("facilities")
+    pagination_class = AirplanePagination
 
     def get_queryset(self) -> QuerySet[Airplane]:
         queryset = self.queryset
