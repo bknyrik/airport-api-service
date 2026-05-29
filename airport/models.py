@@ -352,4 +352,4 @@ class Ticket(models.Model):
         )
 
     def __str__(self) -> str:
-        return f"Row: {self.row} Seat: {self.seat} Flight: {self.flight}"
+        return f"Row: {self.row} Seat: {self.seat} Flight: {self.flight_id}"
