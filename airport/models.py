@@ -6,6 +6,7 @@ from datetime import datetime
 
 from django.db import models
 from django.db.models import constraints
+from django.db.models import indexes
 from django.db.models import Q, F
 from django.conf import settings
 from django.utils.translation import gettext as _
@@ -307,6 +308,9 @@ class Ticket(models.Model):
 
     class Meta:
         ordering = ("flight_id", "row", "seat")
+        indexes = (
+            indexes.Index(fields=("row", "seat"), name="row_seat_idx"),
+        )
         constraints = (
             constraints.UniqueConstraint(
               fields=("row", "seat", "flight"),
