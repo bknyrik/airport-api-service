@@ -264,8 +264,8 @@ class Flight(models.Model):
     def __str__(self) -> str:
         return (
             f"{self.route} "
-            f"{self.departure_time.strftime("%Y-%M-%d %H-%m-%S")} -> "
-            f"{self.arrival_time.strftime("%Y-%M-%d %H-%m-%S")}"
+            f"{self.departure_time.strftime("%Y-%M-%d %H:%m:%S")} -> "
+            f"{self.arrival_time.strftime("%Y-%M-%d %H:%m:%S")}"
         )
 
 
@@ -345,4 +345,4 @@ class Ticket(models.Model):
         )
 
     def __str__(self) -> str:
-        return f"Flight: {self.flight_id} Row: {self.row} Seat: {self.seat}"
+        return f"Row: {self.row} Seat: {self.seat} Flight: {self.flight}"
