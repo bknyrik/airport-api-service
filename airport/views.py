@@ -20,7 +20,8 @@ from airport.pagination import (
     AirplanePagination,
     AirportSetPagination,
     CrewSetPagination,
-    RouteSetPagination
+    RouteSetPagination,
+    FlightSetPagination
 )
 
 
@@ -195,6 +196,7 @@ class FlightViewSet(ModelViewSet):
         "route__source",
         "route__destination"
     )
+    pagination_class = FlightSetPagination
 
     def get_queryset(self) -> QuerySet[Flight]:
         queryset = self.queryset
