@@ -91,6 +91,7 @@ class Airport(models.Model):
     image = models.ImageField(null=True, upload_to=create_custom_image_path)
     iata_code = models.CharField(
         unique=True,
+        null=True,
         validators=(
             RegexValidator(
                 regex=IATA_CODE_REGEX,
