@@ -23,6 +23,21 @@ class UserManager(DjangoUserManager):
 
         return user
 
+    def create_user(
+        self,
+        email: str,
+        password: str,
+        **extra_fields
+    ) -> User:
+        extra_fields.setdefault("is_staff", False)
+        extra_fields.setdefault("is_superuser", False)
+
+        return self._create_user(
+            email=email,
+            password=password,
+            **extra_fields
+        )
+
 
 class User(AbstractUser):
     username = None
