@@ -25,3 +25,6 @@ class UserSerializer(serializers.ModelSerializer[User]):
                 "trim_whitespace": False
             }
         }
+
+    def create(self, validated_data: dict) -> User:
+        return User.objects.create_user(**validated_data)
