@@ -11,6 +11,18 @@ from django.utils.translation import gettext as _
 class UserManager(DjangoUserManager):
     use_in_migrations = True
 
+    def _create_user(self, email: str, password: str, **extra_fields) -> User:
+        if not email:
+            raise ValueError("The given email must be set")
+
+        email = self.normalize_email(email)
+        user = self.model(email=email, **extra_fields)
+
+        user.set_password(password)
+        user.save(using=self._db)
+
+        return user
+
 
 class User(AbstractUser):
     username = None
