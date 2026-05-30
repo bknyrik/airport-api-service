@@ -38,3 +38,16 @@ class UserSerializer(serializers.ModelSerializer[User]):
             user.save()
 
         return user
+
+
+class UserAdminSerializer(UserSerializer):
+    class Meta(UserSerializer.Meta):
+        fields = UserSerializer.Meta.fields + (
+            "is_superuser",
+            "last_login",
+            "user_permissions",
+            "groups"
+        )
+        read_only_fields = UserSerializer.Meta.read_only_fields + (
+            "last_login",
+        )
