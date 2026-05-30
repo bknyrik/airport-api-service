@@ -28,3 +28,13 @@ class UserSerializer(serializers.ModelSerializer[User]):
 
     def create(self, validated_data: dict) -> User:
         return User.objects.create_user(**validated_data)
+
+    def update(self, instance: User, validated_data: dict) -> User:
+        password = validated_data.pop("password", None)
+        user = super().update(instance, validated_data)
+
+        if password:
+            user.set_password(password)
+            user.save()
+
+        return user
