@@ -53,3 +53,8 @@ class UserAdminSerializer(UserSerializer):
             "last_login",
             "date_joined"
         )
+
+
+class UserAdminListRetrieveSerializer(UserAdminSerializer):
+    user_permissions = serializers.StringRelatedField(many=True)
+    groups = serializers.StringRelatedField(many=True)
