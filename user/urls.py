@@ -13,6 +13,7 @@ router.register("", UserViewSet)
 
 
 urlpatterns = [
+    path("", include(router.urls)),
     path("register/", CreateUserAPIView.as_view(), name="create"),
     path("me/", ManageUserAPIView.as_view(), name="manage")
 ]
