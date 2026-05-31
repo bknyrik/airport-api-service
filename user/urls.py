@@ -1,6 +1,15 @@
-from django.urls import path
+from django.urls import path, include
+from rest_framework.routers import SimpleRouter
 
-from user.views import CreateUserAPIView, ManageUserAPIView
+from user.views import (
+    CreateUserAPIView,
+    ManageUserAPIView,
+    UserViewSet
+)
+
+
+router = SimpleRouter()
+router.register("", UserViewSet)
 
 
 urlpatterns = [
