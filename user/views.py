@@ -25,7 +25,7 @@ class UserAdminViewSet(ModelViewSet):
         return UserAdminSerializer
 
 
-class CreateUserAPIView(generics.CreateAPIView):
+class RegisterUserAPIView(generics.CreateAPIView):
     serializer_class = UserSerializer
 
 
