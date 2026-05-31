@@ -13,9 +13,9 @@ router.register("", UserAdminViewSet)
 
 
 urlpatterns = [
-    path("", include(router.urls)),
     path("register/", RegisterUserAPIView.as_view(), name="create"),
-    path("me/", ManageUserAPIView.as_view(), name="manage")
+    path("me/", ManageUserAPIView.as_view(), name="manage"),
+    path("", include(router.urls)),
 ]
 
 app_name = "user"
