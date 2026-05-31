@@ -12,7 +12,7 @@ from user.serializers import (
 User = get_user_model()
 
 
-class UserViewSet(ModelViewSet):
+class UserAdminViewSet(ModelViewSet):
     queryset = User.objects.prefetch_related(
         "user_permissions__content_type",
         "groups"

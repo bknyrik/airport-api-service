@@ -4,12 +4,12 @@ from rest_framework.routers import SimpleRouter
 from user.views import (
     CreateUserAPIView,
     ManageUserAPIView,
-    UserViewSet
+    UserAdminViewSet
 )
 
 
 router = SimpleRouter()
-router.register("", UserViewSet)
+router.register("", UserAdminViewSet)
 
 
 urlpatterns = [
