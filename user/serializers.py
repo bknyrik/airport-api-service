@@ -49,7 +49,8 @@ class UserAdminSerializer(UserSerializer):
             "user_permissions",
             "groups"
         )
-        read_only_fields = UserSerializer.Meta.read_only_fields + (
+        read_only_fields = (
+            "id",
             "last_login",
             "date_joined"
         )
