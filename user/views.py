@@ -2,20 +2,27 @@ from django.contrib.auth import get_user_model
 from rest_framework import generics
 from rest_framework.viewsets import ModelViewSet
 
-from user.serializers import UserSerializer, UserAdminSerializer
+from user.serializers import (
+    UserSerializer,
+    UserAdminSerializer,
+    UserAdminListRetrieveSerializer
+)
 
 
 User = get_user_model()
 
 
 class UserViewSet(ModelViewSet):
-    queryset = User.objects.prefetch_related("user_permissions", "groups")
+    queryset = User.objects.prefetch_related(
+        "user_permissions__content_type",
+        "groups"
+    )
 
     def get_serializer_class(self) -> type[UserSerializer]:
-        if self.request.user.is_superuser:
-            return UserAdminSerializer
+        if self.action in ("list", "retrieve"):
+            return UserAdminListRetrieveSerializer
 
-        return UserSerializer
+        return UserAdminSerializer
 
 
 class CreateUserAPIView(generics.CreateAPIView):
