@@ -8,6 +8,7 @@ from user.serializers import (
     UserAdminSerializer,
     UserAdminListRetrieveSerializer
 )
+from user.permissions import IsAdminOrAnonymous
 
 
 User = get_user_model()
@@ -29,6 +30,7 @@ class UserAdminViewSet(ModelViewSet):
 
 class RegisterUserAPIView(generics.CreateAPIView):
     serializer_class = UserSerializer
+    permission_classes = (IsAdminOrAnonymous,)
 
 
 class ManageUserAPIView(generics.RetrieveUpdateDestroyAPIView):
