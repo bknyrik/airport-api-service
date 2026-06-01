@@ -9,6 +9,7 @@ from user.serializers import (
     UserAdminListRetrieveSerializer
 )
 from user.permissions import IsAdminOrAnonymous
+from user.pagination import UserSetPagination
 
 
 User = get_user_model()
@@ -20,6 +21,7 @@ class UserAdminViewSet(ModelViewSet):
         "groups"
     )
     permission_classes = (IsAdminUser, )
+    pagination_class = UserSetPagination
 
     def get_serializer_class(self) -> type[UserSerializer]:
         if self.action in ("list", "retrieve"):
