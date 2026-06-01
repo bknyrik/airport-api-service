@@ -19,3 +19,12 @@ class IsAdminOrIfAuthenticatedReadOnly(BasePermission):
             )
             or (request.user and request.user.is_staff)
         )
+
+
+class IsAdminOrAnonymous(BasePermission):
+
+    def has_permission(self, request: Request, view: "APIView") -> bool:
+        return bool(
+            (request.user and request.user.is_staff)
+            or request.user.is_anonymous
+        )
