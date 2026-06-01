@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from rest_framework import generics
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.permissions import IsAdminUser
 
 from user.serializers import (
     UserSerializer,
@@ -17,6 +18,7 @@ class UserAdminViewSet(ModelViewSet):
         "user_permissions__content_type",
         "groups"
     )
+    permission_classes = (IsAdminUser, )
 
     def get_serializer_class(self) -> type[UserSerializer]:
         if self.action in ("list", "retrieve"):
