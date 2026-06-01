@@ -4,6 +4,7 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
 
 from airport.models import (
     Facility,
@@ -230,6 +231,7 @@ class FlightViewSet(ModelViewSet):
 class OrderViewSet(ModelViewSet):
     queryset = Order.objects.prefetch_related("tickets")
     pagination_class = pagination.OrderSetPagination
+    permission_classes = (IsAuthenticated,)
 
     def get_queryset(self) -> QuerySet[Order]:
         return self.queryset.filter(user=self.request.user)
