@@ -9,7 +9,7 @@ from user.views import (
 
 
 router = SimpleRouter()
-router.register("", UserAdminViewSet)
+router.register("accounts", UserAdminViewSet)
 
 
 urlpatterns = [
