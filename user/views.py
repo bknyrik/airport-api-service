@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from rest_framework import generics
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
 
 from user.serializers import (
     UserSerializer,
@@ -33,6 +33,7 @@ class RegisterUserAPIView(generics.CreateAPIView):
 
 class ManageUserAPIView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = UserSerializer
+    permission_classes = (IsAuthenticated,)
 
     def get_object(self) -> User:
         return self.request.user
