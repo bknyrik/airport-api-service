@@ -13,7 +13,7 @@ router.register("accounts", UserAdminViewSet)
 
 
 urlpatterns = [
-    path("register/", RegisterUserAPIView.as_view(), name="create"),
+    path("register/", RegisterUserAPIView.as_view(), name="register"),
     path("me/", ManageUserAPIView.as_view(), name="manage"),
     path("", include(router.urls)),
 ]
