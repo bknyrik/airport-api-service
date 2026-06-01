@@ -83,7 +83,7 @@ class Airplane(models.Model):
 
 
 class Airport(models.Model):
-    IATA_CODE_REGEX = r"[A-Z]{3,3}"
+    IATA_CODE_REGEX = r"^[A-Z]{3,3}$"
 
     name = models.CharField(max_length=64)
     country = models.CharField(max_length=64)
