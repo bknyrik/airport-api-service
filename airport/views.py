@@ -33,25 +33,13 @@ class AirplaneTypeViewSet(ModelViewSet):
 class AirplaneViewSet(ModelViewSet):
     queryset = Airplane.objects.prefetch_related("facilities")
     pagination_class = pagination.AirplaneSetPagination
+    filterset_fields = ("airplane_type_id", "facilities")
 
     def get_queryset(self) -> QuerySet[Airplane]:
         queryset = self.queryset
 
         if self.action == "list":
             queryset = queryset.select_related("airplane_type")
-
-            facilities_ids = self.request.query_params.get("facilities_ids")
-            airplane_type = self.request.query_params.get("airplane_type")
-
-            if facilities_ids:
-                queryset = queryset.filter(
-                    facilities__in=tuple(map(int, facilities_ids.split(",")))
-                ).distinct()
-
-            if airplane_type:
-                queryset = queryset.filter(
-                    airplane_type__name__iexact=airplane_type
-                )
 
         return queryset
 
