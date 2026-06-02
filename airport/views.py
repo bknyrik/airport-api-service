@@ -104,6 +104,7 @@ class CrewViewSet(ModelViewSet):
 
 class RouteViewSet(ModelViewSet):
     pagination_class = pagination.RouteSetPagination
+    filterset_class = filtersets.RouteFilterSet
 
     def get_queryset(self) -> QuerySet[Route]:
         queryset = Route.objects.select_related("source", "destination")
