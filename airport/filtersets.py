@@ -1,7 +1,7 @@
 from django_filters.rest_framework import FilterSet
 from django_filters import filters
 
-from airport.models import Airport, Crew
+from airport.models import Airport, Crew, Route
 
 
 class AirportFilterSet(FilterSet):
@@ -35,4 +35,24 @@ class CrewFilterSet(FilterSet):
     last_name = filters.CharFilter(
         field_name="last_name",
         lookup_expr="icontains"
+    )
+
+
+class RouteFilterSet(FilterSet):
+    class Meta:
+        model = Route
+        fields = (
+            "source_id",
+            "destination_id",
+            "min_distance",
+            "max_distance",
+        )
+
+    min_distance = filters.NumberFilter(
+        field_name="distance",
+        lookup_expr="gte"
+    )
+    max_distance = filters.NumberFilter(
+        field_name="distance",
+        lookup_expr="gte"
     )
