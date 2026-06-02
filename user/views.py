@@ -1,4 +1,3 @@
-from django.db.models import QuerySet
 from django.contrib.auth import get_user_model
 from rest_framework import generics
 from rest_framework.viewsets import ModelViewSet
