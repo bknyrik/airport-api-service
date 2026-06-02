@@ -103,31 +103,9 @@ class CrewViewSet(ModelViewSet):
 
 
 class RouteViewSet(ModelViewSet):
+    queryset = Route.objects.select_related("source", "destination")
     pagination_class = pagination.RouteSetPagination
     filterset_class = filtersets.RouteFilterSet
-
-    def get_queryset(self) -> QuerySet[Route]:
-        queryset = Route.objects.select_related("source", "destination")
-
-        if self.action == "list":
-            source_id = self.request.query_params.get("source_id")
-            destination_id = self.request.query_params.get("destination_id")
-            min_distance = self.request.query_params.get("min_distance")
-            max_distance = self.request.query_params.get("max_distance")
-
-            if source_id:
-                queryset = queryset.filter(source_id=source_id)
-
-            if destination_id:
-                queryset = queryset.filter(destination_id=destination_id)
-
-            if min_distance:
-                queryset = queryset.filter(distance__gte=min_distance)
-
-            if max_distance:
-                queryset = queryset.filter(distance__lte=max_distance)
-
-        return queryset
 
     def get_serializer_class(self) -> type[serializers.RouteSerializer]:
         if self.action in ("list", "retrieve"):
