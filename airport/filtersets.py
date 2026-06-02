@@ -54,5 +54,5 @@ class RouteFilterSet(FilterSet):
     )
     max_distance = filters.NumberFilter(
         field_name="distance",
-        lookup_expr="gte"
+        lookup_expr="lte"
     )
