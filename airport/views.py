@@ -124,29 +124,10 @@ class FlightViewSet(ModelViewSet):
         "route__destination"
     )
     pagination_class = pagination.FlightSetPagination
+    filterset_fields = ("airplane_id", "route_id", "crewmembers")
 
     def get_queryset(self) -> QuerySet[Flight]:
-        queryset = self.queryset
-
-        if self.action == "list":
-            airplane_id = self.request.query_params.get("airplane_id")
-            route_id = self.request.query_params.get("route_id")
-            crewmembers_ids = self.request.query_params.get("crewmembers_ids")
-
-            if airplane_id:
-                queryset = queryset.filter(airplane_id=airplane_id)
-
-            if route_id:
-                queryset = queryset.filter(route_id=route_id)
-
-            if crewmembers_ids:
-                queryset = queryset.filter(
-                    crewmembers__in=tuple(
-                         map(int, crewmembers_ids.split(","))
-                    )
-                ).distinct()
-
-        return queryset.annotate(
+        return self.queryset.annotate(
             tickets_available=(
                 F("airplane__rows") * F("airplane__seats_in_row")
                 - Count("tickets")
