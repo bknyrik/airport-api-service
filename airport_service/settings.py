@@ -50,7 +50,8 @@ REST_FRAMEWORK = {
         "anon": "50/day",
         "user": "100/day",
         "admin": "1000/day"
-    }
+    },
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
 
