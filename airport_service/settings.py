@@ -80,6 +80,7 @@ INSTALLED_APPS = [
     "debug_toolbar",
     "django_extensions",
     "drf_spectacular",
+    "django_filters",
     "airport",
     "user"
 ]
