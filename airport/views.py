@@ -92,6 +92,7 @@ class AirportViewSet(ModelViewSet):
 
 class CrewViewSet(ModelViewSet):
     pagination_class = pagination.CrewSetPagination
+    filterset_class = filtersets.CrewFilterSet
 
     def get_queryset(self) -> QuerySet[Crew]:
         queryset = Crew.objects.all()
