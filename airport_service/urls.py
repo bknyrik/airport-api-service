@@ -23,6 +23,9 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
     TokenVerifyView
 )
+from drf_spectacular.views import (
+    SpectacularAPIView
+)
 
 
 urlpatterns = [
@@ -45,4 +48,5 @@ urlpatterns = [
         TokenVerifyView.as_view(),
         name="token_verify"
     ),
+    path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
