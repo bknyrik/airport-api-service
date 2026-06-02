@@ -70,6 +70,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "debug_toolbar",
     "django_extensions",
+    "drf_spectacular",
     "airport",
     "user"
 ]
