@@ -1,7 +1,7 @@
 from django_filters.rest_framework import FilterSet
 from django_filters import filters
 
-from airport.models import Airport
+from airport.models import Airport, Crew
 
 
 class AirportFilterSet(FilterSet):
@@ -19,5 +19,20 @@ class AirportFilterSet(FilterSet):
     )
     iata_code = filters.CharFilter(
         field_name="iata_code",
+        lookup_expr="icontains"
+    )
+
+
+class CrewFilterSet(FilterSet):
+    class Meta:
+        model = Crew
+        fields = ("first_name", "last_name", "role")
+
+    first_name = filters.CharFilter(
+        field_name="first_name",
+        lookup_expr="icontains"
+    )
+    last_name = filters.CharFilter(
+        field_name="last_name",
         lookup_expr="icontains"
     )
