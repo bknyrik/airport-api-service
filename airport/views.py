@@ -91,29 +91,9 @@ class AirportViewSet(ModelViewSet):
 
 
 class CrewViewSet(ModelViewSet):
+    queryset = Crew.objects.all()
     pagination_class = pagination.CrewSetPagination
     filterset_class = filtersets.CrewFilterSet
-
-    def get_queryset(self) -> QuerySet[Crew]:
-        queryset = Crew.objects.all()
-
-        if self.action == "list":
-            first_name = self.request.query_params.get("first_name")
-            last_name= self.request.query_params.get("last_name")
-            role = self.request.query_params.get("role")
-
-            if first_name:
-                queryset = queryset.filter(first_name__icontains=first_name)
-
-            if last_name:
-                queryset = queryset.filter(last_name__icontains=last_name)
-
-            if role:
-                queryset = queryset.filter(
-                    role__iexact=role
-                )
-
-        return queryset
 
     def get_serializer_class(self) -> type[serializers.CrewSerializer]:
         if self.action in ("list", "retrieve"):
