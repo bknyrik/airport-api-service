@@ -11,6 +11,7 @@ from user.serializers import (
 )
 from user.permissions import IsAdminOrAnonymous
 from user.pagination import UserSetPagination
+from user.filtersets import UserFilterSet
 
 
 User = get_user_model()
@@ -23,6 +24,7 @@ class UserAdminViewSet(ModelViewSet):
     )
     permission_classes = (IsAdminUser, )
     pagination_class = UserSetPagination
+    filterset_class = UserFilterSet
 
     def get_queryset(self) -> QuerySet[User]:
         queryset = self.queryset
