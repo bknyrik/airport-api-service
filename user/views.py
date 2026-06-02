@@ -2,6 +2,10 @@ from django.contrib.auth import get_user_model
 from rest_framework import generics
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
+from rest_framework.request import Request
+from rest_framework.response import Response
+from drf_spectacular.utils import extend_schema
+from drf_spectacular.openapi import OpenApiParameter
 
 from user.serializers import (
     UserSerializer,
@@ -30,6 +34,24 @@ class UserAdminViewSet(ModelViewSet):
             return UserAdminListRetrieveSerializer
 
         return UserAdminSerializer
+
+    @extend_schema(
+        parameters=[
+            OpenApiParameter(
+                name="email",
+                description="Filter by characters that are in email.",
+            ),
+            OpenApiParameter(
+                name="is_staff",
+                type=bool,
+                description="Filter by status if user is an admin."
+            )
+        ],
+        description="Get list with users.",
+        summary="Read all users"
+    )
+    def list(self, request: Request, *args, **kwargs) -> Response:
+        return super().list(request, *args, **kwargs)
 
 
 class RegisterUserAPIView(generics.CreateAPIView):
