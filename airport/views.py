@@ -18,6 +18,7 @@ from airport.models import (
 )
 from airport import serializers
 from airport import pagination
+from airport import filtersets
 
 
 class FacilityViewSet(ModelViewSet):
@@ -67,6 +68,7 @@ class AirplaneViewSet(ModelViewSet):
 
 class AirportViewSet(ModelViewSet):
     pagination_class = pagination.AirportSetPagination
+    filterset_class = filtersets.AirportFilterSet
 
     def get_queryset(self) -> QuerySet[Airport]:
         queryset = Airport.objects.all()
