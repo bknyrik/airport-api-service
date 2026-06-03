@@ -11,6 +11,7 @@ from drf_spectacular.openapi import (
     OpenApiRequest,
     OpenApiExample,
     OpenApiResponse,
+    OpenApiTypes
 )
 
 from user.serializers import (
@@ -134,7 +135,6 @@ class RegisterUserAPIView(generics.CreateAPIView):
                         "last_name": "User Last",
                         "password": "userpass12345"
                     },
-                    request_only=True
                 ),
                 OpenApiExample(
                     name="Register a user with email and password fields",
@@ -142,7 +142,6 @@ class RegisterUserAPIView(generics.CreateAPIView):
                         "email": "user@example.com",
                         "password": "userpass12345"
                     },
-                    request_only=True
                 )
             ]
         ),
@@ -160,8 +159,6 @@ class RegisterUserAPIView(generics.CreateAPIView):
                             "last_name": "User Last",
                             "is_staff": False
                         },
-                        response_only=True,
-                        status_codes=(status.HTTP_201_CREATED,)
                     ),
                     OpenApiExample(
                         name="User created with provided field email",
@@ -172,14 +169,12 @@ class RegisterUserAPIView(generics.CreateAPIView):
                             "last_name": "",
                             "is_staff": False
                         },
-                        response_only=True,
-                        status_codes=(status.HTTP_201_CREATED,)
                     )
                 ],
             ),
             status.HTTP_400_BAD_REQUEST: OpenApiResponse(
                 description="Invalid input data",
-                response=dict,
+                response=OpenApiTypes.OBJECT,
                 examples=[
                     OpenApiExample(
                         name="Email is invalid",
@@ -211,13 +206,22 @@ class RegisterUserAPIView(generics.CreateAPIView):
                     ),
                 ]
             ),
-            status.HTTP_403_FORBIDDEN: {
-                "example": {
-                    "detail": (
-                        "You do not have permission to perform this action."
-                    )
-                }
-            }
+            status.HTTP_403_FORBIDDEN: OpenApiResponse(
+                response={
+                    "example": {
+                        "detail": [
+                            (
+                                "You do not have permission "
+                                "to perform this action."
+                            )
+                        ]
+                    },
+                },
+                description=(
+                    "A user, that is not an admin/anonymous, can't register"
+                    " a new user"
+                ),
+            )
         },
     )
     def post(self, request: Request, *args, **kwargs) -> Response:
