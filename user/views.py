@@ -89,6 +89,16 @@ class UserAdminViewSet(ModelViewSet):
     def update(self, request: Request, *args, **kwargs) -> Response:
         return super().update(request, *args, **kwargs)
 
+    @extend_schema(
+        description=(
+            "Takes specified user credentials and "
+            "returns updated information about the user by id."
+        ),
+        summary="Partially update the user by id"
+    )
+    def partial_update(self, request: Request, *args, **kwargs) -> Response:
+        return super().partial_update(request, *args, **kwargs)
+
 
 class RegisterUserAPIView(generics.CreateAPIView):
     serializer_class = UserSerializer
