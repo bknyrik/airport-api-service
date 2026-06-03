@@ -4,8 +4,14 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.request import Request
 from rest_framework.response import Response
+from rest_framework import status
 from drf_spectacular.utils import extend_schema
-from drf_spectacular.openapi import OpenApiParameter
+from drf_spectacular.openapi import (
+    OpenApiParameter,
+    OpenApiRequest,
+    OpenApiExample,
+    OpenApiResponse,
+)
 
 from user.serializers import (
     UserSerializer,
@@ -110,6 +116,112 @@ class UserAdminViewSet(ModelViewSet):
 class RegisterUserAPIView(generics.CreateAPIView):
     serializer_class = UserSerializer
     permission_classes = (IsAdminOrAnonymous,)
+
+    @extend_schema(
+        description=(
+            "Takes user credentials and returns information "
+            "about new created user."
+        ),
+        summary="Register a new user",
+        request=OpenApiRequest(
+            request=UserSerializer,
+            examples=[
+                OpenApiExample(
+                    name="Register a user with all fields",
+                    value={
+                        "email": "user@example.com",
+                        "first_name": "User First",
+                        "last_name": "User Last",
+                        "password": "userpass12345"
+                    },
+                    request_only=True
+                ),
+                OpenApiExample(
+                    name="Register a user with email and password fields",
+                    value={
+                        "email": "user@example.com",
+                        "password": "userpass12345"
+                    },
+                    request_only=True
+                )
+            ]
+        ),
+        responses={
+            status.HTTP_201_CREATED: OpenApiResponse(
+                description="User successfully created",
+                response=UserSerializer,
+                examples=[
+                    OpenApiExample(
+                        name="User created with all provided fields",
+                        value={
+                            "id": 1,
+                            "email": "user@example.com",
+                            "first_name": "User First",
+                            "last_name": "User Last",
+                            "is_staff": False
+                        },
+                        response_only=True,
+                        status_codes=(status.HTTP_201_CREATED,)
+                    ),
+                    OpenApiExample(
+                        name="User created with provided field email",
+                        value={
+                            "id": 1,
+                            "email": "user@example.com",
+                            "first_name": "",
+                            "last_name": "",
+                            "is_staff": False
+                        },
+                        response_only=True,
+                        status_codes=(status.HTTP_201_CREATED,)
+                    )
+                ],
+            ),
+            status.HTTP_400_BAD_REQUEST: OpenApiResponse(
+                description="Invalid input data",
+                response=dict,
+                examples=[
+                    OpenApiExample(
+                        name="Email is invalid",
+                        value={"email": ["Enter a valid email address."]}
+                    ),
+                    OpenApiExample(
+                        name="Email already exists",
+                        value={
+                            "email": [
+                                "user with this Email address already exists."
+                            ],
+                        },
+                    ),
+                    OpenApiExample(
+                        name="Password has invalid length",
+                        value={
+                            "password": [
+                                "Ensure this field has at least 8 characters."
+                            ]
+                        },
+                    ),
+                    OpenApiExample(
+                        name="Email is blank",
+                        value={"email": ["This field may not be blank."],}
+                    ),
+                    OpenApiExample(
+                        name="Password is blank",
+                        value={"password": ["This field may not be blank."],}
+                    ),
+                ]
+            ),
+            status.HTTP_403_FORBIDDEN: {
+                "example": {
+                    "detail": (
+                        "You do not have permission to perform this action."
+                    )
+                }
+            }
+        },
+    )
+    def post(self, request: Request, *args, **kwargs) -> Response:
+        return super().post(request, *args, **kwargs)
 
 
 class ManageUserAPIView(generics.RetrieveUpdateAPIView):
