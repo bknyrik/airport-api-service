@@ -53,6 +53,15 @@ class UserAdminViewSet(ModelViewSet):
     def list(self, request: Request, *args, **kwargs) -> Response:
         return super().list(request, *args, **kwargs)
 
+    @extend_schema(
+        description=(
+            "Creates a new user with additional permissions, "
+            "certain groups and an admin status."
+        ),
+    )
+    def create(self, request: Request, *args, **kwargs) -> Response:
+        return super().create(request, *args, **kwargs)
+
 
 class RegisterUserAPIView(generics.CreateAPIView):
     serializer_class = UserSerializer
