@@ -99,6 +99,13 @@ class UserAdminViewSet(ModelViewSet):
     def partial_update(self, request: Request, *args, **kwargs) -> Response:
         return super().partial_update(request, *args, **kwargs)
 
+    @extend_schema(
+        description="Deletes the user by id and returns nothing.",
+        summary="Delete the user by id"
+    )
+    def destroy(self, request: Request, *args, **kwargs) -> Response:
+        return super().destroy(request, *args, **kwargs)
+
 
 class RegisterUserAPIView(generics.CreateAPIView):
     serializer_class = UserSerializer
