@@ -59,9 +59,11 @@ class UserAdminViewSet(ModelViewSet):
 
     @extend_schema(
         description=(
-            "Creates a new user with additional permissions, "
-            "certain groups and an admin status."
+            "Takes user credentials, including permissions, "
+            "certain groups and an admin status, and returns "
+            "a new user"
         ),
+        summary="Create a user"
     )
     def create(self, request: Request, *args, **kwargs) -> Response:
         return super().create(request, *args, **kwargs)
