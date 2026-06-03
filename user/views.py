@@ -230,3 +230,10 @@ class ManageUserAPIView(generics.RetrieveUpdateAPIView):
 
     def get_object(self) -> User:
         return self.request.user
+
+    @extend_schema(
+        description="Returns information about the current authorized user.",
+        summary="Get the current authorized user",
+    )
+    def get(self, request: Request, *args, **kwargs) -> Response:
+        return super().get(request, *args, **kwargs)
