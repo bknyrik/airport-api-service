@@ -78,6 +78,17 @@ class UserAdminViewSet(ModelViewSet):
     def retrieve(self, request: Request, *args, **kwargs) -> Response:
         return super().retrieve(request, *args, **kwargs)
 
+    @extend_schema(
+        description=(
+            "Takes all user credentials, including permissions, "
+            "groups and an admin status, and returns updated information "
+            "about the user by id."
+        ),
+        summary="Completely update the user by id"
+    )
+    def update(self, request: Request, *args, **kwargs) -> Response:
+        return super().update(request, *args, **kwargs)
+
 
 class RegisterUserAPIView(generics.CreateAPIView):
     serializer_class = UserSerializer
