@@ -47,8 +47,12 @@ class UserAdminViewSet(ModelViewSet):
                 description="Filter by status if user is an admin."
             )
         ],
-        description="Get list with users.",
-        summary="Read all users"
+        description=(
+            "Returns list with users. This list also can be filtered by "
+            "email pattern, is_staff status and paginated by "
+            "page and page_size query parameters."
+        ),
+        summary="Get all users"
     )
     def list(self, request: Request, *args, **kwargs) -> Response:
         return super().list(request, *args, **kwargs)
