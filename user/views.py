@@ -275,3 +275,113 @@ class ManageUserAPIView(generics.RetrieveUpdateAPIView):
     )
     def get(self, request: Request, *args, **kwargs) -> Response:
         return super().get(request, *args, **kwargs)
+
+    @extend_schema(
+        description=(
+            "Takes all user credentials and returns "
+            "updated information about the current authorized user."
+        ),
+        summary="Completely update the current user",
+        request=OpenApiRequest(
+            request=UserSerializer,
+            examples=[
+                OpenApiExample(
+                    name="Update user with all filled fields",
+                    value={
+                        "email": "upd_user@example.com",
+                        "first_name": "Update First",
+                        "last_name": "Update Last",
+                        "password": "updpass12345"
+                    }
+                ),
+                OpenApiExample(
+                    name="Update user with filled fields email and password",
+                    description="Fields first_name and last_name may be blank.",
+                    value={
+                        "email": "upd_user@example.com",
+                        "first_name": "",
+                        "last_name": "",
+                        "password": "updpass12345"
+                    }
+                ),
+            ]
+        ),
+        responses={
+            status.HTTP_200_OK: OpenApiResponse(
+                response=UserSerializer,
+                description="User is updated successfully",
+                examples=[
+                    OpenApiExample(
+                        name="User is updated with all filled fields",
+                        value={
+                            "id": 1,
+                            "email": "upd_user@example.com",
+                            "first_name": "Update First",
+                            "last_name": "Update Last",
+                            "password": "updpass12345"
+                        }
+                    ),
+                    OpenApiExample(
+                        name="User is updated with filled fields email and password",
+                        description="Fields first_name and last_name may be blank.",
+                        value={
+                            "id": 1,
+                            "email": "upd_user@example.com",
+                            "first_name": "",
+                            "last_name": "",
+                            "password": "updpass12345"
+                        }
+                    )
+                ]
+            ),
+            status.HTTP_400_BAD_REQUEST: OpenApiResponse(
+                response=OpenApiTypes.OBJECT,
+                description="Invalid input data",
+                examples=[
+                    OpenApiExample(
+                        name="Email is invalid",
+                        value={"email": ["Enter a valid email address."]}
+                    ),
+                    OpenApiExample(
+                        name="Field email is blank",
+                        value={"email": ["This field may not be blank."]}
+                    ),
+                    OpenApiExample(
+                        name="Password has invalid length",
+                        value={
+                            "password": [
+                                "Ensure this field has at least 8 characters."
+                            ]
+                        }
+                    ),
+                    OpenApiExample(
+                        name="Field password is blank",
+                        value={"password": ["This field may not be blank."]}
+                    )
+                ]
+            ),
+            status.HTTP_401_UNAUTHORIZED: OpenApiResponse(
+                description="User is not authorized",
+                response={
+                    "example": {
+                        "detail": (
+                            "Authentication credentials were not provided."
+                        )
+                    }
+                }
+            ),
+            status.HTTP_429_TOO_MANY_REQUESTS: OpenApiResponse(
+                description="User exhausted the limit of requests",
+                response={
+                    "example": {
+                        "detail": (
+                            "Request was throttled. "
+                            "Expected available in 86399 seconds."
+                        )
+                    }
+                }
+            )
+        }
+    )
+    def put(self, request: Request, *args, **kwargs) -> Response:
+        return super().put(request, *args, **kwargs)
