@@ -302,31 +302,9 @@ class ManageUserAPIView(generics.RetrieveUpdateAPIView):
         description="Returns information about the current authorized user.",
         summary="Get the current authorized user",
         responses={
-            status.HTTP_200_OK: OpenApiResponse(
-                description="Got an information about the current user",
-                response=UserSerializer
-            ),
-            status.HTTP_401_UNAUTHORIZED: OpenApiResponse(
-                description="User is not authorized",
-                response={
-                    "example": {
-                      "detail": (
-                          "Authentication credentials were not provided."
-                      )
-                    }
-                }
-            ),
-            status.HTTP_429_TOO_MANY_REQUESTS: OpenApiResponse(
-                description="User exhausted the limit of requests",
-                response={
-                    "example": {
-                        "detail": (
-                            "Request was throttled. "
-                            "Expected available in 86399 seconds."
-                        )
-                    }
-                }
-            )
+            status.HTTP_200_OK: responses.CURRENT_USER_INFORMATION,
+            status.HTTP_401_UNAUTHORIZED: responses.USER_IS_NOT_AUTHORIZED,
+            status.HTTP_429_TOO_MANY_REQUESTS: responses.REQUEST_IS_THROTTLED
         }
     )
     def get(self, request: Request, *args, **kwargs) -> Response:
