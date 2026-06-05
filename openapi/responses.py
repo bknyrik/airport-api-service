@@ -115,3 +115,8 @@ USER_ADMIN_INVALID_DATA = OpenApiResponse(
         examples.GROUPS_INVALID_PK
     ]
 )
+
+USER_BY_ID_INFORMATION = OpenApiResponse(
+    response=UserAdminSerializer,
+    description="Got the extended information about the user by id"
+)
