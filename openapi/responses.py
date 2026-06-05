@@ -181,3 +181,13 @@ GOT_ACCESS_AND_REFRESH_TOKENS = OpenApiResponse(
     description="Got access and refresh tokens",
     response=TokenObtainPairSerializer
 )
+
+TOKEN_IS_INVALID = OpenApiResponse(
+    description="Provided refresh token is not valid",
+    response={
+        "example": {
+            "detail": "Token is invalid",
+            "code": "token_not_valid"
+        }
+    }
+)
