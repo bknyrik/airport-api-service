@@ -225,6 +225,17 @@ class RegisterUserAPIView(generics.CreateAPIView):
                     "A user, that is not an admin/anonymous, can't register"
                     " a new user"
                 ),
+            ),
+            status.HTTP_429_TOO_MANY_REQUESTS: OpenApiResponse(
+                description="User exhausted the limit of requests",
+                response={
+                    "example": {
+                        "detail": (
+                            "Request was throttled. "
+                            "Expected available in 86399 seconds."
+                        )
+                    }
+                }
             )
         },
     )
