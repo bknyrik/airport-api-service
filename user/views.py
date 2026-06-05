@@ -301,7 +301,7 @@ class ManageUserAPIView(generics.RetrieveUpdateAPIView):
             request=UserSerializer,
             examples=[
                 OpenApiExample(
-                    name="Update user with all filled fields",
+                    name="Update user with all fields",
                     value={
                         "email": "upd_user@example.com",
                         "first_name": "Update First",
