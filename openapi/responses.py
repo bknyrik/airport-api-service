@@ -4,7 +4,11 @@ from drf_spectacular.openapi import (
 )
 
 from openapi import examples
-from user.serializers import UserSerializer, UserAdminSerializer
+from user.serializers import (
+    UserSerializer,
+    UserAdminSerializer,
+    UserAdminListRetrieveSerializer
+)
 
 
 REQUEST_IS_THROTTLED = OpenApiResponse(
@@ -140,4 +144,9 @@ USER_CANT_CREATE = OpenApiResponse(
             "detail": ["You do not have permission to perform this action"]
         }
     }
+)
+
+GOT_USERS_INFORMATION = OpenApiResponse(
+    description="Got an extended information about the users",
+    response=UserAdminListRetrieveSerializer
 )
