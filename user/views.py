@@ -111,51 +111,11 @@ class UserAdminViewSet(ModelViewSet):
         description="Deletes the user by id and returns nothing.",
         summary="Delete the user by id",
         responses={
-            status.HTTP_204_NO_CONTENT: OpenApiResponse(
-                description="User was deleted",
-            ),
-            status.HTTP_401_UNAUTHORIZED: OpenApiResponse(
-                description="User is not authorized",
-                response={
-                    "example": {
-                        "detail": (
-                            "Authentication credentials were not provided."
-                        )
-                    }
-                }
-            ),
-            status.HTTP_404_NOT_FOUND: OpenApiResponse(
-                description="User not found",
-                response={
-                    "example": {"detail": "No User matches the given query."}
-                }
-            ),
-            status.HTTP_403_FORBIDDEN: OpenApiResponse(
-                response={
-                    "example": {
-                        "detail": [
-                            (
-                                "You do not have permission "
-                                "to perform this action."
-                            )
-                        ]
-                    },
-                },
-                description=(
-                    "A user, that is not an admin, can't delete the user"
-                ),
-            ),
-            status.HTTP_429_TOO_MANY_REQUESTS: OpenApiResponse(
-                description="User exhausted the limit of requests",
-                response={
-                    "example": {
-                        "detail": (
-                            "Request was throttled. "
-                            "Expected available in 86399 seconds."
-                        )
-                    }
-                }
-            )
+            status.HTTP_204_NO_CONTENT: responses.USER_IS_DELETED_SUCCESSFULLY,
+            status.HTTP_401_UNAUTHORIZED: responses.USER_IS_NOT_AUTHORIZED,
+            status.HTTP_404_NOT_FOUND: responses.USER_NOT_FOUND,
+            status.HTTP_403_FORBIDDEN: responses.USER_CANT_DELETE,
+            status.HTTP_429_TOO_MANY_REQUESTS: responses.REQUEST_IS_THROTTLED
         }
     )
     def destroy(self, request: Request, *args, **kwargs) -> Response:
