@@ -54,7 +54,7 @@ class AirplaneTypeViewSet(ModelViewSet):
         description="Returns information about airplane type by id.",
         summary="Get airplane type by id",
         responses={
-            status.HTTP_200_OK: airport_responses.GOT_AIRPLANE_TYPES_INFO,
+            status.HTTP_200_OK: airport_responses.GOT_AIRPLANE_TYPE_INFO,
             status.HTTP_401_UNAUTHORIZED: (
                 user_responses.USER_IS_NOT_AUTHORIZED
             ),
