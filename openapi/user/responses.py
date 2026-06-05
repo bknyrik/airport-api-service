@@ -68,6 +68,11 @@ CURRENT_USER_INFORMATION = OpenApiResponse(
     response=UserSerializer
 )
 
+USER_IS_NOT_ADMIN = OpenApiResponse(
+    description="User is not an admin to perform this action",
+    response=EXAMPLE_403_RESPONSE
+)
+
 USER_CANT_REGISTER = OpenApiResponse(
     description=(
         "A user, that is not an admin/anonymous, can't register a new user"
