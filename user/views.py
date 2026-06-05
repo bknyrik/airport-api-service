@@ -8,7 +8,8 @@ from rest_framework import status
 from drf_spectacular.utils import extend_schema
 from rest_framework_simplejwt.views import (
     TokenObtainPairView as JWTTokenObtainPairView,
-    TokenRefreshView as JWTTokenRefreshView
+    TokenRefreshView as JWTTokenRefreshView,
+    TokenVerifyView as JWTTokenVerifyView
 )
 
 from user.serializers import (
@@ -248,5 +249,11 @@ class TokenRefreshView(JWTTokenRefreshView):
             status.HTTP_429_TOO_MANY_REQUESTS: responses.REQUEST_IS_THROTTLED,
         }
     )
+    def post(self, request: Request, *args, **kwargs) -> Response:
+        return super().post(request, *args, **kwargs)
+
+
+class TokenVerifyView(JWTTokenVerifyView):
+
     def post(self, request: Request, *args, **kwargs) -> Response:
         return super().post(request, *args, **kwargs)
