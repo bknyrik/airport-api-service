@@ -15,3 +15,17 @@ EMAIL_IS_BLANK = OpenApiExample(
     name="Email is blank",
     value={"email": ["This field may not be blank."]}
 )
+
+PASSWORD_HAS_INVALID_LENGTH = OpenApiExample(
+    name="Password has invalid length",
+    value={
+        "password": [
+            "Ensure this field has at least 8 characters."
+        ]
+    }
+)
+
+PASSWORD_IS_BLANK = OpenApiExample(
+    name="Password is blank",
+    value={"password": ["This field may not be blank."]}
+)
