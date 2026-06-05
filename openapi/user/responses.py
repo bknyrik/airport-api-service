@@ -73,7 +73,7 @@ USER_IS_NOT_ADMIN = OpenApiResponse(
     response=EXAMPLE_403_RESPONSE
 )
 
-USER_CANT_REGISTER = OpenApiResponse(
+USER_IS_NOT_ADMIN_OR_ANON = OpenApiResponse(
     description=(
         "A user, that is not an admin/anonymous, can't register a new user"
     ),

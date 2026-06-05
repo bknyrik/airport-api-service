@@ -163,7 +163,7 @@ class RegisterUserAPIView(generics.CreateAPIView):
         responses={
             status.HTTP_201_CREATED: responses.USER_CREATED_SUCCESSFULLY,
             status.HTTP_400_BAD_REQUEST: responses.INVALID_USER_DATA,
-            status.HTTP_403_FORBIDDEN: responses.USER_CANT_REGISTER,
+            status.HTTP_403_FORBIDDEN: responses.USER_IS_NOT_ADMIN_OR_ANON,
             status.HTTP_429_TOO_MANY_REQUESTS: responses.REQUEST_IS_THROTTLED
         },
     )
