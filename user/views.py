@@ -60,7 +60,13 @@ class UserAdminViewSet(ModelViewSet):
             "email pattern, is_staff status and paginated by "
             "page and page_size query parameters."
         ),
-        summary="Get all users"
+        summary="Get all users",
+        responses={
+            status.HTTP_200_OK: responses.GOT_USERS_INFORMATION,
+            status.HTTP_401_UNAUTHORIZED: responses.USER_IS_NOT_AUTHORIZED,
+            status.HTTP_403_FORBIDDEN: responses.USER_CANT_GET_USER_LIST,
+            status.HTTP_429_TOO_MANY_REQUESTS: responses.REQUEST_IS_THROTTLED,
+        }
     )
     def list(self, request: Request, *args, **kwargs) -> Response:
         return super().list(request, *args, **kwargs)
