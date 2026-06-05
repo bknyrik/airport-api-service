@@ -62,3 +62,8 @@ USER_CANT_REGISTER = OpenApiResponse(
         },
     },
 )
+
+USER_CREATED_SUCCESSFULLY = OpenApiResponse(
+    description="User successfully created",
+    response=UserSerializer
+)
