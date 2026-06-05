@@ -73,7 +73,7 @@ class UserAdminViewSet(ModelViewSet):
             status.HTTP_201_CREATED: responses.USER_CREATED_SUCCESSFULLY,
             status.HTTP_401_UNAUTHORIZED: responses.USER_IS_NOT_AUTHORIZED,
             status.HTTP_400_BAD_REQUEST: responses.USER_ADMIN_INVALID_DATA,
-            status.HTTP_403_FORBIDDEN: responses.USER_CANT_CREATE,
+            status.HTTP_403_FORBIDDEN: responses.USER_IS_NOT_ADMIN,
             status.HTTP_429_TOO_MANY_REQUESTS: responses.REQUEST_IS_THROTTLED
         }
     )
