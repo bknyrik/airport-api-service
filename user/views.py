@@ -173,30 +173,6 @@ class RegisterUserAPIView(generics.CreateAPIView):
             "about new created user."
         ),
         summary="Register a new user",
-        request=OpenApiRequest(
-            request=UserSerializer,
-            examples=[
-                OpenApiExample(
-                    name="Register a user with all fields",
-                    value={
-                        "email": "user@example.com",
-                        "first_name": "User First",
-                        "last_name": "User Last",
-                        "password": "userpass12345"
-                    },
-                ),
-                OpenApiExample(
-                    name="Register a user with email and password fields",
-                    description=(
-                        "Fields first_name and last_name are optional."
-                    ),
-                    value={
-                        "email": "user@example.com",
-                        "password": "userpass12345"
-                    },
-                )
-            ]
-        ),
         responses={
             status.HTTP_201_CREATED: responses.USER_CREATED_SUCCESSFULLY,
             status.HTTP_400_BAD_REQUEST: responses.INVALID_USER_DATA,
