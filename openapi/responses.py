@@ -2,6 +2,9 @@ from drf_spectacular.openapi import (
     OpenApiResponse,
     OpenApiTypes
 )
+from rest_framework_simplejwt.serializers import (
+    TokenObtainPairSerializer
+)
 
 from openapi import examples
 from user.serializers import (
@@ -168,4 +171,9 @@ PAGE_NOT_FOUND = OpenApiResponse(
 ACCOUNT_NOT_FOUND = OpenApiResponse(
     description="Account with provided credentials not found",
     response={"detail": "No active account found with the given credentials"}
+)
+
+GOT_ACCESS_AND_REFRESH_TOKENS = OpenApiResponse(
+    description="Got access and refresh tokens",
+    response=TokenObtainPairSerializer
 )
