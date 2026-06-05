@@ -141,7 +141,7 @@ class UserAdminViewSet(ModelViewSet):
             status.HTTP_204_NO_CONTENT: responses.USER_IS_DELETED_SUCCESSFULLY,
             status.HTTP_401_UNAUTHORIZED: responses.USER_IS_NOT_AUTHORIZED,
             status.HTTP_404_NOT_FOUND: responses.USER_NOT_FOUND,
-            status.HTTP_403_FORBIDDEN: responses.USER_CANT_DELETE,
+            status.HTTP_403_FORBIDDEN: responses.USER_IS_NOT_ADMIN,
             status.HTTP_429_TOO_MANY_REQUESTS: responses.REQUEST_IS_THROTTLED
         }
     )
