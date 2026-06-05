@@ -139,6 +139,9 @@ class RegisterUserAPIView(generics.CreateAPIView):
                 ),
                 OpenApiExample(
                     name="Register a user with email and password fields",
+                    description=(
+                        "Fields first_name and last_name are optional."
+                    ),
                     value={
                         "email": "user@example.com",
                         "password": "userpass12345"
