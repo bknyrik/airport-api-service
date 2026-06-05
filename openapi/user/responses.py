@@ -121,15 +121,6 @@ GOT_USERS_INFORMATION = OpenApiResponse(
     response=UserAdminListRetrieveSerializer
 )
 
-USER_CANT_GET_USER_LIST = OpenApiResponse(
-    description="User, that is not an admin, can get list with users",
-    response={
-        "example": {
-            "detail": ["You do not have permission to perform this action"]
-        }
-    }
-)
-
 PAGE_NOT_FOUND = OpenApiResponse(
     description="User specified the non-existent page",
     response={"example": {"detail": "Invalid page."}}
