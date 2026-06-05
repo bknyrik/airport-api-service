@@ -51,3 +51,14 @@ CURRENT_USER_INFORMATION = OpenApiResponse(
     description="Got an information about the current user",
     response=UserSerializer
 )
+
+USER_CANT_REGISTER = OpenApiResponse(
+    description=(
+        "A user, that is not an admin/anonymous, can't register a new user"
+    ),
+    response={
+        "example": {
+            "detail": ["You do not have permission to perform this action."]
+        },
+    },
+)
