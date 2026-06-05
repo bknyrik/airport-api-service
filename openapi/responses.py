@@ -170,7 +170,11 @@ PAGE_NOT_FOUND = OpenApiResponse(
 
 ACCOUNT_NOT_FOUND = OpenApiResponse(
     description="Account with provided credentials not found",
-    response={"detail": "No active account found with the given credentials"}
+    response={
+        "example": {
+            "detail": "No active account found with the given credentials"
+        }
+    }
 )
 
 GOT_ACCESS_AND_REFRESH_TOKENS = OpenApiResponse(
