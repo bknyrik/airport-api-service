@@ -6,6 +6,9 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework import status
 from drf_spectacular.utils import extend_schema
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView as JWTTokenObtainPairView,
+)
 
 from user.serializers import (
     UserSerializer,
@@ -218,3 +221,9 @@ class ManageUserAPIView(generics.RetrieveUpdateAPIView):
     )
     def patch(self, request: Request, *args, **kwargs) -> Response:
         return super().patch(request, *args, **kwargs)
+
+
+class TokenObtainPairView(JWTTokenObtainPairView):
+
+    def post(self, request: Request, *args, **kwargs) -> Response:
+        return super().post(request, *args, **kwargs)
