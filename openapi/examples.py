@@ -10,3 +10,8 @@ EMAIL_EXISTS = OpenApiExample(
     name="Email already exists",
     value={"email": ["user with this Email address already exists."]}
 )
+
+EMAIL_IS_BLANK = OpenApiExample(
+    name="Email is blank",
+    value={"email": ["This field may not be blank."]}
+)
