@@ -23,6 +23,7 @@ from user.permissions import IsAdminOrAnonymous
 from user.pagination import UserSetPagination
 from user.filtersets import UserFilterSet
 from openapi import responses
+from openapi import parameters
 
 
 User = get_user_model()
@@ -45,15 +46,8 @@ class UserAdminViewSet(ModelViewSet):
 
     @extend_schema(
         parameters=[
-            OpenApiParameter(
-                name="email",
-                description="Filter by characters that are in email.",
-            ),
-            OpenApiParameter(
-                name="is_staff",
-                type=bool,
-                description="Filter by status if user is an admin."
-            )
+            parameters.FILTER_BY_EMAIL_PATTERN,
+            parameters.FILTER_BY_IS_STAFF
         ],
         description=(
             "Returns list with users. This list also can be filtered by "
