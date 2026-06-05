@@ -1,4 +1,10 @@
-from drf_spectacular.openapi import OpenApiResponse
+from drf_spectacular.openapi import (
+    OpenApiResponse,
+    OpenApiTypes
+)
+
+from openapi import examples
+from user.serializers import UserSerializer
 
 
 REQUEST_IS_THROTTLED = OpenApiResponse(
@@ -22,4 +28,21 @@ USER_IS_NOT_AUTHORIZED = OpenApiResponse(
             )
         }
     }
+)
+
+INVALID_USER_DATA = OpenApiResponse(
+    response=OpenApiTypes.OBJECT,
+    description="Invalid input data",
+    examples=[
+        examples.EMAIL_IS_INVALID,
+        examples.EMAIL_EXISTS,
+        examples.EMAIL_IS_BLANK,
+        examples.PASSWORD_HAS_INVALID_LENGTH,
+        examples.PASSWORD_IS_BLANK
+    ]
+)
+
+USER_UPDATED_SUCCESSFULLY = OpenApiResponse(
+    response=UserSerializer,
+    description="User updated successfully",
 )
