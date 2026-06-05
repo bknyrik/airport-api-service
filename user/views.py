@@ -327,7 +327,7 @@ class ManageUserAPIView(generics.RetrieveUpdateAPIView):
                 description="User is updated successfully",
                 examples=[
                     OpenApiExample(
-                        name="User is updated with all filled fields",
+                        name="User is updated with all fields",
                         value={
                             "id": 1,
                             "email": "upd_user@example.com",
@@ -337,7 +337,7 @@ class ManageUserAPIView(generics.RetrieveUpdateAPIView):
                         }
                     ),
                     OpenApiExample(
-                        name="User is updated with filled fields email and password",
+                        name="User is updated with fields email and password",
                         description="Fields first_name and last_name may be blank.",
                         value={
                             "id": 1,
@@ -358,7 +358,7 @@ class ManageUserAPIView(generics.RetrieveUpdateAPIView):
                         value={"email": ["Enter a valid email address."]}
                     ),
                     OpenApiExample(
-                        name="Field email is blank",
+                        name="Email is blank",
                         value={"email": ["This field may not be blank."]}
                     ),
                     OpenApiExample(
@@ -370,7 +370,7 @@ class ManageUserAPIView(generics.RetrieveUpdateAPIView):
                         }
                     ),
                     OpenApiExample(
-                        name="Field password is blank",
+                        name="Password is blank",
                         value={"password": ["This field may not be blank."]}
                     )
                 ]
