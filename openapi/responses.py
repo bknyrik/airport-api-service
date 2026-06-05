@@ -164,3 +164,8 @@ PAGE_NOT_FOUND = OpenApiResponse(
     description="User specified the non-existent page",
     response={"example": {"detail": "Invalid page."}}
 )
+
+ACCOUNT_NOT_FOUND = OpenApiResponse(
+    description="Account with provided credentials not found",
+    response={"detail": "No active account found with the given credentials"}
+)
