@@ -71,7 +71,13 @@ class UserAdminViewSet(ModelViewSet):
             "certain groups and an admin status, and returns "
             "a new user"
         ),
-        summary="Create a user"
+        summary="Create a user",
+        responses={
+            status.HTTP_201_CREATED: responses.USER_CREATED_SUCCESSFULLY,
+            status.HTTP_400_BAD_REQUEST: responses.USER_ADMIN_INVALID_DATA,
+            status.HTTP_403_FORBIDDEN: responses.USER_CANT_CREATE,
+            status.HTTP_429_TOO_MANY_REQUESTS: responses.REQUEST_IS_THROTTLED
+        }
     )
     def create(self, request: Request, *args, **kwargs) -> Response:
         return super().create(request, *args, **kwargs)
