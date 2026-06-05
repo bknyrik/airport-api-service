@@ -116,15 +116,6 @@ USER_BY_ID_INFORMATION = OpenApiResponse(
     description="Got the extended information about the user by id"
 )
 
-USER_CANT_CREATE = OpenApiResponse(
-    description="User, that is not an admin, can't create the user",
-    response={
-        "example": {
-            "detail": ["You do not have permission to perform this action"]
-        }
-    }
-)
-
 GOT_USERS_INFORMATION = OpenApiResponse(
     description="Got an extended information about the users",
     response=UserAdminListRetrieveSerializer
