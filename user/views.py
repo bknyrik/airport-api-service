@@ -256,14 +256,7 @@ class ManageUserAPIView(generics.RetrieveUpdateAPIView):
         responses={
             status.HTTP_200_OK: OpenApiResponse(
                 description="Got an information about the current user",
-                response={
-                    "example": {
-                        "email": "user@example.com",
-                        "first_name": "User First",
-                        "last_name": "User Last",
-                        "is_staff": False
-                    }
-                }
+                response=UserSerializer
             ),
             status.HTTP_401_UNAUTHORIZED: OpenApiResponse(
                 description="User is not authorized",
