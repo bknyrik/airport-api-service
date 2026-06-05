@@ -12,3 +12,14 @@ REQUEST_IS_THROTTLED = OpenApiResponse(
         }
     }
 )
+
+USER_IS_NOT_AUTHORIZED = OpenApiResponse(
+    description="User is not authorized",
+    response={
+        "example": {
+            "detail": (
+                "Authentication credentials were not provided."
+            )
+        }
+    }
+)
