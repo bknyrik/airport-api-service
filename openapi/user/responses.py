@@ -92,15 +92,6 @@ USER_NOT_FOUND = OpenApiResponse(
     response={"example": {"detail": "No User matches the given query."}}
 )
 
-USER_CANT_UPDATE = OpenApiResponse(
-    description="A user, that is not an admin, can't update the user",
-    response={
-        "example": {
-            "detail": ["You do not have permission to perform this action."]
-        }
-    }
-)
-
 USER_ADMIN_IS_UPDATED_SUCCESSFULLY = OpenApiResponse(
     response=UserAdminSerializer,
     description="User is updated successfully",
