@@ -16,6 +16,13 @@ from user.serializers import (
 )
 
 
+EXAMPLE_403_RESPONSE = {
+    "example": {
+        "detail": ["You do not have permission to perform this action."]
+    }
+}
+
+
 REQUEST_IS_THROTTLED = OpenApiResponse(
     description="The user reached the limit of requests",
     response={
