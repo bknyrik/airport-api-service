@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
+from drf_spectacular.utils import extend_schema
 
 from airport.models import (
     Facility,
@@ -19,6 +20,8 @@ from airport.models import (
 from airport import serializers
 from airport import pagination
 from airport import filtersets
+from openapi.airport import responses as airport_responses
+from openapi.user import responses as user_responses
 
 
 class FacilityViewSet(ModelViewSet):
@@ -29,6 +32,23 @@ class FacilityViewSet(ModelViewSet):
 class AirplaneTypeViewSet(ModelViewSet):
     queryset = AirplaneType.objects.all()
     serializer_class = serializers.AirplaneTypeSerializer
+
+    @extend_schema(
+        description="Returns list with all airplane types.",
+        summary="Get all airplane types",
+        responses={
+            status.HTTP_200_OK: airport_responses.GOT_AIRPLANE_TYPES_INFO,
+            status.HTTP_401_UNAUTHORIZED: (
+                user_responses.USER_IS_NOT_AUTHORIZED
+            ),
+            status.HTTP_403_FORBIDDEN: user_responses.USER_IS_NOT_ADMIN,
+            status.HTTP_429_TOO_MANY_REQUESTS: (
+                user_responses.REQUEST_IS_THROTTLED
+            )
+        }
+    )
+    def list(self, request: Request, *args, **kwargs) -> Response:
+        return super().list(request, *args, **kwargs)
 
 
 class AirplaneViewSet(ModelViewSet):
