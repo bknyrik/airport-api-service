@@ -50,6 +50,23 @@ class AirplaneTypeViewSet(ModelViewSet):
     def list(self, request: Request, *args, **kwargs) -> Response:
         return super().list(request, *args, **kwargs)
 
+    @extend_schema(
+        description="Returns information about airplane type by id.",
+        summary="Get airplane type by id",
+        responses={
+            status.HTTP_200_OK: airport_responses.GOT_AIRPLANE_TYPES_INFO,
+            status.HTTP_401_UNAUTHORIZED: (
+                user_responses.USER_IS_NOT_AUTHORIZED
+            ),
+            status.HTTP_403_FORBIDDEN: user_responses.USER_IS_NOT_ADMIN,
+            status.HTTP_429_TOO_MANY_REQUESTS: (
+                user_responses.REQUEST_IS_THROTTLED
+            )
+        }
+    )
+    def retrieve(self, request: Request, *args, **kwargs) -> Response:
+        return super().retrieve(request, *args, **kwargs)
+
 
 class AirplaneViewSet(ModelViewSet):
     queryset = Airplane.objects.prefetch_related("facilities")
