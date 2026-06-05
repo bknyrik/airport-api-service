@@ -4,7 +4,7 @@ from drf_spectacular.openapi import (
 )
 
 from openapi import examples
-from user.serializers import UserSerializer
+from user.serializers import UserSerializer, UserAdminSerializer
 
 
 REQUEST_IS_THROTTLED = OpenApiResponse(
@@ -95,4 +95,9 @@ USER_CANT_UPDATE = OpenApiResponse(
             "detail": ["You do not have permission to perform this action."]
         }
     }
+)
+
+USER_ADMIN_IS_UPDATED_SUCCESSFULLY = OpenApiResponse(
+    response=UserAdminSerializer,
+    description="User is updated successfully",
 )
