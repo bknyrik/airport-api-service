@@ -132,3 +132,12 @@ USER_CANT_RETRIEVE_USER_INFO = OpenApiResponse(
         }
     }
 )
+
+USER_CANT_CREATE = OpenApiResponse(
+    description="User, that is not an admin, can't create the user",
+    response={
+        "example": {
+            "detail": ["You do not have permission to perform this action"]
+        }
+    }
+)
