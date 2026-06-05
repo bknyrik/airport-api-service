@@ -57,3 +57,13 @@ TOKEN_IS_INVALID = OpenApiExample(
         }
     }
 )
+
+TOKEN_IS_EXPIRED = OpenApiExample(
+    name="Provided access token is expired",
+    value={
+        "example": {
+            "detail": "Token is expired",
+            "code": "token_not_valid"
+        }
+    }
+)

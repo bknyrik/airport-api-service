@@ -202,13 +202,3 @@ TOKEN_IS_VALID = OpenApiResponse(
     description="Provided access token is valid",
     response={"example": {}}
 )
-
-TOKEN_IS_EXPIRED = OpenApiResponse(
-    description="Provided access token is expired",
-    response={
-        "example": {
-            "detail": "Token is expired",
-            "code": "token_not_valid"
-        }
-    }
-)
