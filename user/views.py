@@ -22,6 +22,7 @@ from user.serializers import (
 from user.permissions import IsAdminOrAnonymous
 from user.pagination import UserSetPagination
 from user.filtersets import UserFilterSet
+from openapi import responses
 
 
 User = get_user_model()
@@ -448,65 +449,10 @@ class ManageUserAPIView(generics.RetrieveUpdateAPIView):
         ),
         summary="Partially update the current user",
         responses={
-            status.HTTP_200_OK: OpenApiResponse(
-                response=UserSerializer,
-                description="User updated successfully",
-            ),
-            status.HTTP_400_BAD_REQUEST: OpenApiResponse(
-                response=OpenApiTypes.OBJECT,
-                description="Invalid input data",
-                examples=[
-                    OpenApiExample(
-                        name="Email is invalid",
-                        value={"email": ["Enter a valid email address."]}
-                    ),
-                    OpenApiExample(
-                        name="Email already exists",
-                        value={
-                            "email": [
-                                "user with this Email address already exists."
-                            ],
-                        },
-                    ),
-                    OpenApiExample(
-                        name="Email is blank",
-                        value={"email": ["This field may not be blank."]}
-                    ),
-                    OpenApiExample(
-                        name="Password has invalid length",
-                        value={
-                            "password": [
-                                "Ensure this field has at least 8 characters."
-                            ]
-                        }
-                    ),
-                    OpenApiExample(
-                        name="Password is blank",
-                        value={"password": ["This field may not be blank."]}
-                    )
-                ]
-            ),
-            status.HTTP_401_UNAUTHORIZED: OpenApiResponse(
-                description="User is not authorized",
-                response={
-                    "example": {
-                        "detail": (
-                            "Authentication credentials were not provided."
-                        )
-                    }
-                }
-            ),
-            status.HTTP_429_TOO_MANY_REQUESTS: OpenApiResponse(
-                description="User exhausted the limit of requests",
-                response={
-                    "example": {
-                        "detail": (
-                            "Request was throttled. "
-                            "Expected available in 86399 seconds."
-                        )
-                    }
-                }
-            )
+            status.HTTP_200_OK: responses.USER_UPDATED_SUCCESSFULLY,
+            status.HTTP_400_BAD_REQUEST: responses.INVALID_USER_DATA,
+            status.HTTP_401_UNAUTHORIZED: responses.USER_IS_NOT_AUTHORIZED,
+            status.HTTP_429_TOO_MANY_REQUESTS: responses.REQUEST_IS_THROTTLED
         }
     )
     def patch(self, request: Request, *args, **kwargs) -> Response:
