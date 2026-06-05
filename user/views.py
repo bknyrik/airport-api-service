@@ -198,93 +198,10 @@ class RegisterUserAPIView(generics.CreateAPIView):
             ]
         ),
         responses={
-            status.HTTP_201_CREATED: OpenApiResponse(
-                description="User successfully created",
-                response=UserSerializer,
-                examples=[
-                    OpenApiExample(
-                        name="User created with all provided fields",
-                        value={
-                            "id": 1,
-                            "email": "user@example.com",
-                            "first_name": "User First",
-                            "last_name": "User Last",
-                            "is_staff": False
-                        },
-                    ),
-                    OpenApiExample(
-                        name="User created with provided field email",
-                        value={
-                            "id": 1,
-                            "email": "user@example.com",
-                            "first_name": "",
-                            "last_name": "",
-                            "is_staff": False
-                        },
-                    )
-                ],
-            ),
-            status.HTTP_400_BAD_REQUEST: OpenApiResponse(
-                description="Invalid input data",
-                response=OpenApiTypes.OBJECT,
-                examples=[
-                    OpenApiExample(
-                        name="Email is invalid",
-                        value={"email": ["Enter a valid email address."]}
-                    ),
-                    OpenApiExample(
-                        name="Email already exists",
-                        value={
-                            "email": [
-                                "user with this Email address already exists."
-                            ],
-                        },
-                    ),
-                    OpenApiExample(
-                        name="Password has invalid length",
-                        value={
-                            "password": [
-                                "Ensure this field has at least 8 characters."
-                            ]
-                        },
-                    ),
-                    OpenApiExample(
-                        name="Email is blank",
-                        value={"email": ["This field may not be blank."],}
-                    ),
-                    OpenApiExample(
-                        name="Password is blank",
-                        value={"password": ["This field may not be blank."],}
-                    ),
-                ]
-            ),
-            status.HTTP_403_FORBIDDEN: OpenApiResponse(
-                response={
-                    "example": {
-                        "detail": [
-                            (
-                                "You do not have permission "
-                                "to perform this action."
-                            )
-                        ]
-                    },
-                },
-                description=(
-                    "A user, that is not an admin/anonymous, can't register"
-                    " a new user"
-                ),
-            ),
-            status.HTTP_429_TOO_MANY_REQUESTS: OpenApiResponse(
-                description="User exhausted the limit of requests",
-                response={
-                    "example": {
-                        "detail": (
-                            "Request was throttled. "
-                            "Expected available in 86399 seconds."
-                        )
-                    }
-                }
-            )
+            status.HTTP_201_CREATED: responses.USER_CREATED_SUCCESSFULLY,
+            status.HTTP_400_BAD_REQUEST: responses.INVALID_USER_DATA,
+            status.HTTP_403_FORBIDDEN: responses.USER_CANT_REGISTER,
+            status.HTTP_429_TOO_MANY_REQUESTS: responses.REQUEST_IS_THROTTLED
         },
     )
     def post(self, request: Request, *args, **kwargs) -> Response:
