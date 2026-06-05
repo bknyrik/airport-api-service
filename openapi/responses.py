@@ -200,7 +200,7 @@ GOT_ACCESS_TOKEN = OpenApiResponse(
 )
 
 TOKEN_IS_VALID = OpenApiResponse(
-    description="Provided access token is valid",
+    description="Provided token is valid",
     response={"example": {}}
 )
 
