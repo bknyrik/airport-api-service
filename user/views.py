@@ -117,6 +117,7 @@ class UserAdminViewSet(ModelViewSet):
 class RegisterUserAPIView(generics.CreateAPIView):
     serializer_class = UserSerializer
     permission_classes = (IsAdminOrAnonymous,)
+    throttle_scope = "register"
 
     @extend_schema(
         description=(
