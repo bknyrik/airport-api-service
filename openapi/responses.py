@@ -191,3 +191,12 @@ TOKEN_IS_INVALID = OpenApiResponse(
         }
     }
 )
+
+GOT_ACCESS_TOKEN = OpenApiResponse(
+    description="Got a new access token",
+    response={
+        "example": {
+          "refresh": "string"
+        }
+    }
+)
