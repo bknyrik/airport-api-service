@@ -4,7 +4,8 @@ from drf_spectacular.openapi import (
 )
 from rest_framework_simplejwt.serializers import (
     TokenObtainPairSerializer,
-    TokenRefreshSerializer
+    TokenRefreshSerializer,
+    TokenVerifySerializer
 )
 
 from openapi import examples
@@ -201,4 +202,10 @@ GOT_ACCESS_TOKEN = OpenApiResponse(
 TOKEN_IS_VALID = OpenApiResponse(
     description="Provided access token is valid",
     response={"example": {}}
+)
+
+TOKEN_IS_INVALID_OR_EXPIRED = OpenApiResponse(
+    description="Token is invalid",
+    response=TokenVerifySerializer,
+    examples=[examples.TOKEN_IS_INVALID, examples.TOKEN_IS_EXPIRED]
 )
