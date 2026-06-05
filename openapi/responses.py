@@ -87,3 +87,12 @@ USER_CANT_DELETE = OpenApiResponse(
         }
     }
 )
+
+USER_CANT_UPDATE = OpenApiResponse(
+    description="A user, that is not an admin, can't update the user",
+    response={
+        "example": {
+            "detail": ["You do not have permission to perform this action."]
+        }
+    }
+)
