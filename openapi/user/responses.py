@@ -116,18 +116,6 @@ USER_BY_ID_INFORMATION = OpenApiResponse(
     description="Got the extended information about the user by id"
 )
 
-USER_CANT_RETRIEVE_USER_INFO = OpenApiResponse(
-    description=(
-        "User, that is not an admin, "
-        "can't retrieve the information about a user"
-    ),
-    response={
-        "example": {
-            "detail": ["You do not have permission to perform this action."]
-        }
-    }
-)
-
 USER_CANT_CREATE = OpenApiResponse(
     description="User, that is not an admin, can't create the user",
     response={
