@@ -29,3 +29,21 @@ PASSWORD_IS_BLANK = OpenApiExample(
     name="Password is blank",
     value={"password": ["This field may not be blank."]}
 )
+
+USER_PERMISSIONS_INVALID_PK = OpenApiExample(
+    name="Invalid pk for user_permissions",
+    value={
+        "user_permissions": [
+            "Invalid pk \"9999\" - object does not exist."
+        ]
+    }
+)
+
+GROUPS_INVALID_PK = OpenApiExample(
+    name="Invalid pk for groups",
+    value={
+        "groups": [
+            "Invalid pk \"9999\" - object does not exist."
+        ]
+    }
+)
