@@ -74,14 +74,8 @@ USER_IS_NOT_ADMIN = OpenApiResponse(
 )
 
 USER_IS_NOT_ADMIN_OR_ANON = OpenApiResponse(
-    description=(
-        "A user, that is not an admin/anonymous, can't register a new user"
-    ),
-    response={
-        "example": {
-            "detail": ["You do not have permission to perform this action."]
-        },
-    },
+    description="A user is not an admin/anonymous to perform this action",
+    response=EXAMPLE_403_RESPONSE,
 )
 
 USER_CREATED_SUCCESSFULLY = OpenApiResponse(
