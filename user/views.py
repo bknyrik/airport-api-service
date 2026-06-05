@@ -20,9 +20,7 @@ from user.serializers import (
 from user.permissions import IsAdminOrAnonymous
 from user.pagination import UserSetPagination
 from user.filtersets import UserFilterSet
-from openapi import responses
-from openapi import parameters
-
+from openapi.user import parameters, responses
 
 User = get_user_model()
 

@@ -8,7 +8,7 @@ from rest_framework_simplejwt.serializers import (
     TokenVerifySerializer
 )
 
-from openapi import examples
+from openapi.user import examples
 from user.serializers import (
     UserSerializer,
     UserAdminSerializer,
