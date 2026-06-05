@@ -47,3 +47,13 @@ GROUPS_INVALID_PK = OpenApiExample(
         ]
     }
 )
+
+TOKEN_IS_INVALID = OpenApiExample(
+    name="Provided refresh token is not valid",
+    value={
+        "example": {
+            "detail": "Token is invalid",
+            "code": "token_not_valid"
+        }
+    }
+)
