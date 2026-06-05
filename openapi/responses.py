@@ -71,3 +71,8 @@ USER_CREATED_SUCCESSFULLY = OpenApiResponse(
 USER_IS_DELETED_SUCCESSFULLY = OpenApiResponse(
     description="User was deleted",
 )
+
+USER_NOT_FOUND = OpenApiResponse(
+    description="User not found",
+    response={"example": {"detail": "No User matches the given query."}}
+)
