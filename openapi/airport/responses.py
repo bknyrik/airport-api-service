@@ -12,3 +12,12 @@ GOT_AIRPLANE_TYPE_INFO = OpenApiResponse(
     response=serializers.AirplaneTypeSerializer,
     description="Got airplane type info"
 )
+
+AIRPLANE_TYPE_NOT_FOUND = OpenApiResponse(
+    response={
+        "example": {
+          "detail": "No AirplaneType matches the given query."
+        }
+    },
+    description="Airplane type not found"
+)
