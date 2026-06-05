@@ -49,7 +49,7 @@ GROUPS_INVALID_PK = OpenApiExample(
 )
 
 TOKEN_IS_INVALID = OpenApiExample(
-    name="Provided refresh token is not valid",
+    name="Provided token is not valid",
     value={
         "example": {
             "detail": "Token is invalid",
@@ -59,7 +59,7 @@ TOKEN_IS_INVALID = OpenApiExample(
 )
 
 TOKEN_IS_EXPIRED = OpenApiExample(
-    name="Provided access token is expired",
+    name="Provided token is expired",
     value={
         "example": {
             "detail": "Token is expired",
