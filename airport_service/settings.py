@@ -50,7 +50,8 @@ REST_FRAMEWORK = {
     "DEFAULT_THROTTLE_RATES": {
         "anon": "50/day",
         "user": "100/day",
-        "admin": "1000/day"
+        "admin": "1000/day",
+        "register": "25/day"
     },
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
     "DEFAULT_FILTER_BACKENDS": (
