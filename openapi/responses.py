@@ -101,3 +101,17 @@ USER_ADMIN_IS_UPDATED_SUCCESSFULLY = OpenApiResponse(
     response=UserAdminSerializer,
     description="User is updated successfully",
 )
+
+USER_ADMIN_INVALID_DATA = OpenApiResponse(
+    response=OpenApiTypes.OBJECT,
+    description="Invalid input data",
+    examples=[
+        examples.EMAIL_IS_INVALID,
+        examples.EMAIL_EXISTS,
+        examples.EMAIL_IS_BLANK,
+        examples.PASSWORD_HAS_INVALID_LENGTH,
+        examples.PASSWORD_IS_BLANK,
+        examples.USER_PERMISSIONS_INVALID_PK,
+        examples.GROUPS_INVALID_PK
+    ]
+)
