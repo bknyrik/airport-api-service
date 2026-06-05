@@ -338,30 +338,6 @@ class ManageUserAPIView(generics.RetrieveUpdateAPIView):
             "updated information about the current authorized user."
         ),
         summary="Completely update the current user",
-        request=OpenApiRequest(
-            request=UserSerializer,
-            examples=[
-                OpenApiExample(
-                    name="Update user with all fields",
-                    value={
-                        "email": "upd_user@example.com",
-                        "first_name": "Update First",
-                        "last_name": "Update Last",
-                        "password": "updpass12345"
-                    }
-                ),
-                OpenApiExample(
-                    name="Update user with fields email and password",
-                    description=(
-                        "Fields first_name and last_name are optional."
-                    ),
-                    value={
-                        "email": "upd_user@example.com",
-                        "password": "updpass12345"
-                    }
-                ),
-            ]
-        ),
         responses={
             status.HTTP_200_OK: responses.USER_UPDATED_SUCCESSFULLY,
             status.HTTP_400_BAD_REQUEST: responses.INVALID_USER_DATA,
