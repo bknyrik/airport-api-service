@@ -159,3 +159,8 @@ USER_CANT_GET_USER_LIST = OpenApiResponse(
         }
     }
 )
+
+PAGE_NOT_FOUND = OpenApiResponse(
+    description="User specified the non-existent page",
+    response={"example": {"detail": "Invalid page."}}
+)
