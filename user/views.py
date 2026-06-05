@@ -310,12 +310,12 @@ class ManageUserAPIView(generics.RetrieveUpdateAPIView):
                     }
                 ),
                 OpenApiExample(
-                    name="Update user with filled fields email and password",
-                    description="Fields first_name and last_name may be blank.",
+                    name="Update user with fields email and password",
+                    description=(
+                        "Fields first_name and last_name are optional."
+                    ),
                     value={
                         "email": "upd_user@example.com",
-                        "first_name": "",
-                        "last_name": "",
                         "password": "updpass12345"
                     }
                 ),
