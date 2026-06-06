@@ -17,12 +17,6 @@ from user.serializers import (
 )
 
 
-EXAMPLE_403_RESPONSE = {
-    "example": {
-        "detail": ["You do not have permission to perform this action."]
-    }
-}
-
 INVALID_USER_DATA = OpenApiResponse(
     response=OpenApiTypes.OBJECT,
     description="Invalid input data",
