@@ -1,7 +1,9 @@
+from rest_framework import status
 from drf_spectacular.openapi import OpenApiResponse, OpenApiTypes
 
 from airport import serializers
 from openapi.airport import examples
+from openapi.user import responses as user_responses
 
 
 GOT_AIRPLANE_TYPES_INFO = OpenApiResponse(
@@ -32,3 +34,13 @@ AIRPLANE_TYPE_INVALID_DATA = OpenApiResponse(
         examples.NAME_HAS_INVALID_LENGTH
     ]
 )
+
+AIRPLANE_TYPE_LIST_RESPONSES = {
+    status.HTTP_200_OK: GOT_AIRPLANE_TYPES_INFO,
+    status.HTTP_401_UNAUTHORIZED: (
+        user_responses.USER_IS_NOT_AUTHORIZED
+    ),
+    status.HTTP_429_TOO_MANY_REQUESTS: (
+        user_responses.REQUEST_IS_THROTTLED
+    )
+}
