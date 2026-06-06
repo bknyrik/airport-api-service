@@ -20,10 +20,7 @@ from airport.models import (
 from airport import serializers
 from airport import pagination
 from airport import filtersets
-from openapi.airport import (
-    responses as airport_responses,
-    parameters
-)
+from openapi.airport import responses, parameters
 
 
 class FacilityViewSet(ModelViewSet):
@@ -38,7 +35,7 @@ class AirplaneTypeViewSet(ModelViewSet):
     @extend_schema(
         description="Returns list with all airplane types.",
         summary="Get all airplane types",
-        responses=airport_responses.AIRPLANE_TYPE_LIST_RESPONSES
+        responses=responses.AIRPLANE_TYPE_LIST_RESPONSES
     )
     def list(self, request: Request, *args, **kwargs) -> Response:
         return super().list(request, *args, **kwargs)
@@ -46,7 +43,7 @@ class AirplaneTypeViewSet(ModelViewSet):
     @extend_schema(
         description="Returns information about airplane type by id.",
         summary="Get airplane type by id",
-        responses=airport_responses.AIRPLANE_TYPE_RETRIEVE_RESPONSES
+        responses=responses.AIRPLANE_TYPE_RETRIEVE_RESPONSES
     )
     def retrieve(self, request: Request, *args, **kwargs) -> Response:
         return super().retrieve(request, *args, **kwargs)
@@ -57,7 +54,7 @@ class AirplaneTypeViewSet(ModelViewSet):
             " about created airplane type."
         ),
         summary="Create airplane type",
-        responses=airport_responses.AIRPLANE_TYPE_CREATE_RESPONSES
+        responses=responses.AIRPLANE_TYPE_CREATE_RESPONSES
     )
     def create(self, request: Request, *args, **kwargs) -> Response:
         return super().create(request, *args, **kwargs)
@@ -68,7 +65,7 @@ class AirplaneTypeViewSet(ModelViewSet):
             "about updated airplane type by id"
         ),
         summary="Completely update airplane type by id",
-        responses=airport_responses.AIRPLANE_TYPE_UPDATE_RESPONSES
+        responses=responses.AIRPLANE_TYPE_UPDATE_RESPONSES
     )
     def update(self, request: Request, *args, **kwargs) -> Response:
         return super().update(request, *args, **kwargs)
@@ -79,7 +76,7 @@ class AirplaneTypeViewSet(ModelViewSet):
             "about partially updated airplane type by id"
         ),
         summary="Partially update airplane type by id",
-        responses=airport_responses.AIRPLANE_TYPE_PARTIAL_UPDATE_RESPONSES
+        responses=responses.AIRPLANE_TYPE_PARTIAL_UPDATE_RESPONSES
     )
     def partial_update(self, request: Request, *args, **kwargs) -> Response:
         return super().partial_update(request, *args, **kwargs)
@@ -87,7 +84,7 @@ class AirplaneTypeViewSet(ModelViewSet):
     @extend_schema(
         description="Deletes airplane type by id and returns nothing.",
         summary="Delete airplane type by id",
-        responses=airport_responses.AIRPLANE_TYPE_DESTROY_RESPONSES
+        responses=responses.AIRPLANE_TYPE_DESTROY_RESPONSES
     )
     def destroy(self, request: Request, *args, **kwargs) -> Response:
         return super().destroy(request, *args, **kwargs)
@@ -123,7 +120,7 @@ class AirplaneViewSet(ModelViewSet):
         ),
         summary="Get all airplanes",
         parameters=parameters.AIRPLANE_LIST_PARAMETERS,
-        responses=airport_responses.AIRPLANE_LIST_RESPONSES
+        responses=responses.AIRPLANE_LIST_RESPONSES
     )
     def list(self, request: Request, *args, **kwargs) -> Response:
         return super().list(request, *args, **kwargs)
