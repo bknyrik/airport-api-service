@@ -41,7 +41,6 @@ class AirplaneTypeViewSet(ModelViewSet):
             status.HTTP_401_UNAUTHORIZED: (
                 user_responses.USER_IS_NOT_AUTHORIZED
             ),
-            status.HTTP_403_FORBIDDEN: user_responses.USER_IS_NOT_ADMIN,
             status.HTTP_429_TOO_MANY_REQUESTS: (
                 user_responses.REQUEST_IS_THROTTLED
             )
