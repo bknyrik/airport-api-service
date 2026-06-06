@@ -144,6 +144,14 @@ PAGE_NOT_FOUND = OpenApiResponse(
     response={"example": {"detail": "Invalid page."}}
 )
 
+USER_LIST_RESPONSES = {
+    status.HTTP_200_OK: GOT_USERS_ADMIN_INFO,
+    status.HTTP_401_UNAUTHORIZED: USER_IS_NOT_AUTHORIZED,
+    status.HTTP_403_FORBIDDEN: USER_IS_NOT_ADMIN,
+    status.HTTP_404_NOT_FOUND: PAGE_NOT_FOUND,
+    status.HTTP_429_TOO_MANY_REQUESTS: REQUEST_IS_THROTTLED,
+}
+
 ACCOUNT_NOT_FOUND = OpenApiResponse(
     description="Account with provided credentials not found",
     response={
