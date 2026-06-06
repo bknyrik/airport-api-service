@@ -6,7 +6,7 @@ AIRPLANE_TYPE_NAME_EXISTS = OpenApiExample(
     value={"name": ["airplane type with this name already exists."]}
 )
 
-AIRPLANE_TYPE_NAME_IS_BLANK = OpenApiExample(
+NAME_IS_BLANK = OpenApiExample(
     name="Name is blank",
     value={"name": ["This field may not be blank."]}
 )
