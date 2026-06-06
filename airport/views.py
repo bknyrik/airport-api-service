@@ -21,7 +21,6 @@ from airport import serializers
 from airport import pagination
 from airport import filtersets
 from openapi.airport import responses as airport_responses
-from openapi.user import responses as user_responses
 
 
 class FacilityViewSet(ModelViewSet):
