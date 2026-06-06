@@ -15,3 +15,15 @@ NAME_HAS_INVALID_LENGTH = OpenApiExample(
     name="Name has invalid length",
     value={"name": ["Ensure this field has no more than 64 characters."]}
 )
+
+AIRPLANE_TYPE_ID_INVALID_CHOICE = OpenApiExample(
+    name="Airplane type id is invalid",
+    value={
+        "airplane_type_id": [
+            (
+                "Select a valid choice. "
+                "That choice is not one of the available choices."
+            )
+        ]
+    }
+)
