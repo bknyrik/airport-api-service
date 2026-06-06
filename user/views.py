@@ -4,7 +4,6 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.request import Request
 from rest_framework.response import Response
-from rest_framework import status
 from drf_spectacular.utils import extend_schema
 from rest_framework_simplejwt.views import (
     TokenObtainPairView as JWTTokenObtainPairView,
