@@ -52,7 +52,7 @@ class UserAdminViewSet(ModelViewSet):
         ),
         summary="Get all users",
         responses={
-            status.HTTP_200_OK: responses.GOT_USERS_INFORMATION,
+            status.HTTP_200_OK: responses.GOT_USERS_ADMIN_INFO,
             status.HTTP_401_UNAUTHORIZED: responses.USER_IS_NOT_AUTHORIZED,
             status.HTTP_403_FORBIDDEN: responses.USER_IS_NOT_ADMIN,
             status.HTTP_404_NOT_FOUND: responses.PAGE_NOT_FOUND,

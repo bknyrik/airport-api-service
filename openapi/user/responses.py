@@ -134,7 +134,7 @@ GOT_USER_ADMIN_INFO = OpenApiResponse(
     description="Got the extended information about the user by id"
 )
 
-GOT_USERS_INFORMATION = OpenApiResponse(
+GOT_USERS_ADMIN_INFO = OpenApiResponse(
     description="Got an extended information about the users",
     response=UserAdminListRetrieveSerializer
 )
