@@ -129,8 +129,8 @@ USER_ADMIN_INVALID_DATA = OpenApiResponse(
     ]
 )
 
-USER_BY_ID_INFORMATION = OpenApiResponse(
-    response=UserAdminSerializer,
+GOT_USER_ADMIN_INFO = OpenApiResponse(
+    response=UserAdminListRetrieveSerializer,
     description="Got the extended information about the user by id"
 )
 
