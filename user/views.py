@@ -177,11 +177,7 @@ class TokenRefreshView(JWTTokenRefreshView):
 
     @extend_schema(
         summary="Refresh an access token",
-        responses={
-            status.HTTP_200_OK: responses.GOT_ACCESS_TOKEN,
-            status.HTTP_401_UNAUTHORIZED: responses.TOKEN_IS_INVALID,
-            status.HTTP_429_TOO_MANY_REQUESTS: responses.REQUEST_IS_THROTTLED,
-        }
+        responses=responses.TOKEN_REFRESH_POST_RESPONSES
     )
     def post(self, request: Request, *args, **kwargs) -> Response:
         return super().post(request, *args, **kwargs)
