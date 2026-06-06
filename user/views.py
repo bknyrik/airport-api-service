@@ -41,10 +41,7 @@ class UserAdminViewSet(ModelViewSet):
         return UserAdminSerializer
 
     @extend_schema(
-        parameters=[
-            parameters.FILTER_BY_EMAIL_PATTERN,
-            parameters.FILTER_BY_IS_STAFF
-        ],
+        parameters=parameters.USER_LIST_PARAMETERS,
         description=(
             "Returns list with users. This list also can be filtered by "
             "email pattern, is_staff status and paginated by "
