@@ -11,3 +11,8 @@ FILTER_BY_IS_STAFF = OpenApiParameter(
     type=bool,
     description="Filter by status if user is an admin."
 )
+
+USER_LIST_PARAMETERS = [
+    FILTER_BY_EMAIL_PATTERN,
+    FILTER_BY_IS_STAFF
+]
