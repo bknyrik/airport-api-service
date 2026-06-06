@@ -35,6 +35,8 @@ AIRPLANE_TYPE_INVALID_DATA = OpenApiResponse(
     ]
 )
 
+AIRPLANE_TYPE_IS_DELETED = OpenApiResponse(description="Airplane type is deleted")
+
 AIRPLANE_TYPE_LIST_RESPONSES = {
     status.HTTP_200_OK: GOT_AIRPLANE_TYPES_INFO,
     status.HTTP_401_UNAUTHORIZED: (
