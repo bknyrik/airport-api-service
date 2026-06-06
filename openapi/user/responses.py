@@ -88,7 +88,7 @@ USER_IS_CREATED = OpenApiResponse(
     response=UserSerializer
 )
 
-USER_IS_DELETED_SUCCESSFULLY = OpenApiResponse(
+USER_IS_DELETED = OpenApiResponse(
     description="User was deleted",
 )
 
