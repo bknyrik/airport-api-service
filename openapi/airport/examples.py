@@ -10,3 +10,8 @@ NAME_IS_BLANK = OpenApiExample(
     name="Name is blank",
     value={"name": ["This field may not be blank."]}
 )
+
+NAME_HAS_INVALID_LENGTH = OpenApiExample(
+    name="Name has invalid length",
+    value={"name": ["Ensure this field has no more than 64 characters."]}
+)
