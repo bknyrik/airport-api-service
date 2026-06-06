@@ -80,7 +80,7 @@ USER_IS_CREATED = OpenApiResponse(
 )
 
 USER_IS_DELETED = OpenApiResponse(
-    description="User was deleted",
+    description="User is deleted",
 )
 
 USER_NOT_FOUND = OpenApiResponse(
