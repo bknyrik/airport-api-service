@@ -82,6 +82,14 @@ class AirplaneTypeViewSet(ModelViewSet):
     def partial_update(self, request: Request, *args, **kwargs) -> Response:
         return super().partial_update(request, *args, **kwargs)
 
+    @extend_schema(
+        description="Deletes airplane type by id and returns nothing.",
+        summary="Delete airplane type by id",
+        responses=airport_responses.AIRPLANE_TYPE_DESTROY_RESPONSES
+    )
+    def destroy(self, request: Request, *args, **kwargs) -> Response:
+        return super().destroy(request, *args, **kwargs)
+
 
 class AirplaneViewSet(ModelViewSet):
     queryset = Airplane.objects.prefetch_related("facilities")
