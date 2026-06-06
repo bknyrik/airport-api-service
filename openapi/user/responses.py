@@ -83,8 +83,8 @@ USER_IS_NOT_ADMIN_OR_ANON = OpenApiResponse(
     response=EXAMPLE_403_RESPONSE,
 )
 
-USER_CREATED_SUCCESSFULLY = OpenApiResponse(
-    description="User successfully created",
+USER_IS_CREATED = OpenApiResponse(
+    description="User is created",
     response=UserSerializer
 )
 

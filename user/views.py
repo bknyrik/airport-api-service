@@ -70,7 +70,7 @@ class UserAdminViewSet(ModelViewSet):
         ),
         summary="Create a user",
         responses={
-            status.HTTP_201_CREATED: responses.USER_CREATED_SUCCESSFULLY,
+            status.HTTP_201_CREATED: responses.USER_IS_CREATED,
             status.HTTP_401_UNAUTHORIZED: responses.USER_IS_NOT_AUTHORIZED,
             status.HTTP_400_BAD_REQUEST: responses.USER_ADMIN_INVALID_DATA,
             status.HTTP_403_FORBIDDEN: responses.USER_IS_NOT_ADMIN,
@@ -161,7 +161,7 @@ class RegisterUserAPIView(generics.CreateAPIView):
         ),
         summary="Register a new user",
         responses={
-            status.HTTP_201_CREATED: responses.USER_CREATED_SUCCESSFULLY,
+            status.HTTP_201_CREATED: responses.USER_IS_CREATED,
             status.HTTP_400_BAD_REQUEST: responses.INVALID_USER_DATA,
             status.HTTP_403_FORBIDDEN: responses.USER_IS_NOT_ADMIN_OR_ANON,
             status.HTTP_429_TOO_MANY_REQUESTS: responses.REQUEST_IS_THROTTLED
