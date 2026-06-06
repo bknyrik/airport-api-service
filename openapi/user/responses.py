@@ -177,6 +177,8 @@ USER_ADMIN_UPDATE_RESPONSES = {
     status.HTTP_429_TOO_MANY_REQUESTS: REQUEST_IS_THROTTLED
 }
 
+USER_ADMIN_PARTIAL_UPDATE_RESPONSES = USER_ADMIN_UPDATE_RESPONSES
+
 ACCOUNT_NOT_FOUND = OpenApiResponse(
     description="Account with provided credentials not found",
     response={
