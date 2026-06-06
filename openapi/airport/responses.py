@@ -95,6 +95,11 @@ AIRPLANE_LIST_INVALID_PARAMS = OpenApiResponse(
     ]
 )
 
+GOT_AIRPLANE_INFO = OpenApiResponse(
+    response=serializers.AirplaneSerializer,
+    description="Got an airplane info"
+)
+
 AIRPLANE_LIST_RESPONSES = {
     status.HTTP_200_OK: GOT_AIRPLANES_INFO,
     status.HTTP_400_BAD_REQUEST: AIRPLANE_LIST_INVALID_PARAMS,
