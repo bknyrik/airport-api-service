@@ -118,6 +118,8 @@ USER_PUT_RESPONSES = {
     status.HTTP_429_TOO_MANY_REQUESTS: REQUEST_IS_THROTTLED
 }
 
+USER_PATCH_RESPONSES = USER_PUT_RESPONSES
+
 USER_ADMIN_IS_UPDATED_SUCCESSFULLY = OpenApiResponse(
     response=UserAdminSerializer,
     description="User is updated successfully",
