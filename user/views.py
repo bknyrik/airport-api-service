@@ -74,13 +74,7 @@ class UserAdminViewSet(ModelViewSet):
             " including permissions, groups and status."
         ),
         summary="Get user by id",
-        responses={
-            status.HTTP_200_OK: responses.GOT_USER_ADMIN_INFO,
-            status.HTTP_401_UNAUTHORIZED: responses.USER_IS_NOT_AUTHORIZED,
-            status.HTTP_403_FORBIDDEN: responses.USER_IS_NOT_ADMIN,
-            status.HTTP_404_NOT_FOUND: responses.USER_NOT_FOUND,
-            status.HTTP_429_TOO_MANY_REQUESTS: responses.REQUEST_IS_THROTTLED
-        }
+        responses=responses.USER_ADMIN_RETRIEVE_RESPONSES
     )
     def retrieve(self, request: Request, *args, **kwargs) -> Response:
         return super().retrieve(request, *args, **kwargs)
