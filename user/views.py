@@ -167,11 +167,7 @@ class TokenObtainPairView(JWTTokenObtainPairView):
 
     @extend_schema(
         summary="Get access and refresh tokens",
-        responses={
-            status.HTTP_200_OK: responses.GOT_ACCESS_AND_REFRESH_TOKENS,
-            status.HTTP_401_UNAUTHORIZED: responses.ACCOUNT_NOT_FOUND,
-            status.HTTP_429_TOO_MANY_REQUESTS: responses.REQUEST_IS_THROTTLED,
-        }
+        responses=responses.TOKEN_OBTAIN_POST_RESPONSES
     )
     def post(self, request: Request, *args, **kwargs) -> Response:
         return super().post(request, *args, **kwargs)
