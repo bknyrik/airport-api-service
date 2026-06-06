@@ -187,12 +187,7 @@ class ManageUserAPIView(generics.RetrieveUpdateAPIView):
             "updated information about the current authorized user."
         ),
         summary="Completely update the current user",
-        responses={
-            status.HTTP_200_OK: responses.USER_UPDATED_SUCCESSFULLY,
-            status.HTTP_400_BAD_REQUEST: responses.INVALID_USER_DATA,
-            status.HTTP_401_UNAUTHORIZED: responses.USER_IS_NOT_AUTHORIZED,
-            status.HTTP_429_TOO_MANY_REQUESTS: responses.REQUEST_IS_THROTTLED
-        }
+        responses=responses.USER_PUT_RESPONSES
     )
     def put(self, request: Request, *args, **kwargs) -> Response:
         return super().put(request, *args, **kwargs)
