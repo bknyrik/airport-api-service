@@ -104,6 +104,11 @@ AIRPLANE_IS_DELETED = OpenApiResponse(
     description="Airplane is deleted"
 )
 
+GOT_AIRPLANE_IMAGE_INFO = OpenApiResponse(
+    description="Got the image of the airplane",
+    response=serializers.AirplaneImageSerializer
+)
+
 AIRPLANE_LIST_RESPONSES = {
     status.HTTP_200_OK: GOT_AIRPLANES_INFO,
     status.HTTP_400_BAD_REQUEST: AIRPLANE_LIST_INVALID_PARAMS,
