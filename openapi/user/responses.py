@@ -1,3 +1,4 @@
+from rest_framework import status
 from drf_spectacular.openapi import (
     OpenApiResponse,
     OpenApiTypes
@@ -96,6 +97,13 @@ USER_NOT_FOUND = OpenApiResponse(
     description="User not found",
     response={"example": {"detail": "No User matches the given query."}}
 )
+
+USER_REGISTER_RESPONSES = {
+    status.HTTP_201_CREATED: USER_IS_CREATED,
+    status.HTTP_400_BAD_REQUEST: INVALID_USER_DATA,
+    status.HTTP_403_FORBIDDEN: USER_IS_NOT_ADMIN_OR_ANON,
+    status.HTTP_429_TOO_MANY_REQUESTS: REQUEST_IS_THROTTLED
+}
 
 USER_ADMIN_IS_UPDATED_SUCCESSFULLY = OpenApiResponse(
     response=UserAdminSerializer,
