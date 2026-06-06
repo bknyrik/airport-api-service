@@ -85,3 +85,12 @@ GOT_AIRPLANES_INFO = OpenApiResponse(
     response=serializers.AirplaneListRetrieveSerializer,
     description="Got airplanes"
 )
+
+AIRPLANE_LIST_INVALID_PARAMS = OpenApiResponse(
+    response=OpenApiTypes.OBJECT,
+    description="Invalid parameters",
+    examples=[
+        examples.AIRPLANE_TYPE_ID_INVALID_CHOICE,
+        examples.FACILITIES_INVALID_CHOICE,
+    ]
+)
