@@ -105,6 +105,12 @@ USER_REGISTER_RESPONSES = {
     status.HTTP_429_TOO_MANY_REQUESTS: REQUEST_IS_THROTTLED
 }
 
+USER_GET_RESPONSES = {
+    status.HTTP_200_OK: GOT_USER_INFO,
+    status.HTTP_401_UNAUTHORIZED: USER_IS_NOT_AUTHORIZED,
+    status.HTTP_429_TOO_MANY_REQUESTS: REQUEST_IS_THROTTLED
+}
+
 USER_ADMIN_IS_UPDATED_SUCCESSFULLY = OpenApiResponse(
     response=UserAdminSerializer,
     description="User is updated successfully",
