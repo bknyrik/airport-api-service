@@ -6,3 +6,9 @@ AIRPLANE_TYPE_ID = OpenApiParameter(
     type=int,
     description="Filter by id of airplane type"
 )
+
+FACILITIES_IDS = OpenApiParameter(
+    name="facilities",
+    type={"type": "array", "items": {"type": "number"}},
+    description="Filter by ids of facilities"
+)
