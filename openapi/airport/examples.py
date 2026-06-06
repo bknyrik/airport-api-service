@@ -28,6 +28,11 @@ AIRPLANE_TYPE_ID_INVALID_CHOICE = OpenApiExample(
     }
 )
 
+AIRPLANE_TYPE_INVALID_PK = OpenApiExample(
+    name="Airplane type pk is invalid",
+    value={"airplane_type": ["Invalid pk \"9999\" - object does not exist."]}
+)
+
 FACILITIES_INVALID_CHOICE = OpenApiExample(
     name="Facilities id is invalid",
     value={
