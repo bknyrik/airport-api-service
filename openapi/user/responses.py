@@ -58,6 +58,11 @@ INVALID_USER_DATA = OpenApiResponse(
     ]
 )
 
+GOT_USER_INFO = OpenApiResponse(
+    response=UserSerializer,
+    description="Got user information"
+)
+
 USER_UPDATED_SUCCESSFULLY = OpenApiResponse(
     response=UserSerializer,
     description="User updated successfully",
