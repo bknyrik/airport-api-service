@@ -80,3 +80,8 @@ AIRPLANE_TYPE_DESTROY_RESPONSES = {
     status.HTTP_404_NOT_FOUND: AIRPLANE_TYPE_NOT_FOUND,
     status.HTTP_429_TOO_MANY_REQUESTS: user_responses.REQUEST_IS_THROTTLED
 }
+
+GOT_AIRPLANES_INFO = OpenApiResponse(
+    response=serializers.AirplaneListRetrieveSerializer,
+    description="Got airplanes"
+)
