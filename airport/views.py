@@ -70,6 +70,29 @@ class AirplaneTypeViewSet(ModelViewSet):
     def retrieve(self, request: Request, *args, **kwargs) -> Response:
         return super().retrieve(request, *args, **kwargs)
 
+    @extend_schema(
+        description=(
+            "Takes data and returns information"
+            " about created airplane type."
+        ),
+        summary="Create airplane type",
+        responses={
+            status.HTTP_200_OK: airport_responses.GOT_AIRPLANE_TYPE_INFO,
+            status.HTTP_400_BAD_REQUEST: (
+                airport_responses.AIRPLANE_TYPE_INVALID_DATA
+            ),
+            status.HTTP_401_UNAUTHORIZED: (
+                user_responses.USER_IS_NOT_AUTHORIZED
+            ),
+            status.HTTP_403_FORBIDDEN: user_responses.USER_IS_NOT_ADMIN,
+            status.HTTP_429_TOO_MANY_REQUESTS: (
+                user_responses.REQUEST_IS_THROTTLED
+            ),
+        }
+    )
+    def create(self, request: Request, *args, **kwargs) -> Response:
+        return super().create(request, *args, **kwargs)
+
 
 class AirplaneViewSet(ModelViewSet):
     queryset = Airplane.objects.prefetch_related("facilities")
