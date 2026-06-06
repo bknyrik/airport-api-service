@@ -100,6 +100,10 @@ AIRPLANE_NOT_FOUND = OpenApiResponse(
     response={"example": {"detail": "No Airplane matches the given query."}}
 )
 
+AIRPLANE_IS_DELETED = OpenApiResponse(
+    description="Airplane is deleted"
+)
+
 AIRPLANE_LIST_RESPONSES = {
     status.HTTP_200_OK: GOT_AIRPLANES_INFO,
     status.HTTP_400_BAD_REQUEST: AIRPLANE_LIST_INVALID_PARAMS,
