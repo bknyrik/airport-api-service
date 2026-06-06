@@ -42,3 +42,8 @@ FACILITIES_INVALID_CHOICE = OpenApiExample(
       ]
     }
 )
+
+FACILITIES_INVALID_PK = OpenApiExample(
+    name="Facilities pk is invalid",
+    value={"facilities": ["Invalid pk \"0\" - object does not exist."]}
+)
