@@ -1,6 +1,7 @@
-from drf_spectacular.openapi import OpenApiResponse
+from drf_spectacular.openapi import OpenApiResponse, OpenApiTypes
 
 from airport import serializers
+from openapi.airport import examples
 
 
 GOT_AIRPLANE_TYPES_INFO = OpenApiResponse(
@@ -20,4 +21,14 @@ AIRPLANE_TYPE_NOT_FOUND = OpenApiResponse(
         }
     },
     description="Airplane type not found"
+)
+
+AIRPLANE_TYPE_INVALID_DATA = OpenApiResponse(
+    description="Invalid input data",
+    response=OpenApiTypes.OBJECT,
+    examples=[
+        examples.AIRPLANE_TYPE_NAME_EXISTS,
+        examples.NAME_IS_BLANK,
+        examples.NAME_HAS_INVALID_LENGTH
+    ]
 )
