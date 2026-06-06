@@ -187,13 +187,7 @@ class TokenVerifyView(JWTTokenVerifyView):
 
     @extend_schema(
         summary="Verify the token",
-        responses={
-            status.HTTP_200_OK: responses.TOKEN_IS_VALID,
-            status.HTTP_401_UNAUTHORIZED: (
-                responses.TOKEN_IS_INVALID_OR_EXPIRED
-            ),
-            status.HTTP_429_TOO_MANY_REQUESTS: responses.REQUEST_IS_THROTTLED
-        }
+        responses=responses.TOKEN_VERIFY_POST_RESPONSES
     )
     def post(self, request: Request, *args, **kwargs) -> Response:
         return super().post(request, *args, **kwargs)
