@@ -176,11 +176,7 @@ class ManageUserAPIView(generics.RetrieveUpdateAPIView):
     @extend_schema(
         description="Returns information about the current authorized user.",
         summary="Get the current authorized user",
-        responses={
-            status.HTTP_200_OK: responses.CURRENT_USER_INFORMATION,
-            status.HTTP_401_UNAUTHORIZED: responses.USER_IS_NOT_AUTHORIZED,
-            status.HTTP_429_TOO_MANY_REQUESTS: responses.REQUEST_IS_THROTTLED
-        }
+        responses=responses.USER_GET_RESPONSES
     )
     def get(self, request: Request, *args, **kwargs) -> Response:
         return super().get(request, *args, **kwargs)
