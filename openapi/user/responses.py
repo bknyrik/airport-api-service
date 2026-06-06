@@ -64,16 +64,6 @@ GOT_USER_INFO = OpenApiResponse(
     description="Got user information"
 )
 
-USER_UPDATED_SUCCESSFULLY = OpenApiResponse(
-    response=UserSerializer,
-    description="User updated successfully",
-)
-
-CURRENT_USER_INFORMATION = OpenApiResponse(
-    description="Got an information about the current user",
-    response=UserSerializer
-)
-
 USER_IS_NOT_ADMIN = OpenApiResponse(
     description="User is not an admin to perform this action",
     response=EXAMPLE_403_RESPONSE
