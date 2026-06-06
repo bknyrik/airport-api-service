@@ -117,6 +117,32 @@ class AirplaneTypeViewSet(ModelViewSet):
     def update(self, request: Request, *args, **kwargs) -> Response:
         return super().update(request, *args, **kwargs)
 
+    @extend_schema(
+        description=(
+            "Takes specified data and returns information "
+            "about partially updated airplane type by id"
+        ),
+        summary="Partially update airplane type by id",
+        responses={
+            status.HTTP_200_OK: airport_responses.GOT_AIRPLANE_TYPE_INFO,
+            status.HTTP_400_BAD_REQUEST: (
+                airport_responses.AIRPLANE_TYPE_INVALID_DATA
+            ),
+            status.HTTP_401_UNAUTHORIZED: (
+                user_responses.USER_IS_NOT_AUTHORIZED
+            ),
+            status.HTTP_403_FORBIDDEN: user_responses.USER_IS_NOT_ADMIN,
+            status.HTTP_404_NOT_FOUND: (
+                airport_responses.AIRPLANE_TYPE_NOT_FOUND
+            ),
+            status.HTTP_429_TOO_MANY_REQUESTS: (
+                user_responses.REQUEST_IS_THROTTLED
+            )
+        }
+    )
+    def partial_update(self, request: Request, *args, **kwargs) -> Response:
+        return super().partial_update(request, *args, **kwargs)
+
 
 class AirplaneViewSet(ModelViewSet):
     queryset = Airplane.objects.prefetch_related("facilities")
