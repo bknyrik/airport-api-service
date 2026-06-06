@@ -97,14 +97,7 @@ class UserAdminViewSet(ModelViewSet):
             "returns updated information about the user by id."
         ),
         summary="Partially update the user by id",
-        responses={
-            status.HTTP_200_OK: responses.USER_ADMIN_IS_CREATED,
-            status.HTTP_400_BAD_REQUEST: responses.USER_ADMIN_INVALID_DATA,
-            status.HTTP_401_UNAUTHORIZED: responses.USER_IS_NOT_AUTHORIZED,
-            status.HTTP_403_FORBIDDEN: responses.USER_IS_NOT_ADMIN,
-            status.HTTP_404_NOT_FOUND: responses.USER_NOT_FOUND,
-            status.HTTP_429_TOO_MANY_REQUESTS: responses.REQUEST_IS_THROTTLED
-        }
+        responses=responses.USER_ADMIN_PARTIAL_UPDATE_RESPONSES
     )
     def partial_update(self, request: Request, *args, **kwargs) -> Response:
         return super().partial_update(request, *args, **kwargs)
