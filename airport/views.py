@@ -55,19 +55,7 @@ class AirplaneTypeViewSet(ModelViewSet):
             " about created airplane type."
         ),
         summary="Create airplane type",
-        responses={
-            status.HTTP_200_OK: airport_responses.GOT_AIRPLANE_TYPE_INFO,
-            status.HTTP_400_BAD_REQUEST: (
-                airport_responses.AIRPLANE_TYPE_INVALID_DATA
-            ),
-            status.HTTP_401_UNAUTHORIZED: (
-                user_responses.USER_IS_NOT_AUTHORIZED
-            ),
-            status.HTTP_403_FORBIDDEN: user_responses.USER_IS_NOT_ADMIN,
-            status.HTTP_429_TOO_MANY_REQUESTS: (
-                user_responses.REQUEST_IS_THROTTLED
-            ),
-        }
+        responses=airport_responses.AIRPLANE_TYPE_CREATE_RESPONSES
     )
     def create(self, request: Request, *args, **kwargs) -> Response:
         return super().create(request, *args, **kwargs)
@@ -78,22 +66,7 @@ class AirplaneTypeViewSet(ModelViewSet):
             "about updated airplane type by id"
         ),
         summary="Completely update airplane type by id",
-        responses={
-            status.HTTP_200_OK: airport_responses.GOT_AIRPLANE_TYPE_INFO,
-            status.HTTP_400_BAD_REQUEST: (
-                airport_responses.AIRPLANE_TYPE_INVALID_DATA
-            ),
-            status.HTTP_401_UNAUTHORIZED: (
-                user_responses.USER_IS_NOT_AUTHORIZED
-            ),
-            status.HTTP_403_FORBIDDEN: user_responses.USER_IS_NOT_ADMIN,
-            status.HTTP_404_NOT_FOUND: (
-                airport_responses.AIRPLANE_TYPE_NOT_FOUND
-            ),
-            status.HTTP_429_TOO_MANY_REQUESTS: (
-                user_responses.REQUEST_IS_THROTTLED
-            )
-        }
+        responses=airport_responses.AIRPLANE_TYPE_UPDATE_RESPONSES
     )
     def update(self, request: Request, *args, **kwargs) -> Response:
         return super().update(request, *args, **kwargs)
@@ -104,22 +77,7 @@ class AirplaneTypeViewSet(ModelViewSet):
             "about partially updated airplane type by id"
         ),
         summary="Partially update airplane type by id",
-        responses={
-            status.HTTP_200_OK: airport_responses.GOT_AIRPLANE_TYPE_INFO,
-            status.HTTP_400_BAD_REQUEST: (
-                airport_responses.AIRPLANE_TYPE_INVALID_DATA
-            ),
-            status.HTTP_401_UNAUTHORIZED: (
-                user_responses.USER_IS_NOT_AUTHORIZED
-            ),
-            status.HTTP_403_FORBIDDEN: user_responses.USER_IS_NOT_ADMIN,
-            status.HTTP_404_NOT_FOUND: (
-                airport_responses.AIRPLANE_TYPE_NOT_FOUND
-            ),
-            status.HTTP_429_TOO_MANY_REQUESTS: (
-                user_responses.REQUEST_IS_THROTTLED
-            )
-        }
+        responses=airport_responses.AIRPLANE_TYPE_PARTIAL_UPDATE_RESPONSES
     )
     def partial_update(self, request: Request, *args, **kwargs) -> Response:
         return super().partial_update(request, *args, **kwargs)
