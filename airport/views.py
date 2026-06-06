@@ -36,15 +36,7 @@ class AirplaneTypeViewSet(ModelViewSet):
     @extend_schema(
         description="Returns list with all airplane types.",
         summary="Get all airplane types",
-        responses={
-            status.HTTP_200_OK: airport_responses.GOT_AIRPLANE_TYPES_INFO,
-            status.HTTP_401_UNAUTHORIZED: (
-                user_responses.USER_IS_NOT_AUTHORIZED
-            ),
-            status.HTTP_429_TOO_MANY_REQUESTS: (
-                user_responses.REQUEST_IS_THROTTLED
-            )
-        }
+        responses=airport_responses.AIRPLANE_TYPE_LIST_RESPONSES
     )
     def list(self, request: Request, *args, **kwargs) -> Response:
         return super().list(request, *args, **kwargs)
