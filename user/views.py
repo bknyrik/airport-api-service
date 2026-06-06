@@ -63,13 +63,7 @@ class UserAdminViewSet(ModelViewSet):
             "a new user"
         ),
         summary="Create a user",
-        responses={
-            status.HTTP_201_CREATED: responses.USER_IS_CREATED,
-            status.HTTP_401_UNAUTHORIZED: responses.USER_IS_NOT_AUTHORIZED,
-            status.HTTP_400_BAD_REQUEST: responses.USER_ADMIN_INVALID_DATA,
-            status.HTTP_403_FORBIDDEN: responses.USER_IS_NOT_ADMIN,
-            status.HTTP_429_TOO_MANY_REQUESTS: responses.REQUEST_IS_THROTTLED
-        }
+        responses=responses.USER_CREATE_RESPONSES
     )
     def create(self, request: Request, *args, **kwargs) -> Response:
         return super().create(request, *args, **kwargs)
@@ -99,7 +93,7 @@ class UserAdminViewSet(ModelViewSet):
         ),
         summary="Completely update the user by id",
         responses={
-            status.HTTP_200_OK: responses.USER_ADMIN_IS_UPDATED_SUCCESSFULLY,
+            status.HTTP_200_OK: responses.USER_ADMIN_IS_CREATED,
             status.HTTP_400_BAD_REQUEST: responses.USER_ADMIN_INVALID_DATA,
             status.HTTP_401_UNAUTHORIZED: responses.USER_IS_NOT_AUTHORIZED,
             status.HTTP_403_FORBIDDEN: responses.USER_IS_NOT_ADMIN,
@@ -117,7 +111,7 @@ class UserAdminViewSet(ModelViewSet):
         ),
         summary="Partially update the user by id",
         responses={
-            status.HTTP_200_OK: responses.USER_ADMIN_IS_UPDATED_SUCCESSFULLY,
+            status.HTTP_200_OK: responses.USER_ADMIN_IS_CREATED,
             status.HTTP_400_BAD_REQUEST: responses.USER_ADMIN_INVALID_DATA,
             status.HTTP_401_UNAUTHORIZED: responses.USER_IS_NOT_AUTHORIZED,
             status.HTTP_403_FORBIDDEN: responses.USER_IS_NOT_ADMIN,
