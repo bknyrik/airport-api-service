@@ -100,6 +100,18 @@ GOT_AIRPLANE_INFO = OpenApiResponse(
     description="Got an airplane info"
 )
 
+AIRPLANE_INVALID_DATA = OpenApiResponse(
+    description="Invalid data",
+    response=OpenApiTypes.OBJECT,
+    examples=[
+        examples.NAME_IS_BLANK,
+        examples.AIRPLANE_TYPE_INVALID_PK,
+        examples.FACILITIES_INVALID_PK,
+        examples.ROWS_LESS_THAN_ONE,
+        examples.SEATS_IN_ROW_LESS_THAN_ONE
+    ]
+)
+
 AIRPLANE_LIST_RESPONSES = {
     status.HTTP_200_OK: GOT_AIRPLANES_INFO,
     status.HTTP_400_BAD_REQUEST: AIRPLANE_LIST_INVALID_PARAMS,
