@@ -52,3 +52,10 @@ ROWS_LESS_THAN_ONE = OpenApiExample(
     name="Rows are less than 1",
     value={"rows": ["Ensure this value is greater than or equal to 1."]}
 )
+
+SEATS_IN_ROW_LESS_THAN_ONE = OpenApiExample(
+    name="Seats in row are less than 1",
+    value={
+        "seats_in_row": ["Ensure this value is greater than or equal to 1."]
+    }
+)
