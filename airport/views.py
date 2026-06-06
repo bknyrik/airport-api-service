@@ -20,7 +20,10 @@ from airport.models import (
 from airport import serializers
 from airport import pagination
 from airport import filtersets
-from openapi.airport import responses as airport_responses
+from openapi.airport import (
+    responses as airport_responses,
+    parameters
+)
 
 
 class FacilityViewSet(ModelViewSet):
@@ -111,6 +114,19 @@ class AirplaneViewSet(ModelViewSet):
             return serializers.AirplaneImageSerializer
 
         return serializers.AirplaneSerializer
+
+    @extend_schema(
+        description=(
+            "Returns list with all airplanes."
+            "This list also can be filtered by airplane type id, "
+            "facilities ids and paginated."
+        ),
+        summary="Get all airplanes",
+        parameters=parameters.AIRPLANE_LIST_PARAMETERS,
+        responses=airport_responses.AIRPLANE_LIST_RESPONSES
+    )
+    def list(self, request: Request, *args, **kwargs) -> Response:
+        return super().list(request, *args, **kwargs)
 
     @action(
         methods=("POST",),
