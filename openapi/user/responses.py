@@ -40,16 +40,6 @@ GOT_USER_INFO = OpenApiResponse(
     description="Got user information"
 )
 
-USER_IS_NOT_ADMIN = OpenApiResponse(
-    description="User is not an admin to perform this action",
-    response=EXAMPLE_403_RESPONSE
-)
-
-USER_IS_NOT_ADMIN_OR_ANON = OpenApiResponse(
-    description="A user is not an admin/anonymous to perform this action",
-    response=EXAMPLE_403_RESPONSE,
-)
-
 USER_IS_CREATED = OpenApiResponse(
     description="User is created",
     response=UserSerializer
@@ -67,7 +57,6 @@ USER_NOT_FOUND = OpenApiResponse(
 USER_REGISTER_RESPONSES = {
     status.HTTP_201_CREATED: USER_IS_CREATED,
     status.HTTP_400_BAD_REQUEST: INVALID_USER_DATA,
-    status.HTTP_403_FORBIDDEN: USER_IS_NOT_ADMIN_OR_ANON,
 }
 
 USER_GET_RESPONSES = {
@@ -117,30 +106,23 @@ PAGE_NOT_FOUND = OpenApiResponse(
 
 USER_LIST_RESPONSES = {
     status.HTTP_200_OK: GOT_USERS_ADMIN_INFO,
-    status.HTTP_403_FORBIDDEN: USER_IS_NOT_ADMIN,
     status.HTTP_404_NOT_FOUND: PAGE_NOT_FOUND,
 }
 
 USER_CREATE_RESPONSES = {
     status.HTTP_201_CREATED: USER_ADMIN_IS_CREATED,
     status.HTTP_400_BAD_REQUEST: USER_ADMIN_INVALID_DATA,
-    status.HTTP_403_FORBIDDEN: USER_IS_NOT_ADMIN,
-    
 }
 
 USER_ADMIN_RETRIEVE_RESPONSES = {
     status.HTTP_200_OK: GOT_USER_ADMIN_INFO,
-    status.HTTP_403_FORBIDDEN: USER_IS_NOT_ADMIN,
     status.HTTP_404_NOT_FOUND: USER_NOT_FOUND,
-    
 }
 
 USER_ADMIN_UPDATE_RESPONSES = {
     status.HTTP_200_OK: GOT_USER_ADMIN_INFO,
     status.HTTP_400_BAD_REQUEST: USER_ADMIN_INVALID_DATA,
-    status.HTTP_403_FORBIDDEN: USER_IS_NOT_ADMIN,
     status.HTTP_404_NOT_FOUND: USER_NOT_FOUND,
-    
 }
 
 USER_ADMIN_PARTIAL_UPDATE_RESPONSES = USER_ADMIN_UPDATE_RESPONSES
@@ -148,8 +130,6 @@ USER_ADMIN_PARTIAL_UPDATE_RESPONSES = USER_ADMIN_UPDATE_RESPONSES
 USER_ADMIN_DESTROY_RESPONSES = {
     status.HTTP_204_NO_CONTENT: USER_IS_DELETED,
     status.HTTP_404_NOT_FOUND: USER_NOT_FOUND,
-    status.HTTP_403_FORBIDDEN: USER_IS_NOT_ADMIN,
-    
 }
 
 ACCOUNT_NOT_FOUND = OpenApiResponse(
