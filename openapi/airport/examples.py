@@ -27,3 +27,13 @@ AIRPLANE_TYPE_ID_INVALID_CHOICE = OpenApiExample(
         ]
     }
 )
+
+FACILITIES_INVALID_CHOICE = OpenApiExample(
+    name="Facilities id is invalid",
+    value={
+      "facilities": [
+          "Select a valid choice. 9999999 is not "
+          "one of the available choices."
+      ]
+    }
+)
