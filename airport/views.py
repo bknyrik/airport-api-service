@@ -125,6 +125,17 @@ class AirplaneViewSet(ModelViewSet):
     def list(self, request: Request, *args, **kwargs) -> Response:
         return super().list(request, *args, **kwargs)
 
+    @extend_schema(
+        description=(
+            "Takes data and returns information "
+            "about created airplane."
+        ),
+        summary="Create an airplane",
+        responses=responses.AIRPLANE_CREATE_RESPONSES
+    )
+    def create(self, request: Request, *args, **kwargs) -> Response:
+        return super().create(request, *args, **kwargs)
+
     @action(
         methods=("POST",),
         detail=True,
