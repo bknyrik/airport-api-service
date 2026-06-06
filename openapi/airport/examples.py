@@ -47,3 +47,8 @@ FACILITIES_INVALID_PK = OpenApiExample(
     name="Facilities pk is invalid",
     value={"facilities": ["Invalid pk \"0\" - object does not exist."]}
 )
+
+ROWS_LESS_THAN_ONE = OpenApiExample(
+    name="Rows are less than 1",
+    value={"rows": ["Ensure this value is greater than or equal to 1."]}
+)
