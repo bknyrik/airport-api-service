@@ -136,6 +136,14 @@ class AirplaneViewSet(ModelViewSet):
     def create(self, request: Request, *args, **kwargs) -> Response:
         return super().create(request, *args, **kwargs)
 
+    @extend_schema(
+        description="Returns information about airplane by its identifier.",
+        summary="Get an airplane by id",
+        responses=responses.AIRPLANE_RETRIEVE_RESPONSES
+    )
+    def retrieve(self, request: Request, *args, **kwargs) -> Response:
+        return super().retrieve(request, *args, **kwargs)
+
     @action(
         methods=("POST",),
         detail=True,
