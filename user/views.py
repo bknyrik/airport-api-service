@@ -160,12 +160,7 @@ class RegisterUserAPIView(generics.CreateAPIView):
             "about new created user."
         ),
         summary="Register a new user",
-        responses={
-            status.HTTP_201_CREATED: responses.USER_IS_CREATED,
-            status.HTTP_400_BAD_REQUEST: responses.INVALID_USER_DATA,
-            status.HTTP_403_FORBIDDEN: responses.USER_IS_NOT_ADMIN_OR_ANON,
-            status.HTTP_429_TOO_MANY_REQUESTS: responses.REQUEST_IS_THROTTLED
-        },
+        responses=responses.USER_REGISTER_RESPONSES,
     )
     def post(self, request: Request, *args, **kwargs) -> Response:
         return super().post(request, *args, **kwargs)
