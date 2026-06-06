@@ -166,6 +166,16 @@ class AirplaneViewSet(ModelViewSet):
     def partial_update(self, request: Request, *args, **kwargs) -> Response:
         return super().partial_update(request, *args, **kwargs)
 
+    @extend_schema(
+        description=(
+            "Deletes an airplane by its identifier and returns nothing."
+        ),
+        summary="Delete an airplane by id",
+        responses=responses.AIRPLANE_DESTROY_RESPONSES
+    )
+    def destroy(self, request: Request, *args, **kwargs) -> Response:
+        return super().destroy(request, *args, **kwargs)
+
     @action(
         methods=("POST",),
         detail=True,
