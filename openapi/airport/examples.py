@@ -71,3 +71,15 @@ IMAGE_WAS_NOT_A_FILE = OpenApiExample(
         ]
     }
 )
+
+IMAGE_IS_NOT_VALID = OpenApiExample(
+    name="File was not an image or corrupted",
+    value={
+        "image": [
+            (
+                "Upload a valid image. The file you uploaded was either "
+                "not an image or a corrupted image."
+            )
+        ]
+    }
+)
