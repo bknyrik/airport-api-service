@@ -92,3 +92,12 @@ AIRPORT_EXISTS = OpenApiExample(
         ]
     }
 )
+
+AIRPORT_IATA_CODE_IS_INVALID = OpenApiExample(
+    name="IATA code is invalid",
+    value={
+        "iata_code": [
+            "IATA code must be a three-letter identifier in upper case"
+        ]
+    }
+)
