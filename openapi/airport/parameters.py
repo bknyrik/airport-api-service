@@ -43,3 +43,9 @@ CREW_FIRST_NAME = OpenApiParameter(
     type=str,
     description="Filter by characters in first name"
 )
+
+CREW_LAST_NAME = OpenApiParameter(
+    name="last_name",
+    type=str,
+    description="Filter by characters in last name"
+)
