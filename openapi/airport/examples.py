@@ -83,3 +83,12 @@ IMAGE_IS_NOT_VALID = OpenApiExample(
         ]
     }
 )
+
+AIRPORT_EXISTS = OpenApiExample(
+    name="Airport with this data exists",
+    value={
+        "non_field_errors": [
+            "Airport with this name, country and city exists."
+        ]
+    }
+)
