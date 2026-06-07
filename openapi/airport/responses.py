@@ -35,8 +35,6 @@ AIRPLANE_TYPE_INVALID_DATA = OpenApiResponse(
     ]
 )
 
-AIRPLANE_TYPE_IS_DELETED = OpenApiResponse(description="Airplane type is deleted")
-
 AIRPLANE_TYPE_LIST_RESPONSES = {
     status.HTTP_200_OK: GOT_AIRPLANE_TYPES_INFO,
 }
@@ -60,7 +58,7 @@ AIRPLANE_TYPE_UPDATE_RESPONSES = {
 AIRPLANE_TYPE_PARTIAL_UPDATE_RESPONSES = AIRPLANE_TYPE_UPDATE_RESPONSES
 
 AIRPLANE_TYPE_DESTROY_RESPONSES = {
-    status.HTTP_204_NO_CONTENT: AIRPLANE_TYPE_IS_DELETED,
+    status.HTTP_204_NO_CONTENT: None,
     status.HTTP_404_NOT_FOUND: AIRPLANE_TYPE_NOT_FOUND,
 }
 
@@ -98,10 +96,6 @@ AIRPLANE_INVALID_DATA = OpenApiResponse(
 AIRPLANE_NOT_FOUND = OpenApiResponse(
     description="Airplane not found",
     response={"example": {"detail": "No Airplane matches the given query."}}
-)
-
-AIRPLANE_IS_DELETED = OpenApiResponse(
-    description="Airplane is deleted"
 )
 
 GOT_AIRPLANE_IMAGE_INFO = OpenApiResponse(
@@ -143,7 +137,7 @@ AIRPLANE_UPDATE_RESPONSES = {
 AIRPLANE_PARTIAL_UPDATE_RESPONSES = AIRPLANE_UPDATE_RESPONSES
 
 AIRPLANE_DESTROY_RESPONSES = {
-    status.HTTP_204_NO_CONTENT: AIRPLANE_IS_DELETED,
+    status.HTTP_204_NO_CONTENT: None,
     status.HTTP_404_NOT_FOUND: AIRPLANE_NOT_FOUND
 }
 
