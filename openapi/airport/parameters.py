@@ -37,3 +37,9 @@ IATA_CODE = OpenApiParameter(
 )
 
 AIRPORT_LIST_PARAMETERS = [COUNTRY, CITY, IATA_CODE]
+
+CREW_FIRST_NAME = OpenApiParameter(
+    name="first_name",
+    type=str,
+    description="Filter by characters in first name"
+)
