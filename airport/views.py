@@ -312,6 +312,11 @@ class CrewViewSet(ModelViewSet):
 
     @extend_schema(
         summary="Get all crewmembers",
+        description=(
+            "Returns list with all crewmembers."
+            "This list also can be filtered by first_name, last_name, "
+            "role and paginated."
+        ),
         parameters=parameters.CREW_LIST_PARAMETERS,
         responses=responses.CREW_LIST_RESPONSES
     )
