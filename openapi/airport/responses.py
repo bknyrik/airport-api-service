@@ -96,7 +96,7 @@ GOT_AIRPLANE_INFO = OpenApiResponse(
 )
 
 AIRPLANE_IS_CREATED = OpenApiResponse(
-    description="Airplane is created",
+    description="Got information about created airplane",
     response=serializers.AirplaneSerializer
 )
 
