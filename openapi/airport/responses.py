@@ -157,3 +157,8 @@ GOT_AIRPORTS_INFO = OpenApiResponse(
     description="Got airplanes info",
     response=serializers.AirportSerializer
 )
+
+AIRPORT_LIST_RESPONSES = {
+    status.HTTP_200_OK: GOT_AIRPORTS_INFO,
+    status.HTTP_404_NOT_FOUND: user_responses.PAGE_NOT_FOUND,
+}
