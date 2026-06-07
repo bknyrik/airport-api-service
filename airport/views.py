@@ -262,6 +262,16 @@ class AirportViewSet(ModelViewSet):
     def partial_update(self, request: Request, *args, **kwargs) -> Response:
         return super().partial_update(request, *args, **kwargs)
 
+    @extend_schema(
+        description=(
+            "Deletes an airport by its identifier and returns nothing."
+        ),
+        summary="Delete the airport by id",
+        responses=responses.AIRPORT_DESTROY_RESPONSES
+    )
+    def destroy(self, request: Request, *args, **kwargs) -> Response:
+        return super().destroy(request, *args, **kwargs)
+
     @action(
         methods=("POST",),
         detail=True,
