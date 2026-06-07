@@ -1,4 +1,6 @@
-from drf_spectacular.openapi import OpenApiParameter
+from drf_spectacular.openapi import OpenApiParameter, OpenApiTypes
+
+from airport.models import Crew
 
 
 AIRPLANE_TYPE_ID = OpenApiParameter(
@@ -52,7 +54,7 @@ CREW_LAST_NAME = OpenApiParameter(
 
 CREW_ROLE = OpenApiParameter(
     name="role",
-    type=str,
+    enum=Crew.Role,
     description="Filter by role from the given values"
 )
 
