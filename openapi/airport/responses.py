@@ -275,6 +275,18 @@ CREW_NOT_FOUND = OpenApiResponse(
     response={"example": {"detail": "No Crew matches the given query."}}
 )
 
+CREW_INVALID_DATA = OpenApiResponse(
+    description="Invalid input data",
+    response=OpenApiTypes.OBJECT,
+    examples=[
+        examples.FIRST_NAME_IS_BLANK,
+        examples.FIRST_NAME_HAS_INVALID_LENGTH,
+        examples.LAST_NAME_IS_BLANK,
+        examples.LAST_NAME_HAS_INVALID_LENGTH,
+        examples.ROLE_INVALID_CHOICE
+    ]
+)
+
 CREW_LIST_RESPONSES = {
     status.HTTP_200_OK: GOT_CREWMEMBERS_INFO,
     status.HTTP_404_NOT_FOUND: user_responses.PAGE_NOT_FOUND,
