@@ -100,6 +100,7 @@ AIRPLANE_INVALID_DATA = OpenApiResponse(
     response=OpenApiTypes.OBJECT,
     examples=[
         examples.NAME_IS_BLANK,
+        examples.NAME_HAS_INVALID_LENGTH,
         examples.AIRPLANE_TYPE_INVALID_PK,
         examples.FACILITIES_INVALID_PK,
         examples.ROWS_LESS_THAN_ONE,
