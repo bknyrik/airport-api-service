@@ -59,7 +59,7 @@ class UserAdminViewSet(ModelViewSet):
             "a new user"
         ),
         summary="Create a user",
-        responses=responses.USER_CREATE_RESPONSES
+        responses=responses.USER_ADMIN_CREATE_RESPONSES
     )
     def create(self, request: Request, *args, **kwargs) -> Response:
         return super().create(request, *args, **kwargs)
