@@ -331,6 +331,14 @@ class CrewViewSet(ModelViewSet):
     def create(self, request: Request, *args, **kwargs) -> Response:
         return super().create(request, *args, **kwargs)
 
+    @extend_schema(
+        summary="Get the crew by id",
+        description="Returns information about crewmember by its identifier.",
+        responses=responses.CREW_RETRIEVE_RESPONSES
+    )
+    def retrieve(self, request: Request, *args, **kwargs) -> Response:
+        return super().retrieve(request, *args, **kwargs)
+
 
 class RouteViewSet(ModelViewSet):
     queryset = Route.objects.select_related("source", "destination")
