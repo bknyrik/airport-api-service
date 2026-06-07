@@ -10,6 +10,11 @@ class FacilitySetPagination(BaseSetPagination):
     max_page_size = 25
 
 
+class AirplaneTypeSetPagination(BaseSetPagination):
+    page_size = 15
+    max_page_size = 30
+
+
 class AirplaneSetPagination(PageNumberPagination):
     page_size = 5
     page_size_query_param = "page_size"
