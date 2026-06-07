@@ -116,3 +116,8 @@ FIRST_NAME_IS_BLANK = OpenApiExample(
     name="First name is blank",
     value={"first_name": ["This field may not be blank."]}
 )
+
+LAST_NAME_IS_BLANK = OpenApiExample(
+    name="Last name is blank",
+    value={"Last_name": ["This field may not be blank."]}
+)
