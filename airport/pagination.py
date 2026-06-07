@@ -35,13 +35,11 @@ class RouteSetPagination(BaseSetPagination):
     max_page_size = 20
 
 
-class FlightSetPagination(PageNumberPagination):
+class FlightSetPagination(BaseSetPagination):
     page_size = 5
-    page_size_query_param = "page_size"
     max_page_size = 10
 
 
-class OrderSetPagination(PageNumberPagination):
+class OrderSetPagination(BaseSetPagination):
     page_size = 5
-    page_size_query_param = "page_size"
     max_page_size = 15
