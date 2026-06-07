@@ -47,7 +47,7 @@ class UserAdminViewSet(ModelViewSet):
             "page and page_size query parameters."
         ),
         summary="Get all users",
-        responses=responses.USER_LIST_RESPONSES
+        responses=responses.USER_ADMIN_LIST_RESPONSES
     )
     def list(self, request: Request, *args, **kwargs) -> Response:
         return super().list(request, *args, **kwargs)

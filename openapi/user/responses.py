@@ -136,7 +136,7 @@ PAGE_NOT_FOUND = OpenApiResponse(
     response={"example": {"detail": "Invalid page."}}
 )
 
-USER_LIST_RESPONSES = {
+USER_ADMIN_LIST_RESPONSES = {
     status.HTTP_200_OK: GOT_USERS_ADMIN_INFO,
     status.HTTP_404_NOT_FOUND: PAGE_NOT_FOUND,
     status.HTTP_401_UNAUTHORIZED: USER_IS_UNAUTHORIZED,
