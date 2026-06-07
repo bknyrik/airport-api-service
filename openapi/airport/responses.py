@@ -265,6 +265,11 @@ GOT_CREWMEMBERS_INFO = OpenApiResponse(
     response=serializers.CrewListRetrieveSerializer
 )
 
+GOT_CREW_INFO = OpenApiResponse(
+    description="Got information about crewmember",
+    response=serializers.CrewListRetrieveSerializer
+)
+
 CREW_LIST_RESPONSES = {
     status.HTTP_200_OK: GOT_CREWMEMBERS_INFO,
     status.HTTP_404_NOT_FOUND: user_responses.PAGE_NOT_FOUND,
