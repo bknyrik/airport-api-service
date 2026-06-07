@@ -109,6 +109,15 @@ GOT_AIRPLANE_IMAGE_INFO = OpenApiResponse(
     response=serializers.AirplaneImageSerializer
 )
 
+IMAGE_INVALID_DATA = OpenApiResponse(
+    description="Invalid input data",
+    response=OpenApiTypes.OBJECT,
+    examples=[
+        examples.IMAGE_WAS_NOT_A_FILE,
+        examples.IMAGE_IS_NOT_VALID
+    ]
+)
+
 AIRPLANE_LIST_RESPONSES = {
     status.HTTP_200_OK: GOT_AIRPLANES_INFO,
     status.HTTP_400_BAD_REQUEST: AIRPLANE_LIST_INVALID_PARAMS,
