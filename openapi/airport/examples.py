@@ -101,3 +101,8 @@ AIRPORT_IATA_CODE_IS_INVALID = OpenApiExample(
         ]
     }
 )
+
+COUNTRY_IS_BLANK = OpenApiExample(
+    name="Country is blank",
+    value={"country": ["This field may not be blank."]}
+)
