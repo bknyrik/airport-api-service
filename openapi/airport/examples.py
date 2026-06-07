@@ -59,3 +59,15 @@ SEATS_IN_ROW_LESS_THAN_ONE = OpenApiExample(
         "seats_in_row": ["Ensure this value is greater than or equal to 1."]
     }
 )
+
+IMAGE_WAS_NOT_A_FILE = OpenApiExample(
+    name="Provided data was not a file.",
+    value={
+        "image": [
+            (
+                "The submitted data was not a file. "
+                "Check the encoding type on the form."
+            )
+        ]
+    }
+)
