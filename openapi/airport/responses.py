@@ -181,6 +181,11 @@ AIRPORT_IS_DELETED = OpenApiResponse(
     description="Airport is deleted",
 )
 
+GOT_AIRPORT_IMAGE_INFO = OpenApiResponse(
+    description="Got the image of the airport",
+    response=serializers.AirportImageSerializer
+)
+
 AIRPORT_LIST_RESPONSES = {
     status.HTTP_200_OK: GOT_AIRPORTS_INFO,
     status.HTTP_404_NOT_FOUND: user_responses.PAGE_NOT_FOUND,
