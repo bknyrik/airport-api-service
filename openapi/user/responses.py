@@ -69,6 +69,17 @@ USER_IS_UNAUTHORIZED = OpenApiResponse(
     }
 )
 
+USER_REACHED_LIMIT_REQUESTS = OpenApiResponse(
+    description="User reached the limit of requests",
+    response={
+        "example": {
+            "detail": (
+                "Request was throttled. Expected available in 86399 seconds."
+            )
+        }
+    }
+)
+
 USER_REGISTER_RESPONSES = {
     status.HTTP_201_CREATED: USER_IS_CREATED,
     status.HTTP_400_BAD_REQUEST: INVALID_USER_DATA,
