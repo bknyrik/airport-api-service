@@ -232,6 +232,14 @@ class AirportViewSet(ModelViewSet):
     def create(self, request: Request, *args, **kwargs) -> Response:
         return super().create(request, *args, **kwargs)
 
+    @extend_schema(
+        description="Returns information about the airport by its identifier",
+        summary="Get an airport by id",
+        responses=responses.AIRPORT_RETRIEVE_RESPONSES
+    )
+    def retrieve(self, request: Request, *args, **kwargs) -> Response:
+        return super().retrieve(request, *args, **kwargs)
+
     @action(
         methods=("POST",),
         detail=True,
