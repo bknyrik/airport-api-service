@@ -152,3 +152,8 @@ AIRPLANE_UPLOAD_IMAGE_RESPONSES = {
     status.HTTP_400_BAD_REQUEST: IMAGE_INVALID_DATA,
     status.HTTP_404_NOT_FOUND: AIRPLANE_NOT_FOUND
 }
+
+GOT_AIRPORTS_INFO = OpenApiResponse(
+    description="Got airplanes info",
+    response=serializers.AirportSerializer
+)
