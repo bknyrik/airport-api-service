@@ -49,3 +49,9 @@ CREW_LAST_NAME = OpenApiParameter(
     type=str,
     description="Filter by characters in last name"
 )
+
+CREW_ROLE = OpenApiParameter(
+    name="role",
+    type=str,
+    description="Filter by role from the given values"
+)
