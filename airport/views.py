@@ -304,6 +304,14 @@ class CrewViewSet(ModelViewSet):
 
         return serializers.CrewSerializer
 
+    @extend_schema(
+        summary="Get all crewmembers",
+        parameters=parameters.CREW_LIST_PARAMETERS,
+        responses=responses.CREW_LIST_RESPONSES
+    )
+    def list(self, request: Request, *args, **kwargs) -> Response:
+        return super().list(request, *args, **kwargs)
+
 
 class RouteViewSet(ModelViewSet):
     queryset = Route.objects.select_related("source", "destination")
