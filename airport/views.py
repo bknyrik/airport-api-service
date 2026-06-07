@@ -35,6 +35,7 @@ class AirplaneTypeViewSet(ModelViewSet):
     queryset = AirplaneType.objects.all()
     serializer_class = serializers.AirplaneTypeSerializer
     pagination_class = pagination.AirplaneTypeSetPagination
+    permission_classes = (IsAdminOrReadOnly,)
 
     @extend_schema(
         description="Returns list with all airplane types.",
@@ -98,6 +99,7 @@ class AirplaneViewSet(ModelViewSet):
     queryset = Airplane.objects.prefetch_related("facilities")
     pagination_class = pagination.AirplaneSetPagination
     filterset_fields = ("airplane_type_id", "facilities")
+    permission_classes = (IsAdminOrReadOnly,)
 
     def get_queryset(self) -> QuerySet[Airplane]:
         queryset = self.queryset
