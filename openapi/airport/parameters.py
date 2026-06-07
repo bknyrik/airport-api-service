@@ -29,3 +29,9 @@ CITY = OpenApiParameter(
     type=str,
     description="Filter by city"
 )
+
+IATA_CODE = OpenApiParameter(
+    name="iata_code",
+    type=str,
+    description="Filter by characters in IATA code"
+)
