@@ -177,9 +177,6 @@ AIRPORT_NOT_FOUND = OpenApiResponse(
     response={"example": {"detail": "No Airport matches the given query."}}
 )
 
-AIRPORT_IS_DELETED = OpenApiResponse(
-    description="Airport is deleted",
-)
 
 GOT_AIRPORT_IMAGE_INFO = OpenApiResponse(
     description="Got the image of the airport",
@@ -210,7 +207,7 @@ AIRPORT_UPDATE_RESPONSES = {
 AIRPORT_PARTIAL_UPDATE_RESPONSES = AIRPORT_UPDATE_RESPONSES
 
 AIRPORT_DESTROY_RESPONSES = {
-    status.HTTP_204_NO_CONTENT: AIRPORT_IS_DELETED,
+    status.HTTP_204_NO_CONTENT: None,
     status.HTTP_404_NOT_FOUND: AIRPORT_NOT_FOUND
 }
 
