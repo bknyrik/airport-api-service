@@ -17,3 +17,15 @@ AIRPLANE_LIST_PARAMETERS = [
     AIRPLANE_TYPE_ID,
     FACILITIES_IDS
 ]
+
+COUNTRY = OpenApiParameter(
+    name="country",
+    type=str,
+    description="Filter by country"
+)
+
+CITY = OpenApiParameter(
+    name="city",
+    type=str,
+    description="Filter by city"
+)
