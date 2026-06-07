@@ -177,6 +177,10 @@ AIRPORT_NOT_FOUND = OpenApiResponse(
     response={"example": {"detail": "No Airport matches the given query."}}
 )
 
+AIRPORT_IS_DELETED = OpenApiResponse(
+    description="Airport is deleted",
+)
+
 AIRPORT_LIST_RESPONSES = {
     status.HTTP_200_OK: GOT_AIRPORTS_INFO,
     status.HTTP_404_NOT_FOUND: user_responses.PAGE_NOT_FOUND,
