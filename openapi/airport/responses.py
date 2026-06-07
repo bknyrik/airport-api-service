@@ -91,7 +91,7 @@ AIRPLANE_LIST_INVALID_PARAMS = OpenApiResponse(
 )
 
 GOT_AIRPLANE_INFO = OpenApiResponse(
-    response=serializers.AirplaneSerializer,
+    response=serializers.AirplaneListRetrieveSerializer,
     description="Got an airplane info"
 )
 
