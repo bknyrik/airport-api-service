@@ -164,13 +164,11 @@ GOT_AIRPORT_INFO = OpenApiResponse(
 
 AIRPORT_INVALID_DATA = OpenApiResponse(
     description="Invalid input data",
-    response={
-        "example": {
-            "non_field_errors": [
-                "Airport with this name, country and city exists."
-            ]
-        }
-    }
+    response=OpenApiTypes.OBJECT,
+    examples=[
+        examples.AIRPORT_EXISTS,
+        examples.AIRPORT_IATA_CODE_IS_INVALID
+    ]
 )
 
 AIRPORT_LIST_RESPONSES = {
