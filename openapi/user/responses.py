@@ -103,6 +103,12 @@ USER_ADMIN_IS_CREATED = OpenApiResponse(
     description="User is created",
 )
 
+USER_ADMIN_IS_UPDATED = OpenApiResponse(
+    description="User is updated",
+    response=UserAdminSerializer
+)
+
+
 USER_ADMIN_INVALID_DATA = OpenApiResponse(
     response=OpenApiTypes.OBJECT,
     description="Invalid input data",
