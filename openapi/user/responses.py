@@ -48,6 +48,20 @@ USER_NOT_FOUND = OpenApiResponse(
     response={"example": {"detail": "No User matches the given query."}}
 )
 
+USER_IS_NOT_ADMIN = OpenApiResponse(
+    description="User is not an admin to perform this action",
+    response={
+        "example": {
+            "detail": "You do not have permission to perform this action."
+        }
+    }
+)
+
+USER_IS_NOT_ADMIN_OR_ANON = OpenApiResponse(
+    description="A user is not an admin/anonymous to perform this action",
+    response=USER_IS_NOT_ADMIN.response,
+)
+
 USER_REGISTER_RESPONSES = {
     status.HTTP_201_CREATED: USER_IS_CREATED,
     status.HTTP_400_BAD_REQUEST: INVALID_USER_DATA,
