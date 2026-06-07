@@ -159,7 +159,8 @@ GOT_AIRPORTS_INFO = OpenApiResponse(
 )
 
 GOT_AIRPORT_INFO = OpenApiResponse(
-    description="Got info about airport"
+    description="Got info about airport",
+    response=serializers.AirportSerializer
 )
 
 AIRPORT_INVALID_DATA = OpenApiResponse(
