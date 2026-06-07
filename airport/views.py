@@ -272,6 +272,14 @@ class AirportViewSet(ModelViewSet):
     def destroy(self, request: Request, *args, **kwargs) -> Response:
         return super().destroy(request, *args, **kwargs)
 
+    @extend_schema(
+        description=(
+            "Takes a file that represents an image and returns information"
+            " about image assigned to airport by its identifier."
+        ),
+        summary="Upload an image to the airport by id",
+        responses=responses.AIRPORT_UPLOAD_IMAGE_RESPONSES
+    )
     @action(
         methods=("POST",),
         detail=True,
