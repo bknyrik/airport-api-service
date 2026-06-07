@@ -210,3 +210,8 @@ AIRPORT_UPLOAD_IMAGE_RESPONSES = {
     status.HTTP_400_BAD_REQUEST: IMAGE_INVALID_DATA,
     status.HTTP_404_NOT_FOUND: AIRPORT_NOT_FOUND
 }
+
+GOT_CREWMEMBERS_INFO = OpenApiResponse(
+    description="Got information about crewmembers",
+    response=serializers.CrewListRetrieveSerializer
+)
