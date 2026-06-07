@@ -20,6 +20,7 @@ from airport.models import (
 from airport import serializers
 from airport import pagination
 from airport import filtersets
+from user.permissions import IsAdminOrReadOnly
 from openapi.airport import responses, parameters
 
 
@@ -27,6 +28,7 @@ class FacilityViewSet(ModelViewSet):
     queryset = Facility.objects.all()
     serializer_class = serializers.FacilitySerializer
     pagination_class = pagination.FacilitySetPagination
+    permission_classes = (IsAdminOrReadOnly,)
 
 
 class AirplaneTypeViewSet(ModelViewSet):
