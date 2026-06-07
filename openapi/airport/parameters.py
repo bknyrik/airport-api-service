@@ -35,3 +35,5 @@ IATA_CODE = OpenApiParameter(
     type=str,
     description="Filter by characters in IATA code"
 )
+
+AIRPORT_LIST_PARAMETERS = [COUNTRY, CITY, IATA_CODE]
