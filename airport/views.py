@@ -240,6 +240,28 @@ class AirportViewSet(ModelViewSet):
     def retrieve(self, request: Request, *args, **kwargs) -> Response:
         return super().retrieve(request, *args, **kwargs)
 
+    @extend_schema(
+        description=(
+            "Takes data and returns information about the updated airport"
+            " by its identifier."
+        ),
+        summary="Completely update the airport by id",
+        responses=responses.AIRPORT_UPDATE_RESPONSES
+    )
+    def update(self, request: Request, *args, **kwargs) -> Response:
+        return super().update(request, *args, **kwargs)
+
+    @extend_schema(
+        description=(
+            "Takes specified data and returns information "
+            "about the updated airport by its identifier."
+        ),
+        summary="Partially update the airport by id",
+        responses=responses.AIRPORT_PARTIAL_UPDATE_RESPONSES
+    )
+    def partial_update(self, request: Request, *args, **kwargs) -> Response:
+        return super().partial_update(request, *args, **kwargs)
+
     @action(
         methods=("POST",),
         detail=True,
