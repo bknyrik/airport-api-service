@@ -172,6 +172,11 @@ AIRPORT_INVALID_DATA = OpenApiResponse(
     ]
 )
 
+AIRPORT_NOT_FOUND = OpenApiResponse(
+    description="Airport not found",
+    response={"example": {"detail": "No Airport matches the given query."}}
+)
+
 AIRPORT_LIST_RESPONSES = {
     status.HTTP_200_OK: GOT_AIRPORTS_INFO,
     status.HTTP_404_NOT_FOUND: user_responses.PAGE_NOT_FOUND,
