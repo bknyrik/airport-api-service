@@ -270,6 +270,11 @@ GOT_CREW_INFO = OpenApiResponse(
     response=serializers.CrewListRetrieveSerializer
 )
 
+CREW_NOT_FOUND = OpenApiResponse(
+    description="Crew not found",
+    response={"example": {"detail": "No Crew matches the given query."}}
+)
+
 CREW_LIST_RESPONSES = {
     status.HTTP_200_OK: GOT_CREWMEMBERS_INFO,
     status.HTTP_404_NOT_FOUND: user_responses.PAGE_NOT_FOUND,
