@@ -208,6 +208,19 @@ class AirportViewSet(ModelViewSet):
 
         return serializers.AirportSerializer
 
+    @extend_schema(
+        description=(
+            "Returns list with information about all airports."
+            " This also can be filtered by country, city, "
+            "IATA code and paginated."
+        ),
+        summary="Get all airports",
+        parameters=parameters.AIRPORT_LIST_PARAMETERS,
+        responses=responses.AIRPORT_LIST_RESPONSES
+    )
+    def list(self, request: Request, *args, **kwargs) -> Response:
+        return super().list(request, *args, **kwargs)
+
     @action(
         methods=("POST",),
         detail=True,
