@@ -158,6 +158,17 @@ GOT_AIRPORTS_INFO = OpenApiResponse(
     response=serializers.AirportSerializer
 )
 
+AIRPORT_INVALID_DATA = OpenApiResponse(
+    description="Invalid input data",
+    response={
+        "example": {
+            "non_field_errors": [
+                "Airport with this name, country and city exists."
+            ]
+        }
+    }
+)
+
 AIRPORT_LIST_RESPONSES = {
     status.HTTP_200_OK: GOT_AIRPORTS_INFO,
     status.HTTP_404_NOT_FOUND: user_responses.PAGE_NOT_FOUND,
