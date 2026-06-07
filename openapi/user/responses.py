@@ -39,10 +39,6 @@ USER_IS_CREATED = OpenApiResponse(
     response=UserSerializer
 )
 
-USER_IS_DELETED = OpenApiResponse(
-    description="User is deleted",
-)
-
 USER_NOT_FOUND = OpenApiResponse(
     description="User not found",
     response={"example": {"detail": "No User matches the given query."}}
@@ -172,7 +168,7 @@ USER_ADMIN_UPDATE_RESPONSES = {
 USER_ADMIN_PARTIAL_UPDATE_RESPONSES = USER_ADMIN_UPDATE_RESPONSES
 
 USER_ADMIN_DESTROY_RESPONSES = {
-    status.HTTP_204_NO_CONTENT: USER_IS_DELETED,
+    status.HTTP_204_NO_CONTENT: None,
     status.HTTP_404_NOT_FOUND: USER_NOT_FOUND,
     status.HTTP_401_UNAUTHORIZED: USER_IS_UNAUTHORIZED,
     status.HTTP_403_FORBIDDEN: USER_IS_NOT_ADMIN,
