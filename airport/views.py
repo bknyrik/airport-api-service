@@ -221,6 +221,17 @@ class AirportViewSet(ModelViewSet):
     def list(self, request: Request, *args, **kwargs) -> Response:
         return super().list(request, *args, **kwargs)
 
+    @extend_schema(
+        description=(
+            "Takes data and returns "
+            "information about created airport."
+        ),
+        summary="Create an airport",
+        responses=responses.AIRPORT_CREATE_RESPONSES
+    )
+    def create(self, request: Request, *args, **kwargs) -> Response:
+        return super().create(request, *args, **kwargs)
+
     @action(
         methods=("POST",),
         detail=True,
