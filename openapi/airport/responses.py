@@ -95,6 +95,11 @@ GOT_AIRPLANE_INFO = OpenApiResponse(
     description="Got an airplane info"
 )
 
+AIRPLANE_IS_CREATED = OpenApiResponse(
+    description="Airplane is created",
+    response=serializers.AirplaneSerializer
+)
+
 AIRPLANE_INVALID_DATA = OpenApiResponse(
     description="Invalid data",
     response=OpenApiTypes.OBJECT,
