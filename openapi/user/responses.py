@@ -62,6 +62,13 @@ USER_IS_NOT_ADMIN_OR_ANON = OpenApiResponse(
     response=USER_IS_NOT_ADMIN.response,
 )
 
+USER_IS_UNAUTHORIZED = OpenApiResponse(
+    description="User is not authorized",
+    response={
+        "example": {"detail": "Authentication credentials were not provided."}
+    }
+)
+
 USER_REGISTER_RESPONSES = {
     status.HTTP_201_CREATED: USER_IS_CREATED,
     status.HTTP_400_BAD_REQUEST: INVALID_USER_DATA,
