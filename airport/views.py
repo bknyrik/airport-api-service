@@ -26,11 +26,13 @@ from openapi.airport import responses, parameters
 class FacilityViewSet(ModelViewSet):
     queryset = Facility.objects.all()
     serializer_class = serializers.FacilitySerializer
+    pagination_class = pagination.FacilitySetPagination
 
 
 class AirplaneTypeViewSet(ModelViewSet):
     queryset = AirplaneType.objects.all()
     serializer_class = serializers.AirplaneTypeSerializer
+    pagination_class = pagination.AirplaneTypeSetPagination
 
     @extend_schema(
         description="Returns list with all airplane types.",
