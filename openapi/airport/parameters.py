@@ -55,3 +55,9 @@ CREW_ROLE = OpenApiParameter(
     type=str,
     description="Filter by role from the given values"
 )
+
+CREW_LIST_PARAMETERS = [
+    CREW_FIRST_NAME,
+    CREW_LAST_NAME,
+    CREW_ROLE
+]
