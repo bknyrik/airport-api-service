@@ -154,7 +154,7 @@ AIRPLANE_UPLOAD_IMAGE_RESPONSES = {
 }
 
 GOT_AIRPORTS_INFO = OpenApiResponse(
-    description="Got airplanes info",
+    description="Got info about airports",
     response=serializers.AirportSerializer
 )
 
