@@ -106,3 +106,8 @@ COUNTRY_IS_BLANK = OpenApiExample(
     name="Country is blank",
     value={"country": ["This field may not be blank."]}
 )
+
+CITY_IS_BLANK = OpenApiExample(
+    name="City is blank",
+    value={"city": ["This field may not be blank."]}
+)
