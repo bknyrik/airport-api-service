@@ -30,6 +30,17 @@ class FacilityViewSet(ModelViewSet):
     pagination_class = pagination.FacilitySetPagination
     permission_classes = (IsAdminOrReadOnly,)
 
+    @extend_schema(
+        description=(
+            "Returns list with information about all facilities."
+            " This list also can be paginated."
+        ),
+        summary="Get all facilities",
+        responses=responses.FACILITY_LIST_RESPONSES
+    )
+    def list(self, request: Request, *args, **kwargs) -> Response:
+        return super().list(request, *args, **kwargs)
+
 
 class AirplaneTypeViewSet(ModelViewSet):
     queryset = AirplaneType.objects.all()
