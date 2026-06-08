@@ -568,3 +568,8 @@ GOT_ROUTES_INFO = OpenApiResponse(
     description="Got information about routes",
     response=serializers.RouteListRetrieveSerializer
 )
+
+GOT_ROUTE_INFO = OpenApiResponse(
+    description="Got information about route",
+    response=serializers.RouteListRetrieveSerializer
+)
