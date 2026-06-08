@@ -491,3 +491,8 @@ FLIGHT_DESTROY_RESPONSES = {
     status.HTTP_404_NOT_FOUND: FLIGHT_NOT_FOUND,
     status.HTTP_429_TOO_MANY_REQUESTS: user_responses.USER_REACHED_LIMIT_REQUESTS
 }
+
+GOT_ORDERS_INFO = OpenApiResponse(
+    description="Got information about orders",
+    response=serializers.OrderListRetrieveSerializer
+)
