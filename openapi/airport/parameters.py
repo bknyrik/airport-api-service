@@ -81,3 +81,9 @@ ROUTE_ID = OpenApiParameter(
     type=int,
     description="Filter by route id"
 )
+
+FLIGHT_LIST_PARAMETERS = [
+    AIRPLANE_ID,
+    CREWMEMBERS_IDS,
+    ROUTE_ID
+]
