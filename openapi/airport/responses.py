@@ -365,6 +365,11 @@ FACILITY_INVALID_DATA = OpenApiResponse(
     ]
 )
 
+FACILITY_NOT_FOUND = OpenApiResponse(
+    description="Facility not found",
+    response={"example": {"detail": "No Facility matches the given query."}}
+)
+
 FACILITY_LIST_RESPONSES = {
     status.HTTP_200_OK: GOT_FACILITIES_INFO,
     status.HTTP_404_NOT_FOUND: user_responses.PAGE_NOT_FOUND,
