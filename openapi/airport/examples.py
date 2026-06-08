@@ -145,3 +145,13 @@ FACILITY_NAME_EXISTS = OpenApiExample(
     name="Facility with this name exists",
     value={"name": ["facility with this name already exists."]}
 )
+
+AIRPLANE_ID_INVALID_CHOICE = OpenApiExample(
+    name="Airplane id is invalid",
+    value={
+        "airplane_id": [
+            "Select a valid choice. "
+            "That choice is not one of the available choices."
+        ]
+    }
+)
