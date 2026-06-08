@@ -291,6 +291,10 @@ CREW_IS_UPDATED = OpenApiResponse(
     response=serializers.CrewSerializer
 )
 
+GOT_DETAILED_CREW_INFO = OpenApiResponse(
+    description="Got detailed information about crewmember"
+)
+
 CREW_NOT_FOUND = OpenApiResponse(
     description="Crew not found",
     response={"example": {"detail": "No Crew matches the given query."}}
