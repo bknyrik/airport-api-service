@@ -155,3 +155,13 @@ AIRPLANE_ID_INVALID_CHOICE = OpenApiExample(
         ]
     }
 )
+
+ROUTE_ID_INVALID_CHOICE = OpenApiExample(
+    name="Route id is invalid",
+    value={
+        "route_id": [
+            "Select a valid choice. "
+            "That choice is not one of the available choices."
+        ]
+    }
+)
