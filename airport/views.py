@@ -572,3 +572,14 @@ class OrderViewSet(ModelViewSet):
     )
     def create(self, request: Request, *args, **kwargs) -> Response:
         return super().create(request, *args, **kwargs)
+
+    @extend_schema(
+        description=(
+            "Returns information about order by its identifier "
+            "of the current authenticated user."
+        ),
+        summary="Get order by id of the current user",
+        responses=responses.ORDER_RETRIEVE_RESPONSES
+    )
+    def retrieve(self, request: Request, *args, **kwargs) -> Response:
+        return super().retrieve(request, *args, **kwargs)
