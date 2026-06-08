@@ -516,10 +516,10 @@ class FlightViewSet(ModelViewSet):
 
     @extend_schema(
         description=(
-            "Takes data and returns information about updated "
+            "Takes specified data and returns information about updated "
             "flight by its identifier."
         ),
-        summary="Completely update the flight by id",
+        summary="Partially update the flight by id",
         responses=responses.FLIGHT_PARTIAL_UPDATE_RESPONSES
     )
     def partial_update(self, request: Request, *args, **kwargs) -> Response:
