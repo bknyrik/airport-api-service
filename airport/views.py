@@ -487,6 +487,17 @@ class RouteViewSet(ModelViewSet):
     def update(self, request: Request, *args, **kwargs) -> Response:
         return super().update(request, *args, **kwargs)
 
+    @extend_schema(
+        description=(
+            "Takes specified data and returns information "
+            "about updated route by its identifier."
+        ),
+        summary="Partially update route by id",
+        responses=responses.ROUTE_PARTIAL_UPDATE_RESPONSES
+    )
+    def partial_update(self, request: Request, *args, **kwargs) -> Response:
+        return super().partial_update(request, *args, **kwargs)
+
 
 class FlightViewSet(ModelViewSet):
     queryset = Flight.objects.prefetch_related(
