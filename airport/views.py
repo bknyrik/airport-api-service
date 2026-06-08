@@ -586,8 +586,9 @@ class OrderViewSet(ModelViewSet):
 
     @extend_schema(
         description=(
-            "Takes data and returns updated information about "
-            "created order by assigned to the current authenticated user."
+            "Takes data and returns information about "
+            "updated order by its identifier "
+            "assigned to the current authenticated user."
         ),
         summary="Completely update order by id of the current user",
         responses=responses.ORDER_UPDATE_RESPONSES
@@ -597,8 +598,9 @@ class OrderViewSet(ModelViewSet):
 
     @extend_schema(
         description=(
-            "Takes specified data and returns updated information about "
-            "created order by assigned to the current authenticated user."
+            "Takes specified data and returns information about "
+            "updated order by its identifier "
+            "assigned to the current authenticated user."
         ),
         summary="Partially update order by id of the current user",
         responses=responses.ORDER_PARTIAL_UPDATE_RESPONSES
