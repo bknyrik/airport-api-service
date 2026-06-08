@@ -95,16 +95,6 @@ GOT_AIRPLANE_INFO = OpenApiResponse(
     description="Got an airplane info"
 )
 
-AIRPLANE_IS_CREATED = OpenApiResponse(
-    description="Got information about created airplane",
-    response=serializers.AirplaneSerializer
-)
-
-AIRPLANE_IS_UPDATED = OpenApiResponse(
-    description="Got information about updated airplane",
-    response=serializers.AirplaneSerializer
-)
-
 GOT_DETAILED_AIRPLANE_INFO = OpenApiResponse(
     description="Got detailed information about airplane",
     response=serializers.AirplaneSerializer
