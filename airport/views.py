@@ -60,6 +60,17 @@ class FacilityViewSet(ModelViewSet):
     def retrieve(self, request: Request, *args, **kwargs) -> Response:
         return super().retrieve(request, *args, **kwargs)
 
+    @extend_schema(
+        description=(
+            "Takes data and returns information about updated facility"
+            " by its identifier."
+        ),
+        summary="Completely update the facility by id",
+        responses=responses.FACILITY_UPDATE_RESPONSES
+    )
+    def update(self, request: Request, *args, **kwargs) -> Response:
+        return super().update(request, *args, **kwargs)
+
 
 class AirplaneTypeViewSet(ModelViewSet):
     queryset = AirplaneType.objects.all()
