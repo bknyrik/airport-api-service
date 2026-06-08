@@ -282,7 +282,8 @@ GOT_CREW_INFO = OpenApiResponse(
 )
 
 GOT_DETAILED_CREW_INFO = OpenApiResponse(
-    description="Got detailed information about crewmember"
+    description="Got detailed information about crewmember",
+    response=serializers.CrewSerializer
 )
 
 CREW_NOT_FOUND = OpenApiResponse(
