@@ -550,3 +550,14 @@ class OrderViewSet(ModelViewSet):
 
     def perform_create(self, serializer: serializers.OrderSerializer) -> None:
         serializer.save(user=self.request.user)
+
+    @extend_schema(
+        description=(
+            "Returns list with information about all orders with tickets "
+            "of the current authenticated user. This list also can be paginated."
+        ),
+        summary="Get all orders by current user",
+        responses=responses.ORDER_LIST_RESPONSES
+    )
+    def list(self, request: Request, *args, **kwargs) -> Response:
+        return super().list(request, *args, **kwargs)
