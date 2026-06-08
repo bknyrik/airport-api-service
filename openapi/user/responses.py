@@ -98,17 +98,6 @@ USER_PUT_RESPONSES = {
 
 USER_PATCH_RESPONSES = USER_PUT_RESPONSES
 
-USER_ADMIN_IS_CREATED = OpenApiResponse(
-    response=UserAdminSerializer,
-    description="User is created",
-)
-
-USER_ADMIN_IS_UPDATED = OpenApiResponse(
-    description="User is updated",
-    response=UserAdminSerializer
-)
-
-
 USER_ADMIN_INVALID_DATA = OpenApiResponse(
     response=OpenApiTypes.OBJECT,
     description="Invalid input data",
