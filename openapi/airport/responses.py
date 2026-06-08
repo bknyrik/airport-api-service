@@ -281,16 +281,6 @@ GOT_CREW_INFO = OpenApiResponse(
     response=serializers.CrewListRetrieveSerializer
 )
 
-CREW_IS_CREATED = OpenApiResponse(
-    description="Got information about created crewmember",
-    response=serializers.CrewSerializer
-)
-
-CREW_IS_UPDATED = OpenApiResponse(
-    description="Got information about updated crewmember",
-    response=serializers.CrewSerializer
-)
-
 GOT_DETAILED_CREW_INFO = OpenApiResponse(
     description="Got detailed information about crewmember"
 )
