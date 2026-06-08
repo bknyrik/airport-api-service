@@ -583,3 +583,14 @@ class OrderViewSet(ModelViewSet):
     )
     def retrieve(self, request: Request, *args, **kwargs) -> Response:
         return super().retrieve(request, *args, **kwargs)
+
+    @extend_schema(
+        description=(
+            "Takes data and returns updated information about "
+            "created order by assigned to the current authenticated user."
+        ),
+        summary="Completely update order by id of the current user",
+        responses=responses.ORDER_UPDATE_RESPONSES
+    )
+    def update(self, request: Request, *args, **kwargs) -> Response:
+        return super().update(request, *args, **kwargs)
