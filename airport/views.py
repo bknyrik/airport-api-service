@@ -476,6 +476,17 @@ class RouteViewSet(ModelViewSet):
     def retrieve(self, request: Request, *args, **kwargs) -> Response:
         return super().retrieve(request, *args, **kwargs)
 
+    @extend_schema(
+        description=(
+            "Takes data and returns information about updated route "
+            "by its identifier."
+        ),
+        summary="Completely update route by id",
+        responses=responses.ROUTE_UPDATE_RESPONSES
+    )
+    def update(self, request: Request, *args, **kwargs) -> Response:
+        return super().update(request, *args, **kwargs)
+
 
 class FlightViewSet(ModelViewSet):
     queryset = Flight.objects.prefetch_related(
