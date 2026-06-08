@@ -286,3 +286,8 @@ DESTINATION_ID_INVALID_CHOICE = OpenApiExample(
         ]
     }
 )
+
+SOURCE_INVALID_PK = OpenApiExample(
+    name="Source pk is invalid",
+    value={"source": ["Invalid pk \"999\" - object does not exist."]}
+)
