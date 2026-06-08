@@ -301,3 +301,8 @@ DISTANCE_LESS_THAN_ONE = OpenApiExample(
     name="Distance less than 1",
     value={"distance": ["Ensure this value is greater than or equal to 1."]}
 )
+
+SOURCE_AND_DESTINATION_ARE_SAME = OpenApiExample(
+    name="Source and destination are the same",
+    value={"source": ["Source and destination must be other"]}
+)
