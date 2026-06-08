@@ -75,3 +75,9 @@ CREWMEMBERS_IDS = OpenApiParameter(
     type={"type": "array", "items": {"type": "number"}},
     description="Filter by crewmembers ids"
 )
+
+ROUTE_ID = OpenApiParameter(
+    name="route_id",
+    type=int,
+    description="Filter by route id"
+)
