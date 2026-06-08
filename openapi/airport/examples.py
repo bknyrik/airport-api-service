@@ -266,3 +266,13 @@ TICKETS_SEAT_OUT_OF_RANGE = OpenApiExample(
     name="Seat out of range",
     value={"tickets": [{"seat": ["Seat must be in range from 1 to 999"]}]}
 )
+
+SOURCE_ID_INVALID_CHOICE = OpenApiExample(
+    name="Source id is invalid choice",
+    value={
+        "source_id": [
+            "Select a valid choice. "
+            "That choice is not one of the available choices."
+        ]
+    }
+)
