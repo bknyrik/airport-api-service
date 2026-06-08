@@ -409,6 +409,11 @@ GOT_FLIGHTS_INFO = OpenApiResponse(
     response=serializers.FlightListRetrieveSerializer
 )
 
+GOT_FLIGHT_INFO = OpenApiResponse(
+    description="Got information about flight",
+    response=serializers.FlightListRetrieveSerializer
+)
+
 FLIGHT_LIST_INVALID_PARAMETERS = OpenApiResponse(
     description="Invalid parameters",
     response=OpenApiTypes.OBJECT,
