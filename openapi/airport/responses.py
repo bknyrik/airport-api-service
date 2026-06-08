@@ -430,6 +430,18 @@ FLIGHT_LIST_INVALID_PARAMETERS = OpenApiResponse(
     ]
 )
 
+FLIGHT_INVALID_DATA = OpenApiResponse(
+    description="Invalid input data",
+    response=OpenApiTypes.OBJECT,
+    examples=[
+        examples.ROUTE_INVALID_PK,
+        examples.AIRPLANE_INVALID_PK,
+        examples.DEPARTURE_TIME_GREATER_THAN_ARRIVAL_TIME,
+        examples.CREWMEMBERS_INVALID_PK,
+        examples.CREWMEMBERS_IS_EMPTY
+    ]
+)
+
 FLIGHT_LIST_RESPONSES = {
     status.HTTP_200_OK: GOT_FLIGHTS_INFO,
     status.HTTP_400_BAD_REQUEST: FLIGHT_LIST_INVALID_PARAMETERS,
