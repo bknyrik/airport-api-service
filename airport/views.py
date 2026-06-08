@@ -350,6 +350,17 @@ class CrewViewSet(ModelViewSet):
     def update(self, request: Request, *args, **kwargs) -> Response:
         return super().update(request, *args, **kwargs)
 
+    @extend_schema(
+        description=(
+            "Takes specified data and returns information "
+            "about partially updated crewmember by its identifier."
+        ),
+        summary="Partially update the crew by id",
+        responses=responses.CREW_PARTIAL_UPDATE_RESPONSES
+    )
+    def partial_update(self, request: Request, *args, **kwargs) -> Response:
+        return super().partial_update(request, *args, **kwargs)
+
 
 class RouteViewSet(ModelViewSet):
     queryset = Route.objects.select_related("source", "destination")
