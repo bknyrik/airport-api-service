@@ -503,6 +503,11 @@ GOT_ORDER_INFO = OpenApiResponse(
     response=serializers.OrderListRetrieveSerializer
 )
 
+GOT_DETAILED_ORDER_INFO = OpenApiResponse(
+    description="Got detailed information about order",
+    response=serializers.OrderSerializer
+)
+
 ORDER_INVALID_DATA = OpenApiResponse(
     description="Invalid input data",
     response=OpenApiTypes.OBJECT,
