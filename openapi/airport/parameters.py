@@ -93,3 +93,9 @@ SOURCE_ID = OpenApiParameter(
     type=int,
     description="Filter by source id"
 )
+
+DESTINATION_ID = OpenApiParameter(
+    name="source_id",
+    type=int,
+    description="Filter by source id"
+)
