@@ -140,3 +140,8 @@ ROLE_INVALID_CHOICE = OpenApiExample(
     name="Role has invalid choice",
     value={"role": ["\"BB\" is not a valid choice."]}
 )
+
+FACILITY_NAME_EXISTS = OpenApiExample(
+    name="Facility with this name exists",
+    value={"name": ["facility with this name already exists."]}
+)
