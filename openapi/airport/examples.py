@@ -199,3 +199,8 @@ DEPARTURE_TIME_GREATER_THAN_ARRIVAL_TIME = OpenApiExample(
         ]
     }
 )
+
+CREWMEMBERS_IS_EMPTY = OpenApiExample(
+    name="Crewmembers is empty.",
+    value={"crewmembers": ["This list may not be empty."]}
+)
