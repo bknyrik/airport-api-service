@@ -71,6 +71,17 @@ class FacilityViewSet(ModelViewSet):
     def update(self, request: Request, *args, **kwargs) -> Response:
         return super().update(request, *args, **kwargs)
 
+    @extend_schema(
+        description=(
+            "Takes specified data and returns information "
+            "about updated facility by its identifier."
+        ),
+        summary="Partially update the facility by id",
+        responses=responses.FACILITY_PARTIAL_UPDATE_RESPONSES
+    )
+    def partial_update(self, request: Request, *args, **kwargs) -> Response:
+        return super().partial_update(request, *args, **kwargs)
+
 
 class AirplaneTypeViewSet(ModelViewSet):
     queryset = AirplaneType.objects.all()
