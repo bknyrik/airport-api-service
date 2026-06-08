@@ -60,7 +60,10 @@ class AirplaneTypeViewSet(ModelViewSet):
     permission_classes = (IsAdminOrReadOnly,)
 
     @extend_schema(
-        description="Returns list with all airplane types.",
+        description=(
+            "Returns list with all airplane types. "
+            "This list also can be paginated"
+        ),
         summary="Get all airplane types",
         responses=responses.AIRPLANE_TYPE_LIST_RESPONSES
     )
