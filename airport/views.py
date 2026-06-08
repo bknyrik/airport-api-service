@@ -605,3 +605,14 @@ class OrderViewSet(ModelViewSet):
     )
     def partial_update(self, request: Request, *args, **kwargs) -> Response:
         return super().partial_update(request, *args, **kwargs)
+
+    @extend_schema(
+        description=(
+            "Deletes order by its identifier of the current"
+            " authenticated user and returns nothing"
+        ),
+        summary="Delete order by id of the current user",
+        responses=responses.ORDER_DESTROY_RESPONSES
+    )
+    def destroy(self, request: Request, *args, **kwargs) -> Response:
+        return super().destroy(request, *args, **kwargs)
