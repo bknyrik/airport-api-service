@@ -350,3 +350,11 @@ GOT_FACILITIES_INFO = OpenApiResponse(
     description="Got information about facilities",
     response=serializers.FacilitySerializer
 )
+
+FACILITY_LIST_RESPONSES = {
+    status.HTTP_200_OK: GOT_FACILITIES_INFO,
+    status.HTTP_404_NOT_FOUND: user_responses.PAGE_NOT_FOUND,
+    status.HTTP_401_UNAUTHORIZED: user_responses.USER_IS_UNAUTHORIZED,
+    status.HTTP_403_FORBIDDEN: user_responses.USER_IS_NOT_ADMIN,
+    status.HTTP_429_TOO_MANY_REQUESTS: user_responses.USER_REACHED_LIMIT_REQUESTS
+}
