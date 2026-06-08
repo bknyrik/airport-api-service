@@ -474,6 +474,19 @@ class FlightViewSet(ModelViewSet):
 
         return serializers.FlightSerializer
 
+    @extend_schema(
+        description=(
+            "Returns list with information about all flights. "
+            "This list also can be filtered by airplane id, route id,"
+            " crewmembers ids and paginated."
+        ),
+        summary="Get all flights",
+        parameters=parameters.FLIGHT_LIST_PARAMETERS,
+        responses=responses.FLIGHT_LIST_RESPONSES
+    )
+    def list(self, request: Request, *args, **kwargs) -> Response:
+        return super().list(request, *args, **kwargs)
+
 
 class OrderViewSet(ModelViewSet):
     queryset = Order.objects.prefetch_related("tickets")
