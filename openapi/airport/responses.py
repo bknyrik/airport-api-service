@@ -403,3 +403,8 @@ FACILITY_DESTROY_RESPONSES = {
     status.HTTP_403_FORBIDDEN: user_responses.USER_IS_NOT_ADMIN,
     status.HTTP_429_TOO_MANY_REQUESTS: user_responses.USER_REACHED_LIMIT_REQUESTS
 }
+
+GOT_FLIGHTS_INFO = OpenApiResponse(
+    description="Got information about flights",
+    response=serializers.FlightListRetrieveSerializer
+)
