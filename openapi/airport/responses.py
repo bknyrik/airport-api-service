@@ -415,6 +415,11 @@ GOT_FLIGHT_INFO = OpenApiResponse(
     response=serializers.FlightListRetrieveSerializer
 )
 
+GOT_DETAILED_FLIGHT_INFO = OpenApiResponse(
+    description="Got detailed information about flight",
+    response=serializers.FlightSerializer
+)
+
 FLIGHT_NOT_FOUND = OpenApiResponse(
     description="Flight not found",
     response={"example": {"detail": "No Flight matches the given query."}}
