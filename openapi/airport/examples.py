@@ -214,3 +214,16 @@ TICKETS_IS_EMPTY = OpenApiExample(
     name="Tickets is empty.",
     value={"tickets": ["This list may not be empty."]}
 )
+
+TICKETS_EXIST = OpenApiExample(
+    name="Tickets exist",
+    value={
+        "tickets": [
+            {
+                "non_field_errors": [
+                    "Ticket with this row, seat and flight exists."
+                ]
+            }
+        ]
+    }
+)
