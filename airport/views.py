@@ -514,6 +514,17 @@ class FlightViewSet(ModelViewSet):
     def update(self, request: Request, *args, **kwargs) -> Response:
         return super().update(request, *args, **kwargs)
 
+    @extend_schema(
+        description=(
+            "Takes data and returns information about updated "
+            "flight by its identifier."
+        ),
+        summary="Completely update the flight by id",
+        responses=responses.FLIGHT_PARTIAL_UPDATE_RESPONSES
+    )
+    def partial_update(self, request: Request, *args, **kwargs) -> Response:
+        return super().partial_update(request, *args, **kwargs)
+
 
 class OrderViewSet(ModelViewSet):
     queryset = Order.objects.prefetch_related("tickets")
