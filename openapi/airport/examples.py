@@ -276,3 +276,13 @@ SOURCE_ID_INVALID_CHOICE = OpenApiExample(
         ]
     }
 )
+
+DESTINATION_ID_INVALID_CHOICE = OpenApiExample(
+    name="Destination id is invalid choice",
+    value={
+        "destination_id": [
+            "Select a valid choice. "
+            "That choice is not one of the available choices."
+        ]
+    }
+)
