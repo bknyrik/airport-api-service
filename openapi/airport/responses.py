@@ -588,6 +588,17 @@ ROUTE_LIST_INVALID_PARAMETERS = OpenApiResponse(
     ]
 )
 
+ROUTE_INVALID_DATA = OpenApiResponse(
+    description="Invalid input data",
+    response=OpenApiTypes.OBJECT,
+    examples=[
+        examples.SOURCE_INVALID_PK,
+        examples.DESTINATION_INVALID_PK,
+        examples.SOURCE_AND_DESTINATION_ARE_SAME,
+        examples.DISTANCE_LESS_THAN_ONE
+    ]
+)
+
 ROUTE_LIST_RESPONSES = {
     status.HTTP_200_OK: GOT_ROUTES_INFO,
     status.HTTP_400_BAD_REQUEST: ROUTE_LIST_INVALID_PARAMETERS,
