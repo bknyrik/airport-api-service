@@ -561,3 +561,14 @@ class OrderViewSet(ModelViewSet):
     )
     def list(self, request: Request, *args, **kwargs) -> Response:
         return super().list(request, *args, **kwargs)
+
+    @extend_schema(
+        description=(
+            "Takes data and returns information about order with tickets"
+            " assigned to current authenticated user."
+        ),
+        summary="Create order by current user",
+        responses=responses.ORDER_CREATE_RESPONSES
+    )
+    def create(self, request: Request, *args, **kwargs) -> Response:
+        return super().create(request, *args, **kwargs)
