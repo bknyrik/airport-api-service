@@ -468,6 +468,14 @@ class RouteViewSet(ModelViewSet):
     def create(self, request: Request, *args, **kwargs) -> Response:
         return super().create(request, *args, **kwargs)
 
+    @extend_schema(
+        description="Returns information about route by its identifier.",
+        summary="Get route by id",
+        responses=responses.ROUTE_RETRIEVE_RESPONSES
+    )
+    def retrieve(self, request: Request, *args, **kwargs) -> Response:
+        return super().retrieve(request, *args, **kwargs)
+
 
 class FlightViewSet(ModelViewSet):
     queryset = Flight.objects.prefetch_related(
