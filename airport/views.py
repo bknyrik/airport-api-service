@@ -361,6 +361,14 @@ class CrewViewSet(ModelViewSet):
     def partial_update(self, request: Request, *args, **kwargs) -> Response:
         return super().partial_update(request, *args, **kwargs)
 
+    @extend_schema(
+        description="Deletes the crew by its identifier and returns nothing.",
+        summary="Delete the crew by id",
+        responses=responses.CREW_DESTROY_RESPONSES
+    )
+    def destroy(self, request: Request, *args, **kwargs) -> Response:
+        return super().destroy(request, *args, **kwargs)
+
 
 class RouteViewSet(ModelViewSet):
     queryset = Route.objects.select_related("source", "destination")
