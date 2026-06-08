@@ -190,3 +190,12 @@ CREWMEMBERS_INVALID_PK = OpenApiExample(
     name="Crewmembers pk is invalid",
     value={"crewmembers": ["Invalid pk \"999\" - object does not exist."]}
 )
+
+DEPARTURE_TIME_GREATER_THAN_ARRIVAL_TIME = OpenApiExample(
+    name="Departure time greater than arrival time",
+    value={
+        "departure_time": [
+            "Departure time must be less than or equal arrival time"
+        ]
+    }
+)
