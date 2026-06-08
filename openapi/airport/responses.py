@@ -197,6 +197,7 @@ AIRPORT_INVALID_DATA = OpenApiResponse(
     response=OpenApiTypes.OBJECT,
     examples=[
         examples.NAME_IS_BLANK,
+        examples.NAME_HAS_INVALID_LENGTH,
         examples.COUNTRY_IS_BLANK,
         examples.CITY_IS_BLANK,
         examples.AIRPORT_EXISTS,
