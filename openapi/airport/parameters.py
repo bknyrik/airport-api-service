@@ -111,3 +111,10 @@ MAX_DISTANCE = OpenApiParameter(
     type=int,
     description="Filter by max distance"
 )
+
+ROUTE_LIST_PARAMETERS = [
+    SOURCE_ID,
+    DESTINATION_ID,
+    MIN_DISTANCE,
+    MAX_DISTANCE
+]
