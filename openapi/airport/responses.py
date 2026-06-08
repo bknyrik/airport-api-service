@@ -563,3 +563,8 @@ ORDER_DESTROY_RESPONSES = {
     status.HTTP_404_NOT_FOUND: ORDER_NOT_FOUND,
     status.HTTP_429_TOO_MANY_REQUESTS: user_responses.USER_REACHED_LIMIT_REQUESTS
 }
+
+GOT_ROUTES_INFO = OpenApiResponse(
+    description="Got information about routes",
+    response=serializers.RouteListRetrieveSerializer
+)
