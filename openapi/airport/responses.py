@@ -599,6 +599,11 @@ ROUTE_INVALID_DATA = OpenApiResponse(
     ]
 )
 
+ROUTE_NOT_FOUND = OpenApiResponse(
+    description="Route not found",
+    response={"example": {"detail": "No Route matches the given query."}}
+)
+
 ROUTE_LIST_RESPONSES = {
     status.HTTP_200_OK: GOT_ROUTES_INFO,
     status.HTTP_400_BAD_REQUEST: ROUTE_LIST_INVALID_PARAMETERS,
