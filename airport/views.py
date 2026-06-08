@@ -460,6 +460,14 @@ class RouteViewSet(ModelViewSet):
     def list(self, request: Request, *args, **kwargs) -> Response:
         return super().list(request, *args, **kwargs)
 
+    @extend_schema(
+        description="Takes data and returns information about created route.",
+        summary="Create a route",
+        responses=responses.ROUTE_CREATE_RESPONSES
+    )
+    def create(self, request: Request, *args, **kwargs) -> Response:
+        return super().create(request, *args, **kwargs)
+
 
 class FlightViewSet(ModelViewSet):
     queryset = Flight.objects.prefetch_related(
