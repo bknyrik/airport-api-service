@@ -105,3 +105,9 @@ MIN_DISTANCE = OpenApiParameter(
     type=int,
     description="Filter by min distance"
 )
+
+MAX_DISTANCE = OpenApiParameter(
+    name="max_distance",
+    type=int,
+    description="Filter by max distance"
+)
