@@ -227,3 +227,14 @@ TICKETS_EXIST = OpenApiExample(
         ]
     }
 )
+
+TICKETS_FLIGHT_INVALID_PK = OpenApiExample(
+    name="Flight invalid pk",
+    value={
+        "tickets": [
+            {
+                "flight": ["Invalid pk \"99999\" - object does not exist."]
+            }
+        ]
+    }
+)
