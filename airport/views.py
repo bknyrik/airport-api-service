@@ -564,8 +564,8 @@ class OrderViewSet(ModelViewSet):
 
     @extend_schema(
         description=(
-            "Takes data and returns information about order with tickets"
-            " assigned to current authenticated user."
+            "Takes data and returns information about created "
+            "order with tickets assigned to current authenticated user."
         ),
         summary="Create order by current user",
         responses=responses.ORDER_CREATE_RESPONSES
