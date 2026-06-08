@@ -574,6 +574,11 @@ GOT_ROUTE_INFO = OpenApiResponse(
     response=serializers.RouteListRetrieveSerializer
 )
 
+GOT_DETAILED_ROUTE_INFO = OpenApiResponse(
+    description="Got detailed information about route",
+    response=serializers.RouteSerializer
+)
+
 ROUTE_LIST_INVALID_PARAMETERS = OpenApiResponse(
     description="Invalid parameters",
     response=OpenApiTypes.OBJECT,
