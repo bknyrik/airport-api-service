@@ -487,6 +487,14 @@ class FlightViewSet(ModelViewSet):
     def list(self, request: Request, *args, **kwargs) -> Response:
         return super().list(request, *args, **kwargs)
 
+    @extend_schema(
+        description="Returns information about flight by its identifier.",
+        summary="Get the flight by id",
+        responses=responses.FLIGHT_RETRIEVE_RESPONSES
+    )
+    def retrieve(self, request: Request, *args, **kwargs) -> Response:
+        return super().retrieve(request, *args, **kwargs)
+
 
 class OrderViewSet(ModelViewSet):
     queryset = Order.objects.prefetch_related("tickets")
