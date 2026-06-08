@@ -175,3 +175,8 @@ CREWMEMBERS_INVALID_CHOICE = OpenApiExample(
         ]
     }
 )
+
+ROUTE_INVALID_PK = OpenApiExample(
+    name="Route pk is invalid",
+    value={"route": ["Invalid pk \"999\" - object does not exist."]}
+)
