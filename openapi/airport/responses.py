@@ -498,6 +498,11 @@ GOT_ORDERS_INFO = OpenApiResponse(
     response=serializers.OrderListRetrieveSerializer
 )
 
+GOT_ORDER_INFO = OpenApiResponse(
+    description="Got information about order",
+    response=serializers.OrderListRetrieveSerializer
+)
+
 ORDER_LIST_RESPONSES = {
     status.HTTP_200_OK: GOT_ORDERS_INFO,
     status.HTTP_401_UNAUTHORIZED: user_responses.USER_IS_UNAUTHORIZED,
