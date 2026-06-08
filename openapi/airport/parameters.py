@@ -87,3 +87,9 @@ FLIGHT_LIST_PARAMETERS = [
     CREWMEMBERS_IDS,
     ROUTE_ID
 ]
+
+SOURCE_ID = OpenApiParameter(
+    name="source_id",
+    type=int,
+    description="Filter by source id"
+)
