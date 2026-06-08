@@ -159,7 +159,6 @@ class Route(models.Model):
             raise exception_type(
                 {
                     "source": "Source and destination must be other",
-                    "destination": "Destination and source must be other"
                 }
             )
 
