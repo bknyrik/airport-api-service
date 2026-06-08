@@ -81,7 +81,7 @@ GOT_AIRPLANES_INFO = OpenApiResponse(
     description="Got airplanes"
 )
 
-AIRPLANE_LIST_INVALID_PARAMS = OpenApiResponse(
+AIRPLANE_LIST_INVALID_PARAMETERS = OpenApiResponse(
     response=OpenApiTypes.OBJECT,
     description="Invalid parameters",
     examples=[
@@ -135,7 +135,7 @@ IMAGE_INVALID_DATA = OpenApiResponse(
 
 AIRPLANE_LIST_RESPONSES = {
     status.HTTP_200_OK: GOT_AIRPLANES_INFO,
-    status.HTTP_400_BAD_REQUEST: AIRPLANE_LIST_INVALID_PARAMS,
+    status.HTTP_400_BAD_REQUEST: AIRPLANE_LIST_INVALID_PARAMETERS,
     status.HTTP_404_NOT_FOUND: user_responses.PAGE_NOT_FOUND,
     status.HTTP_429_TOO_MANY_REQUESTS: user_responses.USER_REACHED_LIMIT_REQUESTS
 }
@@ -582,3 +582,4 @@ ROUTE_LIST_INVALID_PARAMETERS = OpenApiResponse(
         examples.DESTINATION_ID_INVALID_CHOICE
     ]
 )
+
