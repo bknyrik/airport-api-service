@@ -133,6 +133,11 @@ GOT_USERS_ADMIN_INFO = OpenApiResponse(
     response=UserAdminListRetrieveSerializer
 )
 
+GOT_DETAILED_USER_ADMIN_INFO = OpenApiResponse(
+    description="Got the detailed information about the user",
+    response=UserAdminSerializer
+)
+
 PAGE_NOT_FOUND = OpenApiResponse(
     description="User specified the non-existent page",
     response={"example": {"detail": "Invalid page."}}
