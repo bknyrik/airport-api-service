@@ -296,3 +296,8 @@ DESTINATION_INVALID_PK = OpenApiExample(
     name="Destination pk is invalid",
     value={"destination": ["Invalid pk \"999\" - object does not exist."]}
 )
+
+DISTANCE_LESS_THAN_ONE = OpenApiExample(
+    name="Distance less than 1",
+    value={"distance": ["Ensure this value is greater than or equal to 1."]}
+)
