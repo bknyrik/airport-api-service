@@ -503,6 +503,19 @@ GOT_ORDER_INFO = OpenApiResponse(
     response=serializers.OrderListRetrieveSerializer
 )
 
+ORDER_INVALID_DATA = OpenApiResponse(
+    description="Invalid input data",
+    response=OpenApiTypes.OBJECT,
+    examples=[
+        examples.TICKETS_EXIST,
+        examples.TICKETS_IS_EMPTY,
+        examples.TICKETS_SEAT_LESS_THAN_ONE,
+        examples.TICKETS_SEAT_OUT_OF_RANGE,
+        examples.TICKETS_ROW_LESS_THAN_ONE,
+        examples.TICKETS_ROW_OUT_OF_RANGE
+    ]
+)
+
 ORDER_LIST_RESPONSES = {
     status.HTTP_200_OK: GOT_ORDERS_INFO,
     status.HTTP_401_UNAUTHORIZED: user_responses.USER_IS_UNAUTHORIZED,
