@@ -95,9 +95,9 @@ SOURCE_ID = OpenApiParameter(
 )
 
 DESTINATION_ID = OpenApiParameter(
-    name="source_id",
+    name="destination_id",
     type=int,
-    description="Filter by source id"
+    description="Filter by destination id"
 )
 
 MIN_DISTANCE = OpenApiParameter(
