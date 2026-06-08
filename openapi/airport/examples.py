@@ -126,7 +126,7 @@ FIRST_NAME_HAS_INVALID_LENGTH = OpenApiExample(
 
 LAST_NAME_IS_BLANK = OpenApiExample(
     name="Last name is blank",
-    value={"Last_name": ["This field may not be blank."]}
+    value={"last_name": ["This field may not be blank."]}
 )
 
 LAST_NAME_HAS_INVALID_LENGTH = OpenApiExample(
