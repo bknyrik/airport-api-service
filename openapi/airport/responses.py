@@ -357,6 +357,7 @@ FACILITY_INVALID_DATA = OpenApiResponse(
     response=OpenApiTypes.OBJECT,
     examples=[
         examples.NAME_IS_BLANK,
+        examples.NAME_HAS_INVALID_LENGTH,
         examples.FACILITY_NAME_EXISTS
     ]
 )
