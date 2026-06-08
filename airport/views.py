@@ -525,6 +525,14 @@ class FlightViewSet(ModelViewSet):
     def partial_update(self, request: Request, *args, **kwargs) -> Response:
         return super().partial_update(request, *args, **kwargs)
 
+    @extend_schema(
+        description="Deletes flight by its identifier and returns nothing.",
+        summary="Delete the flight by id",
+        responses=responses.FLIGHT_DESTROY_RESPONSES
+    )
+    def destroy(self, request: Request, *args, **kwargs) -> Response:
+        return super().destroy(request, *args, **kwargs)
+
 
 class OrderViewSet(ModelViewSet):
     queryset = Order.objects.prefetch_related("tickets")
