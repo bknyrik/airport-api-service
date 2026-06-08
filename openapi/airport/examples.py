@@ -185,3 +185,8 @@ AIRPLANE_INVALID_PK = OpenApiExample(
     name="Airplane pk is invalid",
     value={"airplane": ["Invalid pk \"999\" - object does not exist."]}
 )
+
+CREWMEMBERS_INVALID_PK = OpenApiExample(
+    name="Crewmembers pk is invalid",
+    value={"crewmembers": ["Invalid pk \"999\" - object does not exist."]}
+)
