@@ -63,3 +63,9 @@ CREW_LIST_PARAMETERS = [
     CREW_LAST_NAME,
     CREW_ROLE
 ]
+
+AIRPLANE_ID = OpenApiParameter(
+    name="airplane_id",
+    type=int,
+    description="Filter by airplane id"
+)
