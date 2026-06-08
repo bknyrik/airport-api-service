@@ -592,6 +592,7 @@ ROUTE_INVALID_DATA = OpenApiResponse(
     description="Invalid input data",
     response=OpenApiTypes.OBJECT,
     examples=[
+        examples.ROUTE_EXISTS,
         examples.SOURCE_INVALID_PK,
         examples.DESTINATION_INVALID_PK,
         examples.SOURCE_AND_DESTINATION_ARE_SAME,
