@@ -209,3 +209,8 @@ CREWMEMBERS_IS_EMPTY = OpenApiExample(
     name="Crewmembers is empty.",
     value={"crewmembers": ["This list may not be empty."]}
 )
+
+TICKETS_IS_EMPTY = OpenApiExample(
+    name="Tickets is empty.",
+    value={"tickets": ["This list may not be empty."]}
+)
