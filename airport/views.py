@@ -488,6 +488,14 @@ class FlightViewSet(ModelViewSet):
         return super().list(request, *args, **kwargs)
 
     @extend_schema(
+        description="Takes data and returns information about created flight",
+        summary="Create a flight",
+        responses=responses.FLIGHT_CREATE_RESPONSES
+    )
+    def create(self, request: Request, *args, **kwargs) -> Response:
+        return super().create(request, *args, **kwargs)
+
+    @extend_schema(
         description="Returns information about flight by its identifier.",
         summary="Get the flight by id",
         responses=responses.FLIGHT_RETRIEVE_RESPONSES
