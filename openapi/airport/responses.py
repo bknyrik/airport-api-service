@@ -414,6 +414,11 @@ GOT_FLIGHT_INFO = OpenApiResponse(
     response=serializers.FlightListRetrieveSerializer
 )
 
+FLIGHT_NOT_FOUND = OpenApiResponse(
+    description="Flight not found",
+    response={"example": {"detail": "No Flight matches the given query."}}
+)
+
 FLIGHT_LIST_INVALID_PARAMETERS = OpenApiResponse(
     description="Invalid parameters",
     response=OpenApiTypes.OBJECT,
