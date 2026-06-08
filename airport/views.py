@@ -339,6 +339,17 @@ class CrewViewSet(ModelViewSet):
     def retrieve(self, request: Request, *args, **kwargs) -> Response:
         return super().retrieve(request, *args, **kwargs)
 
+    @extend_schema(
+        description=(
+            "Takes data and returns information "
+            "about updated crewmember by its identifier."
+        ),
+        summary="Completely update the crew by id",
+        responses=responses.CREW_UPDATE_RESPONSES
+    )
+    def update(self, request: Request, *args, **kwargs) -> Response:
+        return super().update(request, *args, **kwargs)
+
 
 class RouteViewSet(ModelViewSet):
     queryset = Route.objects.select_related("source", "destination")
