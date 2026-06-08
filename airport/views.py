@@ -52,6 +52,14 @@ class FacilityViewSet(ModelViewSet):
     def create(self, request: Request, *args, **kwargs) -> Response:
         return super().create(request, *args, **kwargs)
 
+    @extend_schema(
+        description="Returns information about facility by its identifier.",
+        summary="Get the facility by id",
+        responses=responses.FACILITY_RETRIEVE_RESPONSES
+    )
+    def retrieve(self, request: Request, *args, **kwargs) -> Response:
+        return super().retrieve(request, *args, **kwargs)
+
 
 class AirplaneTypeViewSet(ModelViewSet):
     queryset = AirplaneType.objects.all()
