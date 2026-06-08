@@ -180,3 +180,8 @@ ROUTE_INVALID_PK = OpenApiExample(
     name="Route pk is invalid",
     value={"route": ["Invalid pk \"999\" - object does not exist."]}
 )
+
+AIRPLANE_INVALID_PK = OpenApiExample(
+    name="Airplane pk is invalid",
+    value={"airplane": ["Invalid pk \"999\" - object does not exist."]}
+)
