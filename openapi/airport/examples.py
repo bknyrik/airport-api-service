@@ -247,3 +247,12 @@ TICKETS_ROW_LESS_THAN_ONE = OpenApiExample(
         ]
     }
 )
+
+TICKETS_SEAT_LESS_THAN_ONE = OpenApiExample(
+    name="Seat less than 1",
+    value={
+        "tickets": [
+            {"seat": ["Ensure this value is greater than or equal to 1."]}
+        ]
+    }
+)
