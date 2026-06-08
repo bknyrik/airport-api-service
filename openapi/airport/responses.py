@@ -521,6 +521,11 @@ ORDER_INVALID_DATA = OpenApiResponse(
     ]
 )
 
+ORDER_NOT_FOUND = OpenApiResponse(
+    description="Order not found",
+    response={"example": {"detail": "No Order matches the given query."}}
+)
+
 ORDER_LIST_RESPONSES = {
     status.HTTP_200_OK: GOT_ORDERS_INFO,
     status.HTTP_401_UNAUTHORIZED: user_responses.USER_IS_UNAUTHORIZED,
