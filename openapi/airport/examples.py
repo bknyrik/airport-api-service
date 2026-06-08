@@ -147,7 +147,7 @@ FACILITY_NAME_EXISTS = OpenApiExample(
 )
 
 AIRPLANE_ID_INVALID_CHOICE = OpenApiExample(
-    name="Airplane id is invalid",
+    name="Airplane id is invalid choice",
     value={
         "airplane_id": [
             "Select a valid choice. "
@@ -157,7 +157,7 @@ AIRPLANE_ID_INVALID_CHOICE = OpenApiExample(
 )
 
 ROUTE_ID_INVALID_CHOICE = OpenApiExample(
-    name="Route id is invalid",
+    name="Route id is invalid choice",
     value={
         "route_id": [
             "Select a valid choice. "
