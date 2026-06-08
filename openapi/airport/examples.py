@@ -291,3 +291,8 @@ SOURCE_INVALID_PK = OpenApiExample(
     name="Source pk is invalid",
     value={"source": ["Invalid pk \"999\" - object does not exist."]}
 )
+
+DESTINATION_INVALID_PK = OpenApiExample(
+    name="Destination pk is invalid",
+    value={"destination": ["Invalid pk \"999\" - object does not exist."]}
+)
