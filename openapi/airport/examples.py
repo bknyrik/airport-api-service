@@ -238,3 +238,12 @@ TICKETS_FLIGHT_INVALID_PK = OpenApiExample(
         ]
     }
 )
+
+TICKETS_ROW_LESS_THAN_ONE = OpenApiExample(
+    name="Row less than 1",
+    value={
+        "tickets": [
+            {"row": ["Ensure this value is greater than or equal to 1."]}
+        ]
+    }
+)
