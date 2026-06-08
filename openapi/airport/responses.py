@@ -351,6 +351,11 @@ GOT_FACILITIES_INFO = OpenApiResponse(
     response=serializers.FacilitySerializer
 )
 
+GOT_FACILITY_INFO = OpenApiResponse(
+    description="Got information about facility",
+    response=serializers.FacilitySerializer
+)
+
 FACILITY_LIST_RESPONSES = {
     status.HTTP_200_OK: GOT_FACILITIES_INFO,
     status.HTTP_404_NOT_FOUND: user_responses.PAGE_NOT_FOUND,
