@@ -356,6 +356,15 @@ GOT_FACILITY_INFO = OpenApiResponse(
     response=serializers.FacilitySerializer
 )
 
+FACILITY_INVALID_DATA = OpenApiResponse(
+    description="Invalid input data",
+    response=OpenApiTypes.OBJECT,
+    examples=[
+        examples.NAME_IS_BLANK,
+        examples.FACILITY_NAME_EXISTS
+    ]
+)
+
 FACILITY_LIST_RESPONSES = {
     status.HTTP_200_OK: GOT_FACILITIES_INFO,
     status.HTTP_404_NOT_FOUND: user_responses.PAGE_NOT_FOUND,
