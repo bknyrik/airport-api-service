@@ -52,16 +52,12 @@ RESPONSE_BODY_403_EXAMPLE = {
 
 USER_IS_NOT_ADMIN = OpenApiResponse(
     description="User is not an admin to perform this action",
-    response={
-        "example": {
-            "detail": "You do not have permission to perform this action."
-        }
-    }
+    response=RESPONSE_BODY_403_EXAMPLE
 )
 
 USER_IS_NOT_ADMIN_OR_ANON = OpenApiResponse(
     description="A user is not an admin/anonymous to perform this action",
-    response=USER_IS_NOT_ADMIN.response,
+    response=RESPONSE_BODY_403_EXAMPLE,
 )
 
 USER_IS_UNAUTHORIZED = OpenApiResponse(
