@@ -82,6 +82,17 @@ class FacilityViewSet(ModelViewSet):
     def partial_update(self, request: Request, *args, **kwargs) -> Response:
         return super().partial_update(request, *args, **kwargs)
 
+    @extend_schema(
+        description=(
+            "Deletes the facility by its identifier "
+            "and returns nothing."
+        ),
+        summary="Delete the facility by id.",
+        responses=responses.FACILITY_DESTROY_RESPONSES
+    )
+    def destroy(self, request: Request, *args, **kwargs) -> Response:
+        return super().destroy(request, *args, **kwargs)
+
 
 class AirplaneTypeViewSet(ModelViewSet):
     queryset = AirplaneType.objects.all()
