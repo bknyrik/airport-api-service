@@ -447,6 +447,19 @@ class RouteViewSet(ModelViewSet):
 
         return serializers.RouteSerializer
 
+    @extend_schema(
+        description=(
+            "Returns list with information about all routes. "
+            "This list also can be filtered by source id, destination id, "
+            "min_distance, max_distance and paginated."
+        ),
+        summary="Get all routes",
+        parameters=parameters.ROUTE_LIST_PARAMETERS,
+        responses=responses.ROUTE_LIST_RESPONSES
+    )
+    def list(self, request: Request, *args, **kwargs) -> Response:
+        return super().list(request, *args, **kwargs)
+
 
 class FlightViewSet(ModelViewSet):
     queryset = Flight.objects.prefetch_related(
