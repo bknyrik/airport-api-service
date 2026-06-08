@@ -44,6 +44,12 @@ USER_NOT_FOUND = OpenApiResponse(
     response={"example": {"detail": "No User matches the given query."}}
 )
 
+RESPONSE_BODY_403_EXAMPLE = {
+    "example": {
+        "detail": "You do not have permission to perform this action."
+    }
+}
+
 USER_IS_NOT_ADMIN = OpenApiResponse(
     description="User is not an admin to perform this action",
     response={
