@@ -306,3 +306,10 @@ SOURCE_AND_DESTINATION_ARE_SAME = OpenApiExample(
     name="Source and destination are the same",
     value={"source": ["Source and destination must be other"]}
 )
+
+ROUTE_EXISTS = OpenApiExample(
+    name="Route with this source and destination exists",
+    value={
+        "non_field_errors": ["Route with this source and destination exists."]
+    }
+)
