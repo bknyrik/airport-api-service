@@ -48,6 +48,11 @@ FACILITIES_INVALID_PK = OpenApiExample(
     value={"facilities": ["Invalid pk \"0\" - object does not exist."]}
 )
 
+FACILITIES_IS_EMPTY = OpenApiExample(
+    name="Facilities is blank",
+    value={"facilities": ["This list may not be empty."]}
+)
+
 ROWS_LESS_THAN_ONE = OpenApiExample(
     name="Rows are less than 1",
     value={"rows": ["Ensure this value is greater than or equal to 1."]}
