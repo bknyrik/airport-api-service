@@ -261,3 +261,8 @@ TICKETS_ROW_OUT_OF_RANGE = OpenApiExample(
     name="Row out of range",
     value={"tickets": [{"row": ["Row must be in range from 1 to 999"]}]}
 )
+
+TICKETS_SEAT_OUT_OF_RANGE = OpenApiExample(
+    name="Seat out of range",
+    value={"tickets": [{"seat": ["Seat must be in range from 1 to 999"]}]}
+)
