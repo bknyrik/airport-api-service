@@ -165,3 +165,13 @@ ROUTE_ID_INVALID_CHOICE = OpenApiExample(
         ]
     }
 )
+
+CREWMEMBERS_INVALID_CHOICE = OpenApiExample(
+    name="Crewmember id is invalid choice",
+    value={
+        "crewmembers": [
+            "Select a valid choice. "
+            "99999 is not one of the available choices."
+        ]
+    }
+)
