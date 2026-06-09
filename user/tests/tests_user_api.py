@@ -4,7 +4,7 @@ from rest_framework.test import APITestCase
 from rest_framework import status
 from rest_framework.settings import api_settings
 
-from user.serializers import UserSerializer
+from user.serializers import UserSerializer, UserAdminListRetrieveSerializer
 
 User = get_user_model()
 
@@ -152,3 +152,17 @@ class AuthenticatedAdminUserApiTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(serializer.data, response.data)
         self.assertTrue(user.check_password(data["password"]))
+
+    def test_user_admin_list(self) -> None:
+        users = (
+            self.admin_user,
+            user_sample(),
+            user_sample(email="user2@sample.com"),
+            user_sample(email="user3@sample.com")
+        )
+
+        serializer = UserAdminListRetrieveSerializer(users, many=True)
+        response = self.client.get(USER_ADMIN_LIST_URL)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(serializer.data, response.data["results"])
