@@ -189,6 +189,25 @@ class AuthenticatedAdminUserApiTests(APITestCase):
         self.assertNotIn(serializer_user_not_staff, response.data["results"])
         self.assertNotIn(serializer_user3_not_staff, response.data["results"])
 
+    def test_user_admin_list_filter_by_email_characters(self) -> None:
+        user = user_sample(email="johndoe@sample.com")
+        user2 = user_sample(email="donaldcooper@sample.com")
+        user3 = user_sample(email="marksimms@sample.com")
+
+        user_serializer = UserAdminListRetrieveSerializer(user)
+        user2_serializer = UserAdminListRetrieveSerializer(user2)
+        user3_serializer = UserAdminListRetrieveSerializer(user3)
+
+        response = self.client.get(
+            USER_ADMIN_LIST_URL,
+            query_params={"email": "do"}
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertIn(user_serializer.data, response.data["results"])
+        self.assertIn(user2_serializer.data, response.data["results"])
+        self.assertNotIn(user3_serializer.data, response.data["results"])
+
     def test_user_admin_retrieve(self) -> None:
         user = user_sample()
 
