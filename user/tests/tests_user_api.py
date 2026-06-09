@@ -118,3 +118,14 @@ class AuthenticatedUserApiTests(APITestCase):
         response = self.client.get(USER_MANAGE_URL)
 
         self.assertEqual(response.status_code, status.HTTP_429_TOO_MANY_REQUESTS)
+
+
+class AuthenticatedAdminUserApiTests(APITestCase):
+
+    def setUp(self) -> None:
+        self.admin_user = User.objects.create_user(
+            email="admin@airport.com",
+            password="admin123456",
+            is_staff=True
+        )
+        self.client.force_authenticate(user=self.admin_user)
