@@ -8,6 +8,7 @@ from user.serializers import UserSerializer
 User = get_user_model()
 
 USER_ADMIN_LIST_URL = reverse("user:user-list")
+USER_REGISTER_URL = reverse("user:register")
 
 
 class UnauthenticatedUserApiTests(APITestCase):
