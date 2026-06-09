@@ -70,3 +70,17 @@ class AuthenticatedUserApiTests(APITestCase):
         serializer = UserSerializer(self.user)
 
         self.assertEqual(serializer.data, response.data)
+
+    def test_manage_user_update(self) -> None:
+        data = {
+            "email": "upduser@airport.com",
+            "first_name": "Update First",
+            "last_name": "Update Last",
+            "password": "updatepass12345",
+        }
+        response = self.client.put(USER_MANAGE_URL, data=data)
+
+        serializer = UserSerializer(self.user)
+
+        self.assertEqual(serializer.data, response.data)
+        self.assertTrue(self.user.check_password(data["password"]))
