@@ -236,6 +236,25 @@ class AuthenticatedAdminUserApiTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(serializer.data, response.data)
 
+    def test_user_admin_update(self) -> None:
+        user = user_sample()
+        data = {
+            "email": "upduser@example.com",
+            "first_name": "User",
+            "last_name": "Sample",
+            "password": "updpass12345",
+            "is_superuser": True,
+            "user_permissions": (3, 4, 5)
+        }
+        response = self.client.put(user_admin_detail_url(pk=user.pk), data=data)
+        user.refresh_from_db()
+
+        serializer = UserAdminSerializer(user)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(serializer.data, response.data)
+        self.assertTrue(user.check_password(data["password"]))
+
     def test_user_admin_destroy(self) -> None:
         user = user_sample()
         response = self.client.delete(user_admin_detail_url(pk=user.id))
