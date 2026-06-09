@@ -4,7 +4,11 @@ from rest_framework.test import APITestCase
 from rest_framework import status
 from rest_framework.settings import api_settings
 
-from user.serializers import UserSerializer, UserAdminListRetrieveSerializer
+from user.serializers import (
+    UserSerializer,
+    UserAdminSerializer,
+    UserAdminListRetrieveSerializer
+)
 
 User = get_user_model()
 
@@ -207,6 +211,21 @@ class AuthenticatedAdminUserApiTests(APITestCase):
         self.assertIn(user_serializer.data, response.data["results"])
         self.assertIn(user2_serializer.data, response.data["results"])
         self.assertNotIn(user3_serializer.data, response.data["results"])
+
+    def test_user_admin_create(self) -> None:
+        data = {
+            "email": "user@example.com",
+            "password": "userpass12345",
+            "is_staff": True,
+            "user_permissions": (1, 2)
+        }
+
+        response = self.client.post(USER_ADMIN_LIST_URL, data=data)
+        user = User.objects.get(email=data["email"])
+        serializer = UserAdminSerializer(user)
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(serializer.data, response.data)
 
     def test_user_admin_retrieve(self) -> None:
         user = user_sample()
