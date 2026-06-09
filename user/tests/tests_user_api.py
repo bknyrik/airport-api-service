@@ -1,6 +1,11 @@
 from django.shortcuts import reverse
+from django.contrib.auth import get_user_model
 from rest_framework.test import APITestCase
 from rest_framework import status
+
+from user.serializers import UserSerializer
+
+User = get_user_model()
 
 
 class UnauthenticatedUserApiTests(APITestCase):
@@ -17,3 +22,20 @@ class UnauthenticatedUserApiTests(APITestCase):
         response = self.client.get(url)
 
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_anonymous_user_allowed_to_register(self) -> None:
+        data = {
+            "email": "user@airport.com",
+            "password": "userpass12345"
+        }
+
+        url = reverse("user:register")
+        response = self.client.post(url, data=data)
+
+        user = User.objects.get(email=data["email"])
+
+        serializer = UserSerializer(user)
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(serializer.data["email"], data["email"])
+        self.assertTrue(user.check_password(data["password"]))
