@@ -129,3 +129,16 @@ class AuthenticatedAdminUserApiTests(APITestCase):
             is_staff=True
         )
         self.client.force_authenticate(user=self.admin_user)
+
+    def test_user_register(self) -> None:
+        data = {
+            "email": "user@example.com",
+            "password": "userpass12345"
+        }
+        response = self.client.post(USER_REGISTER_URL, data=data)
+        user = User.objects.get(email=data["email"])
+        serializer = UserSerializer(user)
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(serializer.data, response.data)
+        self.assertTrue(user.check_password(data["password"]))
