@@ -35,12 +35,8 @@ class UnauthenticatedUserApiTests(APITestCase):
             "email": "user@airport.com",
             "password": "userpass12345"
         }
-
-        url = reverse("user:register")
-        response = self.client.post(url, data=data)
-
+        response = self.client.post(USER_REGISTER_URL, data=data)
         user = User.objects.get(email=data["email"])
-
         serializer = UserSerializer(user)
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
