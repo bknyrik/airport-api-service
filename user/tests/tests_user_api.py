@@ -300,3 +300,18 @@ class AuthenticatedAdminUserApiTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertFalse(User.objects.filter(pk=user.id).exists())
+
+    def test_user_admin_list_reached_limit_of_request(self) -> None:
+        ADMIN_RATE = int(
+            api_settings.DEFAULT_THROTTLE_RATES["admin"].split("/")[0]
+        )
+
+        for _ in range(ADMIN_RATE):
+            self.client.get(USER_ADMIN_LIST_URL)
+
+        response = self.client.get(USER_ADMIN_LIST_URL)
+
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_429_TOO_MANY_REQUESTS
+        )
