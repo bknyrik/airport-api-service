@@ -55,6 +55,20 @@ class UserAdminSerializer(UserSerializer):
             "date_joined"
         )
 
+    def create(self, validated_data: dict) -> User:
+        user_permissions = validated_data.pop("user_permissions")
+        groups = validated_data.pop("groups")
+
+        user = super().create(validated_data)
+
+        if user_permissions:
+            user.user_permissions.set(user_permissions)
+
+        if groups:
+            user.groups.set(groups)
+
+        return user
+
 
 class UserAdminListRetrieveSerializer(UserAdminSerializer):
     user_permissions = serializers.StringRelatedField(many=True)
