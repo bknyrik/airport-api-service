@@ -2,6 +2,7 @@ from django.shortcuts import reverse
 from django.contrib.auth import get_user_model
 from rest_framework.test import APITestCase
 from rest_framework import status
+from rest_framework.settings import api_settings
 
 from user.serializers import UserSerializer
 
@@ -42,6 +43,17 @@ class UnauthenticatedUserApiTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(serializer.data["email"], data["email"])
         self.assertTrue(user.check_password(data["password"]))
+
+    def test_request_to_register_url_was_throttled(self) -> None:
+        ANON_RATES = int(
+            api_settings.DEFAULT_THROTTLE_RATES["anon"].split("/")[0]
+        )
+
+        for _ in range(ANON_RATES):
+            self.client.get(USER_REGISTER_URL)
+
+        response = self.client.get(USER_REGISTER_URL)
+        self.assertEqual(response.status_code, status.HTTP_429_TOO_MANY_REQUESTS)
 
 
 class AuthenticatedUserApiTests(APITestCase):
