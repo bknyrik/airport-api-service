@@ -64,3 +64,9 @@ class AuthenticatedUserApiTests(APITestCase):
             password="userpass12345"
         )
         self.client.force_authenticate(user=self.user)
+
+    def test_manage_user_retrieve(self) -> None:
+        response = self.client.get(USER_MANAGE_URL)
+        serializer = UserSerializer(self.user)
+
+        self.assertEqual(serializer.data, response.data)
