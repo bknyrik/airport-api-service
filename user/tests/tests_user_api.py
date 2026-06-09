@@ -63,4 +63,4 @@ class AuthenticatedUserApiTests(APITestCase):
             email="user@airport.com",
             password="userpass12345"
         )
-        self.client.force_login(user=self.user)
+        self.client.force_authenticate(user=self.user)
