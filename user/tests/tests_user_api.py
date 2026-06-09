@@ -235,3 +235,10 @@ class AuthenticatedAdminUserApiTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(serializer.data, response.data)
+
+    def test_user_admin_destroy(self) -> None:
+        user = user_sample()
+        response = self.client.delete(user_admin_detail_url(pk=user.id))
+
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertFalse(User.objects.filter(pk=user.id).exists())
