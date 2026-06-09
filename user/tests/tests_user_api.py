@@ -166,3 +166,12 @@ class AuthenticatedAdminUserApiTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(serializer.data, response.data["results"])
+
+    def test_user_admin_retrieve(self) -> None:
+        user = user_sample()
+
+        response = self.client.get(user_admin_detail_url(pk=user.id))
+        serializer = UserAdminListRetrieveSerializer(user)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(serializer.data, response.data)
