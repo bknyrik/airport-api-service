@@ -17,6 +17,16 @@ def user_admin_detail_url(pk: int) -> str:
     return reverse("user:user-detail", kwargs={"pk": pk})
 
 
+def user_sample(**kwargs) -> User:
+    defaults = {
+        "email": "user@sample.com",
+        "password": "userpass12345"
+    }
+    defaults.update(kwargs)
+
+    return User.objects.create_user(**defaults)
+
+
 class UnauthenticatedUserApiTests(APITestCase):
 
     def test_user_admin_list_login_required(self) -> None:
