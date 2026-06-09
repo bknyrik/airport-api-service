@@ -12,6 +12,10 @@ USER_REGISTER_URL = reverse("user:register")
 USER_MANAGE_URL = reverse("user:manage")
 
 
+def user_admin_detail_url(pk: int) -> str:
+    return reverse("user:user-detail", kwargs={"pk": pk})
+
+
 class UnauthenticatedUserApiTests(APITestCase):
 
     def test_user_admin_list_login_required(self) -> None:
