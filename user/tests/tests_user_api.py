@@ -19,10 +19,7 @@ def user_admin_detail_url(pk: int) -> str:
 class UnauthenticatedUserApiTests(APITestCase):
 
     def test_user_admin_list_login_required(self) -> None:
-        url = reverse("user:user-list")
-
-        response = self.client.get(url)
-
+        response = self.client.get(USER_ADMIN_LIST_URL)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_user_admin_retrieve_login_required(self) -> None:
