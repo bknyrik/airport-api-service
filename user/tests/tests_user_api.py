@@ -42,3 +42,13 @@ class UnauthenticatedUserApiTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(serializer.data["email"], data["email"])
         self.assertTrue(user.check_password(data["password"]))
+
+
+class AuthenticatedUserApiTests(APITestCase):
+
+    def setUp(self) -> None:
+        self.user = User.objects.create_user(
+            email="user@airport.com",
+            password="userpass12345"
+        )
+        self.client.force_login(user=self.user)
