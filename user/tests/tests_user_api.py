@@ -106,3 +106,15 @@ class AuthenticatedUserApiTests(APITestCase):
     def test_user_admin_retrieve_is_forbidden(self) -> None:
         response = self.client.get(user_admin_detail_url(999))
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_manage_user_reached_limit_of_requests(self) -> None:
+        USER_RATE = int(
+            api_settings.DEFAULT_THROTTLE_RATES["user"].split("/")[0]
+        )
+
+        for _ in range(USER_RATE):
+            self.client.get(USER_MANAGE_URL)
+
+        response = self.client.get(USER_MANAGE_URL)
+
+        self.assertEqual(response.status_code, status.HTTP_429_TOO_MANY_REQUESTS)
