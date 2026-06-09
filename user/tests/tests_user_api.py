@@ -102,3 +102,7 @@ class AuthenticatedUserApiTests(APITestCase):
     def test_user_admin_list_is_forbidden(self) -> None:
         response = self.client.get(USER_ADMIN_LIST_URL)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_user_admin_retrieve_is_forbidden(self) -> None:
+        response = self.client.get(user_admin_detail_url(999))
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
