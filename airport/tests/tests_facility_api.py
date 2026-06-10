@@ -65,3 +65,11 @@ class UnauthenticatedFacilityApiTests(APITestCase):
         data = {"name": "Test facility"}
         response = self.client.post(FACILITY_LIST_URL, data=data)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_facility_update_authentication_required(self) -> None:
+        data = {
+            "name": "Updated test facility",
+            "description": "Updated description"
+        }
+        response = self.client.put(get_facility_detail_url(pk=1), data=data)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
