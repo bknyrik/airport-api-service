@@ -112,3 +112,8 @@ class AuthenticatedFacilityApiTests(APITestCase):
         }
         response = self.client.put(get_facility_detail_url(pk=1), data=data)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_facility_partial_update_is_forbidden(self) -> None:
+        data = {"description": "Another description"}
+        response = self.client.patch(get_facility_detail_url(pk=1), data=data)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
