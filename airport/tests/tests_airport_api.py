@@ -6,11 +6,24 @@ from rest_framework.test import APITestCase
 from rest_framework import status
 from PIL import Image
 
+from airport.models import Airport
+from airport.serializers import AirportSerializer
+
 
 User = get_user_model()
 
 
 AIRPORT_LIST_URL = reverse("airport:airport-list")
+
+
+def airport_sample(**kwargs) -> Airport:
+    default = {
+        "name": "Sample airport",
+        "country": "Sample country",
+        "city": "Sample city",
+    }
+    default.update(kwargs)
+    return Airport.objects.create(**default)
 
 
 def get_airport_detail_url(pk: int) -> str:
@@ -84,3 +97,15 @@ class AuthenticatedAirportApiTests(APITestCase):
             password="userpass12345"
         )
         self.client.force_authenticate(user=self.user)
+
+    def test_airport_list(self) -> None:
+        airports = (
+            airport_sample(),
+            airport_sample(name="Sample airport 2"),
+            airport_sample(name="Sample airport 3"),
+        )
+        response = self.client.get(AIRPORT_LIST_URL)
+        serializer = AirportSerializer(airports, many=True)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(serializer.data, response.data["results"])
