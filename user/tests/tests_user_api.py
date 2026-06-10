@@ -149,7 +149,7 @@ class AuthenticatedAdminUserApiTests(APITestCase):
         )
         self.client.force_authenticate(user=self.admin_user)
 
-    def test_user_register(self) -> None:
+    def test_register_user(self) -> None:
         data = {
             "email": "user@example.com",
             "password": "userpass12345"
