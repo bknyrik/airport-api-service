@@ -132,3 +132,16 @@ class AuthenticatedAdminFacilityApiTests(APITestCase):
             is_staff=True
         )
         self.client.force_authenticate(user=self.admin_user)
+
+    def test_facility_create(self) -> None:
+        data = {
+            "name": "Facility",
+            "description": "Description"
+        }
+        response = self.client.post(FACILITY_LIST_URL, data=data)
+        serializer = FacilitySerializer(
+            Facility.objects.get(name=data["name"])
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(serializer.data, response.data)
