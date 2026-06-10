@@ -137,6 +137,17 @@ class AuthenticatedUserApiTests(APITestCase):
         response = self.client.post(USER_ADMIN_LIST_URL, data=data)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
+    def test_user_admin_update_is_forbidden(self) -> None:
+        data = {
+            "email": "upduser@example.com",
+            "first_name": "Test",
+            "last_name": "Admin",
+            "is_superuser": True,
+            "password": "updatepass12345"
+        }
+        response = self.client.put(user_admin_detail_url(pk=1), data=data)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
     def test_user_manage_request_is_throttled(self) -> None:
         USER_RATE = get_throttle_rate("user")
 
