@@ -153,3 +153,14 @@ class AuthenticatedAdminAirplaneTypeApiTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(serializer.data, response.data)
+
+    def test_airplane_type_destroy(self) -> None:
+        airplane_type = airplane_type_sample()
+        response = self.client.delete(
+            get_airplane_type_detail_url(pk=airplane_type.id)
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertFalse(
+            AirplaneType.objects.filter(name=airplane_type.name).exists()
+        )
