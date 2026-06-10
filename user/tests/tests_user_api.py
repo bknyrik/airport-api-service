@@ -33,7 +33,7 @@ def user_sample(**kwargs) -> User:
 
 class UnauthenticatedUserApiTests(APITestCase):
 
-    def test_user_admin_list_login_required(self) -> None:
+    def test_user_admin_list_authentication_required(self) -> None:
         response = self.client.get(USER_ADMIN_LIST_URL)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
