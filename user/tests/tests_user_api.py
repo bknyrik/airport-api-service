@@ -277,7 +277,10 @@ class AuthenticatedAdminUserApiTests(APITestCase):
             "is_superuser": True,
             "user_permissions": (3, 4, 5)
         }
-        response = self.client.put(user_admin_detail_url(pk=user.pk), data=data)
+        response = self.client.put(
+            user_admin_detail_url(pk=user.pk),
+            data=data
+        )
         user.refresh_from_db()
 
         serializer = UserAdminSerializer(user)
