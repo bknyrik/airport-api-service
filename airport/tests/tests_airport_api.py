@@ -1,9 +1,13 @@
 import tempfile
 
 from django.shortcuts import reverse
+from django.contrib.auth import get_user_model
 from rest_framework.test import APITestCase
 from rest_framework import status
 from PIL import Image
+
+
+User = get_user_model()
 
 
 AIRPORT_LIST_URL = reverse("airport:airport-list")
@@ -70,3 +74,13 @@ class UnauthenticatedAirportApiTests(APITestCase):
             )
 
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+
+class AuthenticatedAirportApiTests(APITestCase):
+
+    def setUp(self) -> None:
+        self.user = User.objects.create_user(
+            email="user@test.com",
+            password="userpass12345"
+        )
+        self.client.force_authenticate(user=self.user)
