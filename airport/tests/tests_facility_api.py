@@ -162,3 +162,17 @@ class AuthenticatedAdminFacilityApiTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(serializer.data, response.data)
+
+    def test_facility_partial_update(self) -> None:
+        facility = facility_sample()
+        data = {"description": "Another description"}
+        response = self.client.patch(
+            get_facility_detail_url(pk=facility.id),
+            data=data
+        )
+        serializer = FacilitySerializer(facility)
+
+        facility.refresh_from_db()
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(serializer.data, response.data)
