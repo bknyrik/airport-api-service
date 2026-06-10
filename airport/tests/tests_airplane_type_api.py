@@ -103,3 +103,8 @@ class AuthenticatedAirplaneTypeApiTests(APITestCase):
             password="testpass12345"
         )
         self.client.force_authenticate(user=self.user)
+
+    def test_airplane_type_create_is_forbidden(self) -> None:
+        data = {"name": "Test airplane type"}
+        response = self.client.post(AIRPLANE_TYPE_LIST_URL, data=data)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
