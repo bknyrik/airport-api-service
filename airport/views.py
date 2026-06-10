@@ -260,6 +260,7 @@ class AirplaneViewSet(ModelViewSet):
         methods=("POST",),
         detail=True,
         url_path="upload_image",
+        permission_classes=(IsAdminUser,)
     )
     def upload_image(self, request: Request, pk: int = None) -> Response:
         airplane = self.get_object()
