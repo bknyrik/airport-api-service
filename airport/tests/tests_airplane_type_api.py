@@ -131,3 +131,12 @@ class AuthenticatedAdminAirplaneTypeApiTests(APITestCase):
             is_staff=True
         )
         self.client.force_authenticate(user=self.admin_user)
+
+    def test_airplane_type_create(self) -> None:
+        data = {"name": "Test airplane type"}
+        response = self.client.post(AIRPLANE_TYPE_LIST_URL, data=data)
+        airplane_type = AirplaneType.objects.get(name=data["name"])
+        serializer = AirplaneTypeSerializer(airplane_type)
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(serializer.data, response.data)
