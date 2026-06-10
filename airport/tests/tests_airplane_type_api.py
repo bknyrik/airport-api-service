@@ -1,9 +1,13 @@
 from django.shortcuts import reverse
+from django.contrib.auth import get_user_model
 from rest_framework.test import APITestCase
 from rest_framework import status
 
 from airport.models import AirplaneType
 from airport.serializers import AirplaneTypeSerializer
+
+
+User = get_user_model()
 
 
 AIRPLANE_TYPE_LIST_URL = reverse("airport:airplane-type-list")
@@ -70,3 +74,13 @@ class UnauthenticatedAirplaneTypeApiTests(APITestCase):
     def test_airplane_type_destroy_authentication_required(self) -> None:
         response = self.client.delete(get_airplane_type_detail_url(pk=999))
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+
+class AuthenticatedAirplaneTypeApiTests(APITestCase):
+
+    def setUp(self) -> None:
+        self.user = User.objects.create_user(
+            email="user@test.com",
+            password="testpass12345"
+        )
+        self.client.force_authenticate(user=self.user)
