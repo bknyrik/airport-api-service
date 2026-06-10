@@ -120,3 +120,14 @@ class AuthenticatedAirplaneTypeApiTests(APITestCase):
     def test_airplane_type_destroy_is_forbidden(self) -> None:
         response = self.client.delete(get_airplane_type_detail_url(pk=999))
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+
+class AuthenticatedAdminAirplaneTypeApiTests(APITestCase):
+
+    def setUp(self) -> None:
+        self.admin_user = User.objects.create_user(
+            email="admin@airport.com",
+            password="userpass12345",
+            is_staff=True
+        )
+        self.client.force_authenticate(user=self.admin_user)
