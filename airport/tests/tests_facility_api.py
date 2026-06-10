@@ -104,3 +104,11 @@ class AuthenticatedFacilityApiTests(APITestCase):
         }
         response = self.client.post(FACILITY_LIST_URL, data=data)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_facility_update_is_forbidden(self) -> None:
+        data = {
+            "name": "Another facility",
+            "description": "Another description"
+        }
+        response = self.client.put(get_facility_detail_url(pk=1), data=data)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
