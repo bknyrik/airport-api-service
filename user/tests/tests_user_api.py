@@ -31,6 +31,10 @@ def user_sample(**kwargs) -> User:
     return User.objects.create_user(**defaults)
 
 
+def get_throttle_rate(scope: str) -> int:
+    return int(api_settings.DEFAULT_THROTTLE_RATES[scope].split("/")[0])
+
+
 class UnauthenticatedUserApiTests(APITestCase):
 
     def test_user_admin_list_authentication_required(self) -> None:
