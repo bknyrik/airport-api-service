@@ -41,6 +41,11 @@ class UnauthenticatedAirportApiTests(APITestCase):
         )
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
+    def test_airport_partial_update_authentication_required(self) -> None:
+        data = {"iata_code": "TST"}
+        response = self.client.patch(get_airport_detail_url(pk=1), data=data)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
     def test_airport_destroy_authentication_required(self) -> None:
         response = self.client.delete(get_airport_detail_url(pk=1))
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
