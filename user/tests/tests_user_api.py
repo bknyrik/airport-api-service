@@ -84,10 +84,11 @@ class AuthenticatedUserApiTests(APITestCase):
         )
         self.client.force_authenticate(user=self.user)
 
-    def test_manage_user_retrieve(self) -> None:
+    def test_user_manage_retrieve(self) -> None:
         response = self.client.get(USER_MANAGE_URL)
         serializer = UserSerializer(self.user)
 
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(serializer.data, response.data)
 
     def test_manage_user_update(self) -> None:
