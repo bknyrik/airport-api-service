@@ -297,7 +297,10 @@ class AuthenticatedAdminUserApiTests(APITestCase):
             "is_staff": False,
         }
 
-        response = self.client.patch(user_admin_detail_url(pk=user.id), data=data)
+        response = self.client.patch(
+            user_admin_detail_url(pk=user.id),
+            data=data
+        )
         user.refresh_from_db()
 
         serializer = UserAdminSerializer(user)
