@@ -141,6 +141,13 @@ class AuthenticatedUserApiTests(APITestCase):
             status.HTTP_429_TOO_MANY_REQUESTS
         )
 
+    def test_user_manage_destroy_is_not_allowed(self) -> None:
+        response = self.client.delete(USER_MANAGE_URL)
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_405_METHOD_NOT_ALLOWED
+        )
+
 
 class AuthenticatedAdminUserApiTests(APITestCase):
 
