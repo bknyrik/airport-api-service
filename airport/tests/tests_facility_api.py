@@ -121,3 +121,14 @@ class AuthenticatedFacilityApiTests(APITestCase):
     def test_facility_destroy_is_forbidden(self) -> None:
         response = self.client.delete(get_facility_detail_url(pk=1))
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+
+class AuthenticatedAdminFacilityApiTests(APITestCase):
+
+    def setUp(self) -> None:
+        self.admin_user = User.objects.create_user(
+            email="admin@test.com",
+            password="adminpass12345",
+            is_staff=True
+        )
+        self.client.force_authenticate(user=self.admin_user)
