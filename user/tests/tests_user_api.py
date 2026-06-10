@@ -128,10 +128,8 @@ class AuthenticatedUserApiTests(APITestCase):
         response = self.client.get(user_admin_detail_url(999))
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
-    def test_manage_user_reached_limit_of_requests(self) -> None:
-        USER_RATE = int(
-            api_settings.DEFAULT_THROTTLE_RATES["user"].split("/")[0]
-        )
+    def test_user_manage_request_is_throttled(self) -> None:
+        USER_RATE = get_throttle_rate("user")
 
         for _ in range(USER_RATE):
             self.client.get(USER_MANAGE_URL)
