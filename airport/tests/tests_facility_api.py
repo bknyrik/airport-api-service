@@ -31,3 +31,20 @@ class UnauthenticatedFacilityApiTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(serializer.data, response.data["results"])
+
+    def test_facility_list_with_pagination(self) -> None:
+        PAGE_SIZE = 2
+        facility = facility_sample()
+        facility2 = facility_sample(name="Test facility 2")
+        facility3 = facility_sample(name="Test facility 3")
+
+        response = self.client.get(
+            FACILITY_LIST_URL,
+            query_params={"page_size": PAGE_SIZE}
+        )
+        serializer = FacilitySerializer((facility, facility2), many=True)
+        serializer_facility3 = FacilitySerializer(facility3)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(serializer.data, response.data["results"])
+        self.assertNotIn(serializer_facility3.data, response.data["results"])
