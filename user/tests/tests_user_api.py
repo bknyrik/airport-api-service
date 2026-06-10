@@ -105,7 +105,7 @@ class AuthenticatedUserApiTests(APITestCase):
         self.assertEqual(serializer.data, response.data)
         self.assertTrue(self.user.check_password(data["password"]))
 
-    def test_manage_user_partial_update(self) -> None:
+    def test_user_manage_partial_update(self) -> None:
         data = {
             "email": "upduser@airport.com",
             "first_name": "Update First"
@@ -113,6 +113,7 @@ class AuthenticatedUserApiTests(APITestCase):
         response = self.client.patch(USER_MANAGE_URL, data=data)
         serializer = UserSerializer(self.user)
 
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(serializer.data, response.data)
 
     def test_register_user_is_forbidden(self) -> None:
