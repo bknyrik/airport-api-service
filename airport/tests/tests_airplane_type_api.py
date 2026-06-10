@@ -140,3 +140,16 @@ class AuthenticatedAdminAirplaneTypeApiTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(serializer.data, response.data)
+
+    def test_airplane_type_update(self) -> None:
+        airplane_type = airplane_type_sample()
+        data = {"name": "Another test airplane type"}
+        response = self.client.put(
+            get_airplane_type_detail_url(pk=airplane_type.id),
+            data=data
+        )
+        serializer = AirplaneTypeSerializer(airplane_type)
+        airplane_type.refresh_from_db()
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(serializer.data, response.data)
