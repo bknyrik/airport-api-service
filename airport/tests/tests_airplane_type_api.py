@@ -5,7 +5,7 @@ from rest_framework import status
 
 from airport.models import AirplaneType
 from airport.serializers import AirplaneTypeSerializer
-
+from user.tests.tests_user_api import get_throttle_rate
 
 User = get_user_model()
 
@@ -163,4 +163,16 @@ class AuthenticatedAdminAirplaneTypeApiTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertFalse(
             AirplaneType.objects.filter(name=airplane_type.name).exists()
+        )
+
+    def test_airplane_type_list_request_is_throttled(self) -> None:
+        ADMIN_RATE = get_throttle_rate("admin")
+
+        for _ in range(ADMIN_RATE):
+            self.client.get(AIRPLANE_TYPE_LIST_URL)
+
+        response = self.client.get(AIRPLANE_TYPE_LIST_URL)
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_429_TOO_MANY_REQUESTS
         )
