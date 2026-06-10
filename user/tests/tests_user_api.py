@@ -136,7 +136,10 @@ class AuthenticatedUserApiTests(APITestCase):
 
         response = self.client.get(USER_MANAGE_URL)
 
-        self.assertEqual(response.status_code, status.HTTP_429_TOO_MANY_REQUESTS)
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_429_TOO_MANY_REQUESTS
+        )
 
 
 class AuthenticatedAdminUserApiTests(APITestCase):
