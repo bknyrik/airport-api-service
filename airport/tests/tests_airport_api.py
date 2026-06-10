@@ -19,3 +19,12 @@ class UnauthenticatedAirportApiTests(APITestCase):
     def test_airport_retrieve_authentication_required(self) -> None:
         response = self.client.get(get_airport_detail_url(pk=1))
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_airport_create_authentication_required(self) -> None:
+        data = {
+            "name": "Test Airport",
+            "country": "Test country",
+            "city": "Test city",
+        }
+        response = self.client.post(AIRPORT_LIST_URL, data=data)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
