@@ -1,9 +1,13 @@
 from django.shortcuts import reverse
+from django.contrib.auth import get_user_model
 from rest_framework.test import APITestCase
 from rest_framework import status
 
 from airport.serializers import FacilitySerializer
 from airport.models import Facility
+
+
+User = get_user_model()
 
 
 FACILITY_LIST_URL = reverse("airport:facility-list")
@@ -82,3 +86,13 @@ class UnauthenticatedFacilityApiTests(APITestCase):
     def test_facility_destroy_authentication_required(self) -> None:
         response = self.client.delete(get_facility_detail_url(pk=1))
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+
+class AuthenticatedFacilityApiTests(APITestCase):
+
+    def setUp(self) -> None:
+        self.user = User.objects.create_user(
+            email="user@test.com",
+            password="testpass12345"
+        )
+        self.client.force_authenticate(user=self.user)
