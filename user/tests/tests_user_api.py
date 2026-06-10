@@ -62,16 +62,17 @@ class UnauthenticatedUserApiTests(APITestCase):
         self.assertEqual(serializer.data["email"], data["email"])
         self.assertTrue(user.check_password(data["password"]))
 
-    def test_request_to_register_url_was_throttled(self) -> None:
-        ANON_RATES = int(
-            api_settings.DEFAULT_THROTTLE_RATES["anon"].split("/")[0]
-        )
+    def test_user_register_request_is_throttled(self) -> None:
+        REGISTER_RATE = get_throttle_rate("register")
 
-        for _ in range(ANON_RATES):
+        for _ in range(REGISTER_RATE):
             self.client.get(USER_REGISTER_URL)
 
         response = self.client.get(USER_REGISTER_URL)
-        self.assertEqual(response.status_code, status.HTTP_429_TOO_MANY_REQUESTS)
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_429_TOO_MANY_REQUESTS
+        )
 
 
 class AuthenticatedUserApiTests(APITestCase):
