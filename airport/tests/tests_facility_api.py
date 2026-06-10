@@ -18,6 +18,10 @@ def facility_sample(**kwargs) -> Facility:
     return Facility.objects.create(**defaults)
 
 
+def get_facility_detail_url(pk: int) -> str:
+    return reverse("airport:facility-detail", kwargs={"pk": pk})
+
+
 class UnauthenticatedFacilityApiTests(APITestCase):
 
     def test_facility_list(self) -> None:
@@ -48,3 +52,11 @@ class UnauthenticatedFacilityApiTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(serializer.data, response.data["results"])
         self.assertNotIn(serializer_facility3.data, response.data["results"])
+
+    def test_facility_retrieve(self) -> None:
+        facility = facility_sample()
+        response = self.client.get(get_facility_detail_url(pk=facility.id))
+        serializer = FacilitySerializer(facility)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(serializer.data, response.data)
