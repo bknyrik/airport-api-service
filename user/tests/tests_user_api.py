@@ -59,7 +59,7 @@ class UnauthenticatedUserApiTests(APITestCase):
         serializer = UserSerializer(user)
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(serializer.data["email"], data["email"])
+        self.assertEqual(serializer.data, response.data)
         self.assertTrue(user.check_password(data["password"]))
 
     def test_user_register_request_is_throttled(self) -> None:
