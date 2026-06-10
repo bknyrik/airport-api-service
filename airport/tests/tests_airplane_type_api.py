@@ -45,3 +45,8 @@ class UnauthenticatedAirplaneTypeApiTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(serializer.data, response.data)
+
+    def test_airplane_type_create_authentication_required(self) -> None:
+        data = {"name": "Test"}
+        response = self.client.post(AIRPLANE_TYPE_LIST_URL, data=data)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
