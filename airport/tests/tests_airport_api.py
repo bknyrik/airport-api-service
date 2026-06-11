@@ -353,3 +353,13 @@ class AuthenticatedAdminAirportApiTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(serializer.data, response.data)
+
+    def test_airport_partial_update_has_bad_request(self) -> None:
+        airport = airport_sample()
+        data = {"iata_code": "XRT C"}
+        response = self.client.patch(
+            get_airport_detail_url(pk=airport.id),
+            data=data
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
