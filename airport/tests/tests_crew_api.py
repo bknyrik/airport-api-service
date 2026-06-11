@@ -4,7 +4,7 @@ from rest_framework.test import APITestCase
 from rest_framework import status
 
 from airport.models import Crew
-from airport.serializers import CrewListRetrieveSerializer
+from airport.serializers import CrewListRetrieveSerializer, CrewSerializer
 
 
 User = get_user_model()
@@ -210,3 +210,16 @@ class AuthenticatedAdminCrewApiTests(APITestCase):
         )
         self.client.force_authenticate(user=self.admin_user)
         self.crew = crew_sample()
+
+    def test_crew_create(self) -> None:
+        data = {
+            "first_name": "Test first",
+            "last_name": "Test last",
+            "role": "CP",
+        }
+        response = self.client.post(CREW_LIST_URL, data=data)
+        crew = Crew.objects.get(**data)
+        serializer = CrewSerializer(crew)
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(serializer.data, response.data)
