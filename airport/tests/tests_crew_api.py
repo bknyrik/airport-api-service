@@ -20,3 +20,8 @@ class UnauthenticatedCrewApiTests(APITestCase):
     def test_crew_retrieve_authentication_required(self) -> None:
         response = self.client.get(get_crew_detail_url(pk=1))
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_crew_create_authentication_required(self) -> None:
+        data = {"first_name": "John", "last_name": "Doe", "role": "CP"}
+        response = self.client.post(CREW_LIST_URL, data=data)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
