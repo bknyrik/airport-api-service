@@ -363,3 +363,8 @@ class AuthenticatedAdminAirportApiTests(APITestCase):
         )
 
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_airport_destroy(self) -> None:
+        airport = airport_sample()
+        response = self.client.delete(get_airport_detail_url(pk=airport.id))
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
