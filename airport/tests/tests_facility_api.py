@@ -64,9 +64,9 @@ class UnauthenticatedFacilityApiTests(APITestCase):
         self.assertNotIn(serializer_facility3.data, response.data["results"])
 
     def test_facility_retrieve(self) -> None:
-        facility = facility_sample()
-        response = self.client.get(get_facility_detail_url(pk=facility.id))
-        serializer = FacilitySerializer(facility)
+        URL = get_facility_detail_url(pk=self.facility_1.id)
+        response = self.client.get(URL)
+        serializer = FacilitySerializer(self.facility_1)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(serializer.data, response.data)
