@@ -339,3 +339,17 @@ class AuthenticatedAdminAirportApiTests(APITestCase):
         )
 
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_airport_partial_update(self) -> None:
+        airport = airport_sample()
+        data = {"description": "Updated description"}
+        response = self.client.patch(
+            get_airport_detail_url(pk=airport.id),
+            data=data
+        )
+        serializer = AirportSerializer(airport)
+
+        airport.refresh_from_db()
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(serializer.data, response.data)
