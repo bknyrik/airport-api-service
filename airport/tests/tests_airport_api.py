@@ -213,6 +213,16 @@ class AuthenticatedAirportApiTests(APITestCase):
             response.data["results"]
         )
 
+    def test_airport_retrieve(self) -> None:
+        airport = airport_sample()
+        response = self.client.get(
+            get_airport_detail_url(pk=airport.id)
+        )
+        serializer = AirportSerializer(airport)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(serializer.data, response.data)
+
     def test_airport_create_is_forbidden(self) -> None:
         data = {
             "name": "Test airport",
