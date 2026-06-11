@@ -262,3 +262,8 @@ class AuthenticatedAdminCrewApiTests(APITestCase):
         )
 
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_crew_destroy(self) -> None:
+        response = self.client.delete(get_crew_detail_url(pk=self.crew.id))
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertFalse(Crew.objects.filter(pk=self.crew.id).exists())
