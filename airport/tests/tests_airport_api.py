@@ -1,3 +1,4 @@
+import os
 import tempfile
 
 from django.shortcuts import reverse
@@ -368,3 +369,23 @@ class AuthenticatedAdminAirportApiTests(APITestCase):
         airport = airport_sample()
         response = self.client.delete(get_airport_detail_url(pk=airport.id))
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+    def test_airport_upload_image(self) -> None:
+        airport = airport_sample()
+
+        with tempfile.NamedTemporaryFile(suffix=".jpg") as ntf:
+            image = Image.new("RGB", (25, 25))
+            image.save(ntf, format="JPEG")
+            ntf.seek(0)
+
+            response = self.client.post(
+                get_airport_upload_image_url(pk=airport.id),
+                data={"image": ntf},
+                format="multipart"
+            )
+
+        airport.refresh_from_db()
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertIn("image", response.data)
+        self.assertTrue(os.path.exists(airport.image.path))
