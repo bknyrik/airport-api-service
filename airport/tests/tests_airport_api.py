@@ -159,3 +159,28 @@ class AuthenticatedAirportApiTests(APITestCase):
             airport_with_berlin_serializer.data,
             response.data["results"]
         )
+
+    def test_airport_list_filter_by_iata_code(self) -> None:
+        IATA_CODE = "BC"
+        airport = airport_sample(iata_code="ABC")
+        airport2 = airport_sample(name="Sample airport 2", iata_code="CBD")
+        airport3 = airport_sample(name="Sample airport 3", iata_code="BCF")
+        response = self.client.get(
+            AIRPORT_LIST_URL,
+            query_params={"iata_code": IATA_CODE}
+        )
+        airports_with_iata_code_bc = AirportSerializer(
+            (airport, airport3),
+            many=True
+        )
+        airport_without_iata_code_bc = AirportSerializer(airport2)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(
+            airports_with_iata_code_bc.data,
+            response.data["results"]
+        )
+        self.assertNotIn(
+            airport_without_iata_code_bc.data,
+            response.data["results"]
+        )
