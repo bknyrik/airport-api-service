@@ -132,6 +132,7 @@ class AuthenticatedAdminFacilityApiTests(APITestCase):
             is_staff=True
         )
         self.client.force_authenticate(user=self.admin_user)
+        self.facility = facility_sample()
 
     def test_facility_create(self) -> None:
         data = {
@@ -147,18 +148,17 @@ class AuthenticatedAdminFacilityApiTests(APITestCase):
         self.assertEqual(serializer.data, response.data)
 
     def test_facility_update(self) -> None:
-        facility = facility_sample()
         data = {
             "name": "Another facility name",
             "description": "Another facility description"
         }
         response = self.client.put(
-            get_facility_detail_url(pk=facility.id),
+            get_facility_detail_url(pk=self.facility.id),
             data=data
         )
-        serializer = FacilitySerializer(facility)
+        serializer = FacilitySerializer(self.facility)
 
-        facility.refresh_from_db()
+        self.facility.refresh_from_db()
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(serializer.data, response.data)
