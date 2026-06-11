@@ -389,3 +389,12 @@ class AuthenticatedAdminAirportApiTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIn("image", response.data)
         self.assertTrue(os.path.exists(airport.image.path))
+
+    def test_airport_upload_image_has_bad_request(self) -> None:
+        airport = airport_sample()
+        response = self.client.post(
+            get_airport_upload_image_url(pk=airport.id),
+            data={"image": "Not an image"},
+            format="multipart"
+        )
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
