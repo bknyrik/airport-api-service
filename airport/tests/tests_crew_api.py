@@ -276,6 +276,13 @@ class AuthenticatedAdminCrewApiTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(serializer.data, response.data)
 
+    def test_crew_partial_update_has_bad_request(self) -> None:
+        data = {"role": "DD"}
+        response = self.client.patch(
+            get_crew_detail_url(pk=self.crew.id),
+            data=data
+        )
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_crew_destroy(self) -> None:
         response = self.client.delete(get_crew_detail_url(pk=self.crew.id))
