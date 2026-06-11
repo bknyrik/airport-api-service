@@ -306,3 +306,21 @@ class AuthenticatedAdminAirportApiTests(APITestCase):
         }
         response = self.client.post(AIRPORT_LIST_URL, data=data)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_airport_update(self) -> None:
+        airport = airport_sample()
+        data = {
+            "name": "Updated airport",
+            "country": "Updated country",
+            "city": "Updated city"
+        }
+        response = self.client.put(
+            get_airport_detail_url(pk=airport.id),
+            data=data
+        )
+        serializer = AirportSerializer(airport)
+
+        airport.refresh_from_db()
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(serializer.data, response.data)
