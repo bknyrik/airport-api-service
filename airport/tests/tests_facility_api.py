@@ -182,7 +182,9 @@ class AuthenticatedAdminFacilityApiTests(APITestCase):
         self.assertEqual(serializer.data, response.data)
 
     def test_facility_destroy(self) -> None:
-        facility = facility_sample()
-        response = self.client.delete(get_facility_detail_url(pk=facility.id))
+        URL = get_facility_detail_url(pk=self.facility.id)
+        response = self.client.delete(URL)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
-        self.assertFalse(Facility.objects.filter(name=facility.name).exists())
+        self.assertFalse(
+            Facility.objects.filter(pk=self.facility.id).exists()
+        )
