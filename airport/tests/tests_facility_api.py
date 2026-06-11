@@ -34,13 +34,11 @@ class UnauthenticatedFacilityApiTests(APITestCase):
         self.facility_3 = facility_sample(name="Test facility 3")
 
     def test_facility_list(self) -> None:
-        facilities = (
-            facility_sample(),
-            facility_sample(name="Test facility 2"),
-            facility_sample(name="Test facility 3"),
-        )
         response = self.client.get(FACILITY_LIST_URL)
-        serializer = FacilitySerializer(facilities, many=True)
+        serializer = FacilitySerializer(
+            (self.facility_1, self.facility_2, self.facility_3),
+            many=True
+        )
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(serializer.data, response.data["results"])
