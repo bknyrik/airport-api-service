@@ -100,3 +100,33 @@ class AuthenticatedCrewApiTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(serializer_copilots.data, response.data["results"])
         self.assertNotIn(serializer_commander.data, response.data["results"])
+
+    def test_crew_list_filter_by_first_name(self) -> None:
+        FIRST_NAME = "on"
+
+        crew_1 = crew_sample(first_name="Aaron")
+        crew_2 = crew_sample(first_name="Mark")
+        crew_3 = crew_sample(first_name="Leon")
+
+        response = self.client.get(
+            CREW_LIST_URL,
+            query_params={"first_name": FIRST_NAME}
+        )
+
+        serializer_crew_match_first_name = CrewListRetrieveSerializer(
+            (crew_1, crew_3),
+            many=True
+        )
+        serializer_crew_not_match_first_name = CrewListRetrieveSerializer(
+            crew_2
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(
+            serializer_crew_match_first_name.data,
+            response.data["results"]
+        )
+        self.assertNotIn(
+            serializer_crew_not_match_first_name.data,
+            response.data["results"]
+        )
