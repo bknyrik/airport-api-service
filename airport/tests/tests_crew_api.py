@@ -232,3 +232,20 @@ class AuthenticatedAdminCrewApiTests(APITestCase):
         }
         response = self.client.post(CREW_LIST_URL, data=data)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_crew_update(self) -> None:
+        data = {
+            "first_name": "Updated John",
+            "last_name": "Updated Doe",
+            "role": "CP",
+        }
+        response = self.client.put(
+            get_crew_detail_url(pk=self.crew.id),
+            data=data
+        )
+        serializer = CrewSerializer(self.crew)
+
+        self.crew.refresh_from_db()
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(serializer.data, response.data)
