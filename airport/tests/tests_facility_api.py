@@ -81,7 +81,8 @@ class UnauthenticatedFacilityApiTests(APITestCase):
 
     def test_facility_partial_update_authentication_required(self) -> None:
         data = {"description": "updated description"}
-        response = self.client.patch(get_facility_detail_url(pk=1), data=data)
+        URL = get_facility_detail_url(pk=1)
+        response = self.client.patch(URL, data=data)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_facility_destroy_authentication_required(self) -> None:
