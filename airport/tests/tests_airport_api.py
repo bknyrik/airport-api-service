@@ -212,3 +212,13 @@ class AuthenticatedAirportApiTests(APITestCase):
             airport_per_second_page_serializer.data,
             response.data["results"]
         )
+
+    def test_airport_create_is_forbidden(self) -> None:
+        data = {
+            "name": "Test airport",
+            "country": "Test country",
+            "city": "Test city",
+            "iata_code": "TST"
+        }
+        response = self.client.post(AIRPORT_LIST_URL, data=data)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
