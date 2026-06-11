@@ -28,6 +28,11 @@ def get_facility_detail_url(pk: int) -> str:
 
 class UnauthenticatedFacilityApiTests(APITestCase):
 
+    def setUp(self) -> None:
+        self.facility_1 = facility_sample()
+        self.facility_2 = facility_sample(name="Test facility 2")
+        self.facility_3 = facility_sample(name="Test facility 3")
+
     def test_facility_list(self) -> None:
         facilities = (
             facility_sample(),
