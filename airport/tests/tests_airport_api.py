@@ -184,3 +184,31 @@ class AuthenticatedAirportApiTests(APITestCase):
             airport_without_iata_code_bc.data,
             response.data["results"]
         )
+
+    def test_airport_list_with_pagination(self) -> None:
+        PAGE_SIZE = 2
+
+        airport = airport_sample()
+        airport2 = airport_sample(name="Sample airport 2")
+        airport3 = airport_sample(name="Sample airport 3")
+
+        response = self.client.get(
+            AIRPORT_LIST_URL,
+            query_params={"page_size": PAGE_SIZE}
+        )
+
+        airports_per_page_serializer = AirportSerializer(
+            (airport, airport2),
+            many=True
+        )
+        airport_per_second_page_serializer = AirportSerializer(airport3)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(
+            airports_per_page_serializer.data,
+            response.data["results"]
+        )
+        self.assertNotIn(
+            airport_per_second_page_serializer.data,
+            response.data["results"]
+        )
