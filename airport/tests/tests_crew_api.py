@@ -13,6 +13,16 @@ User = get_user_model()
 CREW_LIST_URL = reverse("airport:crew-list")
 
 
+def crew_sample(**kwargs) -> Crew:
+    default = {
+        "first_name": "John",
+        "last_name": "Doe",
+        "role": Crew.Role.COMMANDER
+    }
+    default.update(kwargs)
+    return Crew.objects.create(**default)
+
+
 def get_crew_detail_url(pk: int) -> str:
     return reverse("airport:crew-detail", kwargs={"pk": pk})
 
@@ -60,3 +70,14 @@ class AuthenticatedCrewApiTests(APITestCase):
             password="userpass12345"
         )
         self.client.force_authenticate(user=self.user)
+
+    def test_crew_list(self) -> None:
+        crew_sample()
+        crew_sample()
+        crew_sample()
+
+        response = self.client.get(CREW_LIST_URL)
+        serializer = CrewListRetrieveSerializer(Crew.objects.all(), many=True)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(serializer.data, response.data["results"])
