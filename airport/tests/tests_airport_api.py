@@ -109,3 +109,28 @@ class AuthenticatedAirportApiTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(serializer.data, response.data["results"])
+
+    def test_airport_list_filter_by_country(self) -> None:
+        COUNTRY = "Germany"
+        airport = airport_sample(country="Germany")
+        airport2 = airport_sample(name="Sample airport 2", country="Germany")
+        airport3 = airport_sample(name="Sample airport 3", country="France")
+        response = self.client.get(
+            AIRPORT_LIST_URL,
+            query_params={"country": COUNTRY}
+        )
+        airports_with_germany_serializer = AirportSerializer(
+            (airport, airport2),
+            many=True
+        )
+        airport_with_france_serializer = AirportSerializer(airport3)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(
+            airports_with_germany_serializer.data,
+            response.data["results"]
+        )
+        self.assertNotIn(
+            airport_with_france_serializer.data,
+            response.data["results"]
+        )
