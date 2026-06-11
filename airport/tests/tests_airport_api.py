@@ -244,3 +244,7 @@ class AuthenticatedAirportApiTests(APITestCase):
             data=data
         )
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_airport_destroy_is_forbidden(self) -> None:
+        response = self.client.delete(get_airport_detail_url(pk=1))
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
