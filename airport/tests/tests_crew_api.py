@@ -194,3 +194,7 @@ class AuthenticatedCrewApiTests(APITestCase):
         data = {"role": "CM"}
         response = self.client.patch(get_crew_detail_url(pk=1), data=data)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_crew_destroy_is_forbidden(self) -> None:
+        response = self.client.delete(get_crew_detail_url(pk=1))
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
