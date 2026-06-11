@@ -168,3 +168,12 @@ class AuthenticatedCrewApiTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(serializer.data, response.data)
+
+    def test_crew_create_is_forbidden(self) -> None:
+        data = {
+            "first_name": "John",
+            "last_name": "Doe",
+            "role": "CP",
+        }
+        response = self.client.post(CREW_LIST_URL, data=data)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
