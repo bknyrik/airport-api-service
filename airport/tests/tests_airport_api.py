@@ -267,3 +267,14 @@ class AuthenticatedAirportApiTests(APITestCase):
             )
 
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+
+class AuthenticatedAdminAirportApiTests(APITestCase):
+
+    def setUp(self) -> None:
+        self.admin_user = User.objects.create_user(
+            email="admin@airport.com",
+            password="adminpass12345",
+            is_staff=True
+        )
+        self.client.force_authenticate(self.admin_user)
