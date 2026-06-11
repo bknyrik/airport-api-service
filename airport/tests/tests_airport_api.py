@@ -278,3 +278,21 @@ class AuthenticatedAdminAirportApiTests(APITestCase):
             is_staff=True
         )
         self.client.force_authenticate(self.admin_user)
+
+    def test_airport_create(self) -> None:
+        data = {
+            "name": "Test Airport",
+            "description": "Test description",
+            "country": "Test country",
+            "city": "Test city",
+            "iata_code": "TST"
+        }
+        response = self.client.post(
+            AIRPORT_LIST_URL,
+            data=data
+        )
+        airport = Airport.objects.get(name=data["name"])
+        serializer = AirportSerializer(airport)
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(serializer.data, response.data)
