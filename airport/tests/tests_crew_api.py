@@ -39,3 +39,7 @@ class UnauthenticatedCrewApiTests(APITestCase):
         data = {"first_name": "Update first", "role": "FA"}
         response = self.client.patch(get_crew_detail_url(pk=1), data=data)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_crew_destroy_authentication_required(self) -> None:
+        response = self.client.delete(get_crew_detail_url(pk=1))
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
