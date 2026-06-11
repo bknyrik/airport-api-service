@@ -147,6 +147,11 @@ class AuthenticatedAdminFacilityApiTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(serializer.data, response.data)
 
+    def test_facility_create_has_bad_request(self) -> None:
+        data = {"name": self.facility.name}
+        response = self.client.post(FACILITY_LIST_URL, data=data)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
     def test_facility_update(self) -> None:
         data = {
             "name": "Another facility name",
