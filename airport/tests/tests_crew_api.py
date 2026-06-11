@@ -130,3 +130,33 @@ class AuthenticatedCrewApiTests(APITestCase):
             serializer_crew_not_match_first_name.data,
             response.data["results"]
         )
+
+    def test_crew_list_filter_by_last_name(self) -> None:
+        LAST_NAME = "son"
+
+        crew_1 = crew_sample()
+        crew_2 = crew_sample(last_name="Adamson")
+        crew_3 = crew_sample(last_name="Anderson")
+
+        response = self.client.get(
+            CREW_LIST_URL,
+            query_params={"last_name": LAST_NAME}
+        )
+
+        serializer_crew_match_last_name = CrewListRetrieveSerializer(
+            (crew_2, crew_3),
+            many=True
+        )
+        serializer_crew_not_match_last_name = CrewListRetrieveSerializer(
+            crew_1
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(
+            serializer_crew_match_last_name.data,
+            response.data["results"]
+        )
+        self.assertNotIn(
+            serializer_crew_not_match_last_name.data,
+            response.data["results"]
+        )
