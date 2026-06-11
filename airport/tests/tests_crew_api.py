@@ -249,3 +249,16 @@ class AuthenticatedAdminCrewApiTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(serializer.data, response.data)
+
+    def test_crew_update_has_bad_request(self) -> None:
+        data = {
+            "first_name": "Updated John",
+            "last_name": "Updated Doe",
+            "role": "XX"
+        }
+        response = self.client.put(
+            get_crew_detail_url(pk=self.crew.id),
+            data=data
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
