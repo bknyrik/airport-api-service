@@ -157,10 +157,8 @@ class AuthenticatedAdminFacilityApiTests(APITestCase):
             "name": "Another facility name",
             "description": "Another facility description"
         }
-        response = self.client.put(
-            get_facility_detail_url(pk=self.facility.id),
-            data=data
-        )
+        URL = get_facility_detail_url(pk=self.facility.id)
+        response = self.client.put(URL, data=data)
         serializer = FacilitySerializer(self.facility)
 
         self.facility.refresh_from_db()
@@ -178,10 +176,8 @@ class AuthenticatedAdminFacilityApiTests(APITestCase):
 
     def test_facility_partial_update(self) -> None:
         data = {"description": "Another description"}
-        response = self.client.patch(
-            get_facility_detail_url(pk=self.facility.id),
-            data=data
-        )
+        URL = get_facility_detail_url(pk=self.facility.id)
+        response = self.client.patch(URL, data=data)
         serializer = FacilitySerializer(self.facility)
 
         self.facility.refresh_from_db()
