@@ -1,6 +1,13 @@
 from django.shortcuts import reverse
+from django.contrib.auth import get_user_model
 from rest_framework.test import APITestCase
 from rest_framework import status
+
+from airport.models import Crew
+from airport.serializers import CrewListRetrieveSerializer
+
+
+User = get_user_model()
 
 
 CREW_LIST_URL = reverse("airport:crew-list")
@@ -43,3 +50,13 @@ class UnauthenticatedCrewApiTests(APITestCase):
     def test_crew_destroy_authentication_required(self) -> None:
         response = self.client.delete(get_crew_detail_url(pk=1))
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+
+class AuthenticatedCrewApiTests(APITestCase):
+
+    def setUp(self) -> None:
+        self.user = User.objects.create_user(
+            email="user@test.com",
+            password="userpass12345"
+        )
+        self.client.force_authenticate(user=self.user)
