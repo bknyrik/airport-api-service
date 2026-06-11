@@ -45,7 +45,7 @@ class AirplaneSerializer(serializers.ModelSerializer[Airplane]):
 
 
 class AirplaneImageSerializer(AirplaneSerializer):
-    image = serializers.ImageField(required=True)
+    image = serializers.ImageField()
 
     class Meta(AirplaneSerializer.Meta):
         fields = ("id", "image")
