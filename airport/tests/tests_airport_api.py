@@ -253,3 +253,17 @@ class AuthenticatedAirportApiTests(APITestCase):
     def test_airport_destroy_is_forbidden(self) -> None:
         response = self.client.delete(get_airport_detail_url(pk=1))
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_airport_upload_image_is_forbidden(self) -> None:
+        with tempfile.NamedTemporaryFile(suffix=".jpg") as ntf:
+            image = Image.new("RGB", (25, 25))
+            image.save(ntf, format="JPEG")
+            image.seek(0)
+
+            response = self.client.post(
+                get_airport_upload_image_url(pk=1),
+                data={"image": ntf},
+                format="multipart"
+            )
+
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
