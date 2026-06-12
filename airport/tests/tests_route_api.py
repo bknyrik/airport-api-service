@@ -181,3 +181,9 @@ class AuthenticatedRouteApiTests(APITestCase):
         url = get_route_detail_url(pk=self.route_1.id)
         response = self.client.put(url, data=data)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_route_partial_update_is_forbidden(self) -> None:
+        data = {"distance": 100}
+        url = get_route_detail_url(pk=self.route_1.id)
+        response = self.client.patch(url, data=data)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
