@@ -158,9 +158,9 @@ class AuthenticatedCrewApiTests(APITestCase):
         )
 
     def test_crew_retrieve(self) -> None:
-        crew = crew_sample()
-        response = self.client.get(get_crew_detail_url(pk=crew.id))
-        serializer = CrewListRetrieveSerializer(crew)
+        URL = get_crew_detail_url(pk=self.crew_1.id)
+        response = self.client.get(URL)
+        serializer = CrewListRetrieveSerializer(self.crew_1)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(serializer.data, response.data)
