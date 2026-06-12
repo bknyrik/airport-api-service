@@ -63,6 +63,14 @@ class UnauthenticatedUserApiTests(APITestCase):
         self.assertEqual(serializer.data, response.data)
         self.assertTrue(user.check_password(data["password"]))
 
+    def test_user_register_has_bad_request(self) -> None:
+        data = {
+            "email": "not an email",
+            "password": "pass12345678"
+        }
+        response = self.client.post(USER_REGISTER_URL, data=data)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
     def test_user_register_request_is_throttled(self) -> None:
         REGISTER_RATE = get_throttle_rate("register")
 
