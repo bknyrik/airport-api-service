@@ -200,7 +200,7 @@ class AuthenticatedCrewApiTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
 
-class AuthenticatedAdminCrewApiTests(APITestCase):
+class AdminCrewApiTests(APITestCase):
 
     def setUp(self) -> None:
         self.admin_user = User.objects.create_user(
