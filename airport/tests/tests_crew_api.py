@@ -75,10 +75,12 @@ class AuthenticatedCrewApiTests(APITestCase):
         )
         self.crew_2 = crew_sample(
             first_name="Mark",
+            last_name="Adamson",
             role=Crew.Role.COPILOT
         )
         self.crew_3 = crew_sample(
             first_name="Leon",
+            last_name="Anderson",
             role=Crew.Role.COPILOT
         )
 
@@ -132,21 +134,17 @@ class AuthenticatedCrewApiTests(APITestCase):
     def test_crew_list_filter_by_last_name(self) -> None:
         LAST_NAME = "son"
 
-        crew_1 = crew_sample()
-        crew_2 = crew_sample(last_name="Adamson")
-        crew_3 = crew_sample(last_name="Anderson")
-
         response = self.client.get(
             CREW_LIST_URL,
             query_params={"last_name": LAST_NAME}
         )
 
         serializer_crew_match_last_name = CrewListRetrieveSerializer(
-            (crew_2, crew_3),
+            (self.crew_2, self.crew_3),
             many=True
         )
         serializer_crew_not_match_last_name = CrewListRetrieveSerializer(
-            crew_1
+            self.crew_1
         )
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
