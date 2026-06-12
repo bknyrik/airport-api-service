@@ -162,3 +162,12 @@ class AuthenticatedRouteApiTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(serializer.data, response.data)
+
+    def test_route_create_is_forbidden(self) -> None:
+        data = {
+            "source": self.airport_1.id,
+            "destination": self.airport_2.id,
+            "distance": 100
+        }
+        response = self.client.post(ROUTE_LIST_URL, data=data)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
