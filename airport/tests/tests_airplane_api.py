@@ -36,6 +36,10 @@ def get_airplane_detail_url(pk: int) -> str:
     return reverse("airport:airplane-detail", kwargs={"pk": pk})
 
 
+def get_airplane_upload_image_url(pk: int) -> str:
+    return reverse("airport:airplane-upload-image", kwargs={"pk": pk})
+
+
 class UnauthenticatedAirplaneApiTests(APITestCase):
 
     def setUp(self) -> None:
@@ -324,3 +328,19 @@ class AdminAirplaneApiTests(APITestCase):
         self.assertFalse(
             Airplane.objects.filter(name=self.airplane.name).exists()
         )
+
+    def test_airplane_upload_image(self) -> None:
+        with tempfile.NamedTemporaryFile(suffix=".jpg") as ntf:
+            URL = get_airplane_upload_image_url(pk=self.airplane.id)
+            image = Image.new("RGB", (25, 25))
+
+            image.save(ntf, format="JPEG")
+            ntf.seek(0)
+
+            data = {"image": ntf}
+            response = self.client.post(URL, data=data, format="multipart")
+
+            self.airplane.refresh_from_db()
+
+            self.assertEqual(response.status_code, status.HTTP_200_OK)
+            self.assertTrue(os.path.exists(self.airplane.image.path))
