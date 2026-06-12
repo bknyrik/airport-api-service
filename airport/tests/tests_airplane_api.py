@@ -21,6 +21,10 @@ def airplane_sample(**kwargs) -> Airplane:
     return Airplane.objects.create(**default)
 
 
+def get_airplane_detail_url(pk: int) -> str:
+    return reverse("airport:airplane-detail", kwargs={"pk": pk})
+
+
 class UnauthenticatedAirplaneApiTests(APITestCase):
 
     def setUp(self) -> None:
@@ -96,3 +100,11 @@ class UnauthenticatedAirplaneApiTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIn(serializer_airplane_1.data, response.data["results"])
         self.assertNotIn(serializer_airplane_2.data, response.data["results"])
+
+    def test_airplane_retrieve(self) -> None:
+        URL = get_airplane_detail_url(pk=self.airplane_1.id)
+        response = self.client.get(URL)
+        serializer = AirplaneListRetrieveSerializer(self.airplane_1)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(serializer.data, response.data)
