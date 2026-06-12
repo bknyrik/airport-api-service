@@ -42,7 +42,8 @@ class UnauthenticatedUserApiTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_user_admin_retrieve_authentication_required(self) -> None:
-        response = self.client.get(user_admin_detail_url(999))
+        URL = user_admin_detail_url(999)
+        response = self.client.get(URL)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_user_manage_authentication_required(self) -> None:
