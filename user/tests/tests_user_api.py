@@ -156,7 +156,8 @@ class AuthenticatedUserApiTests(APITestCase):
             "is_staff": True,
             "is_superuser": True
         }
-        response = self.client.patch(user_admin_detail_url(pk=1), data=data)
+        URL = user_admin_detail_url(pk=1)
+        response = self.client.patch(URL, data=data)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_user_manage_request_is_throttled(self) -> None:
