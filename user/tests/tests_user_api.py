@@ -190,6 +190,8 @@ class AuthenticatedAdminUserApiTests(APITestCase):
             is_staff=True
         )
         self.client.force_authenticate(user=self.admin_user)
+        self.user_2 = user_sample(email="user2@sample.com")
+        self.user_3 = user_sample(email="user3@sample.com")
 
     def test_register_user(self) -> None:
         data = {
@@ -205,13 +207,7 @@ class AuthenticatedAdminUserApiTests(APITestCase):
         self.assertTrue(user.check_password(data["password"]))
 
     def test_user_admin_list(self) -> None:
-        users = (
-            self.admin_user,
-            user_sample(),
-            user_sample(email="user2@sample.com"),
-            user_sample(email="user3@sample.com")
-        )
-
+        users = (self.admin_user, self.user_2, self.user_3)
         serializer = UserAdminListRetrieveSerializer(users, many=True)
         response = self.client.get(USER_ADMIN_LIST_URL)
 
