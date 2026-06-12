@@ -189,6 +189,7 @@ class AuthenticatedAdminAirplaneTypeApiTests(APITestCase):
             is_staff=True
         )
         self.client.force_authenticate(user=self.admin_user)
+        self.airplane_type = airplane_type_sample()
 
     def test_airplane_type_create(self) -> None:
         data = {"name": "Test airplane type"}
@@ -200,14 +201,11 @@ class AuthenticatedAdminAirplaneTypeApiTests(APITestCase):
         self.assertEqual(serializer.data, response.data)
 
     def test_airplane_type_update(self) -> None:
-        airplane_type = airplane_type_sample()
         data = {"name": "Another test airplane type"}
-        response = self.client.put(
-            get_airplane_type_detail_url(pk=airplane_type.id),
-            data=data
-        )
-        serializer = AirplaneTypeSerializer(airplane_type)
-        airplane_type.refresh_from_db()
+        URL = get_airplane_type_detail_url(pk=self.airplane_type.id)
+        response = self.client.put(URL, data=data)
+        serializer = AirplaneTypeSerializer(self.airplane_type)
+        self.airplane_type.refresh_from_db()
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(serializer.data, response.data)
