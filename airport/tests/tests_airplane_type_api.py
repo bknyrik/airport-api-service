@@ -65,11 +65,9 @@ class UnauthenticatedAirplaneTypeApiTests(APITestCase):
         self.assertNotIn(serializer_airplane_type3.data, response.data["results"])
 
     def test_airplane_type_retrieve(self) -> None:
-        airplane_type = airplane_type_sample()
-        response = self.client.get(
-            get_airplane_type_detail_url(airplane_type.id)
-        )
-        serializer = AirplaneTypeSerializer(airplane_type)
+        URL = get_airplane_type_detail_url(pk=self.airplane_type_1.id)
+        response = self.client.get(URL)
+        serializer = AirplaneTypeSerializer(self.airplane_type_1)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(serializer.data, response.data)
