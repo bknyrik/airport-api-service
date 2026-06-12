@@ -232,3 +232,17 @@ class AuthenticatedAdminAirplaneTypeApiTests(APITestCase):
             response.status_code,
             status.HTTP_429_TOO_MANY_REQUESTS
         )
+
+    def test_airplane_type_retrieve_request_is_throttled(self) -> None:
+        ADMIN_RATE = get_throttle_rate("admin")
+        URL = get_airplane_type_detail_url(pk=self.airplane_type.id)
+
+        for _ in range(ADMIN_RATE):
+            self.client.get(URL)
+
+        response = self.client.get(URL)
+
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_429_TOO_MANY_REQUESTS
+        )
