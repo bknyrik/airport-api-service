@@ -325,20 +325,16 @@ class AdminUserApiTests(APITestCase):
         self.assertTrue(self.user_2.check_password(data["password"]))
 
     def test_user_admin_partial_update(self) -> None:
-        user = user_sample(is_staff=True)
         data = {
             "first_name": "User",
             "last_name": "Sample",
             "is_staff": False,
         }
+        URL = user_admin_detail_url(pk=self.user_3.id)
+        response = self.client.patch(URL, data=data)
+        self.user_3.refresh_from_db()
 
-        response = self.client.patch(
-            user_admin_detail_url(pk=user.id),
-            data=data
-        )
-        user.refresh_from_db()
-
-        serializer = UserAdminSerializer(user)
+        serializer = UserAdminSerializer(self.user_3)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(serializer.data, response.data)
