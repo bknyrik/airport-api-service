@@ -260,3 +260,14 @@ class AdminAirplaneApiTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(serializer.data, response.data)
+
+    def test_airplane_create_has_bad_request(self) -> None:
+        data = {
+            "name": "Test airplane",
+            "rows": -1,
+            "seats_in_row": 20,
+            "airplane_type": self.airplane_type.id,
+            "facilities": (self.facility_1.id,)
+        }
+        response = self.client.post(AIRPLANE_LIST_URL, data=data)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
