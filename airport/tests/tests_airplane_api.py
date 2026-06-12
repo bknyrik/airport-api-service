@@ -8,7 +8,10 @@ from rest_framework.test import APITestCase
 from rest_framework import status
 
 from airport.models import Airplane
-from airport.serializers import AirplaneListRetrieveSerializer
+from airport.serializers import (
+    AirplaneListRetrieveSerializer,
+    AirplaneSerializer
+)
 from airport.tests.tests_airplane_type_api import airplane_type_sample
 from airport.tests.tests_facility_api import facility_sample
 
@@ -223,3 +226,21 @@ class AuthenticatedAirplaneApiTests(APITestCase):
                 response.status_code,
                 status.HTTP_403_FORBIDDEN
             )
+
+
+class AdminAirplaneApiTests(APITestCase):
+
+    def setUp(self) -> None:
+        self.admin_user = User.objects.create_user(
+            email="admin@airport.com",
+            password="admin12345",
+            is_staff=True
+        )
+        self.client.force_authenticate(user=self.admin_user)
+        self.facility_1 = facility_sample()
+        self.facility_2 = facility_sample(name="Facility Sample 2")
+        self.airplane_type = airplane_type_sample()
+        self.airplane = airplane_sample(
+            airplane_type_id=self.airplane_type.id,
+        )
+        self.airplane.facilities.add(self.facility_1)
