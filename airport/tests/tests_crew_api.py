@@ -49,7 +49,8 @@ class UnauthenticatedCrewApiTests(APITestCase):
             "last_name": "Updated last",
             "role": "CM"
         }
-        response = self.client.put(get_crew_detail_url(pk=1), data=data)
+        URL = get_crew_detail_url(pk=1)
+        response = self.client.put(URL, data=data)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_crew_partial_update_authentication_required(self) -> None:
