@@ -268,24 +268,18 @@ class AuthenticatedAdminUserApiTests(APITestCase):
     def test_user_admin_list_with_pagination(self) -> None:
         PAGE_SIZE = 2
 
-        user = user_sample()
-        user2 = user_sample(email="user2@sample.com")
-        user3 = user_sample(email="user3@sample.com")
-
         response = self.client.get(
             USER_ADMIN_LIST_URL,
             query_params={"page_size": PAGE_SIZE}
         )
         serializer_users = UserAdminListRetrieveSerializer(
-            (self.admin_user, user),
+            (self.admin_user, self.user_2),
             many=True
         )
-        serializer_user2 = UserAdminListRetrieveSerializer(user2)
-        serializer_user3 = UserAdminListRetrieveSerializer(user3)
+        serializer_user3 = UserAdminListRetrieveSerializer(self.user_3)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(serializer_users.data, response.data["results"])
-        self.assertNotIn(serializer_user2.data, response.data["results"])
         self.assertNotIn(serializer_user3.data, response.data["results"])
 
     def test_user_admin_create(self) -> None:
