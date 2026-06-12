@@ -154,3 +154,11 @@ class AuthenticatedRouteApiTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertNotIn(serializer_route_1.data, response.data["results"])
         self.assertIn(serializer_route_2.data, response.data["results"])
+
+    def test_route_retrieve(self) -> None:
+        url = get_route_detail_url(pk=self.route_1.id)
+        response = self.client.get(url)
+        serializer = RouteListRetrieveSerializer(self.route_1)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(serializer.data, response.data)
