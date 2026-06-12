@@ -359,6 +359,16 @@ class AdminUserApiTests(APITestCase):
         self.assertEqual(serializer.data, response.data)
         self.assertTrue(self.user_2.check_password(data["password"]))
 
+    def test_user_admin_update_has_bad_request(self) -> None:
+        data = {
+            "email": "user@airport.com",
+            "password": "userpass12456",
+            "user_permissions": (1, 2, 999)
+        }
+        URL = user_admin_detail_url(pk=self.admin_user)
+        response = self.client.put(URL, data=data)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
     def test_user_admin_partial_update(self) -> None:
         data = {
             "first_name": "User",
