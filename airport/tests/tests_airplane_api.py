@@ -135,3 +135,8 @@ class UnauthenticatedAirplaneApiTests(APITestCase):
         URL = get_airplane_detail_url(pk=self.airplane_1.id)
         response = self.client.patch(URL, data=data)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_airplane_destroy_authentication_required(self) -> None:
+        URL = get_airplane_detail_url(pk=self.airplane_1.id)
+        response = self.client.delete(URL)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
