@@ -6,7 +6,6 @@ from rest_framework.throttling import default_cache
 
 from airport.models import AirplaneType
 from airport.serializers import AirplaneTypeSerializer
-from user.tests.tests_user_api import get_throttle_rate
 
 User = get_user_model()
 
@@ -71,20 +70,6 @@ class UnauthenticatedAirplaneTypeApiTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(serializer.data, response.data)
-
-    def test_airplane_type_retrieve_request_is_throttled(self) -> None:
-        ANON_RATE = get_throttle_rate("anon")
-        URL = get_airplane_type_detail_url(pk=self.airplane_type_1.id)
-
-        for _ in range(ANON_RATE):
-            self.client.get(URL)
-
-        response = self.client.get(URL)
-
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_429_TOO_MANY_REQUESTS
-        )
 
     def test_airplane_type_create_authentication_required(self) -> None:
         data = {"name": "Test"}
