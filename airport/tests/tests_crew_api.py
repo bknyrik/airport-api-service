@@ -71,8 +71,12 @@ class AuthenticatedCrewApiTests(APITestCase):
         )
         self.client.force_authenticate(user=self.user)
         self.crew_1 = crew_sample()
-        self.crew_2 = crew_sample()
-        self.crew_3 = crew_sample()
+        self.crew_2 = crew_sample(
+            role=Crew.Role.COPILOT
+        )
+        self.crew_3 = crew_sample(
+            role=Crew.Role.COPILOT
+        )
 
     def test_crew_list(self) -> None:
         crewmembers = (self.crew_1, self.crew_2, self.crew_3)
@@ -84,18 +88,13 @@ class AuthenticatedCrewApiTests(APITestCase):
 
     def test_crew_list_filter_by_role(self) -> None:
         ROLE = "CP"
-
-        crew_1 = crew_sample()
-        crew_2 = crew_sample(role=Crew.Role.COPILOT)
-        crew_3 = crew_sample(role=Crew.Role.COPILOT)
-
         response = self.client.get(CREW_LIST_URL, query_params={"role": ROLE})
 
         serializer_copilots = CrewListRetrieveSerializer(
-            (crew_2, crew_3),
+            (self.crew_2, self.crew_3),
             many=True
         )
-        serializer_commander = CrewListRetrieveSerializer(crew_1)
+        serializer_commander = CrewListRetrieveSerializer(self.crew_1)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(serializer_copilots.data, response.data["results"])
