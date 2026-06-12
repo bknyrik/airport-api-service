@@ -197,6 +197,7 @@ class AuthenticatedFacilityApiTests(APITestCase):
 class AuthenticatedAdminFacilityApiTests(APITestCase):
 
     def setUp(self) -> None:
+        default_cache.clear()
         self.admin_user = User.objects.create_user(
             email="admin@test.com",
             password="adminpass12345",
@@ -212,6 +213,20 @@ class AuthenticatedAdminFacilityApiTests(APITestCase):
             self.client.get(FACILITY_LIST_URL)
 
         response = self.client.get(FACILITY_LIST_URL)
+
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_429_TOO_MANY_REQUESTS
+        )
+
+    def test_facility_retrieve_request_is_throttled(self) -> None:
+        ADMIN_RATE = get_throttle_rate("admin")
+        URL = get_facility_detail_url(pk=self.facility.id)
+
+        for _ in range(ADMIN_RATE):
+            self.client.get(URL)
+
+        response = self.client.get(URL)
 
         self.assertEqual(
             response.status_code,
