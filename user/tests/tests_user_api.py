@@ -181,6 +181,11 @@ class AuthenticatedUserApiTests(APITestCase):
         response = self.client.patch(URL, data=data)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
+    def test_user_admin_destroy_is_forbidden(self) -> None:
+        URL = user_admin_detail_url(pk=self.user.id)
+        response = self.client.delete(URL)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
     def test_user_manage_request_is_throttled(self) -> None:
         USER_RATE = get_throttle_rate("user")
 
