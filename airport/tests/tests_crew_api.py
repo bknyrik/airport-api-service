@@ -70,14 +70,14 @@ class AuthenticatedCrewApiTests(APITestCase):
             password="userpass12345"
         )
         self.client.force_authenticate(user=self.user)
+        self.crew_1 = crew_sample()
+        self.crew_2 = crew_sample()
+        self.crew_3 = crew_sample()
 
     def test_crew_list(self) -> None:
-        crew_sample()
-        crew_sample()
-        crew_sample()
-
+        crewmembers = (self.crew_1, self.crew_2, self.crew_3)
         response = self.client.get(CREW_LIST_URL)
-        serializer = CrewListRetrieveSerializer(Crew.objects.all(), many=True)
+        serializer = CrewListRetrieveSerializer(crewmembers, many=True)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(serializer.data, response.data["results"])
