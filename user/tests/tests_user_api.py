@@ -133,6 +133,11 @@ class AuthenticatedUserApiTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(serializer.data, response.data)
 
+    def test_user_manage_partial_update_has_bad_request(self) -> None:
+        data = {"email": "not an email"}
+        response = self.client.patch(USER_MANAGE_URL, data=data)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
     def test_user_register_is_forbidden(self) -> None:
         response = self.client.post(USER_REGISTER_URL)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
