@@ -180,10 +180,8 @@ class AuthenticatedCrewApiTests(APITestCase):
             "last_name": "Updated last",
             "role": "CP",
         }
-        response = self.client.put(
-            get_crew_detail_url(pk=1),
-            data=data
-        )
+        URL = get_crew_detail_url(pk=self.crew_1.id)
+        response = self.client.put(URL, data=data)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_crew_partial_update_is_forbidden(self) -> None:
