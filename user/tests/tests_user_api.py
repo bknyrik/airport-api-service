@@ -358,3 +358,16 @@ class AdminUserApiTests(APITestCase):
             response.status_code,
             status.HTTP_429_TOO_MANY_REQUESTS
         )
+
+    def test_user_admin_retrieve_request_is_throttled(self) -> None:
+        ADMIN_RATE = get_throttle_rate("admin")
+        URL = user_admin_detail_url(pk=self.admin_user.id)
+
+        for _ in range(ADMIN_RATE):
+            self.client.get(URL)
+
+        response = self.client.get(URL)
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_429_TOO_MANY_REQUESTS
+        )
