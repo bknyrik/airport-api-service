@@ -384,6 +384,12 @@ class AdminUserApiTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(serializer.data, response.data)
 
+    def test_user_admin_partial_update_has_bad_request(self) -> None:
+        data = {"email": self.user_2.email}
+        URL = user_admin_detail_url(pk=self.admin_user.id)
+        response = self.client.patch(URL, data=data)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
     def test_user_admin_destroy(self) -> None:
         user = user_sample()
         response = self.client.delete(user_admin_detail_url(pk=user.id))
