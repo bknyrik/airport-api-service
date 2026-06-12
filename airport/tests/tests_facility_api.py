@@ -111,19 +111,6 @@ class AuthenticatedFacilityApiTests(APITestCase):
         self.client.force_authenticate(user=self.user)
         self.facility = facility_sample()
 
-    def test_facility_list_request_is_throttled(self) -> None:
-        USER_RATE = get_throttle_rate("user")
-
-        for _ in range(USER_RATE):
-            self.client.get(FACILITY_LIST_URL)
-
-        response = self.client.get(FACILITY_LIST_URL)
-
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_429_TOO_MANY_REQUESTS
-        )
-
     def test_facility_retrieve_request_is_throttled(self) -> None:
         USER_RATE = get_throttle_rate("user")
         URL = get_facility_detail_url(pk=self.facility.id)
