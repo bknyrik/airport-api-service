@@ -1,3 +1,7 @@
+import os
+import tempfile
+
+from PIL import Image
 from django.shortcuts import reverse
 from rest_framework.test import APITestCase
 from rest_framework import status
@@ -140,3 +144,19 @@ class UnauthenticatedAirplaneApiTests(APITestCase):
         URL = get_airplane_detail_url(pk=self.airplane_1.id)
         response = self.client.delete(URL)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_airplane_upload_image_authentication_required(self) -> None:
+        with tempfile.NamedTemporaryFile(suffix=".jpg") as ntf:
+            URL = get_airplane_detail_url(pk=self.airplane_1.id)
+            image = Image.new("RGB", (25, 25))
+
+            image.save(ntf, format="JPEG")
+            ntf.seek(0)
+
+            data = {"image": ntf}
+            response = self.client.post(URL, data=data, format="multipart")
+
+            self.assertEqual(
+                response.status_code,
+                status.HTTP_401_UNAUTHORIZED
+            )
