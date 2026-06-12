@@ -271,3 +271,20 @@ class AdminAirplaneApiTests(APITestCase):
         }
         response = self.client.post(AIRPLANE_LIST_URL, data=data)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_airplane_update(self) -> None:
+        data = {
+            "name": "Another test airplane",
+            "rows": 6,
+            "airplane_type": self.airplane_type.id,
+            "seats_in_row": 20,
+            "facilities": (self.facility_2.id,)
+        }
+        URL = get_airplane_detail_url(pk=self.airplane.id)
+        response = self.client.put(URL, data=data)
+        serializer = AirplaneSerializer(self.airplane)
+
+        self.airplane.refresh_from_db()
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(serializer.data, response.data)
