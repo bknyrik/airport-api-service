@@ -29,3 +29,13 @@ class UnauthenticatedRouteApiTests(APITestCase):
         }
         response = self.client.post(ROUTE_LIST_URL, data=data)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_route_update_authentication_required(self) -> None:
+        data = {
+            "source": 2,
+            "destination": 3,
+            "distance": 250
+        }
+        url = get_route_detail_url(pk=1)
+        response = self.client.put(url, data=data)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
