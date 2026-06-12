@@ -316,3 +316,11 @@ class AdminAirplaneApiTests(APITestCase):
         URL = get_airplane_detail_url(pk=self.airplane.id)
         response = self.client.patch(URL, data=data)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_airplane_destroy(self) -> None:
+        URL = get_airplane_detail_url(pk=self.airplane.id)
+        response = self.client.delete(URL)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertFalse(
+            Airplane.objects.filter(name=self.airplane.name).exists()
+        )
