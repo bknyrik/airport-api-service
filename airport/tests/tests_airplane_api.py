@@ -129,3 +129,9 @@ class UnauthenticatedAirplaneApiTests(APITestCase):
         URL = get_airplane_detail_url(pk=self.airplane_1.id)
         response = self.client.put(URL, data=data)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_airplane_partial_update_authentication_required(self) -> None:
+        data = {"description": "Test description"}
+        URL = get_airplane_detail_url(pk=self.airplane_1.id)
+        response = self.client.patch(URL, data=data)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
