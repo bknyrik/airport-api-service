@@ -323,6 +323,15 @@ class AdminUserApiTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(serializer.data, response.data)
 
+    def test_user_admin_create_has_bad_request(self) -> None:
+        data = {
+            "email": "user@example",
+            "password": "userpass12345",
+            "is_superuser": True,
+        }
+        response = self.client.post(USER_ADMIN_LIST_URL, data=data)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
     def test_user_admin_retrieve(self) -> None:
         URL = user_admin_detail_url(pk=self.admin_user.id)
         response = self.client.get(URL)
