@@ -217,7 +217,7 @@ class AuthenticatedAirplaneApiTests(APITestCase):
 
     def test_airplane_upload_image_is_forbidden(self) -> None:
         with tempfile.NamedTemporaryFile(suffix=".jpg") as ntf:
-            URL = get_airplane_detail_url(pk=1)
+            URL = get_airplane_upload_image_url(pk=1)
             image = Image.new("RGB", (10, 10))
 
             image.save(ntf, format="JPEG")
