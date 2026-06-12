@@ -152,6 +152,18 @@ class AuthenticatedAirplaneTypeApiTests(APITestCase):
         response = self.client.delete(URL)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
+    def test_airplane_type_list_request_is_throttled(self) -> None:
+        USER_RATE = get_throttle_rate("user")
+
+        for _ in range(USER_RATE):
+            self.client.get(AIRPLANE_TYPE_LIST_URL)
+
+        response = self.client.get(AIRPLANE_TYPE_LIST_URL)
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_429_TOO_MANY_REQUESTS
+        )
+
 
 class AuthenticatedAdminAirplaneTypeApiTests(APITestCase):
 
