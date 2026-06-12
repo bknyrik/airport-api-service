@@ -3,6 +3,7 @@ import tempfile
 
 from PIL import Image
 from django.shortcuts import reverse
+from django.contrib.auth import get_user_model
 from rest_framework.test import APITestCase
 from rest_framework import status
 
@@ -10,6 +11,9 @@ from airport.models import Airplane
 from airport.serializers import AirplaneListRetrieveSerializer
 from airport.tests.tests_airplane_type_api import airplane_type_sample
 from airport.tests.tests_facility_api import facility_sample
+
+
+User = get_user_model()
 
 
 AIRPLANE_LIST_URL = reverse("airport:airplane-list")
@@ -160,3 +164,22 @@ class UnauthenticatedAirplaneApiTests(APITestCase):
                 response.status_code,
                 status.HTTP_401_UNAUTHORIZED
             )
+
+
+class AuthenticatedAirplaneApiTests(APITestCase):
+
+    def setUp(self) -> None:
+        self.user = User.objects.create_user(
+            email="user@airport.com",
+            password="userpass12345"
+        )
+        self.client.force_authenticate(user=self.user)
+
+    def test_airplane_create_is_forbidden(self) -> None:
+        data = {
+            "name": "Test airplane",
+            "rows": 4,
+            "seats_in_row": 30
+        }
+        response = self.client.post(AIRPLANE_LIST_URL, data=data)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
