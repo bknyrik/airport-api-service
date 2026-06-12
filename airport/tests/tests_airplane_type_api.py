@@ -180,7 +180,7 @@ class AuthenticatedAirplaneTypeApiTests(APITestCase):
         )
 
 
-class AuthenticatedAdminAirplaneTypeApiTests(APITestCase):
+class AdminAirplaneTypeApiTests(APITestCase):
 
     def setUp(self) -> None:
         self.admin_user = User.objects.create_user(
