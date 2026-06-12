@@ -35,14 +35,13 @@ class UnauthenticatedAirplaneTypeApiTests(APITestCase):
         self.airplane_type_3 = airplane_type_sample(name="Airplane Sample 3")
 
     def test_airplane_type_list(self) -> None:
-        airplane_type = airplane_type_sample()
-        airplane_type2 = airplane_type_sample(name="Airplane Sample 2")
-
-        response = self.client.get(AIRPLANE_TYPE_LIST_URL)
-        serializer = AirplaneTypeSerializer(
-            (airplane_type, airplane_type2),
-            many=True
+        airplane_types = (
+            self.airplane_type_1,
+            self.airplane_type_2,
+            self.airplane_type_3,
         )
+        response = self.client.get(AIRPLANE_TYPE_LIST_URL)
+        serializer = AirplaneTypeSerializer(airplane_types, many=True)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(serializer.data, response.data["results"])
