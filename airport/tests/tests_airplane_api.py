@@ -207,3 +207,19 @@ class AuthenticatedAirplaneApiTests(APITestCase):
         URL = get_airplane_detail_url(pk=1)
         response = self.client.delete(URL)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_airplane_upload_image_is_forbidden(self) -> None:
+        with tempfile.NamedTemporaryFile(suffix=".jpg") as ntf:
+            URL = get_airplane_detail_url(pk=1)
+            image = Image.new("RGB", (10, 10))
+
+            image.save(ntf, format="JPEG")
+            ntf.seek(0)
+
+            data = {"image": ntf}
+            response = self.client.post(URL, data=data, format="multipart")
+
+            self.assertEqual(
+                response.status_code,
+                status.HTTP_403_FORBIDDEN
+            )
