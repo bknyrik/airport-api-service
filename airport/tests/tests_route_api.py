@@ -187,3 +187,8 @@ class AuthenticatedRouteApiTests(APITestCase):
         url = get_route_detail_url(pk=self.route_1.id)
         response = self.client.patch(url, data=data)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_route_destroy_is_forbidden(self) -> None:
+        url = get_route_detail_url(pk=self.route_1.id)
+        response = self.client.delete(url)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
