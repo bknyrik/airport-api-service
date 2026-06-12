@@ -1,6 +1,9 @@
+from django.contrib.auth import get_user_model
 from django.shortcuts import reverse
 from rest_framework.test import APITestCase
 from rest_framework import status
+
+User = get_user_model()
 
 
 ROUTE_LIST_URL = reverse("airport:route-list")
@@ -50,3 +53,13 @@ class UnauthenticatedRouteApiTests(APITestCase):
         url = get_route_detail_url(pk=1)
         response = self.client.delete(url)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+
+class AuthenticatedRouteApiTests(APITestCase):
+
+    def setUp(self) -> None:
+        self.user = User.objects.create_user(
+            email="user@airport.com",
+            password="userpass12345"
+        )
+        self.client.force_authenticate(user=self.user)
