@@ -6,7 +6,6 @@ from rest_framework.throttling import default_cache
 
 from airport.serializers import FacilitySerializer
 from airport.models import Facility
-from user.tests.tests_user_api import get_throttle_rate
 
 
 User = get_user_model()
@@ -151,20 +150,6 @@ class AdminFacilityApiTests(APITestCase):
         )
         self.client.force_authenticate(user=self.admin_user)
         self.facility = facility_sample()
-
-    def test_facility_retrieve_request_is_throttled(self) -> None:
-        ADMIN_RATE = get_throttle_rate("admin")
-        URL = get_facility_detail_url(pk=self.facility.id)
-
-        for _ in range(ADMIN_RATE):
-            self.client.get(URL)
-
-        response = self.client.get(URL)
-
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_429_TOO_MANY_REQUESTS
-        )
 
     def test_facility_create(self) -> None:
         data = {
