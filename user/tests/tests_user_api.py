@@ -114,6 +114,14 @@ class AuthenticatedUserApiTests(APITestCase):
         self.assertEqual(serializer.data, response.data)
         self.assertTrue(self.user.check_password(data["password"]))
 
+    def test_user_manage_update_has_bad_request(self) -> None:
+        data = {
+            "email": "updated_user@airport.com",
+            "password": " "
+        }
+        response = self.client.put(USER_MANAGE_URL, data=data)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
     def test_user_manage_partial_update(self) -> None:
         data = {
             "email": "upduser@airport.com",
