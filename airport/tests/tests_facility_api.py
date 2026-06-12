@@ -2,9 +2,11 @@ from django.shortcuts import reverse
 from django.contrib.auth import get_user_model
 from rest_framework.test import APITestCase
 from rest_framework import status
+from rest_framework.throttling import default_cache
 
 from airport.serializers import FacilitySerializer
 from airport.models import Facility
+from user.tests.tests_user_api import get_throttle_rate
 
 
 User = get_user_model()
@@ -29,6 +31,7 @@ def get_facility_detail_url(pk: int) -> str:
 class UnauthenticatedFacilityApiTests(APITestCase):
 
     def setUp(self) -> None:
+        default_cache.clear()
         self.facility_1 = facility_sample()
         self.facility_2 = facility_sample(name="Test facility 2")
         self.facility_3 = facility_sample(name="Test facility 3")
@@ -62,6 +65,19 @@ class UnauthenticatedFacilityApiTests(APITestCase):
             response.data["results"]
         )
         self.assertNotIn(serializer_facility3.data, response.data["results"])
+
+    def test_facility_list_request_is_throttled(self) -> None:
+        ANON_RATE = get_throttle_rate("anon")
+
+        for _ in range(ANON_RATE):
+            self.client.get(FACILITY_LIST_URL)
+
+        response = self.client.get(FACILITY_LIST_URL)
+
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_429_TOO_MANY_REQUESTS
+        )
 
     def test_facility_retrieve(self) -> None:
         URL = get_facility_detail_url(pk=self.facility_1.id)
