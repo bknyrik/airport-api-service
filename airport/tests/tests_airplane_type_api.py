@@ -144,7 +144,8 @@ class AuthenticatedAirplaneTypeApiTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_airplane_type_destroy_is_forbidden(self) -> None:
-        response = self.client.delete(get_airplane_type_detail_url(pk=999))
+        URL = get_airplane_type_detail_url(pk=1)
+        response = self.client.delete(URL)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
 
