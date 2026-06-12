@@ -124,6 +124,7 @@ class UnauthenticatedAirplaneTypeApiTests(APITestCase):
 class AuthenticatedAirplaneTypeApiTests(APITestCase):
 
     def setUp(self) -> None:
+        default_cache.clear()
         self.user = User.objects.create_user(
             email="user@test.com",
             password="testpass12345"
@@ -159,6 +160,20 @@ class AuthenticatedAirplaneTypeApiTests(APITestCase):
             self.client.get(AIRPLANE_TYPE_LIST_URL)
 
         response = self.client.get(AIRPLANE_TYPE_LIST_URL)
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_429_TOO_MANY_REQUESTS
+        )
+
+    def test_airplane_type_retrieve_request_is_throttled(self) -> None:
+        airplane_type = airplane_type_sample()
+        USER_RATE = get_throttle_rate("user")
+        URL = get_airplane_type_detail_url(pk=airplane_type.id)
+
+        for _ in range(USER_RATE):
+            self.client.get(URL)
+
+        response = self.client.get(URL)
         self.assertEqual(
             response.status_code,
             status.HTTP_429_TOO_MANY_REQUESTS
