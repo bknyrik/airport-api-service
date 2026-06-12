@@ -211,14 +211,14 @@ class AuthenticatedAdminAirplaneTypeApiTests(APITestCase):
         self.assertEqual(serializer.data, response.data)
 
     def test_airplane_type_destroy(self) -> None:
-        airplane_type = airplane_type_sample()
-        response = self.client.delete(
-            get_airplane_type_detail_url(pk=airplane_type.id)
-        )
+        URL = get_airplane_type_detail_url(pk=self.airplane_type.id)
+        response = self.client.delete(URL)
 
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertFalse(
-            AirplaneType.objects.filter(name=airplane_type.name).exists()
+            AirplaneType.objects.filter(
+                name=self.airplane_type.name
+            ).exists()
         )
 
     def test_airplane_type_list_request_is_throttled(self) -> None:
