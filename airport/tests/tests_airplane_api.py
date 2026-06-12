@@ -344,3 +344,9 @@ class AdminAirplaneApiTests(APITestCase):
 
             self.assertEqual(response.status_code, status.HTTP_200_OK)
             self.assertTrue(os.path.exists(self.airplane.image.path))
+
+    def test_airplane_upload_image_has_bad_request(self) -> None:
+        URL = get_airplane_upload_image_url(pk=self.airplane.id)
+        data = {"image": "not an image"}
+        response = self.client.post(URL, data=data, format="multipart")
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
