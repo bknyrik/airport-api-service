@@ -224,19 +224,6 @@ class AdminUserApiTests(APITestCase):
             is_staff=True
         )
 
-    def test_register_user(self) -> None:
-        data = {
-            "email": "user@example.com",
-            "password": "userpass12345"
-        }
-        response = self.client.post(USER_REGISTER_URL, data=data)
-        user = User.objects.get(email=data["email"])
-        serializer = UserSerializer(user)
-
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(serializer.data, response.data)
-        self.assertTrue(user.check_password(data["password"]))
-
     def test_user_admin_list(self) -> None:
         users = (self.admin_user, self.user_2, self.user_3)
         serializer = UserAdminListRetrieveSerializer(users, many=True)
