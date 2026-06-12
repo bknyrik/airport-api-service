@@ -50,7 +50,7 @@ class UnauthenticatedUserApiTests(APITestCase):
         response = self.client.get(USER_MANAGE_URL)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
-    def test_anonymous_user_allowed_to_register(self) -> None:
+    def test_user_register(self) -> None:
         data = {
             "email": "user@airport.com",
             "password": "userpass12345"
