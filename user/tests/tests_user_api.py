@@ -191,10 +191,10 @@ class AuthenticatedAdminUserApiTests(APITestCase):
         )
         self.client.force_authenticate(user=self.admin_user)
         self.user_2 = user_sample(
-            email="user2@sample.com"
+            email="johndoe@sample.com"
         )
         self.user_3 = user_sample(
-            email="user3@sample.com",
+            email="donaldcooper@sample.com",
             is_staff=True
         )
 
@@ -241,23 +241,29 @@ class AuthenticatedAdminUserApiTests(APITestCase):
         )
 
     def test_user_admin_list_filter_by_email_characters(self) -> None:
-        user = user_sample(email="johndoe@sample.com")
-        user2 = user_sample(email="donaldcooper@sample.com")
-        user3 = user_sample(email="marksimms@sample.com")
-
-        user_serializer = UserAdminListRetrieveSerializer(user)
-        user2_serializer = UserAdminListRetrieveSerializer(user2)
-        user3_serializer = UserAdminListRetrieveSerializer(user3)
+        EMAIL_PATTERN = "do"
+        serializer_users_match_email = UserAdminListRetrieveSerializer(
+            (self.user_2, self.user_3),
+            many=True
+        )
+        serializer_user_doesnt_match_email = UserAdminListRetrieveSerializer(
+            self.admin_user
+        )
 
         response = self.client.get(
             USER_ADMIN_LIST_URL,
-            query_params={"email": "do"}
+            query_params={"email": EMAIL_PATTERN}
         )
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertIn(user_serializer.data, response.data["results"])
-        self.assertIn(user2_serializer.data, response.data["results"])
-        self.assertNotIn(user3_serializer.data, response.data["results"])
+        self.assertEqual(
+            serializer_users_match_email.data,
+            response.data["results"]
+        )
+        self.assertNotIn(
+            serializer_user_doesnt_match_email.data,
+            response.data["results"]
+        )
 
     def test_user_admin_list_with_pagination(self) -> None:
         PAGE_SIZE = 2
