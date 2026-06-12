@@ -183,3 +183,13 @@ class AuthenticatedAirplaneApiTests(APITestCase):
         }
         response = self.client.post(AIRPLANE_LIST_URL, data=data)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_airplane_update_is_forbidden(self) -> None:
+        data = {
+            "name": "Another test airplane",
+            "rows": 2,
+            "seats_in_row": 15
+        }
+        URL = get_airplane_detail_url(pk=1)
+        response = self.client.put(URL, data=data)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
