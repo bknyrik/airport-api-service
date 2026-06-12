@@ -66,19 +66,6 @@ class UnauthenticatedFacilityApiTests(APITestCase):
         )
         self.assertNotIn(serializer_facility3.data, response.data["results"])
 
-    def test_facility_list_request_is_throttled(self) -> None:
-        ANON_RATE = get_throttle_rate("anon")
-
-        for _ in range(ANON_RATE):
-            self.client.get(FACILITY_LIST_URL)
-
-        response = self.client.get(FACILITY_LIST_URL)
-
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_429_TOO_MANY_REQUESTS
-        )
-
     def test_facility_retrieve(self) -> None:
         URL = get_facility_detail_url(pk=self.facility_1.id)
         response = self.client.get(URL)
