@@ -128,3 +128,16 @@ class AuthenticatedRouteApiTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIn(serializer_route_1.data, response.data["results"])
         self.assertNotIn(serializer_route_2.data, response.data["results"])
+
+    def test_route_list_filter_by_source_id(self) -> None:
+        SOURCE_ID = self.airport_1.id
+        response = self.client.get(
+            ROUTE_LIST_URL,
+            query_params={"source_id": SOURCE_ID}
+        )
+        serializer_route_1 = RouteListRetrieveSerializer(self.route_1)
+        serializer_route_2 = RouteListRetrieveSerializer(self.route_2)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertIn(serializer_route_1.data, response.data["results"])
+        self.assertNotIn(serializer_route_2.data, response.data["results"])
