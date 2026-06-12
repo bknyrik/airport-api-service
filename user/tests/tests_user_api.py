@@ -365,7 +365,7 @@ class AdminUserApiTests(APITestCase):
             "password": "userpass12456",
             "user_permissions": (1, 2, 999)
         }
-        URL = user_admin_detail_url(pk=self.admin_user)
+        URL = user_admin_detail_url(pk=self.admin_user.id)
         response = self.client.put(URL, data=data)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
