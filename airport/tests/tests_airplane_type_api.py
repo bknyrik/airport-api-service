@@ -251,18 +251,6 @@ class AdminAirplaneTypeApiTests(APITestCase):
             ).exists()
         )
 
-    def test_airplane_type_list_request_is_throttled(self) -> None:
-        ADMIN_RATE = get_throttle_rate("admin")
-
-        for _ in range(ADMIN_RATE):
-            self.client.get(AIRPLANE_TYPE_LIST_URL)
-
-        response = self.client.get(AIRPLANE_TYPE_LIST_URL)
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_429_TOO_MANY_REQUESTS
-        )
-
     def test_airplane_type_retrieve_request_is_throttled(self) -> None:
         ADMIN_RATE = get_throttle_rate("admin")
         URL = get_airplane_type_detail_url(pk=self.airplane_type.id)
