@@ -194,7 +194,7 @@ class AuthenticatedFacilityApiTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
 
-class AuthenticatedAdminFacilityApiTests(APITestCase):
+class AdminFacilityApiTests(APITestCase):
 
     def setUp(self) -> None:
         default_cache.clear()
