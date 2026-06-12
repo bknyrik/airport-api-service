@@ -104,7 +104,8 @@ class UnauthenticatedAirplaneTypeApiTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_airplane_type_destroy_authentication_required(self) -> None:
-        response = self.client.delete(get_airplane_type_detail_url(pk=999))
+        URL = get_airplane_type_detail_url(pk=self.airplane_type_1.id)
+        response = self.client.delete(URL)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_airplane_type_list_request_is_throttled(self) -> None:
