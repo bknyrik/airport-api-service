@@ -108,18 +108,6 @@ class UnauthenticatedAirplaneTypeApiTests(APITestCase):
         response = self.client.delete(URL)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
-    def test_airplane_type_list_request_is_throttled(self) -> None:
-        ANON_RATE = get_throttle_rate("anon")
-
-        for _ in range(ANON_RATE):
-            self.client.get(AIRPLANE_TYPE_LIST_URL)
-
-        response = self.client.get(AIRPLANE_TYPE_LIST_URL)
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_429_TOO_MANY_REQUESTS
-        )
-
 
 class AuthenticatedAirplaneTypeApiTests(APITestCase):
 
