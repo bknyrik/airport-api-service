@@ -48,18 +48,17 @@ class UnauthenticatedAirplaneTypeApiTests(APITestCase):
 
     def test_airplane_type_list_with_pagination(self) -> None:
         PAGE_SIZE = 2
-        airplane_type = airplane_type_sample()
-        airplane_type2 = airplane_type_sample(name="Airplane Sample 2")
-        airplane_type3 = airplane_type_sample(name="Airplane Sample 3")
         response = self.client.get(
             AIRPLANE_TYPE_LIST_URL,
             query_params={"page_size": PAGE_SIZE}
         )
         serializer_airplane_types = AirplaneTypeSerializer(
-            (airplane_type, airplane_type2),
+            (self.airplane_type_1, self.airplane_type_2),
             many=True
         )
-        serializer_airplane_type3 = AirplaneTypeSerializer(airplane_type3)
+        serializer_airplane_type3 = AirplaneTypeSerializer(
+            self.airplane_type_3
+        )
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(serializer_airplane_types.data, response.data["results"])
