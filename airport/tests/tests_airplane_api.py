@@ -254,7 +254,7 @@ class AdminAirplaneApiTests(APITestCase):
             "facilities": (self.facility_2.id,)
         }
         response = self.client.post(AIRPLANE_LIST_URL, data=data)
-        print(response.status_code)
+
         airplane = Airplane.objects.get(name=data["name"])
         serializer = AirplaneSerializer(airplane)
 
