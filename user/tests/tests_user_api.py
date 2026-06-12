@@ -147,7 +147,8 @@ class AuthenticatedUserApiTests(APITestCase):
             "is_superuser": True,
             "password": "updatepass12345"
         }
-        response = self.client.put(user_admin_detail_url(pk=1), data=data)
+        URL = user_admin_detail_url(pk=1)
+        response = self.client.put(URL, data=data)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_user_admin_partial_update_is_forbidden(self) -> None:
