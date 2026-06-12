@@ -244,3 +244,19 @@ class AdminAirplaneApiTests(APITestCase):
             airplane_type_id=self.airplane_type.id,
         )
         self.airplane.facilities.add(self.facility_1)
+
+    def test_airplane_create(self) -> None:
+        data = {
+            "name": "Test airplane",
+            "rows": 4,
+            "seats_in_row": 25,
+            "airplane_type": self.airplane_type.id,
+            "facilities": (self.facility_2.id,)
+        }
+        response = self.client.post(AIRPLANE_LIST_URL, data=data)
+        print(response.status_code)
+        airplane = Airplane.objects.get(name=data["name"])
+        serializer = AirplaneSerializer(airplane)
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(serializer.data, response.data)
