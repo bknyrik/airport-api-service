@@ -130,11 +130,25 @@ class UnauthenticatedFacilityApiTests(APITestCase):
 class AuthenticatedFacilityApiTests(APITestCase):
 
     def setUp(self) -> None:
+        default_cache.clear()
         self.user = User.objects.create_user(
             email="user@test.com",
             password="testpass12345"
         )
         self.client.force_authenticate(user=self.user)
+
+    def test_facility_list_request_is_throttled(self) -> None:
+        USER_RATE = get_throttle_rate("user")
+
+        for _ in range(USER_RATE):
+            self.client.get(FACILITY_LIST_URL)
+
+        response = self.client.get(FACILITY_LIST_URL)
+
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_429_TOO_MANY_REQUESTS
+        )
 
     def test_facility_create_is_forbidden(self) -> None:
         data = {
