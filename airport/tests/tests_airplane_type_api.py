@@ -210,6 +210,17 @@ class AuthenticatedAdminAirplaneTypeApiTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(serializer.data, response.data)
 
+    def test_airplane_type_partial_update(self) -> None:
+        data = {"name": "Partial airplane type"}
+        URL = get_airplane_type_detail_url(pk=self.airplane_type.id)
+        response = self.client.patch(URL, data=data)
+        serializer = AirplaneTypeSerializer(self.airplane_type)
+
+        self.airplane_type.refresh_from_db()
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(serializer.data, response.data)
+
     def test_airplane_type_destroy(self) -> None:
         URL = get_airplane_type_detail_url(pk=self.airplane_type.id)
         response = self.client.delete(URL)
