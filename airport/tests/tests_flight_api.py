@@ -222,3 +222,11 @@ class AuthenticatedFlightApiTests(APITestCase):
             serializer_flight_doesnt_match_crewmembers.data,
             response.data["results"]
         )
+
+    def test_flight_retrieve(self) -> None:
+        url = get_flight_detail_url(pk=self.flight_1.id)
+        response = self.client.get(url)
+        serializer = FlightListRetrieveSerializer(self.flight_1)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(serializer.data, response.data)
