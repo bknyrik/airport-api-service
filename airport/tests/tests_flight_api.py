@@ -308,3 +308,18 @@ class AdminFlightApiTests(APITestCase):
             route_id=self.route_1.id
         )
         self.flight.crewmembers.add(self.crew_1)
+
+    def test_flight_create(self) -> None:
+        data = {
+            "route": self.route_2.id,
+            "airplane": self.airplane_2.id,
+            "departure_time": datetime(2026, 1, 2),
+            "arrival_time": datetime(2026, 1, 5),
+            "crewmembers": (self.crew_1.id,)
+        }
+        response = self.client.post(FLIGHT_LIST_URL, data=data)
+        flight = Flight.objects.get(**data)
+        serializer = FlightSerializer(flight)
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(serializer.data, response.data)
