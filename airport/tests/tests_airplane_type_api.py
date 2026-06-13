@@ -2,7 +2,6 @@ from django.shortcuts import reverse
 from django.contrib.auth import get_user_model
 from rest_framework.test import APITestCase
 from rest_framework import status
-from rest_framework.throttling import default_cache
 
 from airport.models import AirplaneType
 from airport.serializers import AirplaneTypeSerializer
@@ -28,7 +27,6 @@ def get_airplane_type_detail_url(pk: int) -> str:
 class UnauthenticatedAirplaneTypeApiTests(APITestCase):
 
     def setUp(self) -> None:
-        default_cache.clear()
         self.airplane_type_1 = airplane_type_sample()
         self.airplane_type_2 = airplane_type_sample(name="Airplane Sample 2")
         self.airplane_type_3 = airplane_type_sample(name="Airplane Sample 3")
