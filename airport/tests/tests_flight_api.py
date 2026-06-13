@@ -385,3 +385,9 @@ class AdminFlightApiTests(APITestCase):
         url = get_flight_detail_url(pk=self.flight.id)
         response = self.client.patch(url, data=data)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_flight_destroy(self) -> None:
+        url = get_flight_detail_url(pk=self.flight.id)
+        response = self.client.delete(url)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertFalse(Flight.objects.filter(pk=self.flight.id).exists())
