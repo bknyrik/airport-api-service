@@ -135,12 +135,22 @@ class AuthenticatedRouteApiTests(APITestCase):
             ROUTE_LIST_URL,
             query_params={"max_distance": MAX_DISTANCE}
         )
-        serializer_route_1 = RouteListRetrieveSerializer(self.route_1)
-        serializer_route_2 = RouteListRetrieveSerializer(self.route_2)
+        serializer_route_less_max_distance = RouteListRetrieveSerializer(
+            self.route_1
+        )
+        serializer_route_greater_max_distance = RouteListRetrieveSerializer(
+            self.route_2
+        )
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertIn(serializer_route_1.data, response.data["results"])
-        self.assertNotIn(serializer_route_2.data, response.data["results"])
+        self.assertIn(
+            serializer_route_less_max_distance.data,
+            response.data["results"]
+        )
+        self.assertNotIn(
+            serializer_route_greater_max_distance.data,
+            response.data["results"]
+        )
 
     def test_route_list_filter_by_source_id(self) -> None:
         SOURCE_ID = self.airport_1.id
