@@ -4,7 +4,10 @@ from rest_framework.test import APITestCase
 from rest_framework import status
 
 from airport.models import Order, Ticket
-from airport.serializers import OrderSerializer
+from airport.serializers import (
+    OrderSerializer,
+    OrderListRetrieveSerializer
+)
 from airport.tests.tests_airport_api import airport_sample
 from airport.tests.tests_airplane_type_api import airplane_type_sample
 from airport.tests.tests_airplane_api import airplane_sample
@@ -114,6 +117,9 @@ class AuthenticatedOrderApiTests(APITestCase):
         self.order = Order.objects.create(
             user_id=self.user.id
         )
+        self.order_2 = Order.objects.create(
+            user_id=self.user.id
+        )
         self.ticket_1 = Ticket.objects.create(
             flight_id=self.flight.id,
             row=1,
@@ -126,6 +132,22 @@ class AuthenticatedOrderApiTests(APITestCase):
             seat=2,
             order_id=self.order.id
         )
+        self.ticket_3 = Ticket.objects.create(
+            flight_id=self.flight.id,
+            row=4,
+            seat=1,
+            order_id=self.order_2.id
+        )
+
+    def test_order_list(self) -> None:
+        response = self.client.get(ORDER_LIST_URL)
+        serializer = OrderListRetrieveSerializer(
+            Order.objects.all(),
+            many=True
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(serializer.data, response.data["results"])
 
     def test_order_create(self) -> None:
         data = {
