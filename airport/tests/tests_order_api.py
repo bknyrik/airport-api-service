@@ -149,6 +149,19 @@ class AuthenticatedOrderApiTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(serializer.data, response.data["results"])
 
+    def test_order_list_with_pagination(self) -> None:
+        PAGE_SIZE = 1
+        response = self.client.get(
+            ORDER_LIST_URL,
+            query_params={"page_size": PAGE_SIZE}
+        )
+        serializer_order_1 = OrderListRetrieveSerializer(self.order)
+        serializer_order_2 = OrderListRetrieveSerializer(self.order_2)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertIn(serializer_order_1.data, response.data["results"])
+        self.assertNotIn(serializer_order_2.data, response.data["results"])
+
     def test_order_create(self) -> None:
         data = {
             "tickets": (
