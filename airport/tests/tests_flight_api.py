@@ -199,3 +199,26 @@ class AuthenticatedFlightApiTests(APITestCase):
             serializer_flight_match_airplane_id.data,
             response.data["results"]
         )
+
+    def test_flight_list_filter_by_crewmembers_ids(self) -> None:
+        CREWMEMBERS_IDS = (self.crew_1.id, )
+        response = self.client.get(
+            FLIGHT_LIST_URL,
+            query_params={"crewmembers": CREWMEMBERS_IDS}
+        )
+        serializer_flight_match_crewmembers = (
+            FlightListRetrieveSerializer(self.flight_1)
+        )
+        serializer_flight_doesnt_match_crewmembers = (
+            FlightListRetrieveSerializer(self.flight_2)
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertIn(
+            serializer_flight_match_crewmembers.data,
+            response.data["results"]
+        )
+        self.assertNotIn(
+            serializer_flight_doesnt_match_crewmembers.data,
+            response.data["results"]
+        )
