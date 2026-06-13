@@ -153,3 +153,26 @@ class AuthenticatedFlightApiTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(serializer.data, response.data["results"])
+
+    def test_flight_list_filter_by_route_id(self) -> None:
+        ROUTE_ID = self.route_1.id
+        response = self.client.get(
+            FLIGHT_LIST_URL,
+            query_params={"route_id": ROUTE_ID}
+        )
+        serializer_flight_match_route_id = (
+            FlightListRetrieveSerializer(self.flight_1)
+        )
+        serializer_flight_doesnt_match_route_id = (
+            FlightListRetrieveSerializer(self.flight_2)
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertIn(
+            serializer_flight_match_route_id.data,
+            response.data["results"]
+        )
+        self.assertNotIn(
+            serializer_flight_doesnt_match_route_id.data,
+            response.data["results"]
+        )
