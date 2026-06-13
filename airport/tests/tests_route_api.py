@@ -4,7 +4,10 @@ from rest_framework.test import APITestCase
 from rest_framework import status
 
 from airport.models import Route, Airport
-from airport.serializers import RouteListRetrieveSerializer
+from airport.serializers import (
+    RouteSerializer,
+    RouteListRetrieveSerializer
+)
 from airport.tests.tests_airport_api import airport_sample
 
 
@@ -209,3 +212,16 @@ class AdminRouteApiTests(APITestCase):
             source_id=self.airport_1.id,
             destination_id=self.airport_2.id
         )
+
+    def test_route_create(self) -> None:
+        data = {
+            "source": self.airport_2.id,
+            "destination": self.airport_1.id,
+            "distance": 150
+        }
+        response = self.client.post(ROUTE_LIST_URL, data=data)
+        route = Route.objects.get(**data)
+        serializer = RouteSerializer(route)
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(serializer.data, response.data)
