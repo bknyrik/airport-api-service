@@ -262,3 +262,14 @@ class AdminRouteApiTests(APITestCase):
         url = get_route_detail_url(pk=self.route.id)
         response = self.client.put(url, data=data)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_route_partial_update(self) -> None:
+        data = {"distance": 555}
+        url = get_route_detail_url(pk=self.route.id)
+        response = self.client.patch(url, data=data)
+        serializer = RouteSerializer(self.route)
+
+        self.route.refresh_from_db()
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(serializer.data, response.data)
