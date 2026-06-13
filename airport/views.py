@@ -612,7 +612,8 @@ class OrderViewSet(ModelViewSet):
     @extend_schema(
         description=(
             "Returns list with information about all orders with tickets "
-            "of the current authenticated user. This list also can be paginated."
+            "of the current authenticated user. "
+            "This list also can be paginated."
         ),
         summary="Get all orders by current user",
         responses=responses.ORDER_LIST_RESPONSES
