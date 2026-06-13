@@ -30,7 +30,6 @@ def get_facility_detail_url(pk: int) -> str:
 class UnauthenticatedFacilityApiTests(APITestCase):
 
     def setUp(self) -> None:
-        default_cache.clear()
         self.facility_1 = facility_sample()
         self.facility_2 = facility_sample(name="Test facility 2")
         self.facility_3 = facility_sample(name="Test facility 3")
