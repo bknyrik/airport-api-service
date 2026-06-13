@@ -192,3 +192,20 @@ class AuthenticatedRouteApiTests(APITestCase):
         url = get_route_detail_url(pk=self.route_1.id)
         response = self.client.delete(url)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+
+class AdminRouteApiTests(APITestCase):
+
+    def setUp(self) -> None:
+        self.admin_user = User.objects.create_user(
+            email="admin@airport.com",
+            password="admin12345",
+            is_staff=True
+        )
+        self.client.force_authenticate(user=self.admin_user)
+        self.airport_1 = airport_sample()
+        self.airport_2 = airport_sample(name="Airport Sample 2")
+        self.route = route_sample(
+            source_id=self.airport_1.id,
+            destination_id=self.airport_2.id
+        )
