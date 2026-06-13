@@ -376,3 +376,12 @@ class AdminFlightApiTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(serializer.data, response.data)
+
+    def test_flight_partial_update_has_bad_request(self) -> None:
+        data = {
+            "departure_time": datetime(2026, 2, 5),
+            "arrival_time": datetime(2026, 2, 4),
+        }
+        url = get_flight_detail_url(pk=self.flight.id)
+        response = self.client.patch(url, data=data)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
