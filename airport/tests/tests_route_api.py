@@ -252,3 +252,13 @@ class AdminRouteApiTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(serializer.data, response.data)
+
+    def test_route_update_has_bad_request(self) -> None:
+        data = {
+            "source": self.airport_2.id,
+            "destination": self.airport_2.id,
+            "distance": 1_000_000
+        }
+        url = get_route_detail_url(pk=self.route.id)
+        response = self.client.put(url, data=data)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
