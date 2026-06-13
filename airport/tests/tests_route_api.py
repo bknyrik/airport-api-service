@@ -181,12 +181,22 @@ class AuthenticatedRouteApiTests(APITestCase):
             ROUTE_LIST_URL,
             query_params={"destination_id": DESTINATION_ID}
         )
-        serializer_route_1 = RouteListRetrieveSerializer(self.route_1)
-        serializer_route_2 = RouteListRetrieveSerializer(self.route_2)
+        serializer_route_doesnt_match_destination_id = (
+            RouteListRetrieveSerializer(self.route_1)
+        )
+        serializer_route_match_destination_id = (
+            RouteListRetrieveSerializer(self.route_2)
+        )
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertNotIn(serializer_route_1.data, response.data["results"])
-        self.assertIn(serializer_route_2.data, response.data["results"])
+        self.assertNotIn(
+            serializer_route_doesnt_match_destination_id.data,
+            response.data["results"]
+        )
+        self.assertIn(
+            serializer_route_match_destination_id.data,
+            response.data["results"]
+        )
 
     def test_route_retrieve(self) -> None:
         url = get_route_detail_url(pk=self.route_1.id)
