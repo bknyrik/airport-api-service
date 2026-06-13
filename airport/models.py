@@ -150,7 +150,7 @@ class Route(models.Model):
         )
 
     @staticmethod
-    def validate_source(
+    def validate_source_is_different_from_destination(
         source_id: int,
         destination_id: int,
         exception_type: type[Exception]
@@ -163,7 +163,7 @@ class Route(models.Model):
             )
 
     def clean(self) -> None:
-        Route.validate_source(
+        Route.validate_source_is_different_from_destination(
             self.source_id,
             self.destination_id,
             ValidationError

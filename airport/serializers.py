@@ -143,7 +143,7 @@ class RouteSerializer(serializers.ModelSerializer[Route]):
         if destination is None:
             destination = self.instance.destination
 
-        Route.validate_source(
+        Route.validate_source_is_different_from_destination(
             source.id,
             destination.id,
             ValidationError
