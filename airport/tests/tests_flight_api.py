@@ -7,7 +7,10 @@ from rest_framework.test import APITestCase
 from rest_framework import status
 
 from airport.models import Flight
-from airport.serializers import FlightListRetrieveSerializer
+from airport.serializers import (
+    FlightListRetrieveSerializer,
+    FlightSerializer
+)
 from airport.tests.tests_airport_api import airport_sample
 from airport.tests.tests_route_api import route_sample
 from airport.tests.tests_airplane_api import airplane_sample
@@ -262,3 +265,46 @@ class AuthenticatedFlightApiTests(APITestCase):
         url = get_flight_detail_url(pk=self.flight_1.id)
         response = self.client.delete(url)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+
+class AdminFlightApiTests(APITestCase):
+
+    def setUp(self) -> None:
+        self.admin_user = User.objects.create_user(
+            email="admin@airport.com",
+            password="admin12345",
+            is_staff=True
+        )
+        self.client.force_authenticate(user=self.admin_user)
+        self.airplane_type = airplane_type_sample()
+        self.facility = facility_sample()
+
+        self.airplane_1 = airplane_sample(
+            airplane_type_id=self.airplane_type.id,
+        )
+        self.airplane_2 = airplane_sample(
+            name="Airplane Sample 2",
+            airplane_type_id=self.airplane_type.id
+        )
+        self.airplane_1.facilities.add(self.facility)
+        self.airplane_2.facilities.add(self.facility)
+
+        self.airport_1 = airport_sample()
+        self.airport_2 = airport_sample(name="Airport Sample 2")
+
+        self.crew_1 = crew_sample()
+        self.crew_2 = crew_sample()
+        self.route_1 = route_sample(
+            source_id=self.airport_1.id,
+            destination_id=self.airport_2.id,
+        )
+        self.route_2 = route_sample(
+            source_id=self.airport_2.id,
+            destination_id=self.airport_1.id
+        )
+
+        self.flight = flight_sample(
+            airplane_id=self.airplane_2.id,
+            route_id=self.route_1.id
+        )
+        self.flight.crewmembers.add(self.crew_1)
