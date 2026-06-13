@@ -334,3 +334,20 @@ class AdminFlightApiTests(APITestCase):
         }
         response = self.client.post(FLIGHT_LIST_URL, data=data)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_flight_update(self) -> None:
+        data = {
+            "route": self.route_2.id,
+            "airplane": self.airplane_2.id,
+            "departure_time": datetime(2026, 3, 3),
+            "arrival_time": datetime(2026, 3, 10),
+            "crewmembers": (self.crew_1.id, self.crew_2.id)
+        }
+        url = get_flight_detail_url(pk=self.flight.id)
+        response = self.client.put(url, data=data)
+        serializer = FlightSerializer(self.flight)
+
+        self.flight.refresh_from_db()
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(serializer.data, response.data)
