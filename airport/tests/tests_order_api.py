@@ -170,3 +170,32 @@ class AuthenticatedOrderApiTests(APITestCase):
         }
         response = self.client.post(ORDER_LIST_URL, data=data, format="json")
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_order_update(self) -> None:
+        data = {
+            "tickets": (
+                {
+                    "flight": self.flight.id,
+                    "row": 2,
+                    "seat": 2
+                },
+                {
+                    "flight": self.flight.id,
+                    "row": 2,
+                    "seat": 3
+                },
+                {
+                    "flight": self.flight.id,
+                    "row": 2,
+                    "seat": 4
+                }
+            )
+        }
+        url = get_order_detail_url(pk=self.order.id)
+        response = self.client.put(url, data=data, format="json")
+        serializer = OrderSerializer(self.order)
+
+        self.order.refresh_from_db()
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(serializer.data, response.data)
