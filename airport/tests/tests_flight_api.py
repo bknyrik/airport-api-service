@@ -257,3 +257,8 @@ class AuthenticatedFlightApiTests(APITestCase):
         url = get_flight_detail_url(pk=self.flight_2.id)
         response = self.client.patch(url, data=data)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_flight_destroy_is_forbidden(self) -> None:
+        url = get_flight_detail_url(pk=self.flight_1.id)
+        response = self.client.delete(url)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
