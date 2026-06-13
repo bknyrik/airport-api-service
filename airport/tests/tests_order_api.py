@@ -238,3 +238,24 @@ class AuthenticatedOrderApiTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(serializer.data, response.data)
+
+    def test_order_partial_update_has_bad_request(self) -> None:
+        data = {
+            "tickets": (
+                {
+                    "id": self.ticket_2.id,
+                    "flight": self.ticket_2.flight.id,
+                    "row": 1,
+                    "seat": 2,
+                },
+                {
+                    "id": self.ticket_1.id,
+                    "flight": self.ticket_1.flight.id,
+                    "row": 1,
+                    "seat": 2,
+                }
+            )
+        }
+        url = get_order_detail_url(pk=self.order.id)
+        response = self.client.patch(url, data=data, format="json")
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
