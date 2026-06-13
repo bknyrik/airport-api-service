@@ -259,3 +259,12 @@ class AuthenticatedOrderApiTests(APITestCase):
         url = get_order_detail_url(pk=self.order.id)
         response = self.client.patch(url, data=data, format="json")
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_order_destroy(self) -> None:
+        url = get_order_detail_url(pk=self.order.id)
+        response = self.client.delete(url)
+
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertFalse(Order.objects.filter(pk=self.order.id).exists())
+        self.assertFalse(Ticket.objects.filter(pk=self.ticket_1.id).exists())
+        self.assertFalse(Ticket.objects.filter(pk=self.ticket_2.id).exists())
