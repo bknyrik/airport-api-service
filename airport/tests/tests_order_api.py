@@ -1,6 +1,20 @@
+from django.contrib.auth import get_user_model
 from django.shortcuts import reverse
 from rest_framework.test import APITestCase
 from rest_framework import status
+
+from airport.models import Order, Ticket
+from airport.serializers import OrderSerializer
+from airport.tests.tests_airport_api import airport_sample
+from airport.tests.tests_airplane_type_api import airplane_type_sample
+from airport.tests.tests_airplane_api import airplane_sample
+from airport.tests.tests_facility_api import facility_sample
+from airport.tests.tests_route_api import route_sample
+from airport.tests.tests_crew_api import crew_sample
+from airport.tests.tests_flight_api import flight_sample
+
+
+User = get_user_model()
 
 
 ORDER_LIST_URL = reverse("airport:order-list")
@@ -65,3 +79,50 @@ class UnauthenticatedOrderApiTests(APITestCase):
         url = get_order_detail_url(pk=1)
         response = self.client.delete(url)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+
+class AuthenticatedOrderApiTests(APITestCase):
+
+    def setUp(self) -> None:
+        self.user = User.objects.create_user(
+            email="user@airport.com",
+            password="userpass12345"
+        )
+        self.client.force_authenticate(user=self.user)
+
+        self.airplane_type = airplane_type_sample()
+        self.facility = facility_sample()
+        self.airplane = airplane_sample(
+            airplane_type_id=self.airplane_type.id
+        )
+        self.airplane.facilities.add(self.facility)
+
+        self.airport_1 = airport_sample()
+        self.airport_2 = airport_sample(name="Airport Sample 2")
+
+        self.route = route_sample(
+            source_id=self.airport_1.id,
+            destination_id=self.airport_2.id,
+        )
+        self.crew = crew_sample()
+
+        self.flight = flight_sample(
+            route_id=self.route.id,
+            airplane_id=self.airplane.id,
+        )
+        self.flight.crewmembers.add(self.crew)
+        self.order = Order.objects.create(
+            user_id=self.user.id
+        )
+        self.ticket_1 = Ticket.objects.create(
+            flight_id=self.flight.id,
+            row=1,
+            seat=1,
+            order_id=self.order.id
+        )
+        self.ticket_2 = Ticket.objects.create(
+            flight_id=self.flight.id,
+            row=1,
+            seat=2,
+            order_id=self.order.id
+        )
