@@ -33,3 +33,14 @@ class UnauthenticatedFlightApiTests(APITestCase):
         }
         response = self.client.post(FLIGHT_LIST_URL, data=data)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_flight_update_authentication_required(self) -> None:
+        data = {
+            "route": 2,
+            "airplane": 3,
+            "departure_time": datetime(year=2026, month=1, day=10),
+            "arrival_time": datetime(year=2026, month=1, day=15),
+        }
+        url = get_flight_detail_url(pk=1)
+        response = self.client.put(url, data=data)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
