@@ -134,9 +134,18 @@ class RouteSerializer(serializers.ModelSerializer[Route]):
         fields = ("id", "source", "destination", "distance")
 
     def validate(self, attrs: dict) -> dict:
+        source = attrs.get("source")
+        destination = attrs.get("destination")
+
+        if source is None:
+            source = self.instance.source
+
+        if destination is None:
+            destination = self.instance.destination
+
         Route.validate_source(
-            attrs["source"],
-            attrs["destination"],
+            source.id,
+            destination.id,
             ValidationError
         )
 
