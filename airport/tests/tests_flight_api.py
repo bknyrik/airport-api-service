@@ -142,3 +142,14 @@ class AuthenticatedFlightApiTests(APITestCase):
         )
         self.flight_1 = flights.get(pk=self.flight_1.id)
         self.flight_2 = flights.get(pk=self.flight_2.id)
+
+    def test_flight_list(self) -> None:
+        flights = (self.flight_1, self.flight_2)
+        response = self.client.get(FLIGHT_LIST_URL)
+        serializer = FlightListRetrieveSerializer(
+            flights,
+            many=True
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(serializer.data, response.data["results"])
