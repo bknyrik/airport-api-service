@@ -279,3 +279,10 @@ class AdminRouteApiTests(APITestCase):
         url = get_route_detail_url(pk=self.route.id)
         response = self.client.patch(url, data=data)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_route_destroy(self) -> None:
+        url = get_route_detail_url(pk=self.route.id)
+        response = self.client.delete(url)
+
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertFalse(Route.objects.filter(pk=self.route.id).exists())
