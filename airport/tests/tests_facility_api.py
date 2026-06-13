@@ -101,7 +101,6 @@ class UnauthenticatedFacilityApiTests(APITestCase):
 class AuthenticatedFacilityApiTests(APITestCase):
 
     def setUp(self) -> None:
-        default_cache.clear()
         self.user = User.objects.create_user(
             email="user@test.com",
             password="testpass12345"
