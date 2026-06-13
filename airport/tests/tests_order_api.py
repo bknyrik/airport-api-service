@@ -20,3 +20,16 @@ class UnauthenticatedOrderApiTests(APITestCase):
         url = get_order_detail_url(pk=1)
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_order_create_authentication_required(self) -> None:
+        data = {
+            "tickets": (
+                {
+                    "flight": 1,
+                    "row": 1,
+                    "seat": 1
+                },
+            )
+        }
+        response = self.client.post(ORDER_LIST_URL, data=data)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
