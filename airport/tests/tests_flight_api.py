@@ -230,3 +230,13 @@ class AuthenticatedFlightApiTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(serializer.data, response.data)
+
+    def test_flight_create_is_forbidden(self) -> None:
+        data = {
+            "route": self.route_2.id,
+            "airplane": self.airplane_1.id,
+            "departure_time": datetime(2026, 5, 1),
+            "arrival_time": datetime(2026, 5, 10),
+        }
+        response = self.client.post(FLIGHT_LIST_URL, data=data)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
