@@ -517,17 +517,14 @@ class FlightViewSet(ModelViewSet):
         "airplane",
         "route__source",
         "route__destination"
+    ).annotate(
+        tickets_available=(
+            F("airplane__rows") * F("airplane__seats_in_row")
+            - Count("tickets")
+        )
     )
     pagination_class = pagination.FlightSetPagination
     filterset_fields = ("airplane_id", "route_id", "crewmembers")
-
-    def get_queryset(self) -> QuerySet[Flight]:
-        return self.queryset.annotate(
-            tickets_available=(
-                F("airplane__rows") * F("airplane__seats_in_row")
-                - Count("tickets")
-            )
-        )
 
     def get_serializer_class(self) -> type[serializers.FlightSerializer]:
         if self.action in ("list", "retrieve"):
