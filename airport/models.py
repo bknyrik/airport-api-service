@@ -261,6 +261,22 @@ class Flight(models.Model):
             ValidationError
         )
 
+    def save(
+        self,
+        *,
+        force_insert: bool | tuple[models.base.ModelBase, ...] = False,
+        force_update: bool = False,
+        using: str = None,
+        update_fields: Iterable[str] | None = None,
+    ) -> None:
+        self.full_clean()
+        return super().save(
+            force_insert=force_insert,
+            force_update=force_update,
+            using=using,
+            update_fields=update_fields
+        )
+
     def __str__(self) -> str:
         return (
             f"{self.route} "
