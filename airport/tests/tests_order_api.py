@@ -60,3 +60,8 @@ class UnauthenticatedOrderApiTests(APITestCase):
         url = get_order_detail_url(pk=1)
         response = self.client.patch(url, data=data, format="json")
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_order_destroy_authentication_required(self) -> None:
+        url = get_order_detail_url(pk=1)
+        response = self.client.delete(url)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
