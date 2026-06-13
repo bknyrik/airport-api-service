@@ -126,3 +126,29 @@ class AuthenticatedOrderApiTests(APITestCase):
             seat=2,
             order_id=self.order.id
         )
+
+    def test_order_create(self) -> None:
+        data = {
+            "tickets": (
+                {
+                    "flight": self.flight.id,
+                    "row": 2,
+                    "seat": 3
+                },
+                {
+                    "flight": self.flight.id,
+                    "row": 3,
+                    "seat": 4
+                }
+            )
+        }
+        response = self.client.post(ORDER_LIST_URL, data=data, format="json")
+        order = Order.objects.get(
+            tickets__flight=data["tickets"][0]["flight"],
+            tickets__row=data["tickets"][0]["row"],
+            tickets__seat=data["tickets"][0]["seat"],
+        )
+        serializer = OrderSerializer(order)
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(serializer.data, response.data)
