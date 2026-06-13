@@ -2,7 +2,6 @@ from django.shortcuts import reverse
 from django.contrib.auth import get_user_model
 from rest_framework.test import APITestCase
 from rest_framework import status
-from rest_framework.throttling import default_cache
 
 from airport.serializers import FacilitySerializer
 from airport.models import Facility
@@ -140,7 +139,6 @@ class AuthenticatedFacilityApiTests(APITestCase):
 class AdminFacilityApiTests(APITestCase):
 
     def setUp(self) -> None:
-        default_cache.clear()
         self.admin_user = User.objects.create_user(
             email="admin@test.com",
             password="adminpass12345",
