@@ -1,8 +1,22 @@
 from datetime import datetime
 
 from django.shortcuts import reverse
+from django.contrib.auth import get_user_model
+from django.db.models import F, Count
 from rest_framework.test import APITestCase
 from rest_framework import status
+
+from airport.models import Flight
+from airport.serializers import FlightListRetrieveSerializer
+from airport.tests.tests_airport_api import airport_sample
+from airport.tests.tests_route_api import route_sample
+from airport.tests.tests_airplane_api import airplane_sample
+from airport.tests.tests_facility_api import facility_sample
+from airport.tests.tests_airplane_type_api import airplane_type_sample
+from airport.tests.tests_crew_api import crew_sample
+
+
+User = get_user_model()
 
 
 FLIGHT_LIST_URL = reverse("airport:flight-list")
@@ -10,6 +24,15 @@ FLIGHT_LIST_URL = reverse("airport:flight-list")
 
 def get_flight_detail_url(pk: int) -> str:
     return reverse("airport:flight-detail", kwargs={"pk": pk})
+
+
+def flight_sample(**kwargs) -> Flight:
+    defaults = {
+        "departure_time": datetime(year=2026, month=2, day=1),
+        "arrival_time": datetime(year=2026, month=2, day=5),
+    }
+    defaults.update(kwargs)
+    return Flight.objects.create(**defaults)
 
 
 class UnauthenticatedFlightApiTests(APITestCase):
@@ -58,3 +81,64 @@ class UnauthenticatedFlightApiTests(APITestCase):
         url = get_flight_detail_url(pk=1)
         response = self.client.delete(url)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+
+class AuthenticatedFlightApiTests(APITestCase):
+
+    def setUp(self) -> None:
+        self.user = User.objects.create_user(
+            email="user@airport.com",
+            password="userpass12345"
+        )
+        self.client.force_authenticate(user=self.user)
+
+        self.airplane_type = airplane_type_sample()
+        self.facility = facility_sample()
+
+        self.airplane_1 = airplane_sample(
+            airplane_type_id=self.airplane_type.id
+        )
+        self.airplane_2 = airplane_sample(
+            name="Airplane Sample 2",
+            airplane_type_id=self.airplane_type.id
+        )
+        self.airplane_1.facilities.add(self.facility)
+        self.airplane_2.facilities.add(self.facility)
+
+        self.airport_1 = airport_sample()
+        self.airport_2 = airport_sample(
+            name="Airport Sample 2",
+        )
+        self.airport_3 = airport_sample(
+            name="Airport Sample 3"
+        )
+
+        self.route_1 = route_sample(
+            source_id=self.airport_1.id,
+            destination_id=self.airport_2.id
+        )
+        self.route_2 = route_sample(
+            source_id=self.airport_2.id,
+            destination_id=self.airport_3.id
+        )
+        self.crew_1 = crew_sample()
+        self.crew_2 = crew_sample()
+
+        self.flight_1 = flight_sample(
+            route_id=self.route_1.id,
+            airplane_id=self.airplane_1.id
+        )
+        self.flight_2 = flight_sample(
+            route_id=self.route_2.id,
+            airplane_id=self.airplane_2.id
+        )
+        self.flight_1.crewmembers.add(self.crew_1)
+        self.flight_2.crewmembers.add(self.crew_2)
+        flights = Flight.objects.annotate(
+            tickets_available=(
+                F("airplane__rows") * F("airplane__seats_in_row")
+                - Count("tickets")
+            )
+        )
+        self.flight_1 = flights.get(pk=self.flight_1.id)
+        self.flight_2 = flights.get(pk=self.flight_2.id)
