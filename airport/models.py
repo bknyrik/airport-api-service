@@ -293,9 +293,6 @@ class Order(models.Model):
         related_name="orders"
     )
 
-    class Meta:
-        ordering = ("-created_at",)
-
     def __str__(self) -> str:
         return f"{self.user} - {self.created_at}"
 
