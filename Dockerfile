@@ -18,6 +18,6 @@ RUN adduser \
     django_user
 
 RUN chown -R django_user /files/media
-RUN chmod -R django_user 755 /files/media
+RUN chmod -R 755 /files/media
 
 USER django_user
