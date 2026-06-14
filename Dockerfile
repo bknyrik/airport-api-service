@@ -1,6 +1,7 @@
 FROM python:3.12.1-alpine3.18
 LABEL maintainer="knyrikkolesnichenko2004@gmail.com"
 
+ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONBUFFERED 1
 
 WORKDIR app/
