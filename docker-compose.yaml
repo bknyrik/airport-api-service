@@ -14,9 +14,9 @@ services:
              python manage.py migrate &&
              python manage.py runserver 0.0.0.0:8000"
     depends_on:
-      - postgres
+      - database
 
-  postgres:
+  database:
     image: postgres:18.3-alpine
     restart: always
     env_file:
