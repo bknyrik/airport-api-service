@@ -83,3 +83,13 @@ Token refresh:
 
 Token verify:
 ![Token verify page](./documentation/token_verify.png)
+
+## Features
+___
+- JWT Authentication
+- Documentation at `/api/schema/swagger-ui/` and `/api/schema/redoc/`
+- Managing orders and tickets
+- Creating airplanes with airplane types and facilities
+- Creating flights with routes, airports and crewmembers
+- Filtering airplanes, airports, routes, flights, crewmembers and users
+- Creating and managing users
