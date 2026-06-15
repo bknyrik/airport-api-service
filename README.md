@@ -105,3 +105,19 @@ ___
 5. Add `.env` file according to the `.env.sample` template. Note: If you are going to launch project in the Docker container,
 set `POSTGRES_HOST=database`;
 6. Apply all migrations - `python manage.py migrate`;
+
+## Usage
+___
+### Run locally
+___
+Run the server `python manage.py runserver`.
+### Run with Docker
+___
+1. Build services - `docker-compose build`;
+2. Create and start containers - `docker-compose up -d`.
+
+Visit `http://127.0.0.1:8000/` in your browser to use the application. \
+And also don't forget to create a superuser:
+```python manage.py createsuperuser```.
+
+NOTE: If you are running project in the Docker container, create superuser inside the container.
