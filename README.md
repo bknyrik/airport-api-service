@@ -27,11 +27,17 @@ Airplane list:
 Airplane detail:
 ![Airplane detail page](./documentation/airplane_detail.png)
 
+Airplane upload image:
+![Airplane upload image page](./documentation/airplane_upload_image.png)
+
 Airport list:
 ![Airport list page](./documentation/airport_list.png)
 
 Airport detail:
 ![Airport detail page](./documentation/airport_detail.png)
+
+Airport upload image:
+![Airport upload image page](./documentation/airport_upload_image.png)
 
 Crew list:
 ![Crew list page](./documentation/crew_list.png)
