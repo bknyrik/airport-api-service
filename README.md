@@ -137,8 +137,10 @@ ___
 - get facility by `pk` via `api/airport/facilities/{pk}/`
 - get list with airplanes via `api/airport/airplanes/`
 - get airplane by `pk` via `api/airport/airplanes/{pk}/`
+- upload an image to airplane by `pk` via `api/airport/airplanes/{pk}/`
 - get list with airports via `api/airport/airports/`
 - get airport by `pk` via `api/airport/airports/{pk}/`
+- upload an image to airport by `pk` via `api/airport/airports/{pk}/`
 - get list with routes via `api/airport/routes/`
 - get route by `pk` via `api/airport/routes/{pk}/`
 - get list with crewmembers via `api/airport/crewmembers/`
