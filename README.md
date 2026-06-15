@@ -93,3 +93,15 @@ ___
 - Creating flights with routes, airports and crewmembers
 - Filtering airplanes, airports, routes, flights, crewmembers and users
 - Creating and managing users
+
+## Installation
+___
+1. Clone the repository - `git clone https://github.com/bknyrik/airport-api-service.git`;
+2. Create the virtual environment - `python -m venv .venv`;
+3. Activate the virtual environment:
+    - Windows - `airport-api-service\Scripts\activate`;
+    - macOS/Linux - `source airport-api-service/bin/activate`.
+4. Install all dependencies - `pip install -r requirements.txt`
+5. Add `.env` file according to the `.env.sample` template. Note: If you are going to launch project in the Docker container,
+set `POSTGRES_HOST=database`;
+6. Apply all migrations - `python manage.py migrate`;
