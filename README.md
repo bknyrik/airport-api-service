@@ -121,3 +121,29 @@ And also don't forget to create a superuser:
 ```python manage.py createsuperuser```.
 
 NOTE: If you are running project in the Docker container, create superuser inside the container.
+
+## Getting access
+___
+- register user via `/api/users/register/`
+- manage user via `/api/users/me/`
+- list with users via `api/users/accounts/`
+- get user by `pk` via `/api/users/accounts/{pk}/`
+- obtain access and refresh token via `api/auth/token/obtain/`
+- refresh access token via `api/auth/token/refresh/`
+- verify token via `api/auth/token/verify`
+- get list with airplane types via `api/airport/airplane_types/`
+- get airplane type by `pk` via `api/airport/airplane_types/{pk}/`
+- get list with facilities via `api/airport/facilities/`
+- get facility by `pk` via `api/airport/facilities/{pk}/`
+- get list with airplanes via `api/airport/airplanes/`
+- get airplane by `pk` via `api/airport/airplanes/{pk}/`
+- get list with airports via `api/airport/airports/`
+- get airport by `pk` via `api/airport/airports/{pk}/`
+- get list with routes via `api/airport/routes/`
+- get route by `pk` via `api/airport/routes/{pk}/`
+- get list with crewmembers via `api/airport/crewmembers/`
+- get crew by `pk` via `api/airport/crewmembers/{pk}/`
+- get list with flights via `api/airport/flights/`
+- get flight by `pk` via `api/airport/flights/{pk}/`
+- get list with orders via `api/airport/orders/`
+- get order by `pk` via `api/airport/orders/{pk}/`
