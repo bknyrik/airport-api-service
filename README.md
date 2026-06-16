@@ -1,5 +1,5 @@
 # Airport Api Service
-___
+
 ## Description
 This project allows you track flights between airports, order tickets to these flights, manage users and more. 
 
@@ -85,7 +85,7 @@ Token verify:
 ![Token verify page](documentation/token_verify.png)
 
 ## Features
-___
+
 - JWT Authentication
 - Documentation at `/api/schema/swagger-ui/` and `/api/schema/redoc/`
 - Managing orders and tickets
@@ -95,7 +95,7 @@ ___
 - Creating and managing users
 
 ## Installation
-___
+
 1. Clone the repository - `git clone https://github.com/bknyrik/airport-api-service.git`;
 2. Create the virtual environment - `python -m venv .venv`;
 3. Activate the virtual environment:
@@ -107,12 +107,12 @@ set `POSTGRES_HOST=database`;
 6. Apply all migrations - `python manage.py migrate`;
 
 ## Usage
-___
+
 ### Run locally
-___
+
 Run the server `python manage.py runserver`.
 ### Run with Docker
-___
+
 1. Build services - `docker-compose build`;
 2. Create and start containers - `docker-compose up -d`.
 
@@ -123,7 +123,7 @@ And also don't forget to create a superuser:
 NOTE: If you are running project in the Docker container, create superuser inside the container.
 
 ## Getting access
-___
+
 - register user via `/api/users/register/`
 - manage user via `/api/users/me/`
 - list with users via `api/users/accounts/`
