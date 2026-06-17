@@ -99,8 +99,8 @@ Token verify:
 1. Clone the repository - `git clone https://github.com/bknyrik/airport-api-service.git`;
 2. Create the virtual environment - `python -m venv .venv`;
 3. Activate the virtual environment:
-    - Windows - `airport-api-service\Scripts\activate`;
-    - macOS/Linux - `source airport-api-service/bin/activate`.
+    - Windows - `.venv\Scripts\activate`;
+    - macOS/Linux - `source .venv/Scripts/activate`.
 4. Install all dependencies - `pip install -r requirements.txt`
 5. Add `.env` file according to the `.env.sample` template. Note: If you are going to launch project in the Docker container,
 set `POSTGRES_HOST=database`;
